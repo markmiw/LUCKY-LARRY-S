@@ -3,7 +3,8 @@
     "build": "npx webpack",
     "build-dev": "npx webpack --watch",
     "start": "node server/index.js",
-    "start-dev": "npx nodemon server/index.js"
+    "start-dev": "npx nodemon server/index.js",
+    "initdb": "psql -U postgres -f database/schema.sql"
   },
   "dependencies": {
     "axios": "0.27.2",
