@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const express = require('express');
 const morgan = require('morgan');
 require('dotenv').config();
@@ -15,7 +17,7 @@ app.use(express.static('client/dist'));
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`);
-})
+});
 
 // listens for server close event and ends database connection
 //   connection stays active after server closes?

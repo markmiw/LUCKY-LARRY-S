@@ -1,9 +1,9 @@
-const db = require('./index.js');
+const db = require('./index');
 
 const errorHandler = (err) => console.error(err);
 
 const getTestData = () => {
-  let queryString = `SELECT * FROM test`;
+  const queryString = 'SELECT * FROM test';
 
   return db.query(queryString)
     .then((res) => res.rows)
@@ -11,5 +11,5 @@ const getTestData = () => {
 };
 
 module.exports = {
-  getTestData
+  getTestData,
 };

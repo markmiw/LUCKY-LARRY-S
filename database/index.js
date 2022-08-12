@@ -1,4 +1,5 @@
-const { Pool } = require('pg')
+/* eslint-disable linebreak-style */
+const { Pool } = require('pg');
 require('dotenv').config();
 
 // Pool uses evironment variables defined in .env, so no options need to be defined
