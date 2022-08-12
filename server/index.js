@@ -23,7 +23,6 @@ app.use('/api', router);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '/client/dist/index.html'), (err) => {
     if (err) {
-      console.log(err);
       res.status(500).send(err);
     }
   });
