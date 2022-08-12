@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 require('dotenv').config();
 
+const db = require('../database');
 // const router = require('./routes');
 
 const app = express();
@@ -12,6 +13,12 @@ app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.static('client/dist'));
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`);
 })
+
+process.on('SIGINT', () => {
+  console.log('Goodbye!');
+  db.end();
+  server.close();
+});
