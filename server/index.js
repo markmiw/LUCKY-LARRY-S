@@ -1,9 +1,13 @@
 const express = require('express');
-// import path from 'path';
+const morgan = require('morgan');
 
 require('dotenv').config();
 
 const app = express();
+
+// middleware for logging requests made to the server
+app.use(morgan('tiny'));
+
 app.use(express.json());
 app.use(express.static('client/dist'));
 

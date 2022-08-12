@@ -1,6 +1,9 @@
+// file for adding database queries
 
-function getData() {
+const getData = () => {
 
 }
 
-export default getData;
+export default {
+  getData
+};

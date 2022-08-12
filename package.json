@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "build:once": "npx webpack",
-    "build:watch": "npx webpack --watch",
-    "start": "node server/index.js"
+    "build": "npx webpack",
+    "build-dev": "npx webpack --watch",
+    "start": "node server/index.js",
+    "start-dev": "npx nodemon server/index.js"
   },
   "dependencies": {
     "axios": "0.27.2",
@@ -12,7 +13,9 @@
     "babel-loader": "8.2.5",
     "dotenv": "16.0.1",
     "express": "4.18.1",
+    "morgan": "1.10.0",
     "path": "0.12.7",
+    "pg": "8.7.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
