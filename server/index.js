@@ -17,6 +17,9 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`);
 })
 
+// listens for server close event and ends database connection
+//   connection stays active after server closes?
+//   not sure if that is true actually. this code may be uneccessary
 process.on('SIGINT', () => {
   console.log('Goodbye!');
   db.end();

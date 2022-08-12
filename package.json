@@ -1,4 +1,13 @@
 {
+  "name": "luckylarrys",
+  "description": "lucky larrys",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TotoroBlueOcean/LUCKYLARRYS.git"
+  },
+  "author": "",
+  "license": "ISC",
   "scripts": {
     "build": "npx webpack",
     "build-dev": "npx webpack --watch",
