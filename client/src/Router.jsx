@@ -2,16 +2,16 @@ import React from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
-import Homepage from './components/homepage/Homepage';
-import Roulette from './components/roulette/Roulette';
-import ScratchTicket from './components/scratch-ticket/ScratchTicket';
-import Slots from './components/slots/Slots';
-
+// import Homepage from './components/homepage/Homepage';
+// import Roulette from './components/roulette/Roulette';
+// import ScratchTicket from './components/scratch-ticket/ScratchTicket';
+// import Slots from './components/slots/Slots';
+import Chat from './components/chat/Chat';
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+        {/* <Route
           path="/roulette"
           element={<Roulette />}
         />
@@ -26,10 +26,14 @@ function Router() {
         <Route
           path="/"
           element={<Homepage />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="*"
           element={<Navigate to="/" />}
+        /> */}
+        <Route
+          path="*"
+          element={<Chat to="/" />}
         />
       </Routes>
     </BrowserRouter>
