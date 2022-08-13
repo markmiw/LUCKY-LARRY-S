@@ -45,8 +45,12 @@ export default function Column({ scrollTime, values, setValues }) {
         }}
       >
         {
-          values.map((value) => (
+          values.map((value, index) => (
             <div
+              // need to use something other than purely value for key as otherwise
+              // there would be duplicates
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${value}@${index}`}
               style={{
                 display: 'flex',
                 justifyContent: 'center',
