@@ -13,11 +13,7 @@ function NavBar({ user, loggedIn }) {
         {!loggedIn ? null : `Balance : $${user.balance}`}
       </NavItem>
       <NavItem>{!loggedIn ? null : 'Update Balance'}</NavItem>
-      {!loggedIn ? (
-        <NavItem>Login</NavItem>
-      ) : (
-        <NavItem>{user.username}</NavItem>
-      )}
+      <NavItem>{!loggedIn ? 'Login' : `${user.username}`}</NavItem>
     </Nav>
   );
 }
@@ -34,6 +30,7 @@ const Nav = styled.header`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background-color: grey;
+  margin-bottom: 1%;
 `;
 
 const NavItem = styled.div`
