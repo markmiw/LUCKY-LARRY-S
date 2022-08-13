@@ -3,8 +3,8 @@ import Column from './Column';
 
 export default function Slots() {
   const [column1Values, setColumn1Values] = useState([1, 2, 3]);
-  const [column2Values, setColumn2Values] = useState([4, 5, 6]);
-  const [column3Values, setColumn3Values] = useState([7, 8, 9]);
+  const [column2Values, setColumn2Values] = useState([4, 5, 1]);
+  const [column3Values, setColumn3Values] = useState([2, 3, 4]);
 
   function getSlotArray(start, result) {
     const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
