@@ -7,7 +7,7 @@ export default function Slots() {
   const [column3Values, setColumn3Values] = useState([7, 8, 9]);
 
   function getSlotArray(start, result) {
-    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5 + 1));
+    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
     return start.concat(filler, result);
   }
 
@@ -17,7 +17,7 @@ export default function Slots() {
       return;
     }
     // get values from andy
-    const result = [7, 7, 7, 6, 6, 6, 5, 5, 5];
+    const result = [1, 2, 3, 1, 4, 5, 1, 3, 5];
     setColumn1Values(getSlotArray(column1Values, result.slice(0, 3)));
     setColumn2Values(getSlotArray(column2Values, result.slice(3, 6)));
     setColumn3Values(getSlotArray(column3Values, result.slice(6)));

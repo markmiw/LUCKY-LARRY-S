@@ -1,6 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+// move the links into served assets when finalized icon decision
+const getImageFromValue = function getImageFromValue(value) {
+  switch (value) {
+    case 4:
+      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/gem-stone_1f48e.png" alt="diamond" />;
+    case 3:
+      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/high-voltage_26a1.png" alt="lightning" />;
+    case 2:
+      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/lemon_1f34b.png" alt="lemon" />;
+    case 1:
+      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/dollar-banknote_1f4b5.png" alt="banknote" />;
+    default: // 0
+      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/cherries_1f352.png" alt="cherries" />;
+  }
+};
+
 export default function Column({ scrollTime, values, setValues }) {
   const [offset, setOffset] = useState(0);
 
@@ -21,7 +37,7 @@ export default function Column({ scrollTime, values, setValues }) {
   useEffect(() => {
     if (values.length !== 3) {
       columnRef.current.style.transition = `bottom ${scrollTime}s ease-out`;
-      setOffset(30 * (values.length - 3));
+      setOffset(50 * (values.length - 3));
     }
   }, [columnRef, values]);
 
@@ -30,7 +46,7 @@ export default function Column({ scrollTime, values, setValues }) {
       style={{
         display: 'inline-block',
         backgroundColor: 'rgb(220, 220, 220)',
-        height: '90px',
+        height: '150px',
         width: '40px',
         marginRight: '10px',
         overflow: 'hidden',
@@ -55,11 +71,12 @@ export default function Column({ scrollTime, values, setValues }) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '30px',
+                height: '40px',
                 width: '40px',
+                marginBottom: '10px',
               }}
             >
-              {value}
+              {getImageFromValue(value)}
             </div>
           ))
         }
