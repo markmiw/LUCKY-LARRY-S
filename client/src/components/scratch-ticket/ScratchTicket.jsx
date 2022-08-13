@@ -14,9 +14,9 @@ function getNUnique(n) {
   const arr = [];
   const set = new Set();
   for (let i = 0; i < n; i += 1) {
-    let num = getRandom(1, 99);
+    let num = getRandom(1, 50);
     while (set.has(num)) {
-      num = getRandom(1, 99);
+      num = getRandom(1, 50);
     }
     arr.push(num);
     set.add(num);
@@ -59,12 +59,12 @@ export default function ScratchTicket() {
 
   return (
     <div align="center">
-      <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-        {cardValues.map((amount) => (<button key={amount} type="submit" onClick={(e) => changeValue(e)}>{amount}</button>))}
+      <div style={{ marginLeft: '1rem', display: 'flex', justifyContent: 'space-evenly' }}>
+        {cardValues.map((amount) => (<button style={{ width: '75px', height: '20px' }} key={amount} type="submit" onClick={(e) => changeValue(e)}>${amount}</button>))}
       </div>
       <ScratchCard
         width={500}
-        height={650}
+        height={510}
         image={IMG}
         finishPercent={80}
         onComplete={() => getWinnings()}
@@ -80,7 +80,7 @@ export default function ScratchTicket() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100px',
-                height: '100px',
+                height: '75px',
                 border: '1px solid',
                 margin: '10px',
               }}
@@ -104,7 +104,7 @@ export default function ScratchTicket() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100%',
-                height: '100px',
+                height: '80px',
                 border: '1px solid',
               }}
             >
