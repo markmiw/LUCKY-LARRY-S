@@ -22,14 +22,14 @@
     "morgan": "1.10.0",
     "path": "0.12.7",
     "pg": "8.7.3",
-    "react": "^17.0.2",
+    "react": "18.2.0",
     "react-custom-roulette": "^1.2.0",
     "react-custom-roulette-skate": "^1.2.3",
-    "react-dom": "^17.0.2",
+    "react-dom": "18.2.0",
     "react-router-dom": "^6.3.0",
     "roulette-board": "^0.2.0",
-    "styled-components": "^5.3.5",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "7.18.10",

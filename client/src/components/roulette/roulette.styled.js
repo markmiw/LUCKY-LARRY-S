@@ -50,23 +50,62 @@ export const BetNumberGrid = styled.div`
   margin: 0 auto;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
 `
+export const Number0Button = styled.button`
+&:after {
+  background-color: green;
+}
+background-color: #0b6102;
+`
+
+export const NumberButton = styled.button`
+&:after {
+  background-color: #FDA300;
+}
+background-color: #E09F5A;
+`
 export const BetColorOddGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto auto;
 `
+export const RedColorButton = styled.button`
+&:after {
+  background-color: red;
+}
+background-color: red;
+`
+export const BlackColorButton = styled.button`
+&:after {
+  background-color: black;
+}
+background-color: black;
+`
+
 export const Bet12Grid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto;
 `
+export const Bet12Button = styled.button`
+&:after {
+  background-color: #327ba8;
+}
+background-color: #1a4b82
+`
 export const Bet18Grid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto;
+
+`
+export const Bet18Button = styled.button`
+&:after {
+  background-color: #4ADEDE;
+}
+background-color: #1AA7EC;
 `
 export const BetRowGrid = styled.div`
   display: grid;
@@ -74,5 +113,10 @@ export const BetRowGrid = styled.div`
   margin: 0 auto;
   grid-template-columns: auto auto auto;
 `
-
+export const BetRowButton = styled.button`
+  &:after {
+    background-color: #FDA300;
+  }
+  background-color: #E09F5A;
+`
 

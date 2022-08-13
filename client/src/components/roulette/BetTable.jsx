@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { BetNumberGrid, BetColorOddGrid, Bet12Grid, Bet18Grid, BetRowGrid } from './roulette.styled.js'
+import { BetNumberGrid, Number0Button, NumberButton, BetColorOddGrid, RedColorButton, BlackColorButton,  Bet12Grid, Bet12Button, Bet18Grid, Bet18Button, BetRowGrid, BetRowButton } from './roulette.styled.js'
 
 export default function BetTable() {
   // rouletteInput
@@ -30,43 +30,43 @@ export default function BetTable() {
 
   return (
     <div>
-      <button onClick={() => setNum(0)}>
+      <Number0Button onClick={() => setNum(0)}>
         0
-      </button>
+      </Number0Button>
       <BetNumberGrid>
         {[...Array(36)].map((star, index) => {
           const val = index + 1;
           return (
-            <button value={val} onClick={() => setNum(val)}>
+            <NumberButton value={val} onClick={() => setNum(val)}>
               {val}
               &nbsp;
-            </button>
+            </NumberButton>
           );
         })}
       </BetNumberGrid>
       <BetColorOddGrid>
-        <button onClick={() => setColor('red')}>Red</button>
-        <button onClick={() => setColor('black')}>Black</button>
+        <RedColorButton onClick={() => setColor('red')}>Red</RedColorButton>
+        <BlackColorButton onClick={() => setColor('black')}>Black</BlackColorButton>
         <button onClick={() => setEO(true)}>Even</button>
         <button onClick={() => setEO(false)}>Odd</button>
 
       </BetColorOddGrid>
 
       <Bet12Grid>
-        <button onClick={() => setRangeOf12(1)}>1st12 </button>
-        <button onClick={() => setRangeOf12(2)}>2nd12 </button>
-        <button onClick={() => setRangeOf12(3)}>3rd12 </button>
+        <Bet12Button onClick={() => setRangeOf12(1)}>1st12 </Bet12Button>
+        <Bet12Button onClick={() => setRangeOf12(2)}>2nd12 </Bet12Button>
+        <Bet12Button onClick={() => setRangeOf12(3)}>3rd12 </Bet12Button>
       </Bet12Grid>
 
       <Bet18Grid>
-        <button onClick={() => setFirstHalf(1)}>1to18 </button>
-        <button onClick={() => setFirstHalf(2)}>19to36 </button>
+        <Bet18Button onClick={() => setFirstHalf(1)}>1to18 </Bet18Button>
+        <Bet18Button onClick={() => setFirstHalf(2)}>19to36 </Bet18Button>
       </Bet18Grid>
 
       <BetRowGrid>
-        <button onClick={() => setNumRow(1)}>2to1 - 1s row </button>
-        <button onClick={() => setNumRow(2)}>2to1 - 2s row </button>
-        <button onClick={() => setNumRow(3)}>2to1 - 3s row </button>
+        <BetRowButton onClick={() => setNumRow(1)}>2to1 - 1s row </BetRowButton>
+        <BetRowButton onClick={() => setNumRow(2)}>2to1 - 2s row </BetRowButton>
+        <BetRowButton onClick={() => setNumRow(3)}>2to1 - 3s row </BetRowButton>
       </BetRowGrid>
 
       {/* display of current bets if no visuals to show what has been checked */}

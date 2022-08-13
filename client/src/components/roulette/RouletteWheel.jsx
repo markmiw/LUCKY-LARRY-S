@@ -68,9 +68,10 @@ export default function RouletteWheel () {
     // need to send newPrizeNumber to the backend when clicked
     console.log(newPrizeNumber)
     setMustSpin(true);
-
     // do axios calls to get winning number information
     // grabWinningNum(newPriceNumber);
+
+    <Celebration/>
   };
 
   const grabWinningNum = (num) => {
