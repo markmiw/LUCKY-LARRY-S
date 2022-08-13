@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
@@ -8,12 +8,24 @@ import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
 
+const dummyData = {
+  username: 'LarryLucky',
+  balance: 999999999,
+};
+
 function Router() {
-  const [username, setUsername] = useState('larry');
+  const [user, setUser] = useState(); // user data
+  const [loggedIn, setLoggedIn] = useState(); // is user logged in?
+
+  // dummy data for now, yes it should be in useeffect
+  useEffect(() => {
+    setUser(dummyData);
+    setLoggedIn(true);
+  }, []);
 
   return (
     <BrowserRouter>
-      <NavBar username={username} />
+      <NavBar user={user} loggedIn={loggedIn} />
       <Routes>
         <Route
           path="/roulette"
