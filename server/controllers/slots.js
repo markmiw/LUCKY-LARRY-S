@@ -1,6 +1,6 @@
 module.exports.spin = (req, res) => {
   const combination = [];
-  const plays = req.query.plays;
+  const { plays } = req.query;
   for (let i = 0; i < (3 * plays); i += 1) {
     combination.push(Math.floor(Math.random() * 5) + 1);
   }
@@ -9,15 +9,12 @@ module.exports.spin = (req, res) => {
 
 module.exports.weightedSpin = (req, res) => {
   const combination = [];
-  const plays = req.query.plays;
+  const { plays } = req.query;
   for (let i = 0; i < (3 * plays); i += 1) {
     if (i % 3 === 1) {
       const chance = Math.random() * 100 + 1;
       const choices = [1, 2, 3, 4, 5];
       choices.splice(combination[i - 1] - 1, 1);
-      // console.log('Chance:', chance);
-      // console.log('Choice:', choices);
-      // console.log('Last Combination:', combination[i - 1]);
       if (chance <= 50) {
         combination.push(combination[i - 1]);
       } else if (chance <= 62.5) {
@@ -33,9 +30,6 @@ module.exports.weightedSpin = (req, res) => {
       const chance = Math.random() * 100 + 1;
       const choices = [1, 2, 3, 4, 5];
       choices.splice(combination[i - 1] - 1, 1);
-      console.log('Chance:', chance);
-      console.log('Choice:', choices);
-      console.log('Last Combination:', combination[i - 1]);
       if (chance <= 10) {
         combination.push(combination[i - 1]);
       } else if (chance <= 32.5) {

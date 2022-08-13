@@ -15,7 +15,6 @@ app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(express.static('client/dist'));
-app.use('/', router);
 
 app.use('/api', router);
 

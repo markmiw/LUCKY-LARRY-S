@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Column from './Column';
 
 export default function Slots() {
@@ -9,6 +10,7 @@ export default function Slots() {
   function getSlotArray(start, result) {
     const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
     return start.concat(filler, result);
+    // last 3 items of this returned array = what slot machine lands on
   }
 
   function play() {
@@ -16,11 +18,19 @@ export default function Slots() {
     if (column3Values.length !== 3) {
       return;
     }
-    // get values from andy
-    const result = [1, 2, 3, 1, 4, 5, 1, 3, 5];
-    setColumn1Values(getSlotArray(column1Values, result.slice(0, 3)));
-    setColumn2Values(getSlotArray(column2Values, result.slice(3, 6)));
-    setColumn3Values(getSlotArray(column3Values, result.slice(6)));
+    axios.get('/api/weightedSlots', { params: { plays: 3 } })
+      .then((result) => {
+        const { data } = result;
+        const col1 = [data[0], data[3], data[6]];
+        const col2 = [data[1], data[4], data[7]];
+        const col3 = [data[2], data[5], data[8]];
+        setColumn1Values(getSlotArray(column1Values, col1));
+        setColumn2Values(getSlotArray(column2Values, col2));
+        setColumn3Values(getSlotArray(column3Values, col3));
+      })
+      .catch((err) => {
+        console.log('Error in Slots play:', err);
+      });
   }
 
   return (
