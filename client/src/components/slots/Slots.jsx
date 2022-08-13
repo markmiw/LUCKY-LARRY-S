@@ -7,7 +7,7 @@ export default function Slots() {
   const [column3Values, setColumn3Values] = useState([7, 8, 9]);
 
   function getSlotArray(start, result) {
-    const filler = [...new Array(50)].map(() => Math.floor(Math.random() * 5 + 1));
+    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5 + 1));
     return start.concat(filler, result);
   }
 
@@ -31,20 +31,17 @@ export default function Slots() {
         setValues={setColumn1Values}
       />
       <Column
-        scrollTime={5}
+        scrollTime={5.5}
         values={column2Values}
         setValues={setColumn2Values}
       />
       <Column
-        scrollTime={6}
+        scrollTime={7}
         values={column3Values}
         setValues={setColumn3Values}
       />
       <button
         type="button"
-        style={{
-          marginTop: '50px',
-        }}
         onClick={() => {
           play();
         }}
