@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS RouletteNums(
   evenOdd: BOOLEAN NOT NULL,
   color: VARCHAR(1) NOT NULL,
   rangeOf12: INTEGER NOT NULL,
-  firstHalf: INTEGER NOT NULL,
+  rangeOf18: INTEGER NOT NULL,
   numRow: INTEGER NOT NULL,
 )
 
