@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 function NavBar({ user, loggedIn }) {
+  function loginModal(e) {
+    // will open a login modal
+  }
+
   return (
     <Nav>
       <Link to="/">
@@ -13,7 +17,11 @@ function NavBar({ user, loggedIn }) {
         {!loggedIn ? null : `Balance : $${user.balance}`}
       </NavItem>
       <NavItem>{!loggedIn ? null : 'Update Balance'}</NavItem>
-      <NavItem>{!loggedIn ? 'Login' : `${user.username}`}</NavItem>
+      {!loggedIn ? (
+        <NavItem onClick={(e) => loginModal(e)}>Login</NavItem>
+      ) : (
+        <NavItem>{user.username}</NavItem>
+      )}
     </Nav>
   );
 }
