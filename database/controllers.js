@@ -10,6 +10,15 @@ const getTestData = () => {
     .catch(errorHandler);
 };
 
+const getUser = () => {
+  const queryString = 'SELECT * FROM users';
+
+  return db.query(queryString)
+    .then((results) => results.rows)
+    .catch(errorHandler);
+};
+
 module.exports = {
   getTestData,
+  getUser,
 };
