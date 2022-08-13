@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import ScratchCard from 'react-scratchcard-v2';
-// import CardValues from './CardValues';
 import IMG from '../../../../assets/test.jpg';
 
 const GRID_COLS = 5;
@@ -27,15 +27,10 @@ function getNUnique(n) {
 }
 
 export default function ScratchTicket() {
-  const [winningValues, setWinningValues] = useState([]);
-  const [matchingValues, setMatchingValues] = useState([]);
+  const [winningValues, setWinningValues] = useState(getNUnique(5));
+  const [matchingValues, setMatchingValues] = useState(getNUnique(25));
   const [value, setValue] = useState(1);
   const [playing, setPlaying] = useState(false);
-
-  useEffect(() => {
-    setWinningValues(getNUnique(5));
-    setMatchingValues(getNUnique(25));
-  }, []);
 
   function countMatches() {
     console.log('completed');
