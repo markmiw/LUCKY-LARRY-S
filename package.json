@@ -32,7 +32,7 @@
     "react-router-dom": "^6.3.0",
     "roulette-board": "^0.2.0",
     "style-loader": "^3.3.1",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
     "react-scratchcard-v2": "^1.1.1"
   },
   "devDependencies": {
