@@ -14,6 +14,7 @@ import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
 
 const dummyData = {
+  id: 1,
   username: 'LarryLucky',
   balance: 999999999,
 };
@@ -46,7 +47,11 @@ function Router() {
         />
         <Route
           path="/sidebar"
-          element={<Sidebar />}
+          element={(
+            <Sidebar
+              user={user}
+            />
+          )}
         />
         <Route
           path="/"

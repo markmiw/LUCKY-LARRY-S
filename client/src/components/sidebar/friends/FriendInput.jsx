@@ -1,18 +1,35 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function FriendInput({ closeFriendInput }) {
+function FriendInput({ closeFriendInput, userID, fetchFriends }) {
   const [username, setUsername] = useState('');
 
   return (
     <FriendInputContainer
       onSubmit={(e) => {
         e.preventDefault();
-        // only submit if username is non-empty
         if (username !== '') {
-          console.log(`submitting ${username}`);
-          closeFriendInput();
+          axios({
+            url: `/api/users/${userID}/friends`,
+            method: 'post',
+            data: {
+              friendUsername: username,
+            },
+          })
+            .then(({ data }) => {
+              if (data === 'username not found') {
+                // add a visual error message here: 'username not found'
+                console.log('display err msg');
+              } else {
+                fetchFriends();
+                closeFriendInput();
+              }
+            })
+            .catch((err) => {
+              console.error('failed to add friend', err);
+            });
         }
       }}
     >
@@ -32,6 +49,8 @@ function FriendInput({ closeFriendInput }) {
 
 FriendInput.propTypes = {
   closeFriendInput: PropTypes.func.isRequired,
+  userID: PropTypes.number.isRequired,
+  fetchFriends: PropTypes.func.isRequired,
 };
 
 const FriendInputContainer = styled('form')`

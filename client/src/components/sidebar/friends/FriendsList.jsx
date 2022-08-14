@@ -1,68 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import FriendsListItem from './FriendsListItem';
 import FriendInput from './FriendInput';
 
-function FriendsList() {
+function FriendsList({ userID }) {
   const [showingFriendInput, setShowingFriendInput] = useState(false);
 
-  // placeholder
-  const [friends] = useState([
-    {
-      id: 1,
-      username: 'Bruce',
-      flag: 'Japan',
-      lastOpened: new Date().toISOString(),
-    },
-    {
-      id: 2,
-      username: 'Mark',
-      flag: 'Usa',
-      lastOpened: new Date('13 august 2022').toISOString(),
-    },
-    {
-      id: 3,
-      username: 'Andy',
-      flag: 'Usa',
-      lastOpened: new Date().toISOString(),
-    },
-    {
-      id: 4,
-      username: 'Gary',
-      flag: 'Usa',
-      lastOpened: new Date('13 august 2022').toISOString(),
-    },
-    {
-      id: 5,
-      username: 'River',
-      flag: 'Usa',
-      lastOpened: new Date().toISOString(),
-    },
-    {
-      id: 6,
-      username: 'Jesse',
-      flag: 'Canada',
-      lastOpened: new Date('13 august 2022').toISOString(),
-    },
-    {
-      id: 7,
-      username: 'Matthew',
-      flag: 'Usa',
-      lastOpened: new Date('13 august 2022').toISOString(),
-    },
-    {
-      id: 8,
-      username: 'Cornelius',
-      flag: 'Germany',
-      lastOpened: new Date('12 august 2022').toISOString(),
-    },
-    {
-      id: 9,
-      username: 'Cornelius',
-      flag: 'Germany',
-      lastOpened: new Date('12 august 2022').toISOString(),
-    },
-  ]);
+  const [friends, setFriends] = useState([]);
+
+  const fetchFriends = () => {
+    axios({
+      url: `/api/users/${userID}/friends`,
+      method: 'get',
+    })
+      .then(({ data }) => {
+        const mapped = data.map((user) => ({
+          flag: 'Usa',
+          lastOpened: new Date().toISOString(),
+          ...user,
+        }));
+        setFriends(mapped);
+      })
+      .catch((err) => {
+        console.error('failed to fetch friends', err);
+      });
+  };
+
+  useEffect(() => {
+    fetchFriends();
+  }, []);
 
   return (
     <FriendsListContainer>
@@ -83,6 +51,8 @@ function FriendsList() {
         ? (
           <FriendInput
             closeFriendInput={() => setShowingFriendInput(false)}
+            userID={userID}
+            fetchFriends={fetchFriends}
           />
         )
         : <Spacer />}
@@ -92,13 +62,17 @@ function FriendsList() {
             key={friend.id}
             username={friend.username}
             flag={friend.flag}
-            lastOnline={friend.lastOnline}
+            lastOpened={friend.lastOpened}
           />
         ))}
       </List>
     </FriendsListContainer>
   );
 }
+
+FriendsList.propTypes = {
+  userID: PropTypes.number.isRequired,
+};
 
 const FriendsListContainer = styled('div')`
   width: 400px;
