@@ -1,17 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
+// import Homepage from './components/homepage/Homepage';
+// import Roulette from './components/roulette/Roulette';
+// import ScratchTicket from './components/scratch-ticket/ScratchTicket';
+// import Slots from './components/slots/Slots';
+import Sidebar from './components/sidebar/Sidebar';
 import Homepage from './components/homepage/Homepage';
 import Roulette from './components/roulette/Roulette';
 import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 import Slots from './components/slots/Slots';
+import NavBar from './NavBar';
+
+const dummyData = {
+  username: 'LarryLucky',
+  balance: 999999999,
+};
 
 function Router() {
+  const [user, setUser] = useState(); // user data
+  const [loggedIn, setLoggedIn] = useState(); // is user logged in?
+
+  // dummy data for now, yes it should be in useeffect
+  useEffect(() => {
+    setUser(dummyData);
+    setLoggedIn(true);
+  }, []);
+
   return (
     <BrowserRouter>
+      <NavBar user={user} loggedIn={loggedIn} />
       <Routes>
-        <Route
+        {/* <Route
           path="/roulette"
           element={<Roulette />}
         />
@@ -26,10 +47,14 @@ function Router() {
         <Route
           path="/"
           element={<Homepage />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="*"
           element={<Navigate to="/" />}
+        /> */}
+        <Route
+          path="*"
+          element={<Sidebar to="/" />}
         />
       </Routes>
     </BrowserRouter>

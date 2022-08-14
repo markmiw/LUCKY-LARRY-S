@@ -5,18 +5,22 @@ const morgan = require('morgan');
 const path = require('path');
 require('dotenv').config();
 
+// Adding this here for future implementation
+// const expressStaticGzip = require("express-static-gzip");
+
 const db = require('../database');
-// const router = require('./routes');
+const router = require('./routes');
 
 const app = express();
+
+// middleware to convert into json readable data
+app.use(express.json());
 
 // middleware for logging requests made to the server
 app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(express.static('client/dist'));
-
-const router = require('./routes');
 
 app.use('/api', router);
 
