@@ -58,20 +58,20 @@ const calculateWinnings = (slotMatrix, bet, rows) => {
     5: 50,
   };
 
-  const winnings = {
-    currency: 0,
+  const winningsData = {
+    winnings: 0,
     winningRows: [],
   };
 
   for (let i = 0; i < rows; i += 1) {
     const row = slotMatrix.slice(3 * i, 3 * i + 3);
     if (row.every((item) => item === row[0])) {
-      winnings.currency += bet * multipliers[row[0]];
-      winnings.winningRows.push(i + 1);
+      winningsData.winnings += bet * multipliers[row[0]];
+      winningsData.winningRows.push(i + 1);
     }
   }
 
-  return winnings;
+  return winningsData;
 };
 
 module.exports.slots = async (req, res) => {
@@ -86,11 +86,11 @@ module.exports.slots = async (req, res) => {
     return;
   }
   const slotResult = weightedSpin(3);
-  const winnings = calculateWinnings(slotResult, bet, rows);
-  const updatedBalance = await updateBalanceBasedOnWinnings(userid, bet, winnings.currency);
+  const winningsData = calculateWinnings(slotResult, bet, rows);
+  const updatedBalance = await updateBalanceBasedOnWinnings(userid, bet, winningsData.winnings);
   res.status(201).json({
     rows: slotResult,
     updatedBalance,
-    winnings,
+    winningsData,
   });
 };
