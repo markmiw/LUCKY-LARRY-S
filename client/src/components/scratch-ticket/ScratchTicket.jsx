@@ -27,16 +27,20 @@ function getNUnique(n) {
 }
 
 export default function ScratchTicket() {
-  const [winningValues, setWinningValues] = useState(getNUnique(5));
-  const [matchingValues, setMatchingValues] = useState(getNUnique(25));
+  const [winningValues, setWinningValues] = useState([]);
+  const [matchingValues, setMatchingValues] = useState([]);
   const [value, setValue] = useState(1);
   const [playing, setPlaying] = useState(false);
 
+  useEffect(() => {
+    setWinningValues(getNUnique(5));
+    setMatchingValues(getNUnique(25));
+  }, []);
+
   function countMatches() {
-    console.log('completed');
     let count = 0;
-    winningValues.forEach((num) => {
-      if (matchingValues.includes(num)) {
+    winningValues.forEach((amount) => {
+      if (matchingValues.includes(amount)) {
         count += 1;
       }
     });
@@ -44,10 +48,10 @@ export default function ScratchTicket() {
   }
 
   function getWinnings() {
-    let numMatches = countMatches();
-
+    const numMatches = countMatches();
+    console.log(numMatches);
     // do some multiplier
-    // 1: value * 0.5; 2: value * 1; 3: value * 2; 4: value * 5; 5: JACKPOT
+    // 1: value * 0.5; 2: value * 1.25; 3: value * 2; 4: value * 5; 5: JACKPOT
     // axios post
   }
 
@@ -57,9 +61,8 @@ export default function ScratchTicket() {
   }
 
   function confirmPlay(e) {
-    setPlaying(true);
+    setPlaying(true); // removes overlay div with z-index 2
     // need to lock buttons
-    // remove overlay div with z-index 2
   }
 
   return (
