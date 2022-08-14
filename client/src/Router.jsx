@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
+// import Homepage from './components/homepage/Homepage';
+// import Roulette from './components/roulette/Roulette';
+// import ScratchTicket from './components/scratch-ticket/ScratchTicket';
+// import Slots from './components/slots/Slots';
+import Sidebar from './components/sidebar/Sidebar';
 import Homepage from './components/homepage/Homepage';
 import Roulette from './components/roulette/Roulette';
 import ScratchTicket from './components/scratch-ticket/ScratchTicket';
@@ -27,7 +32,7 @@ function Router() {
     <BrowserRouter>
       <NavBar user={user} loggedIn={loggedIn} />
       <Routes>
-        <Route
+        {/* <Route
           path="/roulette"
           element={<Roulette />}
         />
@@ -42,10 +47,14 @@ function Router() {
         <Route
           path="/"
           element={<Homepage />}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="*"
           element={<Navigate to="/" />}
+        /> */}
+        <Route
+          path="*"
+          element={<Sidebar to="/" />}
         />
       </Routes>
     </BrowserRouter>
