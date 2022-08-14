@@ -1,4 +1,8 @@
 const router = require('express').Router();
+const slots = require('./controllers/slots');
+
+router.get('/slots', slots.spin);
+router.get('/weightedSlots', slots.weightedSpin);
 const { getUser } = require('../database/controllers');
 
 router.get('/test', (req, res) => {
