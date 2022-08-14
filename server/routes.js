@@ -1,9 +1,14 @@
 const router = require('express').Router();
 const slots = require('./controllers/slots');
+const { addFriend, getAllFriends }= require('./controllers/friends');
+const { getUser } = require('../database/controllers');
 
 router.get('/slots', slots.spin);
 router.get('/weightedSlots', slots.weightedSpin);
-const { getUser } = require('../database/controllers');
+
+router.get('/users/:userID/friends', getAllFriends);
+
+router.post('/users/:userID/friends', addFriend);
 
 router.get('/test', (req, res) => {
   res.status(200).send('hello!');

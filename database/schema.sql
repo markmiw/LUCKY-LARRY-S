@@ -44,7 +44,10 @@ CREATE INDEX IF NOT EXISTS idx_chat ON chat(userID);
 
 
 INSERT INTO country (country, flag) VALUES ('TEST', 'TEST');
-INSERT INTO users (username, password, countryID, balance, winnings) VALUES ('Bruce', 'Waifus', 1, 2000, 0);
+INSERT INTO users (username, password, countryID, balance, winnings) VALUES
+  ('Bruce', 'Waifus', 1, 2000, 0),
+  ('Mark', 'Waifus', 1, 2000, 0),
+  ('Cornelius', 'Waifus', 1, 2000, 0);
 
 -- ---
 -- Table 'test'
