@@ -9,7 +9,7 @@ require('dotenv').config();
 // const expressStaticGzip = require("express-static-gzip");
 
 const db = require('../database');
-// const router = require('./routes');
+const router = require('./routes');
 
 const app = express();
 
@@ -21,8 +21,6 @@ app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(express.static('client/dist'));
-
-const router = require('./routes');
 
 app.use('/api', router);
 
