@@ -27,6 +27,7 @@
     "react-custom-roulette": "^1.2.0",
     "react-custom-roulette-skate": "^1.2.3",
     "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "roulette-board": "^0.2.0",
     "style-loader": "^3.3.1",

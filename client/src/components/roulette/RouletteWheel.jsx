@@ -4,6 +4,7 @@ import { Wheel } from 'react-custom-roulette';
 import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
 
 
+
 const data = [
   { option: '0', style: { backgroundColor: 'green' } },
   { option: '1' },
@@ -57,31 +58,34 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel () {
+export default function RouletteWheel ({ winNum, setWinNum, result }) {
+  //wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [winningNumInfo, setWinningNumInfo] = useState([]);
 
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
+
+    // below will update winNum in parent Roulette.jsx
+    setWinNum(newPrizeNumber);
+
     // need to send newPrizeNumber to the backend when clicked
     console.log(newPrizeNumber)
     setMustSpin(true);
     // do axios calls to get winning number information
     // grabWinningNum(newPriceNumber);
-
-    <Celebration/>
   };
 
-  const grabWinningNum = (num) => {
-    // how does router.jsx plays a role here?
-      axios.get('/')
-        .then((response) => {
-          setWinningNumInfo(response.data);
-        })
-        .catch((err) => console.log(err));
-  }
+  // May use in refactor for heightened security
+  // const grabWinningNum = (num) => {
+  //   // how does router.jsx plays a role here?
+  //     axios.get('/')
+  //       .then((response) => {
+  //         setWinningNumInfo(response.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  // }
 
   return (
     <RouletteWheelContainer className="App">
@@ -105,6 +109,19 @@ export default function RouletteWheel () {
           textDistance={textDistance}
           onStopSpinning={() => {
             setMustSpin(false);
+            // we can send out celebration or lose here
+            //actions for front end after wheel stops spinning
+
+            //pass in data from submit in roulette bet ex. data
+            if (results) {
+              //play confetti
+              //results is an object with all the winnings from each game.
+              window.alert(`Congratulations! You won a total of ${results.winnings}!`)
+              //further clarifications on what they won on after (ex. win.amount.colors)
+              //update userbalance hook
+            } else {
+              window.alert('Not a winner, try again next time!')
+            }
           }}
         />
         <br/>
