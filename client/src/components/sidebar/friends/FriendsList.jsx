@@ -6,6 +6,7 @@ import FriendInput from './FriendInput';
 function FriendsList() {
   const [showingFriendInput, setShowingFriendInput] = useState(false);
 
+  // placeholder
   const [friends] = useState([
     {
       id: 1,
@@ -66,7 +67,6 @@ function FriendsList() {
   return (
     <FriendsListContainer>
       <Header>
-        <div />
         <Title>
           Chat
         </Title>
