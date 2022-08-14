@@ -92,7 +92,7 @@ function FriendsList() {
             key={friend.id}
             username={friend.username}
             flag={friend.flag}
-            lastOnline={friend.lastOnline}
+            lastOpened={friend.lastOpened}
           />
         ))}
       </List>
