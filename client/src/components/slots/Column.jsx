@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 // move the links into served assets when finalized icon decision
@@ -17,7 +18,7 @@ const getImageFromValue = function getImageFromValue(value) {
   }
 };
 
-export default function Column({ scrollTime, values, setValues }) {
+export default function Column({ scrollTime, values, setValues, balance, setBalance, adjustment, column }) {
   const [offset, setOffset] = useState(0);
 
   const columnRef = useRef(null);
@@ -28,9 +29,15 @@ export default function Column({ scrollTime, values, setValues }) {
       setValues(values.slice(-3));
       columnRef.current.style.transition = '';
       setOffset(0);
+      if (column === 3) {
+        setBalance(balance + adjustment);
+      }
     };
 
     columnRef.current.addEventListener('transitionend', transitionEndListener);
+    // if (scrollTime === 7 && columnRef.current.style.transition === '') {
+    //   setBalance(balance + adjustment);
+    // }
     return () => { columnRef.current.addEventListener('transitionend', transitionEndListener); };
   }, [columnRef, values]);
 

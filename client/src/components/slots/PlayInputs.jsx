@@ -1,8 +1,8 @@
 import React from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-export default function PlayInputs({ setPlays, setBetAmount }) {
+export default function PlayInputs({ setPlays, betAmount, setBetAmount }) {
   return (
     <div>
       <button type="button" onClick={() => setPlays(1)}>
@@ -14,6 +14,16 @@ export default function PlayInputs({ setPlays, setBetAmount }) {
       <button type="button" onClick={() => setPlays(3)}>
         3 Lines
       </button>
+      <div>
+        $
+        <input type="number" value={betAmount} placeholder="1" onChange={(event) => setBetAmount(event.target.value)} />
+      </div>
     </div>
   );
 }
+
+PlayInputs.propTypes = {
+  setPlays: PropTypes.func.isRequired,
+  betAmount: PropTypes.number.isRequired,
+  setBetAmount: PropTypes.func.isRequired,
+};
