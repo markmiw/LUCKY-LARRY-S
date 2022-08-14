@@ -2,6 +2,7 @@
 
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 require('dotenv').config();
 
 // Adding this here for future implementation
@@ -20,6 +21,18 @@ app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(express.static('client/dist'));
+
+const router = require('./routes');
+
+app.use('/api', router);
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '/client/dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`);
