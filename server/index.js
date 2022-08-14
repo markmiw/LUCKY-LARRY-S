@@ -6,7 +6,7 @@ const path = require('path');
 require('dotenv').config();
 
 const db = require('../database');
-// const router = require('./routes');
+const router = require('./routes');
 
 const app = express();
 
@@ -15,8 +15,6 @@ app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(express.static('client/dist'));
-
-const router = require('./routes');
 
 app.use('/api', router);
 
