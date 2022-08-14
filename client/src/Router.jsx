@@ -6,7 +6,8 @@ import {
 // import Roulette from './components/roulette/Roulette';
 // import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 // import Slots from './components/slots/Slots';
-import Chat from './components/chat/Chat';
+import Sidebar from './components/sidebar/Sidebar';
+
 function Router() {
   return (
     <BrowserRouter>
@@ -33,7 +34,7 @@ function Router() {
         /> */}
         <Route
           path="*"
-          element={<Chat to="/" />}
+          element={<Sidebar to="/" />}
         />
       </Routes>
     </BrowserRouter>
