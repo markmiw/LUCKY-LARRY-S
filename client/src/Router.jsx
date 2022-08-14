@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BrowserRouter, Routes, Route, Navigate,
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
 } from 'react-router-dom';
 // import Homepage from './components/homepage/Homepage';
 // import Roulette from './components/roulette/Roulette';
@@ -30,32 +33,19 @@ function Router() {
 
   return (
     <BrowserRouter>
-      <NavBar user={user} loggedIn={loggedIn} />
+      <NavBar
+        user={user}
+        setUser={setUser}
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+      />
       <Routes>
-        {/* <Route
-          path="/roulette"
-          element={<Roulette />}
-        />
-        <Route
-          path="/scratch-ticket"
-          element={<ScratchTicket />}
-        />
-        <Route
-          path="/slots"
-          element={<Slots />}
-        />
-        <Route
-          path="/"
-          element={<Homepage />}
-        /> */}
-        {/* <Route
-          path="*"
-          element={<Navigate to="/" />}
-        /> */}
-        <Route
-          path="*"
-          element={<Sidebar to="/" />}
-        />
+        <Route path="/roulette" element={<Roulette />} />
+        <Route path="/scratch-ticket" element={<ScratchTicket />} />
+        <Route path="/slots" element={<Slots />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Sidebar to="/" />} />
       </Routes>
     </BrowserRouter>
   );
