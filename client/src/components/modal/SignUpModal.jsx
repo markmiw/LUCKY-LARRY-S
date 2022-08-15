@@ -36,8 +36,6 @@ function SignUpModal({ setModal }) {
           <button
             type="button"
             className="close"
-            data-dismiss="modal"
-            aria-label="Close"
             onClick={() => setModal(false)}
           >
             <span aria-hidden="true">&times;</span>

@@ -5,7 +5,9 @@ import LoginModal from './components/modal/LoginModal';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
 
-function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
+function NavBar({
+  user, setUser, loggedIn, setLoggedIn,
+}) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
@@ -29,6 +31,7 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
   function handleLogout() {
     setLoggedIn(false);
     setUser();
+    // send them back to homepage?
   }
 
   return (

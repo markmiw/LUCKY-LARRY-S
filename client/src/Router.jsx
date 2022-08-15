@@ -40,12 +40,30 @@ function Router() {
         setLoggedIn={setLoggedIn}
       />
       <Routes>
-        <Route path="/roulette" element={<Roulette />} />
-        <Route path="/scratch-ticket" element={<ScratchTicket />} />
-        <Route path="/slots" element={<Slots />} />
-        <Route path="/" element={<Homepage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-        <Route path="*" element={<Sidebar to="/" />} />
+        <Route
+          path="/roulette"
+          element={<Roulette />}
+        />
+        <Route
+          path="/scratch-ticket"
+          element={<ScratchTicket />}
+        />
+        <Route
+          path="/slots"
+          element={<Slots />}
+        />
+        <Route
+          path="/"
+          element={<Homepage />}
+        />
+        <Route
+          path="*"
+          element={<Navigate to="/" />}
+        />
+        <Route
+          path="*"
+          element={<Sidebar to="/" />}
+        />
       </Routes>
     </BrowserRouter>
   );

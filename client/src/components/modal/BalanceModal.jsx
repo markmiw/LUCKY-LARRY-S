@@ -11,7 +11,7 @@ function BalanceModal({ setModal }) {
   }
 
   function handleSubmit() {
-    // axios post increase balance
+    const results = axios.post('/api/user'); // CHECK WHAT ROUTE WE ARE USING
     setModal(false);
   }
 
@@ -25,8 +25,6 @@ function BalanceModal({ setModal }) {
           <button
             type="button"
             className="close"
-            data-dismiss="modal"
-            aria-label="Close"
             onClick={() => setModal(false)}
           >
             <span aria-hidden="true">&times;</span>
@@ -39,7 +37,6 @@ function BalanceModal({ setModal }) {
               <input
                 type="number"
                 min="0"
-                id="defaultForm-username"
                 className="form-control validate"
                 onChange={(e) => handleChange(e)}
               />

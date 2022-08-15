@@ -34,8 +34,6 @@ function LoginModal({ setModal }) {
           <button
             type="button"
             className="close"
-            data-dismiss="modal"
-            aria-label="Close"
             onClick={() => setModal(false)}
           >
             <span aria-hidden="true">&times;</span>
@@ -47,7 +45,6 @@ function LoginModal({ setModal }) {
               Your username
               <input
                 type="text"
-                id="defaultForm-username"
                 className="form-control validate"
                 onChange={(e) => handleChange(e, 'username')}
               />
@@ -58,7 +55,6 @@ function LoginModal({ setModal }) {
               Your password
               <input
                 type="password"
-                id="defaultForm-pass"
                 className="form-control validate"
                 onChange={(e) => handleChange(e, 'password')}
               />
