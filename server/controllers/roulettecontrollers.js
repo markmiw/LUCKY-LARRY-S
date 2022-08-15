@@ -1,8 +1,12 @@
+const pool =require('../../database/index.js')
+
 module.exports.checkNum = (req, res) => {
-  console.log(req.query.betInfo)
-  const { winNum, num, color, eO, rangeOf12, firstHalf, numRow} = req.query.betInfo;
+
+  console.log('req.query is: ', req.query.betInfo)
+ const { winNum, num, color, eO, rangeOf12, firstHalf, numRow } = req.query.betInfo;
+ console.log(winNum, num, color, eO, rangeOf12, firstHalf, numRow);
   const query = `SELECT * FROM RouletteNums WHERE id = ${winNum}`;
-  const winnings, winsNum, winsCol, winsEO, winsRange, winsRow, winsCol;
+  const winnings = '', winsNum= '', winsCol= '', winsEO= '', winsRange= '', winsRow= '';
   const winInfo = {};
   const winMultiplier = (result, userInput, winStorage, multiplier) => {
     result === userInput.pick ? winStorage = userInput.bet * multiplier : null;
@@ -12,7 +16,7 @@ module.exports.checkNum = (req, res) => {
   };
   pool
     .query(query)
-    .then((results) =>
+    .then((results) => {console.log('this', results);
     const { resNum, resColor, resEO, resRange, resFirstHalf, resNumRow } = results;
       //seperate winnings
       winMultipler(resNum, num, winsNum, 35);
@@ -20,7 +24,7 @@ module.exports.checkNum = (req, res) => {
       winMultipler(resEO, eO, winsEO, 2);
       winMultipler(resRange, rangeOf12, winsRange, 3);
       winMultipler(resNumRow, numRow, winsRow, 3);
-      winnings = (winsNum + winsCol = winsEo + winsRange + winsRow);)
+      winnings = (winsNum + winsCol + winsEo + winsRange + winsRow);})
         .then(() => {
         if (winnings > 0) {
           winInfoPop(winnings);
@@ -34,7 +38,6 @@ module.exports.checkNum = (req, res) => {
           res.status(200).send(winInfo)
         }
         res.status(200).send(false)
-      }
-      res.status(200).send(winMessage))
+      })
   .catch((err) => { res.status(500); console.log(err) })
     }

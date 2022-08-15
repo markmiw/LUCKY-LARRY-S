@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Wheel } from 'react-custom-roulette';
-import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
+import styled from 'styled-components';
+// import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
 
 const data = [
   { option: '0', style: { backgroundColor: 'green' } },
@@ -56,28 +57,27 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel ({ winNum, setWinNum, setWinState }) {
+export default function RouletteWheel ({setWinState, betInfo, setBetInfo}) {
   //wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [setResult, result] = useState('');
+  const [setResult, result] = useState({});
 
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
-    // below will update winNum in parent Roulette.jsx
-    setWinNum(newPrizeNumber);
-    // need to send newPrizeNumber to the backend when clicked
-    console.log(newPrizeNumber)
+
     setMustSpin(true);
     // do axios calls to get winning number information
     // grabWinningNum(newPriceNumber);
-    // axios.post('')
-    axios.get('/api/user/roulette', {
-      betInfo: betInfo
+    console.log('winning number is: ', newPrizeNumber);
+
+    axios.get('/api/roulette', { params: {
+      betInfo: betInfo}
     })
       //change the state of the hook passed into this function from roulette wheel
-      .then((results => { setResult(results.data); console.log(results.data) })
+      // ERROR: setResult is not a function
+      .then((results) => { setResult(results.data); console.log('results.data is: ',results.data) }
       )
       .catch(err => console.log(err));
   };
@@ -122,7 +122,7 @@ export default function RouletteWheel ({ winNum, setWinNum, setWinState }) {
             if (result) {
             //   //play confetti
             //   //results is an object with all the winnings from each game.
-              window.alert(`Congratulations! You won a total of ${results.winnings}!`)
+              window.alert(`Congratulations! You won a total of ${result.winnings}!`)
 
             //   //further clarifications on what they won on after (ex. win.amount.colors)
             //   //update userbalance hook
@@ -139,3 +139,10 @@ export default function RouletteWheel ({ winNum, setWinNum, setWinState }) {
     </RouletteWheelContainer>
   )
 }
+
+export const RouletteWheelContainer = styled.div`
+  margin: 0 auto;
+`
+export const SpinButton = styled.button`
+
+`

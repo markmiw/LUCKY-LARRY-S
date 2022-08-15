@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS RouletteNums(
 );
 
 -- Load data in
-INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUES (0, 'zero', 'green', 0, 1, 0),
+INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUES (0, 'zero', 'green', 0, 0, 0),
 (1, 'odd', 'black', 1, 1, 1),
 (2, 'even', 'red', 1, 1, 2),
 (3, 'odd', 'black', 1, 1, 3),

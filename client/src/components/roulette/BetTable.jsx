@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal.jsx';
-import { RouletteInfo1Grid, GameDisplay, BetTableContainer, BetNumberGrid, Number0Button, NumberButton, BetColorOddGrid, RedColorButton, BlackColorButton, Bet12Grid, Bet12Button, Bet18Grid, Bet18Button, BetRowGrid, BetRowButton } from './roulette.styled.js';
+import styled from 'styled-components';
+// import { RouletteInfo1Grid, GameDisplay, BetTableContainer, BetNumberGrid, Number0Button, NumberButton, BetColorOddGrid, RedColorButton, BlackColorButton, Bet12Grid, Bet12Button, Bet18Grid, Bet18Button, BetRowGrid, BetRowButton } from './roulette.styled.js';
 
-export default function BetTable({ winNum, setResult, setBetInfo }) {
+export default function BetTable({ setResult, setBetInfo }) {
   // userbet refactor to remove initial pick bets
   const [num, setNum] = useState({ pick: '', bet: '' });
   const [color, setColor] = useState({ pick: '', bet: '' });
@@ -22,6 +23,7 @@ export default function BetTable({ winNum, setResult, setBetInfo }) {
   }, [betInput])
 
   // need a function that handles the amount bet pop upc
+
   const openModal = (input) => {
     setShowModal(prev => !prev); // prev => !prev
     console.log('modal status is: ', showModal)
@@ -101,3 +103,96 @@ export default function BetTable({ winNum, setResult, setBetInfo }) {
 
   );
 }
+
+export const RouletteInfo1Grid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto;
+  gap: 5%;
+`
+export const GameDisplay = styled.div`
+  margin: 0 auto;
+  width: 300px;
+  height: 30px;
+`
+
+
+export const BetTableContainer = styled.div`
+  margin: 0 auto;
+`
+export const BetNumberGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+`
+export const Number0Button = styled.button`
+&:after {
+  background-color: green;
+}
+background-color: #0b6102;
+`
+
+export const NumberButton = styled.button`
+&:after {
+  background-color: #FDA300;
+}
+background-color: #E09F5A;
+`
+export const BetColorOddGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto auto;
+`
+export const RedColorButton = styled.button`
+&:after {
+  background-color: red;
+}
+background-color: red;
+`
+export const BlackColorButton = styled.button`
+&:after {
+  background-color: black;
+}
+background-color: black;
+`
+
+export const Bet12Grid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto;
+`
+export const Bet12Button = styled.button`
+&:after {
+  background-color: #327ba8;
+}
+background-color: #1a4b82
+`
+export const Bet18Grid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto;
+
+`
+export const Bet18Button = styled.button`
+&:after {
+  background-color: #4ADEDE;
+}
+background-color: #1AA7EC;
+`
+export const BetRowGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto;
+`
+export const BetRowButton = styled.button`
+  &:after {
+    background-color: #FDA300;
+  }
+  background-color: #E09F5A;
+`
