@@ -7,8 +7,7 @@ CREATE DATABASE luckylarrys;
 
 CREATE TABLE country (
   id SERIAL PRIMARY KEY NOT NULL,
-  country VARCHAR(30) NOT NULL,
-  flag VARCHAR(300) NOT NULL
+  country VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE users (
@@ -43,18 +42,17 @@ CREATE INDEX IF NOT EXISTS idx_friends ON friends(userID);
 CREATE INDEX IF NOT EXISTS idx_chat ON chat(userID);
 
 
-INSERT INTO country (country, flag) VALUES ('TEST', 'TEST');
+INSERT INTO country (country) VALUES ('Argentina'), ('Afghanistan'), ('France'), ('Australia');
 INSERT INTO users (username, password, countryID, balance, winnings) VALUES
 ('Bruce', 'Waifus', 1, 2000, 10000000),
-('Matthew', 'Moofus', 1, 2000, 10),
-('Cornelius', 'Mario', 1, 0, 0),
-('River', 'Animation', 1, 2000, 100),
+('Matthew', 'Moofus', 2, 2000, 10),
+('Cornelius', 'Mario', 3, 0, 0),
+('River', 'Animation', 4, 2000, 100),
 ('Jesse', 'Roulette', 1, 2000, 1000),
-('Andy', 'Anime', 1, 2000, 100000),
-('Mark', 'Tensorflow', 1, 2000, 1000),
-('Gary', 'Pokemon', 1, 2000, 10000),
-('Bruce2', 'Waifu', 1, 2000, 1);
-
+('Andy', 'Anime', 2, 2000, 100000),
+('Mark', 'Tensorflow', 3, 2000, 1000),
+('Gary', 'Pokemon', 4, 2000, 10000),
+('Bruce2', 'Waifu', 2, 2000, 1);
 
 -------Roulette---------
 -- USE roulette
