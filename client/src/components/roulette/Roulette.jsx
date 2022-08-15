@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import RouletteWheel from './RouletteWheel.jsx';
-import RouletteBet from './RouletteBet.jsx';
+import BetTable from './BetTable.jsx';
 import { RouletteGameGrid,  } from './roulette.styled.js';
 import Modal from './model.jsx';
 
@@ -17,7 +17,7 @@ export default function Roulette () {
     <RouletteGameGrid>
       <Modal showModal={showModal} setShowModal={setShowModal} currentBetOption={currentBetOption} />
       <RouletteWheel winNum={winNum} setWinNum={setWinNum} result={result} />
-      <RouletteBet winNum={winNum} showModal={showModal} currentBetOption={currentBetOption} setCurrentBetOption={setCurrentBetOption} setShowModal={setShowModal} setResult={setResult} />
+      <BetTable winNum={winNum} showModal={showModal} currentBetOption={currentBetOption} setCurrentBetOption={setCurrentBetOption} setShowModal={setShowModal} setResult={setResult} />
     </RouletteGameGrid>
 
   )
