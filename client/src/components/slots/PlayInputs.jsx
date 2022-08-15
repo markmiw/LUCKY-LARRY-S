@@ -77,6 +77,7 @@ const StyledInput = styled.input`
   margin: 0;
   margin-left: 5px;
   border-radius: 10px;
+  text-align: center;
 `;
 
 const Dollar = styled.div`
