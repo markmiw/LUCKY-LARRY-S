@@ -8,6 +8,7 @@ import {
 // import Slots from './components/slots/Slots';
 import Sidebar from './components/sidebar/Sidebar';
 import '../dist/sidebar.css';
+import '../dist/bootstrap.min.css';
 // import Homepage from './components/homepage/Homepage';
 // import Roulette from './components/roulette/Roulette';
 // import ScratchTicket from './components/scratch-ticket/ScratchTicket';

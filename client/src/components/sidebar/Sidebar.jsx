@@ -7,9 +7,9 @@ function Sidebar() {
   return (
     <div className="sidebar-container">
       <div className='sidebar-nav-container'>
-        <img src={Globe}></img>
-        <img src={Leaderboard}></img>
-        <img src={Friends}></img>
+        <img className='sidebar-nav-btn' src={Globe}></img>
+        <img className='sidebar-nav-btn' src={Leaderboard}></img>
+        <img className='sidebar-nav-btn' src={Friends}></img>
       </div>
       <Chat />
     </div>
