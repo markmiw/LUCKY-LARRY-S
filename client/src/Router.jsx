@@ -45,16 +45,16 @@ function Router() {
           element={<Slots />}
         />
         <Route
+          path="/sidebar"
+          element={<Sidebar />}
+        />
+        <Route
           path="/"
           element={<Homepage />}
         />
-        {/* <Route
-          path="*"
-          element={<Navigate to="/" />}
-        /> */}
         <Route
           path="*"
-          element={<Sidebar to="/" />}
+          element={<Navigate to="/" />}
         />
       </Routes>
     </BrowserRouter>
