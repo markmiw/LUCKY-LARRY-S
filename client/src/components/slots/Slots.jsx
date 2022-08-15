@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import Column from './Column';
 import PlayInputs from './PlayInputs';
@@ -40,34 +41,39 @@ export default function Slots() {
   }
 
   return (
-    <>
-      <Column
-        scrollTime={4}
-        values={column1Values}
-        setValues={setColumn1Values}
-        balance={balance}
-        setBalance={setBalance}
-        adjustment={adjustment}
-        column={1}
-      />
-      <Column
-        scrollTime={5.5}
-        values={column2Values}
-        setValues={setColumn2Values}
-        balance={balance}
-        setBalance={setBalance}
-        adjustment={adjustment}
-        column={2}
-      />
-      <Column
-        scrollTime={7}
-        values={column3Values}
-        setValues={setColumn3Values}
-        balance={balance}
-        setBalance={setBalance}
-        adjustment={adjustment}
-        column={3}
-      />
+    <SlotsContainer>
+      <ColumnsContainer>
+        <Column
+          scrollTime={4}
+          values={column1Values}
+          setValues={setColumn1Values}
+          balance={balance}
+          setBalance={setBalance}
+          adjustment={adjustment}
+          column={1}
+          iconSize={100}
+        />
+        <Column
+          scrollTime={5.5}
+          values={column2Values}
+          setValues={setColumn2Values}
+          balance={balance}
+          setBalance={setBalance}
+          adjustment={adjustment}
+          column={2}
+          iconSize={100}
+        />
+        <Column
+          scrollTime={7}
+          values={column3Values}
+          setValues={setColumn3Values}
+          balance={balance}
+          setBalance={setBalance}
+          adjustment={adjustment}
+          column={3}
+          iconSize={100}
+        />
+      </ColumnsContainer>
       <div>
         Balance: $
         {balance}
@@ -76,15 +82,19 @@ export default function Slots() {
         setPlays={setPlays}
         betAmount={betAmount}
         setBetAmount={setBetAmount}
+        play={() => { play(); }}
       />
-      <button
-        type="button"
-        onClick={() => {
-          play();
-        }}
-      >
-        Go!
-      </button>
-    </>
+    </SlotsContainer>
   );
 }
+
+const SlotsContainer = styled.div`
+  width: 50vw;
+`;
+
+const ColumnsContainer = styled.div`
+  min-width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
