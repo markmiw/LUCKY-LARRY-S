@@ -11,7 +11,7 @@ function BalanceModal({ setModal }) {
   }
 
   function handleSubmit() {
-    const results = axios.post('/api/user'); // CHECK WHAT ROUTE WE ARE USING
+    // const results = axios.post('/api/user'); // CHECK WHAT ROUTE WE ARE USING
     setModal(false);
   }
 

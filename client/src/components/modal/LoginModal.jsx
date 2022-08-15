@@ -18,9 +18,9 @@ function LoginModal({ setModal }) {
 
   function handleSubmit() {
     // const results = axios.get('/api/user', { params: info }); // CHECK WHAT ROUTE WE ARE USING
-    if (info.password === results.password) {
-      // valid
-    }
+    // if (info.password === results.password) {
+    //   // valid
+    // }
     setModal(false);
   }
 

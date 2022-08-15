@@ -18,11 +18,11 @@ function SignUpModal({ setModal }) {
   }
 
   function handleSubmit() {
-    if (info.password !== info.reEnterPassword) return;
-    const results = axios.post('/api/user', info); // CHECK WHAT ROUTE WE ARE USING, ALSO PROBABLY MORE FIELDS
-    if (info.password === results.password) {
-      // valid
-    }
+    // if (info.password !== info.reEnterPassword) return;
+    // const results = axios.post('/api/user', info); // CHECK WHAT ROUTE WE ARE USING, ALSO PROBABLY MORE FIELDS
+    // if (info.password === results.password) {
+    //   // valid
+    // }
     setModal(false);
   }
 
