@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Chat from './chat/Chat.jsx';
 import Leaderboard from "../../../dist/icons/leaderboard.png"
 import Friends from "../../../dist/icons/friends.svg"
@@ -11,7 +11,7 @@ function Sidebar() {
         <img className='sidebar-nav-btn' src={Leaderboard}></img>
         <img className='sidebar-nav-btn' src={Friends}></img>
       </div>
-      <Chat />
+      <Chat/>
     </div>
   );
 }

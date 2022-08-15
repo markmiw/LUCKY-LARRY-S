@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import * as moment from 'moment';
 import Picker from 'emoji-picker-react';
 import flags from '../Flag.jsx';
@@ -16,15 +16,24 @@ function handleDate(date) {
   return `${moment(date, ['x']).format('MMM Do, yyyy, h:mm A')}`;
 }
 
-function Chat(props) {
+function Chat({}) {
   const [inputStr, setInputStr] = useState('');
-  const [showPicker, setShowPicker] = useState(false);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
-
-  const onEmojiClick = (event, emojiObject) => {
-    setChosenEmoji(emojiObject);
+  const inputRef = useRef(null);
+  const onEmojiClick = (e, emojiObject) => {
+    const { selectionStart, selectionEnd } = inputRef.current;
+    const newVal = inputStr.slice(0, selectionStart) + emojiObject.emoji + inputStr.slice(selectionEnd);
+    setInputStr(newVal);
   };
 
+  function hideEmojiModal(e) {
+    e.preventDefault();
+    document.getElementsByClassName('emoji-modal')[0].classList.add('hidden');
+  }
+
+  function showEmojiModal(e) {
+    e.preventDefault();
+    document.getElementsByClassName('emoji-modal')[0].classList.remove('hidden');
+  }
   const messages = [{
     username: 'mark',
     country: 'USA',
@@ -75,44 +84,20 @@ function Chat(props) {
         </ul>
       </div>
       <div className="global-chat-input-container">
-        <input onChange={(e) => setInputStr(e.target.value)} type="text" className="global-chat-input" placeholder="Aa" />
+        <input ref={inputRef} onChange={(e) => setInputStr(e.target.value)} type="text" className="global-chat-input" placeholder="Aa" value={inputStr} />
         <div className="emoji-container">
-          <img onClick={() => setShowPicker((val) => !val)} alt="emoji" className="emoji-button align-items-center" src={Smileyface} />
-          {showPicker && <Picker
-          pickerStyle={{ width: '300px', position: "fixed", bottom: "130px" }}
-          onEmojiClick={onEmojiClick} />}
+          <img onClick={(e) => showEmojiModal(e)} alt="emoji" className="emoji-button align-items-center" src={Smileyface} />
+          <div className="emoji-modal hidden">
+            <div className="emoji-backdrop" onClick={(e) => { hideEmojiModal(e); }} />
+            <Picker
+              pickerStyle={{ width: '250px', position: 'fixed', bottom: '165px' }}
+              onEmojiClick={onEmojiClick}
+            />
+          </div>
         </div>
       </div>
-
     </div>
   );
 }
 
 export default Chat;
-
-{ /* <div classNameName="global-chat-container">
-      <div classNameName="global-chat-message-container">
-        {messages.map((message, i) => (
-          <div classNameName="global-message-container" key={i}>
-            <img classNameName="global-message-country" src={flags[message.country]} alt="user-country" />
-            <div classNameName="global-message-container-inner">
-              <div classNameName="global-chat-username-date-container">
-                <span classNameName="chat-username">
-                  {message.username}
-                </span>
-                <span classNameName="global-chat-date">
-                  {moment(message.date).fromNow()}
-                </span>
-              </div>
-              <span classNameName="global-chat-message">
-                {message.message}
-              </span>
-            </div>
-          </div>
-        ))}
-        <div classNameName="global-chat-input-container">
-          <input classNameName="global-chat-input" type="text" placeholder="Aa" />
-          <img alt='emoji-button' src={Smileyface}></img>
-        </div>
-      </div>
-    </div> */ }
