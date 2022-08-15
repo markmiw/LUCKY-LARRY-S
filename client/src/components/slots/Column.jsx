@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 // move the links into served assets when finalized icon decision
@@ -18,7 +17,15 @@ const getImageFromValue = function getImageFromValue(value) {
   }
 };
 
-export default function Column({ scrollTime, values, setValues, balance, setBalance, adjustment, column }) {
+export default function Column({
+  scrollTime,
+  values,
+  setValues,
+  balance,
+  setBalance,
+  adjustment,
+  column,
+}) {
   const [offset, setOffset] = useState(0);
 
   const columnRef = useRef(null);
@@ -35,9 +42,6 @@ export default function Column({ scrollTime, values, setValues, balance, setBala
     };
 
     columnRef.current.addEventListener('transitionend', transitionEndListener);
-    // if (scrollTime === 7 && columnRef.current.style.transition === '') {
-    //   setBalance(balance + adjustment);
-    // }
     return () => { columnRef.current.addEventListener('transitionend', transitionEndListener); };
   }, [columnRef, values]);
 
@@ -96,4 +100,8 @@ Column.propTypes = {
   scrollTime: PropTypes.number.isRequired,
   values: PropTypes.arrayOf(PropTypes.number).isRequired,
   setValues: PropTypes.func.isRequired,
+  balance: PropTypes.number.isRequired,
+  setBalance: PropTypes.func.isRequired,
+  adjustment: PropTypes.number.isRequired,
+  column: PropTypes.number.isRequired,
 };
