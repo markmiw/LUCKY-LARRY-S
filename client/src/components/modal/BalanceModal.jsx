@@ -18,7 +18,7 @@ function BalanceModal({ setModal }) {
   return (
     <Modal setModal={setModal}>
       <div className="modal-content">
-        <div className="modal-header text-center bg-info">
+        <div className="modal-header text-center">
           <h4 className="modal-title w-100 font-weight-bold">
             Top Off
           </h4>
@@ -44,7 +44,7 @@ function BalanceModal({ setModal }) {
           </div>
         </div>
         <div className="modal-footer d-flex justify-content-center">
-          <button type="submit" className="btn btn-info" onClick={() => handleSubmit()}>
+          <button type="submit" className="btn" onClick={() => handleSubmit()}>
             Confirm
           </button>
         </div>

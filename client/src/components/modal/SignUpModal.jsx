@@ -29,7 +29,7 @@ function SignUpModal({ setModal }) {
   return (
     <Modal setModal={setModal}>
       <div className="modal-content">
-        <div className="modal-header text-center bg-info">
+        <div className="modal-header text-center">
           <h4 className="modal-title w-100 font-weight-bold">
             Create Account
           </h4>
@@ -66,11 +66,22 @@ function SignUpModal({ setModal }) {
               onChange={(e) => handleChange(e, 'reEnterPassword')}
             />
           </div>
+          <div className="md-form mb-4">
+            <select
+              className="form-select"
+              aria-label=".form-select-lg"
+            >
+              <option value="USA">United States of America</option>
+              <option value="China">China</option>
+              <option value="Canada">Canada</option>
+              <option value="Japan">Japan</option>
+            </select>
+          </div>
         </div>
         <div className="modal-footer d-flex justify-content-center">
           <button
             type="submit"
-            className="btn btn-info"
+            className="btn"
             onClick={() => handleSubmit()}
           >
             Create account

@@ -5,9 +5,7 @@ import LoginModal from './components/modal/LoginModal';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
 
-function NavBar({
-  user, setUser, loggedIn, setLoggedIn,
-}) {
+function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
@@ -43,34 +41,34 @@ function NavBar({
       {showSignUpModal && (
         <SignUpModal setModal={setShowSignUpModal} />
       )}
-      <nav className="navbar sticky-top navbar-light bg-info mb-3">
+      <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-success mb-3">
         <Link to="/">
-          <button
-            type="submit"
-            className="navbar-item active bg-info"
-          >
+          <button type="submit" className="navbar-item btn">
             Home
           </button>
         </Link>
-        <button
-          type="submit"
-          className="navbar-item bg-info"
-          onClick={() => openBalanceModal()}
-        >
-          {loggedIn ? `Balance is : $${user.balance}` : null}
-        </button>
+        {loggedIn ? (
+          <button
+            type="submit"
+            className="navbar-item btn"
+            onClick={() => openBalanceModal()}
+          >
+            Balance is $
+            {`${user.balance}`}
+          </button>
+        ) : null}
         {!loggedIn ? (
           <>
             <button
               type="submit"
-              className="navbar-item bg-info"
+              className="navbar-item btn me-auto"
               onClick={() => openLoginModal(true)}
             >
               Login
             </button>
             <button
               type="submit"
-              className="navbar-item bg-info"
+              className="navbar-item btn"
               onClick={() => openSignUpModal(true)}
             >
               Sign Up
@@ -78,12 +76,12 @@ function NavBar({
           </>
         ) : (
           <>
-            <button type="submit" className="navbar-item bg-info">
+            <button type="submit" className="navbar-item btn">
               {user.username}
             </button>
             <button
               type="submit"
-              className="navbar-item bg-info"
+              className="navbar-item btn"
               onClick={() => handleLogout()}
             >
               Log Out

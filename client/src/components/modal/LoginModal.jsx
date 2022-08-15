@@ -17,7 +17,7 @@ function LoginModal({ setModal }) {
   }
 
   function handleSubmit() {
-    const results = axios.get('/api/user', { params: info }); // CHECK WHAT ROUTE WE ARE USING
+    // const results = axios.get('/api/user', { params: info }); // CHECK WHAT ROUTE WE ARE USING
     if (info.password === results.password) {
       // valid
     }
@@ -27,7 +27,7 @@ function LoginModal({ setModal }) {
   return (
     <Modal setModal={setModal}>
       <div className="modal-content">
-        <div className="modal-header text-center bg-info">
+        <div className="modal-header text-center">
           <h4 className="modal-title w-100 font-weight-bold">
             Sign in
           </h4>
@@ -42,20 +42,20 @@ function LoginModal({ setModal }) {
         <div className="modal-body mx-3">
           <div className="md-form mb-4">
             <label htmlFor="defaultForm-username">
-              Your username
               <input
                 type="text"
                 className="form-control validate"
+                placeholder="Username"
                 onChange={(e) => handleChange(e, 'username')}
               />
             </label>
           </div>
           <div className="md-form mb-4">
             <label htmlFor="defaultForm-pass">
-              Your password
               <input
                 type="password"
                 className="form-control validate"
+                placeholder="Password"
                 onChange={(e) => handleChange(e, 'password')}
               />
             </label>
@@ -64,7 +64,7 @@ function LoginModal({ setModal }) {
         <div className="modal-footer d-flex justify-content-center">
           <button
             type="submit"
-            className="btn btn-info"
+            className="btn"
             onClick={() => handleSubmit()}
           >
             Login
