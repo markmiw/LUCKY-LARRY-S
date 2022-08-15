@@ -12,7 +12,7 @@ import {
 
 
 
-export default function Modal({ showModal, setShowModal }) {
+export default function Modal({ showModal, setShowModal, currentBetOption }) {
   const [betAmount, setBetAmount] = useState(0);
 
   const handleSubmit = () => {
@@ -35,7 +35,7 @@ export default function Modal({ showModal, setShowModal }) {
         <ModalWrapperStyled>
           <ModalWrapper>
             <CloseButtonStyled type="button" onClick={() => setShowModal(prev => !prev)}>X</CloseButtonStyled>
-            <ModalHeaderInnerStyled style={{ color: 'blue', lineHeight : 10}}> You can bet $1, $5, $10, $20, $50, $100 on this option</ModalHeaderInnerStyled>
+            <ModalHeaderInnerStyled style={{ color: 'blue', lineHeight : 10}}> You can bet $1, $5, $10, $20, $50, $100 on {currentBetOption}</ModalHeaderInnerStyled>
             <ModalForm onSubmit={(event) => handleSubmit(event)}>
               <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => { setBetAmount(event.target.value); console.log('amount recorded', event.target.value) }} required />
               <button onClick={() => handleSubmit()}>Submit Bet</button>

@@ -8,15 +8,16 @@ export default function Roulette () {
 
   const [winNum, setWinNum] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [currentBetOption, setCurrentBetOption] = useState('');
     //result hook
   const [result, setResult] = useState('')
 
 
   return (
     <RouletteGameGrid>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
+      <Modal showModal={showModal} setShowModal={setShowModal} currentBetOption={currentBetOption} />
       <RouletteWheel winNum={winNum} setWinNum={setWinNum} result={result} />
-      <RouletteBet winNum={winNum} showModal={showModal} setShowModal={setShowModal} setResult={setResult}/>
+      <RouletteBet winNum={winNum} showModal={showModal} currentBetOption={currentBetOption} setCurrentBetOption={setCurrentBetOption} setShowModal={setShowModal} setResult={setResult} />
     </RouletteGameGrid>
 
   )

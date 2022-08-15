@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import BetTable from './BetTable.jsx'
 import { RouletteInfo1Grid, RouletteInfo2Grid, GameDisplay, BetTableContainer  } from './roulette.styled.js';
 
-export default function RouletteBet ({winNum, showModal, setShowModal}) {
+export default function RouletteBet ({winNum, showModal, setShowModal, currentBetOption, setCurrentBetOption }) {
   // RouletteBet will contain:
   // note: for MVP, only allow single bet
   // betting table:
@@ -20,14 +20,14 @@ export default function RouletteBet ({winNum, showModal, setShowModal}) {
   return (
     <div>
     <RouletteInfo1Grid>
- 
+
       <GameDisplay>Win Chance: </GameDisplay>
       <GameDisplay>Multiplier: </GameDisplay>
 
       <GameDisplay>Winning Amount: </GameDisplay>
       </RouletteInfo1Grid>
       <BetTableContainer>
-        <BetTable winNum={winNum} showModal={showModal} setShowModal={setShowModal}/>
+        <BetTable winNum={winNum} showModal={showModal} setShowModal={setShowModal} currentBetOption={currentBetOption} setCurrentBetOption={setCurrentBetOption}/>
       </BetTableContainer>
       </div>
   )
