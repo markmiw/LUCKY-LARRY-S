@@ -1,5 +1,6 @@
 module.exports.checkNum = (req, res) => {
-  const { winNum, num, color, eO, rangeOf12, firstHalf, numRow} = req.query;
+  console.log(req.query.betInfo)
+  const { winNum, num, color, eO, rangeOf12, firstHalf, numRow} = req.query.betInfo;
   const query = `SELECT * FROM RouletteNums WHERE id = ${winNum}`;
   const winnings, winsNum, winsCol, winsEO, winsRange, winsRow, winsCol;
   const winInfo = {};
