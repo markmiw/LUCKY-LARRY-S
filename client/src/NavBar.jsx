@@ -12,17 +12,24 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
 
   function openLoginModal() {
     // only have 1 modal open
+    setShowBalanceModal(false);
     setShowSignUpModal(false);
+
     setShowLoginModal(true);
   }
 
   function openSignUpModal() {
     // only have 1 modal open
+    setShowBalanceModal(false);
     setShowLoginModal(false);
+
     setShowSignUpModal(true);
   }
 
   function openBalanceModal() {
+    setShowLoginModal(false);
+    setShowSignUpModal(false);
+
     setShowBalanceModal(true);
   }
 
@@ -34,13 +41,9 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
 
   return (
     <>
-      {showBalanceModal && (
-        <BalanceModal setModal={setShowBalanceModal} />
-      )}
+      {showBalanceModal && (<BalanceModal setModal={setShowBalanceModal} />)}
       {showLoginModal && <LoginModal setModal={setShowLoginModal} />}
-      {showSignUpModal && (
-        <SignUpModal setModal={setShowSignUpModal} />
-      )}
+      {showSignUpModal && (<SignUpModal setModal={setShowSignUpModal} />)}
       <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-success mb-3">
         <Link to="/">
           <button type="submit" className="navbar-item btn">
@@ -54,7 +57,7 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
             onClick={() => openBalanceModal()}
           >
             Balance is $
-            {`${user.balance}`}
+            {user.balance}
           </button>
         ) : null}
         {!loggedIn ? (
