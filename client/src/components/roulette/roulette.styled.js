@@ -141,7 +141,6 @@ export const ModalForm = styled.form`
   color: black;
 `
 
-
 export const CloseModalButton = styled.button`
   cursor: pointer;
   position: absolute;
@@ -194,9 +193,9 @@ export const ModalHeaderStyled = styled.div`
 `;
 
 export const ModalHeaderInnerStyled = styled.div`
-  display: flex;
-  align-items: center;
-  width: (80%);
+  max-width: 80%;
+  max-height: 40%;
+  margin: 0 auto;
 `;
 
 export const ModalHeaderContentStyled = styled.div`

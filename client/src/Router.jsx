@@ -32,7 +32,7 @@ function Router() {
     <BrowserRouter>
       <NavBar user={user} loggedIn={loggedIn} />
       <Routes>
-        {/* <Route
+        <Route
           path="/roulette"
           element={<Roulette />}
         />
@@ -47,7 +47,7 @@ function Router() {
         <Route
           path="/"
           element={<Homepage />}
-        /> */}
+        />
         {/* <Route
           path="*"
           element={<Navigate to="/" />}

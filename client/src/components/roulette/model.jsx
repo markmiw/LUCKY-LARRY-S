@@ -15,16 +15,30 @@ import {
 export default function Modal({ showModal, setShowModal }) {
   const [betAmount, setBetAmount] = useState(0);
 
+  const handleSubmit = () => {
+    event.preventDefault();
+    // need to pass this betting information to somewhere
+    // betAmount here is the current bet on the current amount
+    if (betAmount > 0) {
+      console.log('current bet is: ', betAmount);
+      alert('You have successfully bet on this option')
+      document.getElementById("betAmount").value = "";
+    } else {
+      alert('Please the amount you want to bet on this option')
+    }
+
+  }
+
   return (
     <div>
       {showModal ?
         <ModalWrapperStyled>
           <ModalWrapper>
-            model open test
             <CloseButtonStyled type="button" onClick={() => setShowModal(prev => !prev)}>X</CloseButtonStyled>
-            <ModalHeaderInnerStyled style={{ color: 'blue', lineHeight : 10}}>Please enter your bet amount. You can bet $1, $5, $10, $20, $50, $100 on this option</ModalHeaderInnerStyled>
-            <ModalForm>
+            <ModalHeaderInnerStyled style={{ color: 'blue', lineHeight : 10}}> You can bet $1, $5, $10, $20, $50, $100 on this option</ModalHeaderInnerStyled>
+            <ModalForm onSubmit={(event) => handleSubmit(event)}>
               <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => { setBetAmount(event.target.value); console.log('amount recorded', event.target.value) }} required />
+              <button onClick={() => handleSubmit()}>Submit Bet</button>
             </ModalForm>
           </ModalWrapper>
           <ModalBackgroundStyled />
@@ -32,4 +46,5 @@ export default function Modal({ showModal, setShowModal }) {
         : null}
     </div>
   )
+
 }
