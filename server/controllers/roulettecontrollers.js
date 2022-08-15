@@ -1,8 +1,4 @@
-const db = require('./index');
-
-const errorHandler = (err) => console.error(err);
-
-const checkNum = (req, res) => {
+module.exports.checkNum = (req, res) => {
   const { winNum, num, color, eO, rangeOf12, firstHalf, numRow} = req.query;
   const query = `SELECT * FROM RouletteNums WHERE id = ${winNum}`;
   const winnings, winsNum, winsCol, winsEO, winsRange, winsRow, winsCol;
@@ -33,7 +29,7 @@ const checkNum = (req, res) => {
           winInfoPop(winsRange);
           winInfoPop(winsRow);
           //add the winnings to the user via the implemented controller ***
-          //add winnings to the user's records ***
+          //add winnings to the user's records - to be implemented w/ global function ***
           res.status(200).send(winInfo)
         }
         res.status(200).send(false)

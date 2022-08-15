@@ -10,10 +10,8 @@ import {
   CloseButtonExpandedStyled, ModalHeaderInnerStyled
 } from './roulette.styled.js';
 
+export default function Modal({ showModal, setShowModal, currentBetOption, betAmount, setBetAmount }) {
 
-
-export default function Modal({ showModal, setShowModal, currentBetOption }) {
-  const [betAmount, setBetAmount] = useState(0);
 
   const handleSubmit = () => {
     event.preventDefault();
@@ -24,7 +22,7 @@ export default function Modal({ showModal, setShowModal, currentBetOption }) {
       alert('You have successfully bet on this option')
       document.getElementById("betAmount").value = "";
     } else {
-      alert('Please the amount you want to bet on this option')
+      alert('Please put the amount you want to bet on this option')
     }
 
   }

@@ -82,7 +82,7 @@ export default function BetTable({ winNum, showModal, setShowModal, setResult, c
 
         {/* display of current bets if no visuals to show what has been checked */}
         <div>Your current bets:
-          {num.pick}&nbsp;
+          {num.pick ? num.pick : null}&nbsp;
           {color.pick === 'red' ? 'Red' : color.pick === 'black' ? 'Black' : null}&nbsp;
           {eO.pick === 'odd' ? 'Odd' : eO.pick === 'even' ? 'Even' : null}&nbsp;
           {rangeOf12.pick === 1 ? '1st12' : rangeOf12.pick === 2 ? '2nd12' : rangeOf12.pick === 3 ? '3rd12' : null}&nbsp;

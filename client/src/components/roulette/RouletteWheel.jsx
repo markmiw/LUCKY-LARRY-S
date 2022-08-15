@@ -58,7 +58,7 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel ({ winNum, setWinNum, result }) {
+export default function RouletteWheel ({ winNum, setWinNum, result, setWinState }) {
   //wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -113,12 +113,14 @@ export default function RouletteWheel ({ winNum, setWinNum, result }) {
             //actions for front end after wheel stops spinning
 
             //pass in data from submit in roulette bet ex. data
-            if (results) {
-              //play confetti
-              //results is an object with all the winnings from each game.
+            setWinState(true)
+            if (result) {
+            //   //play confetti
+            //   //results is an object with all the winnings from each game.
               window.alert(`Congratulations! You won a total of ${results.winnings}!`)
-              //further clarifications on what they won on after (ex. win.amount.colors)
-              //update userbalance hook
+
+            //   //further clarifications on what they won on after (ex. win.amount.colors)
+            //   //update userbalance hook
             } else {
               window.alert('Not a winner, try again next time!')
             }
