@@ -24,6 +24,6 @@ export default function PlayInputs({ setPlays, betAmount, setBetAmount }) {
 
 PlayInputs.propTypes = {
   setPlays: PropTypes.func.isRequired,
-  betAmount: PropTypes.number.isRequired,
+  betAmount: PropTypes.string.isRequired,
   setBetAmount: PropTypes.func.isRequired,
 };

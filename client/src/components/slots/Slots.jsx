@@ -9,7 +9,7 @@ export default function Slots() {
   const [column2Values, setColumn2Values] = useState([4, 5, 1]);
   const [column3Values, setColumn3Values] = useState([2, 3, 4]);
   const [plays, setPlays] = useState(1);
-  const [betAmount, setBetAmount] = useState(1);
+  const [betAmount, setBetAmount] = useState('1');
   // Will replace below with actual balance from db
   const [balance, setBalance] = useState(10000);
   const [adjustment, setAdjustment] = useState(50);
@@ -73,10 +73,15 @@ export default function Slots() {
         adjustment={adjustment}
         column={3}
       />
-      <text>
+      <div>
         Balance: $
         {balance}
-      </text>
+      </div>
+      <PlayInputs
+        setPlays={setPlays}
+        betAmount={betAmount}
+        setBetAmount={setBetAmount}
+      />
       <button
         type="button"
         onClick={() => {
@@ -85,12 +90,7 @@ export default function Slots() {
       >
         Go!
       </button>
-      <PlayInputs
-        setPlays={setPlays}
-        betAmount={betAmount}
-        setBetAmount={setBetAmount}
-      />
-      {console.log('Bet Amount:', betAmount)}
+      {/* {console.log('Bet Amount:', betAmount)} */}
     </>
   );
 }
