@@ -44,18 +44,13 @@ CREATE INDEX IF NOT EXISTS idx_chat ON chat(userID);
 
 
 INSERT INTO country (country, flag) VALUES ('TEST', 'TEST');
-INSERT INTO users (username, password, countryID, balance, winnings) VALUES ('Bruce', 'Waifus', 1, 2000, 0);
-
--- ---
--- Table 'test'
--- ---
-
--- CREATE TABLE test (
---   id SERIAL NOT NULL,
---   num INTEGER,
---   PRIMARY KEY (id)
--- );
--- INSERT INTO test (num) VALUES (12);
--- INSERT INTO test (num) VALUES (15);
--- INSERT INTO test (num) VALUES (99);
--- INSERT INTO test (num) VALUES (-4);
+INSERT INTO users (username, password, countryID, balance, winnings) VALUES
+('Bruce', 'Waifus', 1, 2000, 10000000),
+('Matthew', 'Moofus', 1, 2000, 10),
+('Cornelius', 'Mario', 1, 0, 0),
+('River', 'Animation', 1, 2000, 100),
+('Jesse', 'Roulette', 1, 2000, 1000),
+('Andy', 'Anime', 1, 2000, 100000),
+('Mark', 'Tensorflow', 1, 2000, 1000),
+('Gary', 'Pokemon', 1, 2000, 10000),
+('Bruce2', 'Waifu', 1, 2000, 1);
