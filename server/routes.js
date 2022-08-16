@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const slots = require('./controllers/slots');
-
+const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
 router.get('/slots', slots.spin);
 router.get('/weightedSlots', slots.weightedSpin);
 const { getUser } = require('../database/controllers');
@@ -14,5 +14,7 @@ router.get('/user', (req, res) => {
     .then((results) => res.send(results))
     .catch((err) => res.sendStatus(404));
 });
+
+router.get('/')
 
 module.exports = router;
