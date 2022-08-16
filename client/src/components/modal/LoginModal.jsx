@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
 
-function LoginModal({ setModal }) {
+function LoginModal({ setModal, setUser, setLoggedIn }) {
   const [info, setInfo] = useState({});
 
   function handleChange(e, field) {
@@ -16,12 +16,21 @@ function LoginModal({ setModal }) {
     });
   }
 
-  function handleSubmit() {
-    // const results = axios.get('/api/user', { params: info }); // CHECK WHAT ROUTE WE ARE USING
-    // if (info.password === results.password) {
-    //   // valid
-    // }
+  async function handleSubmit() {
+    const results = await axios.get(`/api/user/${info.username}`);
+
+    if (results.data.length !== 1) return; // did not find a username
+    if (info.password !== results.data[0].password) return;
+
+    setUser(results.data[0]);
+    setLoggedIn(true);
     setModal(false);
+  }
+
+  function handleEnterSubmit(e) {
+    if (e.code === 'Enter') {
+      handleSubmit();
+    }
   }
 
   return (
@@ -57,6 +66,7 @@ function LoginModal({ setModal }) {
                 className="form-control validate"
                 placeholder="Password"
                 onChange={(e) => handleChange(e, 'password')}
+                onKeyDown={(e) => handleEnterSubmit(e)}
               />
             </label>
           </div>
@@ -77,6 +87,8 @@ function LoginModal({ setModal }) {
 
 LoginModal.propTypes = {
   setModal: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  setLoggedIn: PropTypes.func.isRequired,
 };
 
 export default LoginModal;

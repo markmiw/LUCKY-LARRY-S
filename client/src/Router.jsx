@@ -19,13 +19,8 @@ const dummyData = {
 };
 
 function Router() {
-  const [user, setUser] = useState(dummyData); // user data
-  const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
-
-  useEffect(() => {
-    setUser(dummyData);
-    setLoggedIn(true);
-  }, []);
+  const [user, setUser] = useState(); // user data
+  const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
 
   return (
     <BrowserRouter>

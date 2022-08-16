@@ -5,7 +5,9 @@ import LoginModal from './components/modal/LoginModal';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
 
-function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
+function NavBar({
+  user, setUser, loggedIn, setLoggedIn,
+}) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
@@ -41,9 +43,19 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
 
   return (
     <>
-      {showBalanceModal && (<BalanceModal setModal={setShowBalanceModal} />)}
-      {showLoginModal && <LoginModal setModal={setShowLoginModal} />}
-      {showSignUpModal && (<SignUpModal setModal={setShowSignUpModal} />)}
+      {showBalanceModal && (
+        <BalanceModal user={user} setUser={setUser} setModal={setShowBalanceModal} />
+      )}
+      {showLoginModal && (
+        <LoginModal
+          setModal={setShowLoginModal}
+          setUser={setUser}
+          setLoggedIn={setLoggedIn}
+        />
+      )}
+      {showSignUpModal && (
+        <SignUpModal setModal={setShowSignUpModal} />
+      )}
       <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-success mb-3">
         <Link to="/">
           <button type="submit" className="navbar-item btn">
@@ -64,7 +76,7 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
           <>
             <button
               type="submit"
-              className="navbar-item btn me-auto"
+              className="navbar-item btn"
               onClick={() => openLoginModal(true)}
             >
               Login

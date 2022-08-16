@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Modal from './Modal';
 import axios from 'axios';
+import Modal from './Modal';
 
-function BalanceModal({ setModal }) {
+function BalanceModal({ user, setUser, setModal }) {
   const [amount, setAmount] = useState(0);
 
   function handleChange(e) {
     setAmount(Number(e.target.value));
   }
 
-  function handleSubmit() {
-    // const results = axios.post('/api/user'); // CHECK WHAT ROUTE WE ARE USING
+  async function handleSubmit() {
+    const results = await axios.post('/api/user/balance', { id: user.id, amount }); // CHECK WHAT ROUTE WE ARE USING
+
+    setUser(results.data.rows[0]);
     setModal(false);
   }
 
@@ -55,6 +57,10 @@ function BalanceModal({ setModal }) {
 
 BalanceModal.propTypes = {
   setModal: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
 };
 
 export default BalanceModal;
