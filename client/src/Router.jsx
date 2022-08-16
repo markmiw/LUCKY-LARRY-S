@@ -12,7 +12,6 @@ import '../dist/sidebar.css';
 import '../dist/bootstrap.min.css';
 
 const dummyData = {
-  id: 1,
   username: 'LarryLucky',
   balance: 999999999,
 };
@@ -50,9 +49,7 @@ function Router() {
         <Route
           path="/sidebar"
           element={(
-            <Sidebar
-              user={user}
-            />
+            <Sidebar />
           )}
         />
         <Route
