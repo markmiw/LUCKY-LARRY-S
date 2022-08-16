@@ -75,7 +75,7 @@ const calculateWinnings = (slotMatrix, bet, rows) => {
 };
 
 module.exports.slots = async (req, res) => {
-  const { userid, bet, rows } = req.body;
+  const { userid, bet, rows } = req.body.data;
   if (!userid || !bet || !rows) {
     res.status(400).send('missing input');
     return;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 // move the links into served assets when finalized icon decision
@@ -17,7 +18,16 @@ const getImageFromValue = function getImageFromValue(value) {
   }
 };
 
-export default function Column({ scrollTime, values, setValues }) {
+export default function Column({
+  scrollTime,
+  values,
+  setValues,
+  balance,
+  setBalance,
+  adjustment,
+  column,
+  iconSize,
+}) {
   const [offset, setOffset] = useState(0);
 
   const columnRef = useRef(null);
@@ -28,6 +38,9 @@ export default function Column({ scrollTime, values, setValues }) {
       setValues(values.slice(-3));
       columnRef.current.style.transition = '';
       setOffset(0);
+      if (column === 3) {
+        setBalance(balance + adjustment);
+      }
     };
 
     columnRef.current.addEventListener('transitionend', transitionEndListener);
@@ -37,51 +50,36 @@ export default function Column({ scrollTime, values, setValues }) {
   useEffect(() => {
     if (values.length !== 3) {
       columnRef.current.style.transition = `bottom ${scrollTime}s ease-out`;
-      setOffset(50 * (values.length - 3));
+      setOffset(iconSize * (values.length - 3));
     }
   }, [columnRef, values]);
 
   return (
-    <div
-      style={{
-        display: 'inline-block',
-        backgroundColor: 'rgb(220, 220, 220)',
-        height: '150px',
-        width: '40px',
-        marginRight: '10px',
-        overflow: 'hidden',
-      }}
+    <ColumnContainer
+      iconSize={iconSize}
     >
-      <div
+      <IconContainer
         ref={columnRef}
         style={{
-          position: 'relative',
           bottom: `${offset}px`,
           transition: `bottom ${scrollTime}s ease-out`,
         }}
       >
         {
           values.map((value, index) => (
-            <div
+            <Icon
               // need to use something other than purely value for key as otherwise
               // there would be duplicates
               // eslint-disable-next-line react/no-array-index-key
               key={`${value}@${index}`}
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '40px',
-                width: '40px',
-                marginBottom: '10px',
-              }}
+              iconSize={iconSize}
             >
               {getImageFromValue(value)}
-            </div>
+            </Icon>
           ))
         }
-      </div>
-    </div>
+      </IconContainer>
+    </ColumnContainer>
   );
 }
 
@@ -89,4 +87,35 @@ Column.propTypes = {
   scrollTime: PropTypes.number.isRequired,
   values: PropTypes.arrayOf(PropTypes.number).isRequired,
   setValues: PropTypes.func.isRequired,
+  balance: PropTypes.number.isRequired,
+  setBalance: PropTypes.func.isRequired,
+  adjustment: PropTypes.number.isRequired,
+  column: PropTypes.number.isRequired,
+  iconSize: PropTypes.number.isRequired,
 };
+
+const ColumnContainer = styled.div`
+  ${({ iconSize }) => `
+    height: ${iconSize * 3}px;
+    width: ${iconSize}px;
+  `}
+  display: inline-block;
+  background-color: #30aebfed;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+const IconContainer = styled.div`
+  position: relative;
+`;
+
+const Icon = styled.div`
+  ${({ iconSize }) => `
+    height: ${iconSize}px;
+    width: ${iconSize}px;
+    padding: ${0.10 * iconSize}px;
+  `}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

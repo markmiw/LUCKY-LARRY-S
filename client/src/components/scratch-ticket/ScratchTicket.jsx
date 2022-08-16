@@ -16,9 +16,9 @@ function getNUnique(n) {
   const arr = [];
   const set = new Set();
   for (let i = 0; i < n; i += 1) {
-    let num = getRandom(1, 99);
+    let num = getRandom(1, 50);
     while (set.has(num)) {
-      num = getRandom(1, 99);
+      num = getRandom(1, 50);
     }
     arr.push(num);
     set.add(num);
