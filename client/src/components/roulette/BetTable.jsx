@@ -19,17 +19,14 @@ export default function BetTable({ setResult, setBetInfo }) {
 
   //updates state for roulette wheel
   useEffect(()=> {
-    setBetInfo({num: num, color: color, eO: eO, rangeOf12: rangeOf12, firstHalf: firstHalf, numRow: numRow})
+    setBetInfo({num: num, col: color, eO: eO, rangeOf12: rangeOf12, firstHalf: firstHalf, numRow: numRow})
   }, [betInput])
 
   // need a function that handles the amount bet pop upc
 
   const openModal = (input) => {
     setShowModal(prev => !prev); // prev => !prev
-    console.log('modal status is: ', showModal)
     setCurrentBetOption(input)
-    //pass in state
-    //pass in stateChanger
   }
 
   return (
@@ -84,19 +81,12 @@ export default function BetTable({ setResult, setBetInfo }) {
 
         {/* display of current bets if no visuals to show what has been checked */}
         <div>Your current bets:
-
           {num.pick && num.bet ? `$${num.bet} on ${num.pick}.` : null }&nbsp;
-
           {(color.pick && color.bet) ? `$${color.bet} on ${color.pick}.` : null}&nbsp;
-
           {(eO.pick && eO.bet) ? `$${eO.bet} on ${eO.pick}.` : null}&nbsp;
-
-          {(rangeOf12.pick && rangeOf12.bet) ? `$${rangeOf12.bet} on ${rangeOf12.pick}.` : null}&nbsp;
-
-          {(firstHalf.pick && firstHalf.bet) ? `$${firstHalf.bet} on ${firstHalf.pick}.` : null}&nbsp;
-
-          {(numRow.pick && numRow.bet) ? `$${numRow.bet} on ${numRow.pick}.` : null}&nbsp;
-
+          {(rangeOf12.pick && rangeOf12.bet) ? `$${rangeOf12.bet} on ${rangeOf12.pick === 1 ? '1st dozen' : rangeOf12.pick === 2 ? '2nd dozen' : rangeOf12.pick === 3 ? '3rd dozen' : null}.` : null}&nbsp;
+          {(firstHalf.pick && firstHalf.bet) ? `$${firstHalf.bet} on ${firstHalf.pick === 1 ? '1to18' : firstHalf.pick === 2 ? '19to36' : null }.` : null}&nbsp;
+          {(numRow.pick && numRow.bet) ? `$${numRow.bet} on ${numRow.pick === 1 ? '1s row': numRow.pick === 2 ? '2s row': numRow.pick === 3 ? '3s row':null}.` : null}&nbsp;
           </div>
       </BetTableContainer>
     </div>

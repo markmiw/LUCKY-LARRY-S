@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
+import Confetti from 'react-confetti';
 // import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
 
 const data = [
@@ -57,25 +58,17 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel ({setWinState, betInfo, setBetInfo}) {
+export default function RouletteWheel({ betInfo }) {
   //wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [setResult, result] = useState({});
+  const [winAmount, setWinAmount] = useState(0);
 
   const handleSpinClick = () => {
-     // grabWinningNum(newPriceNumber);
+    // grabWinningNum(newPriceNumber);
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
-    axios.get('/api/roulette', { params: {
-      betInfo: betInfo}
-    })
-      //change the state of the hook passed into this function from roulette wheel
-      // ERROR: setResult is not a function
-      .then((results) => { setResult(results.data); console.log('results.data is: ',results.data) }
-      )
-      .catch(err => console.log(err));
   };
 
   // May use in refactor for heightened security
@@ -110,24 +103,25 @@ export default function RouletteWheel ({setWinState, betInfo, setBetInfo}) {
           textDistance={textDistance}
           onStopSpinning={() => {
             setMustSpin(false);
-            // we can send out celebration or lose here
-            //actions for front end after wheel stops spinning
-
-            //pass in data from submit in roulette bet ex. data
-            setWinState(true)
-            if (result) {
-            //   //play confetti
-            //   //results is an object with all the winnings from each game.
-              window.alert(`Congratulations! You won a total of ${result.winnings}!`)
-
-            //   //further clarifications on what they won on after (ex. win.amount.colors)
-            //   //update userbalance hook
-            } else {
-              window.alert('Not a winner, try again next time!')
-            }
+            axios.get('/api/roulette', {
+              params: {
+                betInfo: betInfo,
+                winNum: prizeNumber
+              }
+            })
+              .then(results => {
+                if (results.data) {
+                  // <Confetti/>
+                  window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
+                  //update global userbalance hook here
+                } else {
+                  window.alert('Not a winner, try again next time!')
+                }
+              })
+              .catch(err => console.log(err));
           }}
         />
-        <br/>
+        <br />
         <SpinButton className={'spin-button'} onClick={handleSpinClick}>
           SPIN
         </SpinButton>
