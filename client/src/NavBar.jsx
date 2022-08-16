@@ -1,28 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import LoginModal from './components/modal/LoginModal';
+import SignUpModal from './components/modal/SignUpModal';
+import BalanceModal from './components/modal/BalanceModal';
 
-function NavBar({ user, loggedIn }) {
-  function loginModal(e) {
-    // will open a login modal
+function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [showBalanceModal, setShowBalanceModal] = useState(false);
+
+  function openLoginModal() {
+    // only have 1 modal open
+    setShowBalanceModal(false);
+    setShowSignUpModal(false);
+
+    setShowLoginModal(true);
+  }
+
+  function openSignUpModal() {
+    // only have 1 modal open
+    setShowBalanceModal(false);
+    setShowLoginModal(false);
+
+    setShowSignUpModal(true);
+  }
+
+  function openBalanceModal() {
+    setShowLoginModal(false);
+    setShowSignUpModal(false);
+
+    setShowBalanceModal(true);
+  }
+
+  function handleLogout() {
+    setLoggedIn(false);
+    setUser();
+    // send them back to homepage?
   }
 
   return (
-    <Nav>
-      <Link to="/">
-        <NavItem>Home</NavItem>
-      </Link>
-      <NavItem>
-        {!loggedIn ? null : `Balance : $${user.balance}`}
-      </NavItem>
-      <NavItem>{!loggedIn ? null : 'Update Balance'}</NavItem>
-      {!loggedIn ? (
-        <NavItem onClick={(e) => loginModal(e)}>Login</NavItem>
-      ) : (
-        <NavItem>{user.username}</NavItem>
-      )}
-    </Nav>
+    <>
+      {showBalanceModal && (<BalanceModal setModal={setShowBalanceModal} />)}
+      {showLoginModal && <LoginModal setModal={setShowLoginModal} />}
+      {showSignUpModal && (<SignUpModal setModal={setShowSignUpModal} />)}
+      <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-success mb-3">
+        <Link to="/">
+          <button type="submit" className="navbar-item btn">
+            Home
+          </button>
+        </Link>
+        {loggedIn ? (
+          <button
+            type="submit"
+            className="navbar-item btn"
+            onClick={() => openBalanceModal()}
+          >
+            Balance is $
+            {user.balance}
+          </button>
+        ) : null}
+        {!loggedIn ? (
+          <>
+            <button
+              type="submit"
+              className="navbar-item btn me-auto"
+              onClick={() => openLoginModal(true)}
+            >
+              Login
+            </button>
+            <button
+              type="submit"
+              className="navbar-item btn"
+              onClick={() => openSignUpModal(true)}
+            >
+              Sign Up
+            </button>
+          </>
+        ) : (
+          <>
+            <button type="submit" className="navbar-item btn">
+              {user.username}
+            </button>
+            <button
+              type="submit"
+              className="navbar-item btn"
+              onClick={() => handleLogout()}
+            >
+              Log Out
+            </button>
+          </>
+        )}
+      </nav>
+    </>
   );
 }
 
@@ -31,21 +101,9 @@ NavBar.propTypes = {
     username: PropTypes.string.isRequired,
     balance: PropTypes.number.isRequired,
   }).isRequired,
+  setUser: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
+  setLoggedIn: PropTypes.func.isRequired,
 };
-
-const Nav = styled.header`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background-color: grey;
-  margin-bottom: 1%;
-`;
-
-const NavItem = styled.div`
-  display: flex;
-  justify-content: center;
-  color: green;
-  border: 1px solid black;
-`;
 
 export default NavBar;

@@ -1,10 +1,9 @@
 const router = require('express').Router();
-const slots = require('./controllers/slots');
-const { addFriend, getAllFriends }= require('./controllers/friends');
-const { getUser } = require('../database/controllers');
+const { slots } = require('./controllers/slots');
+const { addFriend, getAllFriends } = require('./controllers/friends');
+const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
 
-router.get('/slots', slots.spin);
-router.get('/weightedSlots', slots.weightedSpin);
+router.put('/slots', slots);
 
 router.get('/users/:userID/friends', getAllFriends);
 
@@ -17,7 +16,19 @@ router.get('/test', (req, res) => {
 router.get('/user', (req, res) => {
   getUser()
     .then((results) => res.send(results))
-    .catch((err) => res.sendStatus(404));
+    .catch(() => res.sendStatus(404));
+});
+
+router.get('/leaderboard', (req, res) => {
+  getLeaderboard()
+    .then((results) => res.send(results))
+    .catch(() => res.sendStatus(404));
+});
+
+router.get('/country/:countryid', (req, res) => {
+  getCountry(req.params.countryid)
+    .then((results) => res.send(results))
+    .catch(() => res.sendStatus(404));
 });
 
 module.exports = router;
