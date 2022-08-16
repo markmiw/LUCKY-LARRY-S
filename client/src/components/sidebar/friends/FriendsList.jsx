@@ -99,8 +99,10 @@ FriendsList.propTypes = {
 
 const FriendsListContainer = styled('div')`
   background-color: white;
-  width: 400px;
-  border: 1px solid black;
+  width: 317px;
+  border: 1px solid #ced4da;
+  border-bottom-style: none;
+  border-radius: 7px;
 `;
 
 const Header = styled('div')`
@@ -132,7 +134,8 @@ const ErrorMsg = styled('div')`
 
 const List = styled('div')`
   overflow-y: scroll;
-  height: 500px;
+  height: 390px;
+  width: 99%;
 `;
 
 const OpenFriendInputIcon = styled('span')`

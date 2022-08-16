@@ -1,33 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import Chat from './chat/Chat.jsx';
+import leaderboard_icon from '../../../dist/icons/leaderboard.png';
+import Friends from '../../../dist/icons/friends.svg';
+import Globe from '../../../dist/icons/globe.svg';
+import Leaderboard from './leaderboard/Leaderboard.jsx';
 import FriendsList from './friends/FriendsList';
 
-function Sidebar({ user }) {
-  // for now, if no user is selected display nothing
-  // wont need this later as sidebar will only be displayed when logged in
-  if (!user) {
-    return <div />;
-  }
+function Sidebar() {
+  const [sidebarState, setSidebarState] = useState('global-chat');
+
+  const renderSidebar = () => {
+    if (sidebarState === 'global-chat') {
+      return <Chat key="global-chat" />;
+    } if (sidebarState === 'leaderboard') {
+      return <Leaderboard key="leaderboard" />;
+    }
+    // temp userid
+    return <FriendsList userID={1} key="friends" />;
+  };
   return (
     <div className="sidebar-container">
-      <FriendsList
-        userID={user.id}
-      />
+      <div className="sidebar-nav-container">
+        <img onClick={() => setSidebarState('global-chat')} className="sidebar-nav-btn" src={Globe} />
+        <img onClick={() => setSidebarState('leaderboard')} className="sidebar-nav-btn" src={leaderboard_icon} />
+        <img onClick={() => setSidebarState('friends')} className="sidebar-nav-btn" src={Friends} />
+      </div>
+      {renderSidebar()}
     </div>
   );
 }
-
-Sidebar.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    username: PropTypes.string.isRequired,
-    balance: PropTypes.number.isRequired,
-  }),
-};
-
-Sidebar.defaultProps = {
-  user: undefined,
-};
 
 export default Sidebar;

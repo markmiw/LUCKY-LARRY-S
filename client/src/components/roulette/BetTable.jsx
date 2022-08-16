@@ -1,38 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { RouletteInfo1Grid, GameDisplay, BetTableContainer, BetNumberGrid, Number0Button, NumberButton, BetColorOddGrid, RedColorButton, BlackColorButton, Bet12Grid, Bet12Button, Bet18Grid, Bet18Button, BetRowGrid, BetRowButton } from './roulette.styled.js';
+import Modal from './Modal.jsx';
+import styled from 'styled-components';
+// import { RouletteInfo1Grid, GameDisplay, BetTableContainer, BetNumberGrid, Number0Button, NumberButton, BetColorOddGrid, RedColorButton, BlackColorButton, Bet12Grid, Bet12Button, Bet18Grid, Bet18Button, BetRowGrid, BetRowButton } from './roulette.styled.js';
 
-
-export default function BetTable({ winNum, showModal, setShowModal, setResult, currentBetOption, setCurrentBetOption }) {
-  // userbet
+export default function BetTable({ setResult, setBetInfo }) {
+  // userbet refactor to remove initial pick bets
   const [num, setNum] = useState({ pick: '', bet: '' });
   const [color, setColor] = useState({ pick: '', bet: '' });
   const [eO, setEO] = useState({ pick: '', bet: '' });
   const [rangeOf12, setRangeOf12] = useState({ pick: '', bet: '' });
   const [firstHalf, setFirstHalf] = useState({ pick: '', bet: '' });
   const [numRow, setNumRow] = useState({ pick: '', bet: '' });
+  //modal props
+  const [showModal, setShowModal] = useState(false);
+  const [currentBetOption, setCurrentBetOption] = useState('');
+  const [betInput, setBetInput] = useState(false);
 
-  //Model
-
-
-  let handleSubmit = () => {
-    axios.get('/api/user/roulette', {
-      winNum: winNum, num: num, color: color, eO: eO, rangeOf12: rangeOf12, firstHalf: firstHalf, numRow: numRow
-    })
-      //change the state of the hook passed into this function from roulette wheel
-      .then((results => setResult(results.data))
-      )
-      .catch(err => console.log(err));
-  }
+  //updates state for roulette wheel
+  useEffect(()=> {
+    setBetInfo({num: num, col: color, eO: eO, rangeOf12: rangeOf12, firstHalf: firstHalf, numRow: numRow})
+  }, [betInput])
 
   // need a function that handles the amount bet pop upc
+
   const openModal = (input) => {
-    setShowModal(prev => !prev);
+    setShowModal(prev => !prev); // prev => !prev
     setCurrentBetOption(input)
   }
 
   return (
     <div>
+      <Modal showModal={showModal} setShowModal={setShowModal} currentBetOption={currentBetOption} setNum={setNum} setColor={setColor} setEO={setEO} setFirstHalf={setFirstHalf} setNumRow={setNumRow} setRangeOf12 = {setRangeOf12} num ={num} color ={color} eO ={eO} rangeOf12 = {rangeOf12} firstHalf = {firstHalf} numRow={numRow} betInput = {betInput} setBetInput = {setBetInput}/>
       <RouletteInfo1Grid>
 
         <GameDisplay>Win Chance: </GameDisplay>
@@ -48,7 +47,7 @@ export default function BetTable({ winNum, showModal, setShowModal, setResult, c
           {[...Array(36)].map((star, index) => {
             const val = index + 1;
             return (
-              <NumberButton value={val} key={index} onClick={() => { setNum(val); openModal(`${val}`); }}>
+              <NumberButton key={index} onClick={() => { setNum({pick: val}); openModal(`${val}`); }}>
                 {val}
                 &nbsp;
               </NumberButton>
@@ -56,8 +55,8 @@ export default function BetTable({ winNum, showModal, setShowModal, setResult, c
           })}
         </BetNumberGrid>
         <BetColorOddGrid>
-          <RedColorButton onClick={() => { setColor({ pick: 'red' }); openModal('red'); }}>Red</RedColorButton>
-          <BlackColorButton onClick={() => { setColor({ pick: 'black' }); openModal('black'); }}>Black</BlackColorButton>
+          <RedColorButton onClick={() => { setColor({ pick: 'red' }); openModal('red')}}>Red</RedColorButton>
+          <BlackColorButton onClick={() => { setColor({ pick: 'black' }); openModal('black')}}>Black</BlackColorButton>
           <button onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</button>
           <button onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</button>
 
@@ -82,14 +81,108 @@ export default function BetTable({ winNum, showModal, setShowModal, setResult, c
 
         {/* display of current bets if no visuals to show what has been checked */}
         <div>Your current bets:
-          {num.pick}&nbsp;
-          {color.pick === 'red' ? 'Red' : color.pick === 'black' ? 'Black' : null}&nbsp;
-          {eO.pick === 'odd' ? 'Odd' : eO.pick === 'even' ? 'Even' : null}&nbsp;
-          {rangeOf12.pick === 1 ? '1st12' : rangeOf12.pick === 2 ? '2nd12' : rangeOf12.pick === 3 ? '3rd12' : null}&nbsp;
-          {firstHalf.pick === 1 ? '1to18' : firstHalf.pick === 2 ? '19to36' : null}&nbsp;
-          {numRow.pick === 1 ? '1st row' : numRow.pick === 2 ? '2nd row' : numRow.pick === 3 ? '3rd row' : null}</div>
+          {num.pick && num.bet ? `$${num.bet} on ${num.pick}.` : null }&nbsp;
+          {(color.pick && color.bet) ? `$${color.bet} on ${color.pick}.` : null}&nbsp;
+          {(eO.pick && eO.bet) ? `$${eO.bet} on ${eO.pick}.` : null}&nbsp;
+          {(rangeOf12.pick && rangeOf12.bet) ? `$${rangeOf12.bet} on ${rangeOf12.pick === 1 ? '1st dozen' : rangeOf12.pick === 2 ? '2nd dozen' : rangeOf12.pick === 3 ? '3rd dozen' : null}.` : null}&nbsp;
+          {(firstHalf.pick && firstHalf.bet) ? `$${firstHalf.bet} on ${firstHalf.pick === 1 ? '1to18' : firstHalf.pick === 2 ? '19to36' : null }.` : null}&nbsp;
+          {(numRow.pick && numRow.bet) ? `$${numRow.bet} on ${numRow.pick === 1 ? '1s row': numRow.pick === 2 ? '2s row': numRow.pick === 3 ? '3s row':null}.` : null}&nbsp;
+          </div>
       </BetTableContainer>
     </div>
 
   );
 }
+
+export const RouletteInfo1Grid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto;
+  gap: 5%;
+`
+export const GameDisplay = styled.div`
+  margin: 0 auto;
+  width: 300px;
+  height: 30px;
+`
+
+
+export const BetTableContainer = styled.div`
+  margin: 0 auto;
+`
+export const BetNumberGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+`
+export const Number0Button = styled.button`
+&:after {
+  background-color: green;
+}
+background-color: #0b6102;
+`
+
+export const NumberButton = styled.button`
+&:after {
+  background-color: #FDA300;
+}
+background-color: #E09F5A;
+`
+export const BetColorOddGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto auto;
+`
+export const RedColorButton = styled.button`
+&:after {
+  background-color: red;
+}
+background-color: red;
+`
+export const BlackColorButton = styled.button`
+&:after {
+  background-color: black;
+}
+background-color: black;
+`
+
+export const Bet12Grid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto;
+`
+export const Bet12Button = styled.button`
+&:after {
+  background-color: #327ba8;
+}
+background-color: #1a4b82
+`
+export const Bet18Grid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto;
+
+`
+export const Bet18Button = styled.button`
+&:after {
+  background-color: #4ADEDE;
+}
+background-color: #1AA7EC;
+`
+export const BetRowGrid = styled.div`
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: auto auto auto;
+`
+export const BetRowButton = styled.button`
+  &:after {
+    background-color: #FDA300;
+  }
+  background-color: #E09F5A;
+`

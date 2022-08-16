@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Moment from 'react-moment';
 import flags from '../Flag';
 
 function FriendsListItem({ username, country, lastOpened }) {
@@ -15,7 +14,6 @@ function FriendsListItem({ username, country, lastOpened }) {
         <Timestamp>
           {/* thoughts on making this last online instead of last opened? */}
           Opened&nbsp;
-          <StyledMoment fromNow>{lastOpened}</StyledMoment>
         </Timestamp>
       </TextContainer>
       <ChatIconContainer>

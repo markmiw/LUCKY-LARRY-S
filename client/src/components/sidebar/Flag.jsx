@@ -219,7 +219,7 @@ import Ukraine from "../../../dist/icons/flags/Ukraine.png"
 import UnitedArabEmirates from "../../../dist/icons/flags/United Arab Emirates.png"
 import UnitedStatesVirginIslands from "../../../dist/icons/flags/United States Virgin Islands.png"
 import Uruguay from "../../../dist/icons/flags/Uruguay.png"
-import Usa from "../../../dist/icons/flags/Usa.png"
+import USA from "../../../dist/icons/flags/Usa.png"
 import Ussr from "../../../dist/icons/flags/Ussr.png"
 import Uzbekistan from "../../../dist/icons/flags/Uzbekistan.png"
 import Vanuatu from "../../../dist/icons/flags/Vanuatu.png"
@@ -452,7 +452,7 @@ const flags = {
 "United Arab Emirates": UnitedArabEmirates,
 "United States Virgin Islands": UnitedStatesVirginIslands,
 "Uruguay": Uruguay,
-"Usa": Usa,
+"USA": USA,
 "Ussr": Ussr,
 "Uzbekistan": Uzbekistan,
 "Vanuatu": Vanuatu,
