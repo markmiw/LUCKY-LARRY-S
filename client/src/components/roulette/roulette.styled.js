@@ -1,3 +1,6 @@
+
+/// this file is not in use, for organization purposes. All styled components were moved to corresponding files
+
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
@@ -121,6 +124,7 @@ export const BetRowButton = styled.button`
   background-color: #E09F5A;
 `
 
+/// for modal ///
 export const ModalWrapper = styled.div`
   display: grid;
   grid-template-rows: auto auto;

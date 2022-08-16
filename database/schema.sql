@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS RouletteNums(
 );
 
 -- Load data in
-INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUES (0, 'zero', 'green', 0, 1, 0),
+INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUES (0, 'zero', 'green', 0, 0, 0),
 (1, 'odd', 'black', 1, 1, 1),
 (2, 'even', 'red', 1, 1, 2),
 (3, 'odd', 'black', 1, 1, 3),
@@ -114,8 +114,13 @@ INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUE
 (33, 'odd', 'black', 3, 2, 3),
 (34, 'even', 'red', 3, 2, 1),
 (35, 'odd', 'black', 3, 2, 2),
-(36, 'even', 'red', 3, 2, 3)
+(36, 'even', 'red', 3, 2, 3);
 
+<<<<<<< HEAD
 -- -- psql postgres postgres < /Users/.... rouletteSchema.sql;
 -- GRANT ALL PRIVILEGES ON ALL TABLES TO postgres;
 -- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA luckylarrys TO postgres;
+=======
+-- psql postgres postgres < /Users/.... rouletteSchema.sql;
+-- psql -U postgres \Users\J\Documents\Projects\LUCKYLARRYS\database\schema.sql
+>>>>>>> 1964d9395a0110862d0def478b049cd2432ca9f8
