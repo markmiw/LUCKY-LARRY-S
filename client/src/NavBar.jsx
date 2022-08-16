@@ -110,8 +110,12 @@ function NavBar({
 
 NavBar.propTypes = {
   user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
     balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
   }).isRequired,
   setUser: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,

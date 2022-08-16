@@ -20,7 +20,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
     const results = await axios.get(`/api/user/${info.username}`);
 
     if (results.data.length !== 1) return; // did not find a username
-    if (info.password !== results.data[0].password) return;
+    if (info.password !== results.data[0].password) return; // password did not match
 
     setUser(results.data[0]);
     setLoggedIn(true);

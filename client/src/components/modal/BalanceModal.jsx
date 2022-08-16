@@ -11,7 +11,8 @@ function BalanceModal({ user, setUser, setModal }) {
   }
 
   async function handleSubmit() {
-    const results = await axios.post('/api/user/balance', { id: user.id, amount }); // CHECK WHAT ROUTE WE ARE USING
+    const results = await axios.post('/api/user/balance', { id: user.id, amount });
+    // don't think it is possible to error, DOUBLE CHECK THIS
 
     setUser(results.data.rows[0]);
     setModal(false);
@@ -56,11 +57,16 @@ function BalanceModal({ user, setUser, setModal }) {
 }
 
 BalanceModal.propTypes = {
-  setModal: PropTypes.func.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
   }).isRequired,
   setUser: PropTypes.func.isRequired,
+  setModal: PropTypes.func.isRequired,
 };
 
 export default BalanceModal;
