@@ -57,10 +57,12 @@ const TextContainer = styled('div')`
 
 const Username = styled('div')`
   font-size: large;
+  color: black;
 `;
 
 const Timestamp = styled('div')`
   font-size: small;
+  color: black;
 `;
 
 const ChatIconContainer = styled('div')`
