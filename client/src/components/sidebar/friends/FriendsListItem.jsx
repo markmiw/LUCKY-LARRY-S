@@ -63,10 +63,6 @@ const Timestamp = styled('div')`
   color: black;
 `;
 
-const StyledMoment = styled(Moment)`
-  color: black;
-`;
-
 const ChatIconContainer = styled('div')`
   margin-left: auto;
   margin-right: 10px;
