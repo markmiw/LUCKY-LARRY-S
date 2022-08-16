@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const router = require('express').Router();
 const { slots } = require('./controllers/slots');
 const { addFriend, getAllFriends } = require('./controllers/friends');
@@ -75,7 +76,7 @@ router.get('/globalchat', (req, res) => {
 router.post('/globalchat', (req, res) => {
   const { username, message, country } = req.body;
   postGlobalChat(username, message, country).then((results) => res.send(results))
-  .catch(() => res.sendStatus(404));
+    .catch(() => res.sendStatus(404));
 });
 
 module.exports = router;

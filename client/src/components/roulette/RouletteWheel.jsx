@@ -1,10 +1,10 @@
+/* eslint-disable object-shorthand */
 import React, { useState } from 'react';
 import { Wheel } from 'react-custom-roulette';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
-// import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
 
 const data = [
   { option: '0', style: { backgroundColor: 'green' } },
@@ -43,8 +43,8 @@ const data = [
   { option: '33' },
   { option: '34' },
   { option: '35' },
-  { option: '36' }
-]
+  { option: '36' },
+];
 
 const backgroundColors = ['#9c0505', '#000000'];
 const textColors = ['white'];
@@ -105,23 +105,23 @@ export default function RouletteWheel({ betInfo }) {
             axios.get('/api/roulette', {
               params: {
                 betInfo: betInfo,
-                winNum: prizeNumber
-              }
+                winNum: prizeNumber,
+              },
             })
-              .then(results => {
+              .then((results) => {
                 if (results.data) {
                   // <Confetti/>
-                  window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
-                  //update global userbalance hook here
+                  window.alert(`Congratulations! You won a total of ${results.data} dollars!`);
+                  // update global userbalance hook here
                 } else {
-                  window.alert('Not a winner, try again next time!')
+                  window.alert('Not a winner, try again next time!');
                 }
               })
-              .catch(err => console.log(err));
+              .catch((err) => console.log(err));
           }}
         />
         <br />
-        <SpinButton className={'spin-button'} onClick={handleSpinClick}>
+        <SpinButton className="spin-button" onClick={handleSpinClick}>
           SPIN
         </SpinButton>
       </header>
