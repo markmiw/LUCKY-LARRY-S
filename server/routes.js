@@ -3,9 +3,7 @@ const router = require('express').Router();
 const { slots } = require('./controllers/slots');
 const roulette = require('./controllers/roulettecontrollers.js');
 
-router.get('/slots', slots.spin);
 router.put('/slots', slots);
-router.get('/weightedSlots', slots.weightedSpin);
 router.get('/roulette', roulette.checkNum);
 const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
 
