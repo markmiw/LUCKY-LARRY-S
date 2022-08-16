@@ -1,4 +1,9 @@
-const { getUserId, addFriendRelationship, getAllFriends, checkIfFriendshipExists } = require('../../database/controllers');
+const {
+  getUserId,
+  addFriendRelationship,
+  getAllFriends,
+  checkIfFriendshipExists,
+} = require('../../database/controllers');
 
 module.exports.getAllFriends = async (req, res) => {
   try {
