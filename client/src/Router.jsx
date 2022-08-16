@@ -7,13 +7,11 @@ import {
 // import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 // import Slots from './components/slots/Slots';
 import Sidebar from './components/sidebar/Sidebar';
-import '../dist/sidebar.css';
-import '../dist/bootstrap.min.css';
-// import Homepage from './components/homepage/Homepage';
-// import Roulette from './components/roulette/Roulette';
-// import ScratchTicket from './components/scratch-ticket/ScratchTicket';
-// import Slots from './components/slots/Slots';
-// import NavBar from './NavBar';
+import Homepage from './components/homepage/Homepage';
+import Roulette from './components/roulette/Roulette';
+import ScratchTicket from './components/scratch-ticket/ScratchTicket';
+import Slots from './components/slots/Slots';
+import NavBar from './NavBar';
 
 const dummyData = {
   username: 'LarryLucky',
@@ -31,14 +29,14 @@ function Router() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar
+      <NavBar
         user={user}
         setUser={setUser}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
-      /> */}
+      />
       <Routes>
-        {/* <Route
+        <Route
           path="/roulette"
           element={<Roulette />}
         />
@@ -49,15 +47,19 @@ function Router() {
         <Route
           path="/slots"
           element={<Slots />}
-        /> */}
+        />
         <Route
           path="/sidebar"
           element={<Sidebar />}
         />
-        {/* <Route
+        <Route
           path="/"
           element={<Homepage />}
-        /> */}
+        />
+        <Route
+          path="*"
+          element={<Navigate to="/" />}
+        />
       </Routes>
     </BrowserRouter>
   );
