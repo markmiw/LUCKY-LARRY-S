@@ -7,6 +7,7 @@ import FriendInput from './FriendInput';
 
 function FriendsList({ userID }) {
   const [showingFriendInput, setShowingFriendInput] = useState(false);
+  const [friendAddError, setFriendAddError] = useState('');
 
   const [friends, setFriends] = useState([]);
 
@@ -17,7 +18,9 @@ function FriendsList({ userID }) {
     })
       .then(({ data }) => {
         const mapped = data.map((user) => ({
-          flag: 'Usa',
+          // temporary! needs to be in DB
+          // temporary! needs to be in DB
+          // temporary! needs to be in DB
           lastOpened: new Date().toISOString(),
           ...user,
         }));
@@ -28,9 +31,36 @@ function FriendsList({ userID }) {
       });
   };
 
+  const showFriendAddError = (errorMessage) => {
+    setShowingFriendInput(false);
+    setFriendAddError(errorMessage);
+    setTimeout(() => {
+      setFriendAddError('');
+    }, 3000);
+  };
+
   useEffect(() => {
     fetchFriends();
   }, []);
+
+  let friendInput = <Spacer />;
+  if (friendAddError) {
+    friendInput = (
+      <ErrorMsg>
+        {friendAddError}
+      </ErrorMsg>
+    );
+  }
+  if (showingFriendInput) {
+    friendInput = (
+      <FriendInput
+        closeFriendInput={() => setShowingFriendInput(false)}
+        showFriendAddError={showFriendAddError}
+        userID={userID}
+        fetchFriends={fetchFriends}
+      />
+    );
+  }
 
   return (
     <FriendsListContainer>
@@ -42,26 +72,19 @@ function FriendsList({ userID }) {
           className="material-symbols-outlined"
           onClick={() => {
             setShowingFriendInput(!showingFriendInput);
+            setShowingFriendAddError(false);
           }}
         >
           {showingFriendInput ? 'close' : 'person_add'}
         </OpenFriendInputIcon>
       </Header>
-      {showingFriendInput
-        ? (
-          <FriendInput
-            closeFriendInput={() => setShowingFriendInput(false)}
-            userID={userID}
-            fetchFriends={fetchFriends}
-          />
-        )
-        : <Spacer />}
+      {friendInput}
       <List>
         {friends.map((friend) => (
           <FriendsListItem
             key={friend.id}
             username={friend.username}
-            flag={friend.flag}
+            country={friend.country}
             lastOpened={friend.lastOpened}
           />
         ))}
@@ -75,6 +98,7 @@ FriendsList.propTypes = {
 };
 
 const FriendsListContainer = styled('div')`
+  background-color: white;
   width: 400px;
   border: 1px solid black;
 `;
@@ -91,10 +115,19 @@ const Header = styled('div')`
 
 const Title = styled('div')`
   font-size: x-large;
+  color: black;
 `;
 
 const Spacer = styled('div')`
   height: 40px;
+`;
+
+const ErrorMsg = styled('div')`
+  height: 40px;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const List = styled('div')`

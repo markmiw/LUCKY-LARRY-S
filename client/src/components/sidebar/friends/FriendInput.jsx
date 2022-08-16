@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function FriendInput({ closeFriendInput, userID, fetchFriends }) {
+function FriendInput({ closeFriendInput, userID, fetchFriends, showFriendAddError }) {
   const [username, setUsername] = useState('');
 
   return (
@@ -19,9 +19,12 @@ function FriendInput({ closeFriendInput, userID, fetchFriends }) {
             },
           })
             .then(({ data }) => {
-              if (data === 'username not found') {
-                // add a visual error message here: 'username not found'
-                console.log('display err msg');
+              if (
+                data === 'username not found'
+                || data === 'you can\'t add yourself as a friend'
+                || data === 'user is already your friend'
+              ) {
+                showFriendAddError(data);
               } else {
                 fetchFriends();
                 closeFriendInput();
@@ -51,12 +54,14 @@ FriendInput.propTypes = {
   closeFriendInput: PropTypes.func.isRequired,
   userID: PropTypes.number.isRequired,
   fetchFriends: PropTypes.func.isRequired,
+  showFriendAddError: PropTypes.func.isRequired,
 };
 
 const FriendInputContainer = styled('form')`
   padding: 0 50px;
   display: flex;
   flex-direction: row;
+  height: fit-content;
 `;
 
 const StyledInput = styled('input')`

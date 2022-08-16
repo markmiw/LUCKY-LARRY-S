@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Moment from 'react-moment';
 import flags from '../Flag';
 
-function FriendsListItem({ username, flag, lastOpened }) {
+function FriendsListItem({ username, country, lastOpened }) {
   return (
     <FriendsListItemContainer>
-      <Flag src={flags[flag]} alt={`Flag of ${flag}`} />
+      <Flag src={flags[country]} alt={`Flag of ${country}`} />
       <TextContainer>
         <Username>
           {username}
@@ -15,7 +15,7 @@ function FriendsListItem({ username, flag, lastOpened }) {
         <Timestamp>
           {/* thoughts on making this last online instead of last opened? */}
           Opened&nbsp;
-          <Moment fromNow>{lastOpened}</Moment>
+          <StyledMoment fromNow>{lastOpened}</StyledMoment>
         </Timestamp>
       </TextContainer>
       <ChatIconContainer>
@@ -29,7 +29,7 @@ function FriendsListItem({ username, flag, lastOpened }) {
 
 FriendsListItem.propTypes = {
   username: PropTypes.string.isRequired,
-  flag: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
   lastOpened: PropTypes.string.isRequired,
 };
 
@@ -57,10 +57,16 @@ const TextContainer = styled('div')`
 
 const Username = styled('div')`
   font-size: large;
+  color: black;
 `;
 
 const Timestamp = styled('div')`
   font-size: small;
+  color: black;
+`;
+
+const StyledMoment = styled(Moment)`
+  color: black;
 `;
 
 const ChatIconContainer = styled('div')`

@@ -1,4 +1,4 @@
-const { getUserId, addFriendRelationship, getAllFriends } = require('../../database/controllers');
+const { getUserId, addFriendRelationship, getAllFriends, checkIfFriendshipExists } = require('../../database/controllers');
 
 module.exports.getAllFriends = async (req, res) => {
   try {
@@ -16,6 +16,15 @@ module.exports.addFriend = async (req, res) => {
     const friendID = await getUserId(friendUsername);
     if (friendID === null) {
       res.status(200).send('username not found');
+      return;
+    }
+    if (friendID === userID) {
+      res.status(200).send('you can\'t add yourself as a friend');
+      return;
+    }
+    const doesFriendshipAlreadyExist = await checkIfFriendshipExists(userID, friendID) !== null;
+    if (doesFriendshipAlreadyExist) {
+      res.status(200).send('user is already your friend');
       return;
     }
     await addFriendRelationship(userID, friendID);

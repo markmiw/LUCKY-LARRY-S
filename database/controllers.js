@@ -55,6 +55,21 @@ const addFriendRelationship = (userID, friendID) => {
     .catch(errorHandler);
 };
 
+const checkIfFriendshipExists = (userID, friendID) => {
+  const queryString = `
+    SELECT * FROM friends WHERE userID = $1 AND friendID = $2;
+  `;
+
+  return db.query(queryString, [userID, friendID])
+    .then((results) => {
+      if (results.rows[0]) {
+        return results.rows[0];
+      }
+      return null;
+    })
+    .catch(errorHandler);
+};
+
 const getAllFriends = (userID) => {
   const queryString = `
     WITH friendIDs AS (
@@ -62,9 +77,12 @@ const getAllFriends = (userID) => {
       FROM friends
       WHERE userID = $1
     )
-    SELECT id, username
-    FROM users
-    WHERE id IN (SELECT friendID FROM friendIDs)
+    SELECT u.id, u.username, c.country
+    FROM users u
+    JOIN
+    country c
+    ON u.countryID = c.id
+    WHERE u.id IN (SELECT friendID FROM friendIDs)
   `;
 
   return db.query(queryString, [userID])
@@ -125,4 +143,5 @@ module.exports = {
   getCountry,
   getBalance,
   updateBalanceBasedOnWinnings,
+  checkIfFriendshipExists,
 };
