@@ -1,9 +1,13 @@
 const router = require('express').Router();
+
 const { slots } = require('./controllers/slots');
 const { addFriend, getAllFriends } = require('./controllers/friends');
 const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
+const roulette = require('./controllers/roulettecontrollers.js');
 
 router.put('/slots', slots);
+router.get('/roulette', roulette.checkNum);
+const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
 
 router.get('/users/:userID/friends', getAllFriends);
 

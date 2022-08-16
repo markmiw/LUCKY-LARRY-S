@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS RouletteNums(
 );
 
 -- Load data in
-INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUES (0, 'zero', 'green', 0, 1, 0),
+INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUES (0, 'zero', 'green', 0, 0, 0),
 (1, 'odd', 'black', 1, 1, 1),
 (2, 'even', 'red', 1, 1, 2),
 (3, 'odd', 'black', 1, 1, 3),
@@ -112,6 +112,7 @@ INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUE
 (33, 'odd', 'black', 3, 2, 3),
 (34, 'even', 'red', 3, 2, 1),
 (35, 'odd', 'black', 3, 2, 2),
-(36, 'even', 'red', 3, 2, 3)
+(36, 'even', 'red', 3, 2, 3);
 
 -- psql postgres postgres < /Users/.... rouletteSchema.sql;
+-- psql -U postgres \Users\J\Documents\Projects\LUCKYLARRYS\database\schema.sql
