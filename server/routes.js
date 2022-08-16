@@ -3,7 +3,6 @@ const { slots } = require('./controllers/slots');
 const {
   getUser, getLeaderboard, getCountry, getSpecificUser, createUser, addBalance,
 } = require('../database/controllers');
-const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
 
 router.put('/slots', slots);
 router.get('/roulette', roulette.checkNum);
