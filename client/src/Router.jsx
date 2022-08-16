@@ -47,11 +47,7 @@ function Router() {
         />
         <Route
           path="/sidebar"
-          element={(
-            <Sidebar
-              user={user}
-            />
-          )}
+          element={<Sidebar />}
         />
         <Route
           path="/"
