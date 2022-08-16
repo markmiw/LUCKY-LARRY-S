@@ -72,7 +72,7 @@ function FriendsList({ userID }) {
           className="material-symbols-outlined"
           onClick={() => {
             setShowingFriendInput(!showingFriendInput);
-            setShowingFriendAddError(false);
+            setFriendAddError('');
           }}
         >
           {showingFriendInput ? 'close' : 'person_add'}

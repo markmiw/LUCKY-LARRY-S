@@ -3,7 +3,12 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function FriendInput({ closeFriendInput, userID, fetchFriends, showFriendAddError }) {
+function FriendInput({
+  closeFriendInput,
+  userID,
+  fetchFriends,
+  showFriendAddError,
+}) {
   const [username, setUsername] = useState('');
 
   return (

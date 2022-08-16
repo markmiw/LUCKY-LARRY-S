@@ -18,7 +18,7 @@ module.exports.addFriend = async (req, res) => {
       res.status(200).send('username not found');
       return;
     }
-    if (friendID === userID) {
+    if (Number(friendID) === Number(userID)) {
       res.status(200).send('you can\'t add yourself as a friend');
       return;
     }
