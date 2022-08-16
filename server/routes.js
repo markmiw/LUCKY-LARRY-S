@@ -52,6 +52,7 @@ router.post('/user/balance', (req, res) => {
   addBalance(req.body)
     .then((results) => res.status(201).send(results))
     .catch((err) => res.sendStatus(404));
+});
     
 router.get('/globalchat', (req, res) => {
   getGlobalChat(req.query.loginTime)
