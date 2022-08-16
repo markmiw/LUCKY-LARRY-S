@@ -25,7 +25,7 @@ export default function Homepage({
                   src={img}
                   width="200"
                   height="200"
-                  alt="roulette"
+                  alt="game"
                 />
               </Link>
             </Game>
@@ -34,7 +34,7 @@ export default function Homepage({
         return (
           <Game key={game} onClick={() => handleClick()}>
             <div>{game}</div>
-            <img src={img} width="200" height="200" alt="roulette" />
+            <img src={img} width="200" height="200" alt="game" />
           </Game>
         );
       })}
