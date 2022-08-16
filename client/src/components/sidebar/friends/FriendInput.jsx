@@ -38,6 +38,8 @@ const FriendInputContainer = styled('form')`
   padding: 0 50px;
   display: flex;
   flex-direction: row;
+  border-radius: 7px;
+  padding-bottom: 5xpx;
 `;
 
 const StyledInput = styled('input')`
