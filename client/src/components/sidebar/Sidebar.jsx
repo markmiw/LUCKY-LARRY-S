@@ -4,6 +4,7 @@ import leaderboard_icon from '../../../dist/icons/leaderboard.png';
 import Friends from '../../../dist/icons/friends.svg';
 import Globe from '../../../dist/icons/globe.svg';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
+import FriendsList from './friends/FriendsList';
 
 function Sidebar() {
   const [sidebarState, setSidebarState] = useState('global-chat');
