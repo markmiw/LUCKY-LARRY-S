@@ -8,7 +8,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /.(png|jp(e*)g|svg|gif)$/,
@@ -19,15 +19,15 @@ module.exports = {
               name: 'images/[hash]-[name].[ext]',
             },
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: ['.jsx', '.js'],
   },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './client/dist'),
-  }
+  },
 };

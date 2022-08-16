@@ -7,8 +7,7 @@ CREATE DATABASE luckylarrys;
 
 CREATE TABLE country (
   id SERIAL PRIMARY KEY NOT NULL,
-  country VARCHAR(30) NOT NULL,
-  flag VARCHAR(300) NOT NULL
+  country VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE users (
@@ -43,33 +42,27 @@ CREATE INDEX IF NOT EXISTS idx_friends ON friends(userID);
 CREATE INDEX IF NOT EXISTS idx_chat ON chat(userID);
 
 
-INSERT INTO country (country, flag) VALUES ('TEST', 'TEST');
-INSERT INTO users (username, password, countryID, balance, winnings) VALUES ('Bruce', 'Waifus', 1, 2000, 0);
-
--- ---
--- Table 'test'
--- ---
-
-CREATE TABLE test (
-  id SERIAL NOT NULL,
-  num INTEGER,
-  PRIMARY KEY (id)
-);
-INSERT INTO test (num) VALUES (12);
-INSERT INTO test (num) VALUES (15);
-INSERT INTO test (num) VALUES (99);
-INSERT INTO test (num) VALUES (-4);
-
+INSERT INTO country (country) VALUES ('Argentina'), ('Afghanistan'), ('France'), ('Australia');
+INSERT INTO users (username, password, countryID, balance, winnings) VALUES
+('Bruce', 'Waifus', 1, 2000, 10000000),
+('Matthew', 'Moofus', 2, 2000, 10),
+('Cornelius', 'Mario', 3, 0, 0),
+('River', 'Animation', 4, 2000, 100),
+('Jesse', 'Roulette', 1, 2000, 1000),
+('Andy', 'Anime', 2, 2000, 100000),
+('Mark', 'Tensorflow', 3, 2000, 1000),
+('Gary', 'Pokemon', 4, 2000, 10000),
+('Bruce2', 'Waifu', 2, 2000, 1);
 
 -------Roulette---------
 -- USE roulette
 
 --id = num
---E0 = even/odd - true = 'even', odd = false
+--E0 = even/odd - even = 'even', odd = 'odd', 0 = 'zero'
 --color = r='red', b='black', g='green'
---Rangeof12 = 1st,2nd,3rd range
---firstHalf = 1 to 18 = true, 19-36 = false
---numRow =1,2,3 rows
+--Rangeof12 = 0,1st,2nd,3rd range
+--firstHalf = 1 to 18 = 1, 19-36 = 2, 0 = 0
+--numRow =1,2,3 rows, 0
 -- further functionality - add relation in DB for when users pick middle quadrants between numbers
 
 DROP TABLE IF EXISTS RouletteNums;
