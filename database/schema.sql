@@ -32,6 +32,8 @@ CREATE TABLE chat (
   id SERIAL PRIMARY KEY NOT NULL,
   date BIGINT NOT NULL,
   message VARCHAR(500) NOT NULL,
+  country VARCHAR(50) NOT NULL,
+  username VARCHAR(256) NOT NULL,
   userID INT,
   FOREIGN KEY (userID) REFERENCES users(id)
 );
@@ -114,5 +116,11 @@ INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUE
 (35, 'odd', 'black', 3, 2, 2),
 (36, 'even', 'red', 3, 2, 3);
 
+<<<<<<< HEAD
+-- -- psql postgres postgres < /Users/.... rouletteSchema.sql;
+-- GRANT ALL PRIVILEGES ON ALL TABLES TO postgres;
+-- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA luckylarrys TO postgres;
+=======
 -- psql postgres postgres < /Users/.... rouletteSchema.sql;
 -- psql -U postgres \Users\J\Documents\Projects\LUCKYLARRYS\database\schema.sql
+>>>>>>> 1964d9395a0110862d0def478b049cd2432ca9f8

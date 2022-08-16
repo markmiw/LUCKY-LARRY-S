@@ -17,25 +17,25 @@ function FriendsList() {
     {
       id: 2,
       username: 'Mark',
-      flag: 'Usa',
+      flag: 'USA',
       lastOpened: new Date('13 august 2022').toISOString(),
     },
     {
       id: 3,
       username: 'Andy',
-      flag: 'Usa',
+      flag: 'USA',
       lastOpened: new Date().toISOString(),
     },
     {
       id: 4,
       username: 'Gary',
-      flag: 'Usa',
+      flag: 'USA',
       lastOpened: new Date('13 august 2022').toISOString(),
     },
     {
       id: 5,
       username: 'River',
-      flag: 'Usa',
+      flag: 'USA',
       lastOpened: new Date().toISOString(),
     },
     {
@@ -47,7 +47,7 @@ function FriendsList() {
     {
       id: 7,
       username: 'Matthew',
-      flag: 'Usa',
+      flag: 'USA',
       lastOpened: new Date('13 august 2022').toISOString(),
     },
     {
@@ -101,8 +101,10 @@ function FriendsList() {
 }
 
 const FriendsListContainer = styled('div')`
-  width: 400px;
-  border: 1px solid black;
+  width: 317px;
+  border: 1px solid #ced4da;
+  border-bottom-style: none;
+  border-radius: 7px;
 `;
 
 const Header = styled('div')`
@@ -125,7 +127,8 @@ const Spacer = styled('div')`
 
 const List = styled('div')`
   overflow-y: scroll;
-  height: 500px;
+  height: 390px;
+  width: 99%;
 `;
 
 const OpenFriendInputIcon = styled('span')`
