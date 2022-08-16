@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import handleDate from '../handleDate';
 import flags from '../Flag';
 
 function FriendsListItem({ username, country, lastOpened }) {
+  console.log(handleDate(new Date(lastOpened)));
   return (
     <FriendsListItemContainer>
       <Flag src={flags[country]} alt={`Flag of ${country}`} />
@@ -14,6 +16,7 @@ function FriendsListItem({ username, country, lastOpened }) {
         <Timestamp>
           {/* thoughts on making this last online instead of last opened? */}
           Opened&nbsp;
+          {handleDate(lastOpened)}
         </Timestamp>
       </TextContainer>
       <ChatIconContainer>

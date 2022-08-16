@@ -9,7 +9,6 @@ import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
 import '../dist/sidebar.css';
-import '../dist/bootstrap.min.css';
 
 const dummyData = {
   id: 1,

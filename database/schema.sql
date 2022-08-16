@@ -115,12 +115,3 @@ INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUE
 (34, 'even', 'red', 3, 2, 1),
 (35, 'odd', 'black', 3, 2, 2),
 (36, 'even', 'red', 3, 2, 3);
-
-<<<<<<< HEAD
--- -- psql postgres postgres < /Users/.... rouletteSchema.sql;
--- GRANT ALL PRIVILEGES ON ALL TABLES TO postgres;
--- GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA luckylarrys TO postgres;
-=======
--- psql postgres postgres < /Users/.... rouletteSchema.sql;
--- psql -U postgres \Users\J\Documents\Projects\LUCKYLARRYS\database\schema.sql
->>>>>>> 1964d9395a0110862d0def478b049cd2432ca9f8

@@ -1,20 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import * as moment from 'moment';
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
 import flags from '../Flag.jsx';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
-
-const handleDate = (date) => {
-  if (moment(date).isSame(moment(), 'day')) {
-    return `Today at ${moment(date, ['x']).format('h:mm A')}`;
-  } if (moment(date).isSame(moment().subtract(1, 'day'), 'day')) {
-    return `Yesterday at ${moment(date, ['x']).format('h:mm A')}`;
-  } if (moment(date).isBefore(moment().subtract(1, 'day'), 'day')) {
-    return `${moment(date, ['x']).format('ddd hh:mm A')}`;
-  }
-  return `${moment(date, ['x']).format('MMM Do, yyyy, h:mm A')}`;
-};
+import handleDate from '../handleDate';
 
 function Chat({}) {
   const username = 'mark';
@@ -68,7 +57,7 @@ function Chat({}) {
                   <span className="message-username">
                     {message.username}
                   </span>
-                  <div className="message-data-time">{handleDate(message.date)}</div>
+                  <div className="message-data-time">{handleDate(new Date(Number(message.date)))}</div>
                 </div>
                 <div className="message">{message.message}</div>
               </div>
