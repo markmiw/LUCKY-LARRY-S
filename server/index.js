@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -19,7 +18,6 @@ app.use(express.json());
 // middleware for logging requests made to the server
 app.use(morgan('tiny'));
 
-app.use(express.json());
 app.use(express.static('client/dist'));
 
 app.use('/api', router);
