@@ -15,7 +15,8 @@ function Sidebar() {
     } if (sidebarState === 'leaderboard') {
       return <Leaderboard key="leaderboard" />;
     }
-    return <FriendsList key="friends" />;
+    // temp userid
+    return <FriendsList userID={1} key="friends" />;
   };
   return (
     <div className="sidebar-container">

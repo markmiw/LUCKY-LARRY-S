@@ -10,7 +10,6 @@ import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
 import LoginModal from './components/modal/LoginModal';
 import '../dist/sidebar.css';
-import '../dist/bootstrap.min.css';
 
 function Router() {
   const [user, setUser] = useState(); // user data

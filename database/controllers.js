@@ -18,6 +18,83 @@ const getUser = () => {
     .catch(errorHandler);
 };
 
+const getUserId = (username) => {
+  const queryString = `
+    SELECT id
+    FROM users
+    WHERE username = $1
+  `;
+
+  return db.query(queryString, [username])
+    .then((results) => {
+      if (results.rows[0]) {
+        return results.rows[0].id;
+      }
+      return null;
+    })
+    .catch(errorHandler);
+};
+
+const addFriendRelationship = (userID, friendID) => {
+  const queryString = `
+    WITH insertOne AS (
+      INSERT INTO friends (userID, friendID) VALUES ($1, $2)
+    ), insertTwo AS (
+      INSERT INTO friends (userID, friendID) VALUES ($2, $1)
+    )
+    SELECT 'done' AS status
+  `;
+
+  return db.query(queryString, [userID, friendID])
+    .then((results) => {
+      if (results.rows[0]) {
+        return results.rows[0];
+      }
+      return null;
+    })
+    .catch(errorHandler);
+};
+
+const checkIfFriendshipExists = (userID, friendID) => {
+  const queryString = `
+    SELECT * FROM friends WHERE userID = $1 AND friendID = $2;
+  `;
+
+  return db.query(queryString, [userID, friendID])
+    .then((results) => {
+      if (results.rows[0]) {
+        return results.rows[0];
+      }
+      return null;
+    })
+    .catch(errorHandler);
+};
+
+const getAllFriends = (userID) => {
+  const queryString = `
+    WITH friendIDs AS (
+      SELECT friendID
+      FROM friends
+      WHERE userID = $1
+    )
+    SELECT u.id, u.username, c.country
+    FROM users u
+    JOIN
+    country c
+    ON u.countryID = c.id
+    WHERE u.id IN (SELECT friendID FROM friendIDs)
+  `;
+
+  return db.query(queryString, [userID])
+    .then((results) => {
+      if (results.rows[0]) {
+        return results.rows;
+      }
+      return null;
+    })
+    .catch(errorHandler);
+};
+
 const getLeaderboard = () => {
   const queryString = 'SELECT * FROM users ORDER BY winnings DESC LIMIT 25';
 
@@ -101,12 +178,16 @@ module.exports = {
   getTestData,
   getSpecificUser,
   getUser,
+  getUserId,
+  addFriendRelationship,
+  getAllFriends,
   getGlobalChat,
   postGlobalChat,
   getLeaderboard,
   getCountry,
   getBalance,
   updateBalanceBasedOnWinnings,
+  checkIfFriendshipExists,
   createUser,
   addBalance,
 };

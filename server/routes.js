@@ -1,12 +1,24 @@
 const router = require('express').Router();
 const { slots } = require('./controllers/slots');
+const { addFriend, getAllFriends } = require('./controllers/friends');
 const {
-  getUser, getLeaderboard, getCountry, getSpecificUser, createUser, addBalance, getGlobalChat, postGlobalChat,
+  getUser,
+  getLeaderboard,
+  getCountry,
+  getSpecificUser,
+  createUser,
+  addBalance,
+  getGlobalChat,
+  postGlobalChat,
 } = require('../database/controllers');
-const roulette = require('./controllers/roulettecontrollers.js');
+const roulette = require('./controllers/roulettecontrollers');
 
 router.put('/slots', slots);
 router.get('/roulette', roulette.checkNum);
+
+router.get('/users/:userID/friends', getAllFriends);
+
+router.post('/users/:userID/friends', addFriend);
 
 router.get('/test', (req, res) => {
   res.status(200).send('hello!');
@@ -53,7 +65,7 @@ router.post('/user/balance', (req, res) => {
     .then((results) => res.status(201).send(results))
     .catch((err) => res.sendStatus(404));
 });
-    
+
 router.get('/globalchat', (req, res) => {
   getGlobalChat(req.query.loginTime)
     .then((results) => res.send(results))
