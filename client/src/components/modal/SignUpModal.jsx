@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
+import flags from '../sidebar/Flag';
 
 function SignUpModal({ setModal }) {
   // PROBABLY MORE FIELDS
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState({
+    username: '',
+    password: '',
+    reEnterPassword: '',
+    country: 'Usa',
+  });
 
   function handleChange(e, field) {
     setInfo((prev) => {
@@ -17,12 +23,12 @@ function SignUpModal({ setModal }) {
     });
   }
 
-  function handleSubmit() {
-    // if (info.password !== info.reEnterPassword) return;
-    // const results = axios.post('/api/user', info); // CHECK WHAT ROUTE WE ARE USING, ALSO PROBABLY MORE FIELDS
-    // if (info.password === results.password) {
-    //   // valid
-    // }
+  async function handleSubmit() {
+    if (info.password !== info.reEnterPassword || info.username === '' || info.password === '') return;
+
+    let res = await axios.post('/api/user', info);
+    // need to check what happens when username already exists
+
     setModal(false);
   }
 
@@ -70,11 +76,10 @@ function SignUpModal({ setModal }) {
             <select
               className="form-select"
               aria-label=".form-select-lg"
+              onChange={(e) => handleChange(e, 'country')}
+              defaultValue="Usa"
             >
-              <option value="USA">United States of America</option>
-              <option value="China">China</option>
-              <option value="Canada">Canada</option>
-              <option value="Japan">Japan</option>
+              {Object.keys(flags).map((name) => (<option key={name} value={name}>{name}</option>))}
             </select>
           </div>
         </div>

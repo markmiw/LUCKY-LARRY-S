@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import LoginModal from './components/modal/LoginModal';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
 
-function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
+function NavBar({
+  user, setUser, loggedIn, setLoggedIn, setShowLoginModal,
+}) {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
 
@@ -41,10 +41,13 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
 
   return (
     <>
-      {showBalanceModal && (<BalanceModal setModal={setShowBalanceModal} />)}
-      {showLoginModal && <LoginModal setModal={setShowLoginModal} />}
-      {showSignUpModal && (<SignUpModal setModal={setShowSignUpModal} />)}
-      <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-success mb-3">
+      {showBalanceModal && (
+        <BalanceModal user={user} setUser={setUser} setModal={setShowBalanceModal} />
+      )}
+      {showSignUpModal && (
+        <SignUpModal setModal={setShowSignUpModal} />
+      )}
+      <nav className="navbar navbar-expand-lg navbar-light bg-success mb-3">
         <Link to="/">
           <button type="submit" className="navbar-item btn">
             Home
@@ -64,7 +67,7 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
           <>
             <button
               type="submit"
-              className="navbar-item btn me-auto"
+              className="navbar-item btn"
               onClick={() => openLoginModal(true)}
             >
               Login
@@ -98,12 +101,17 @@ function NavBar({ user, setUser, loggedIn, setLoggedIn }) {
 
 NavBar.propTypes = {
   user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
     balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
   }).isRequired,
   setUser: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   setLoggedIn: PropTypes.func.isRequired,
+  setShowLoginModal: PropTypes.func.isRequired,
 };
 
 export default NavBar;
