@@ -12,18 +12,28 @@ import Roulette from './components/roulette/Roulette';
 import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
+import LoginModal from './components/modal/LoginModal';
 
 function Router() {
   const [user, setUser] = useState(); // user data
   const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
     <BrowserRouter>
+      {showLoginModal && (
+        <LoginModal
+          setModal={setShowLoginModal}
+          setUser={setUser}
+          setLoggedIn={setLoggedIn}
+        />
+      )}
       <NavBar
         user={user}
         setUser={setUser}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
+        setShowLoginModal={setShowLoginModal}
       />
       <Routes>
         <Route
@@ -50,6 +60,7 @@ function Router() {
               setUser={setUser}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
+              setShowLoginModal={setShowLoginModal}
             />
           )}
         />

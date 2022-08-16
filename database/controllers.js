@@ -63,7 +63,7 @@ const getSpecificUser = (username) => {
     .catch(errorHandler);
 };
 
-const addUser = (info) => {
+const createUser = (info) => {
   const queryString = 'INSERT INTO users (username, password, balance, winnings, countryid) VALUES ($1, $2, $3, $4, (SELECT id from country WHERE country.country = $5))';
   const args = [info.username, info.password, 0, 0, info.country];
 
@@ -89,6 +89,6 @@ module.exports = {
   getCountry,
   getBalance,
   updateBalanceBasedOnWinnings,
-  addUser,
+  createUser,
   addBalance,
 };

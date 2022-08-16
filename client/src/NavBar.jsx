@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import LoginModal from './components/modal/LoginModal';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
 
 function NavBar({
-  user, setUser, loggedIn, setLoggedIn,
+  user, setUser, loggedIn, setLoggedIn, setShowLoginModal,
 }) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
 
@@ -46,17 +44,10 @@ function NavBar({
       {showBalanceModal && (
         <BalanceModal user={user} setUser={setUser} setModal={setShowBalanceModal} />
       )}
-      {showLoginModal && (
-        <LoginModal
-          setModal={setShowLoginModal}
-          setUser={setUser}
-          setLoggedIn={setLoggedIn}
-        />
-      )}
       {showSignUpModal && (
         <SignUpModal setModal={setShowSignUpModal} />
       )}
-      <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-success mb-3">
+      <nav className="navbar navbar-expand-lg navbar-light bg-success mb-3">
         <Link to="/">
           <button type="submit" className="navbar-item btn">
             Home
@@ -120,6 +111,7 @@ NavBar.propTypes = {
   setUser: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   setLoggedIn: PropTypes.func.isRequired,
+  setShowLoginModal: PropTypes.func.isRequired,
 };
 
 export default NavBar;

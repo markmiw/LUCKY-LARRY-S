@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { slots } = require('./controllers/slots');
 const {
-  getUser, getLeaderboard, getCountry, getSpecificUser, addUser, addBalance,
+  getUser, getLeaderboard, getCountry, getSpecificUser, createUser, addBalance,
 } = require('../database/controllers');
 
 router.put('/slots', slots);
@@ -35,8 +35,14 @@ router.get('/user/:username', (req, res) => {
 });
 
 router.post('/user', (req, res) => {
-  addUser(req.body)
-    .then((results) => res.sendStatus(201))
+  createUser(req.body)
+    .then((results) => {
+      if (results.length === 0) {
+        res.sendStatus(201);
+      } else {
+        res.sendStatus(409);
+      }
+    })
     .catch((err) => res.sendStatus(404));
 });
 
