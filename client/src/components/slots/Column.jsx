@@ -43,14 +43,10 @@ export default function Column({
       }
     };
 
-    if (columnRef) {
-      columnRef.current.addEventListener('transitionend', transitionEndListener);
-    }
-    return () => {
-      if (columnRef) {
-        columnRef.current.removeEventListener('transitionend', transitionEndListener);
-      }
-    };
+    const el = columnRef.current;
+
+    el.addEventListener('transitionend', transitionEndListener);
+    return () => { el.removeEventListener('transitionend', transitionEndListener); };
   }, [columnRef, values]);
 
   useEffect(() => {
