@@ -12,6 +12,8 @@ import Roulette from './components/roulette/Roulette';
 import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
+import '../dist/sidebar.css';
+import '../dist/bootstrap.min.css';
 
 const dummyData = {
   username: 'LarryLucky',
