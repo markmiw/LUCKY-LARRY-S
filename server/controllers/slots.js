@@ -21,7 +21,7 @@ module.exports.weightedSpin = (req, res) => {
         combination.push(choices[0]);
       } else if (chance <= 75) {
         combination.push(choices[1]);
-      } else if (chance <= 87.5) {
+      } else if (chance <= 87.5) {  
         combination.push(choices[2]);
       } else if (chance <= 100) {
         combination.push(choices[3]);

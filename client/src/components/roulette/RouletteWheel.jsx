@@ -64,14 +64,10 @@ export default function RouletteWheel ({setWinState, betInfo, setBetInfo}) {
   const [setResult, result] = useState({});
 
   const handleSpinClick = () => {
+     // grabWinningNum(newPriceNumber);
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
-
     setMustSpin(true);
-    // do axios calls to get winning number information
-    // grabWinningNum(newPriceNumber);
-    console.log('winning number is: ', newPrizeNumber);
-
     axios.get('/api/roulette', { params: {
       betInfo: betInfo}
     })

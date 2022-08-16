@@ -122,3 +122,4 @@ INSERT INTO RouletteNums(id, evenOdd, color, rangeOf12, firstHalf, numRow) VALUE
 (36, 'even', 'red', 3, 2, 3)
 
 -- psql postgres postgres < /Users/.... rouletteSchema.sql;
+-- psql postgres 1 \Users\J\Documents\Projects\LUCKYLARRYS\database\schema.sql

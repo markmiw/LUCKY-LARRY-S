@@ -1,9 +1,7 @@
 const pool =require('../../database/index.js')
 
 module.exports.checkNum = (req, res) => {
-
-  console.log('req.query is: ', req.query.betInfo)
- const { winNum, num, color, eO, rangeOf12, firstHalf, numRow } = req.query.betInfo;
+ const { winNum, num, color, eO, rangeOf12, firstHalf, numRow } = JSON.parse(req.query.betInfo);
  console.log(winNum, num, color, eO, rangeOf12, firstHalf, numRow);
   const query = `SELECT * FROM RouletteNums WHERE id = ${winNum}`;
   const winnings = '', winsNum= '', winsCol= '', winsEO= '', winsRange= '', winsRow= '';
@@ -18,7 +16,7 @@ module.exports.checkNum = (req, res) => {
     .query(query)
     .then((results) => {console.log('this', results);
     const { resNum, resColor, resEO, resRange, resFirstHalf, resNumRow } = results;
-      //seperate winnings
+    console.log(resNum)
       winMultipler(resNum, num, winsNum, 35);
       winMultipler(resColor, color, winsCol, 2);
       winMultipler(resEO, eO, winsEO, 2);
@@ -36,8 +34,9 @@ module.exports.checkNum = (req, res) => {
           //add the winnings to the user via the implemented controller ***
           //add winnings to the user's records - to be implemented w/ global function ***
           res.status(200).send(winInfo)
+        } else {
+          res.status(200).send(false)
         }
-        res.status(200).send(false)
       })
   .catch((err) => { res.status(500); console.log(err) })
     }

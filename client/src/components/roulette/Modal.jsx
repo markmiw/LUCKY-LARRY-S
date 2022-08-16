@@ -15,11 +15,8 @@ export default function Modal({ showModal, setShowModal, currentBetOption, setNu
 
   const handleSubmit = () => {
     event.preventDefault();
-    // need to pass this betting information to somewhere
-    // betAmount here is the current bet on the current amount
     if (betAmount > 0) {
       //to potentially convert to switches or refactor later with a useEffect
-      console.log('currentBetOption: ', currentBetOption)
       if (currentBetOption === 'red' || currentBetOption ===  'black') {
         console.log('inside colors')
         setColor({ ...color, bet: betAmount })
@@ -38,7 +35,6 @@ export default function Modal({ showModal, setShowModal, currentBetOption, setNu
         setNum({ ...num, bet: betAmount })
       }
         setBetInput(!betInput);
-        console.log('current bet/betAmount is: ', num, betAmount);
         alert('You have successfully bet on this option')
         document.getElementById("betAmount").value = "";
         // turn off modal after submitting bet
