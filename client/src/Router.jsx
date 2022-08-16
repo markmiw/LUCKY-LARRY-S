@@ -48,9 +48,7 @@ function Router() {
         />
         <Route
           path="/sidebar"
-          element={(
-            <Sidebar />
-          )}
+          element={<Sidebar />}
         />
         <Route
           path="/"
