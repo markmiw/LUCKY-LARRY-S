@@ -43,8 +43,10 @@ export default function Column({
       }
     };
 
-    columnRef.current.addEventListener('transitionend', transitionEndListener);
-    return () => { columnRef.current.addEventListener('transitionend', transitionEndListener); };
+    const el = columnRef.current;
+
+    el.addEventListener('transitionend', transitionEndListener);
+    return () => { el.removeEventListener('transitionend', transitionEndListener); };
   }, [columnRef, values]);
 
   useEffect(() => {

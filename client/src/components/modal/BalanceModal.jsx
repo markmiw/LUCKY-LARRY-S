@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Modal from './Modal';
 import axios from 'axios';
+import Modal from './Modal';
 
-function BalanceModal({ setModal }) {
+function BalanceModal({ user, setUser, setModal }) {
   const [amount, setAmount] = useState(0);
 
   function handleChange(e) {
     setAmount(Number(e.target.value));
   }
 
-  function handleSubmit() {
-    // const results = axios.post('/api/user'); // CHECK WHAT ROUTE WE ARE USING
+  async function handleSubmit() {
+    const results = await axios.post('/api/user/balance', { id: user.id, amount });
+    // don't think it is possible to error, DOUBLE CHECK THIS
+
+    setUser(results.data.rows[0]);
     setModal(false);
   }
 
@@ -54,6 +57,15 @@ function BalanceModal({ setModal }) {
 }
 
 BalanceModal.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,
 };
 

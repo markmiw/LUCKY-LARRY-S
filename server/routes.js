@@ -1,14 +1,12 @@
 const router = require('express').Router();
-
 const { slots } = require('./controllers/slots');
 const {
-  getUser, getLeaderboard, getCountry, getGlobalChat, postGlobalChat,
+  getUser, getLeaderboard, getCountry, getSpecificUser, createUser, addBalance, getGlobalChat, postGlobalChat,
 } = require('../database/controllers');
 const roulette = require('./controllers/roulettecontrollers.js');
 
 router.put('/slots', slots);
 router.get('/roulette', roulette.checkNum);
-const { getUser, getLeaderboard, getCountry } = require('../database/controllers');
 
 router.get('/test', (req, res) => {
   res.status(200).send('hello!');
@@ -32,6 +30,30 @@ router.get('/country/:countryid', (req, res) => {
     .catch(() => res.sendStatus(404));
 });
 
+router.get('/user/:username', (req, res) => {
+  getSpecificUser(req.params.username)
+    .then((results) => res.send(results))
+    .catch((err) => res.sendStatus(404));
+});
+
+router.post('/user', (req, res) => {
+  createUser(req.body)
+    .then((results) => {
+      if (results.length === 0) {
+        res.sendStatus(201);
+      } else {
+        res.sendStatus(409);
+      }
+    })
+    .catch((err) => res.sendStatus(404));
+});
+
+router.post('/user/balance', (req, res) => {
+  addBalance(req.body)
+    .then((results) => res.status(201).send(results))
+    .catch((err) => res.sendStatus(404));
+});
+    
 router.get('/globalchat', (req, res) => {
   getGlobalChat(req.query.loginTime)
     .then((results) => res.send(results))
