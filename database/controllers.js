@@ -18,6 +18,22 @@ const getUser = () => {
     .catch(errorHandler);
 };
 
+const getLeaderboard = () => {
+  const queryString = 'SELECT * FROM users ORDER BY winnings DESC LIMIT 25';
+
+  return db.query(queryString)
+    .then((results) => results.rows)
+    .catch(errorHandler);
+};
+
+const getCountry = (countryid) => {
+  const queryString = 'SELECT country FROM country WHERE id = $1';
+
+  return db.query(queryString, [countryid])
+    .then((results) => results.rows)
+    .catch(errorHandler);
+};
+
 const getBalance = (userid) => {
   const queryString = 'SELECT balance FROM users WHERE id = $1';
 
@@ -43,6 +59,8 @@ const updateBalanceBasedOnWinnings = (userid, bet, winnings) => {
 module.exports = {
   getTestData,
   getUser,
+  getLeaderboard,
+  getCountry,
   getBalance,
   updateBalanceBasedOnWinnings,
 };
