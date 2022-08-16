@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Wheel } from 'react-custom-roulette';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
 // import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
@@ -59,13 +60,11 @@ const textDistance = 77;
 const spinDuration = 1.0;
 
 export default function RouletteWheel({ betInfo }) {
-  //wheel functionality
+  // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [winAmount, setWinAmount] = useState(0);
 
   const handleSpinClick = () => {
-    // grabWinningNum(newPriceNumber);
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
@@ -127,12 +126,13 @@ export default function RouletteWheel({ betInfo }) {
         </SpinButton>
       </header>
     </RouletteWheelContainer>
-  )
+  );
 }
+
+RouletteWheel.propTypes = { betInfo: PropTypes.shape.isRequired };
 
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;
-`
+`;
 export const SpinButton = styled.button`
-
-`
+`;

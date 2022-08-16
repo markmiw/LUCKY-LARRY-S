@@ -1,22 +1,31 @@
-// this is the share game model pop up
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import {
-//   ModalWrapper, ModalForm, CloseModalButton, ModalWrapperStyled,
-//   ModalBackgroundStyled,
-//   ModalInnerStyled,
-//   ModalContentStyled,
-//   CloseButtonStyled,
-//   CloseButtonExpandedStyled, ModalHeaderInnerStyled
-// } from './roulette.styled.js';
 
-export default function Modal({ showModal, setShowModal, currentBetOption, setNum, setColor, setEO, setFirstHalf, setNumRow, setRangeOf12, num, color, eO, rangeOf12, firstHalf, numRow, betInput, setBetInput }) {
+export default function Modal({
+  showModal,
+  setShowModal,
+  currentBetOption,
+  setNum,
+  setColor,
+  setEO,
+  setFirstHalf,
+  setNumRow,
+  setRangeOf12,
+  num,
+  color,
+  eO,
+  rangeOf12,
+  firstHalf,
+  numRow,
+  betInput,
+  setBetInput,
+}) {
   const [betAmount, setBetAmount] = useState(0);
 
-  const handleSubmit = () => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (betAmount > 0) {
-      //to potentially convert to switches or refactor later with a useEffect
       if (currentBetOption === 'red' || currentBetOption === 'black') {
         setColor({ ...color, bet: betAmount });
       } else if (currentBetOption === 'even' || currentBetOption === 'odd') {
@@ -31,43 +40,56 @@ export default function Modal({ showModal, setShowModal, currentBetOption, setNu
         setNum({ ...num, bet: betAmount });
       }
       setBetInput(!betInput);
-      alert('You have successfully bet on this option')
+      alert('You have successfully bet on this option');
       // turn off modal after submitting bet
-      setShowModal(prev => !prev)
-
+      setShowModal((prev) => !prev);
     } else {
-      alert('Please put the amount you want to bet on this option')
+      alert('Please put the amount you want to bet on this option');
     }
     setBetAmount(0);
-  }
+  };
 
   return (
     <div>
-      {showModal ?
-        <ModalWrapperStyled>
+      {showModal
+        ? <ModalWrapperStyled>
           <ModalWrapper>
-            <CloseButtonStyled type="button" onClick={() => setShowModal(prev => !prev)}>X</CloseButtonStyled>
-            <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}> You can bet $1, $5, $10, $20, $50, $100 on {currentBetOption}</ModalInnerStyled>
+            <CloseButtonStyled type="button" onClick={() => setShowModal((prev) => !prev)}>X</CloseButtonStyled>
+            <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}>
+              You can bet $1, $5, $10, $20, $50, $100 on
+              {currentBetOption}
+            </ModalInnerStyled>
             <ModalForm onSubmit={(event) => handleSubmit(event)}>
-              {/* styles refactor needed for buttons */}
-              <button onClick={() => setBetAmount(betAmount + 1)}>1</button>
-              <button onClick={() => setBetAmount(betAmount + 5)}>5</button>
-              <button onClick={() => setBetAmount(betAmount + 10)}>10</button>
-              <button onClick={() => setBetAmount(betAmount + 20)}>20</button>
-              <button onClick={() => setBetAmount(betAmount + 50)}>50</button>
-              <button onClick={() => setBetAmount(betAmount + 100)}>100</button>
-              {/*  search bar implementation below*/}
-              {/* <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required /> */}
-              <button onClick={() => handleSubmit()}>Submit Bet</button>
+              <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
+              <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Bet</button>
             </ModalForm>
           </ModalWrapper>
           <ModalBackgroundStyled />
         </ModalWrapperStyled>
         : null}
     </div>
-  )
-
+  );
 }
+
+Modal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  currentBetOption: PropTypes.number.isRequired,
+  setNum: PropTypes.func.isRequired,
+  setColor: PropTypes.func.isRequired,
+  setEO: PropTypes.func.isRequired,
+  setFirstHalf: PropTypes.func.isRequired,
+  setNumRow: PropTypes.func.isRequired,
+  setRangeOf12: PropTypes.func.isRequired,
+  num: PropTypes.shape.isRequired,
+  color: PropTypes.shape.isRequired,
+  eO: PropTypes.shape.isRequired,
+  rangeOf12: PropTypes.shape.isRequired,
+  firstHalf: PropTypes.shape.isRequired,
+  numRow: PropTypes.shape.isRequired,
+  betInput: PropTypes.number.isRequired,
+  setBetInput: PropTypes.func.isRequired,
+};
 
 export const ModalWrapper = styled.div`
   display: grid;
@@ -82,12 +104,12 @@ export const ModalWrapper = styled.div`
   height: 500px;
   margin-top: -300px;
   overflow-y: scroll;
-`
+`;
 
 export const ModalForm = styled.form`
   z-index: 11;
   color: black;
-`
+`;
 
 export const CloseModalButton = styled.button`
   cursor: pointer;
@@ -97,7 +119,7 @@ export const CloseModalButton = styled.button`
   width: 32px;
   padding: 0;
   z-index: 10;
-`
+`;
 
 export const ModalWrapperStyled = styled.div`
   position: fixed;
@@ -119,7 +141,6 @@ export const ModalBackgroundStyled = styled.div`
   bottom: 0;
   z-index: 10;
 `;
-
 
 export const ModalInnerStyled = styled.div`
   max-width: 80%;

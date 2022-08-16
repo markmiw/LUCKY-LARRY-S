@@ -1,10 +1,7 @@
-import React, { useState } from 'react'
-import RouletteWheel from './RouletteWheel.jsx';
-import BetTable from './BetTable.jsx';
-// import { RouletteGameGrid,  } from './roulette.styled.js';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Confetti from 'react-confetti';
-
+import RouletteWheel from './RouletteWheel';
+import BetTable from './BetTable';
 
 export default function Roulette () {
   const [betInfo, setBetInfo] = useState('');
