@@ -21,10 +21,9 @@ const dummyData = {
 };
 
 function Router() {
-  const [user, setUser] = useState(); // user data
-  const [loggedIn, setLoggedIn] = useState(); // is user logged in?
+  const [user, setUser] = useState(dummyData); // user data
+  const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
 
-  // dummy data for now, yes it should be in useeffect
   useEffect(() => {
     setUser(dummyData);
     setLoggedIn(true);
@@ -32,7 +31,12 @@ function Router() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar user={user} loggedIn={loggedIn} /> */}
+      {/* <NavBar
+        user={user}
+        setUser={setUser}
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+      /> */}
       <Routes>
         {/* <Route
           path="/roulette"
@@ -45,19 +49,15 @@ function Router() {
         <Route
           path="/slots"
           element={<Slots />}
-        />
-        <Route
-          path="/"
-          element={<Homepage />}
-        /> */}
-        {/* <Route
-          path="*"
-          element={<Navigate to="/" />}
         /> */}
         <Route
           path="/sidebar"
           element={<Sidebar />}
         />
+        {/* <Route
+          path="/"
+          element={<Homepage />}
+        /> */}
       </Routes>
     </BrowserRouter>
   );

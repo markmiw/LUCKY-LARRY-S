@@ -11,6 +11,7 @@
 .sidebar-nav-container {
   display: flex;
   margin: auto;
+  cursor: pointer;
   /* justify-content: space-between; */
 }
 
@@ -152,4 +153,8 @@ width: 50px;
 
 .emoji-modal {
   z-index: 1;
+}
+
+.chat-list {
+  padding: 0;
 }

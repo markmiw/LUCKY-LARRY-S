@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as moment from 'moment';
 import Picker from 'emoji-picker-react';
+import axios from 'axios';
 import flags from '../Flag.jsx';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
 
-function handleDate(date) {
-  // if date is today return 11:01 AM
+const handleDate = (date) => {
   if (moment(date).isSame(moment(), 'day')) {
     return `Today at ${moment(date, ['x']).format('h:mm A')}`;
   } if (moment(date).isSame(moment().subtract(1, 'day'), 'day')) {
@@ -14,61 +14,54 @@ function handleDate(date) {
     return `${moment(date, ['x']).format('ddd hh:mm A')}`;
   }
   return `${moment(date, ['x']).format('MMM Do, yyyy, h:mm A')}`;
-}
+};
 
 function Chat({}) {
-  const [inputStr, setInputStr] = useState('');
+  const username = 'mark';
+  const country = 'USA';
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
+  const loginTime = useRef(Date.now());
   const onEmojiClick = (e, emojiObject) => {
     const { selectionStart, selectionEnd } = inputRef.current;
-    const newVal = inputStr.slice(0, selectionStart) + emojiObject.emoji + inputStr.slice(selectionEnd);
-    setInputStr(newVal);
+    const newVal = message.slice(0, selectionStart) + emojiObject.emoji + message.slice(selectionEnd);
+    setMessage(newVal);
+    hideEmojiModal();
   };
 
-  function hideEmojiModal(e) {
-    e.preventDefault();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios.get('/api/globalchat', {params: {loginTime: loginTime.current}}).then(({data}) => {
+        setMessages(data);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }, 300);
+  }, []);
+
+  const hideEmojiModal = (e) => {
     document.getElementsByClassName('emoji-modal')[0].classList.add('hidden');
-  }
+  };
 
-  function showEmojiModal(e) {
-    e.preventDefault();
+  const showEmojiModal = (e) => {
     document.getElementsByClassName('emoji-modal')[0].classList.remove('hidden');
-  }
-  const messages = [{
-    username: 'mark',
-    country: 'USA',
-    date: Date.now() - 864000,
-    message: 'yooooo',
-  },
-  {
-    username: 'mark2',
-    country: 'USA',
-    date: Date.now(),
-    message: 'yooooo2',
-  },
-  {
-    username: 'mark3',
-    country: 'USA',
-    date: Date.now(),
-    message: 'yooooo3',
-  },
-  {
-    username: 'mark2',
-    country: 'USA',
-    date: Date.now(),
-    message: 'yooooo2',
-  },
+  };
 
-  ];
-  const username = 'mark';
-
-  return (
-    <div className="chat">
-
-      <div className="chat-history">
-        <ul className="m-b-0">
-          {messages.map((message) => (
-            <li className="display-flex">
+  const submitMessage = (e) => {
+    e.preventDefault();
+    if (message.length > 0) {
+      axios.post('/api/globalchat', { username, country, message }).then((data) => {
+        setMessage('');
+      }).catch((err) => console.log(err));
+    }
+  };
+  const renderChatHistory = () => {
+    if (messages.length) {
+      return (
+        <ul className="chat-list">
+          {messages.map((message, i) => (
+            <li key={i} className="display-flex">
               <img className="global-chat-country" alt="country" src={flags[message.country]} />
               <div className="message-data">
                 <div className="display-flex relative">
@@ -82,9 +75,19 @@ function Chat({}) {
             </li>
           ))}
         </ul>
+      );
+    }
+    return null;
+  };
+  return (
+    <div className="chat">
+      <div className="chat-history">
+        {renderChatHistory()}
       </div>
       <div className="global-chat-input-container">
-        <input ref={inputRef} onChange={(e) => setInputStr(e.target.value)} type="text" className="global-chat-input" placeholder="Aa" value={inputStr} />
+        <form onSubmit={(e) => { submitMessage(e); }}>
+          <input ref={inputRef} onChange={(e) => setMessage(e.target.value)} type="text" className="global-chat-input" placeholder="Aa" value={message} />
+        </form>
         <div className="emoji-container">
           <img onClick={(e) => showEmojiModal(e)} alt="emoji" className="emoji-button align-items-center" src={Smileyface} />
           <div className="emoji-modal hidden">

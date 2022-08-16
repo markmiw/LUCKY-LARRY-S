@@ -18,26 +18,67 @@ const getUser = () => {
     .catch(errorHandler);
 };
 
-const getGlobalChat = (loginTime) => {
-  const queryString = 'SELECT * FROM chat where date > $1';
+const getLeaderboard = () => {
+  const queryString = 'SELECT * FROM users ORDER BY winnings DESC LIMIT 25';
 
   return db.query(queryString)
     .then((results) => results.rows)
     .catch(errorHandler);
 };
 
-const postGlobalChat = ({date, message, username}) => {
-  const queryString = 'INSERT INTO chat(date, message, userID) VALUES($1, $2, $3)';
-
-  return db.query(queryString)
+const getGlobalChat = (loginTime) => {
+  const queryString = 'SELECT * FROM chat where date > $1';
+  return db.query(queryString, [Number(loginTime)])
     .then((results) => results.rows)
     .catch(errorHandler);
-}
+};
+// INSERT INTO chat(username, message, country, date) VALUES('markmiw', 'hello', 'USA', 1660633394434);
 
+const postGlobalChat = (username, message, country) => {
+  const queryString = 'INSERT INTO chat(username, message, country, date) VALUES($1, $2, $3, $4)';
+  return db.query(queryString, [username, message, country, Date.now()])
+    .then((results) => {
+      results.rows
+    })
+    .catch(errorHandler);
+};
+
+const getCountry = (countryid) => {
+  const queryString = 'SELECT country FROM country WHERE id = $1';
+  return db.query(queryString, [countryid])
+    .then((results) => results.rows)
+    .catch(errorHandler);
+};
+
+const getBalance = (userid) => {
+  const queryString = 'SELECT balance FROM users WHERE id = $1';
+
+  return db.query(queryString, [userid])
+    .then((results) => results.rows[0].balance)
+    .catch(errorHandler);
+};
+
+const updateBalanceBasedOnWinnings = (userid, bet, winnings) => {
+  const queryString = `
+      UPDATE users
+      SET balance = balance - $2 + $3,
+      winnings = winnings + $3
+      WHERE id = $1
+      RETURNING balance
+    `;
+
+  return db.query(queryString, [userid, bet, winnings])
+    .then((results) => results.rows[0].balance)
+    .catch(errorHandler);
+};
 
 module.exports = {
   getTestData,
   getUser,
   getGlobalChat,
   postGlobalChat,
+  getLeaderboard,
+  getCountry,
+  getBalance,
+  updateBalanceBasedOnWinnings,
 };
