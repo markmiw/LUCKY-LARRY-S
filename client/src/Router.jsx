@@ -38,7 +38,7 @@ function Router() {
           />
           <Route
             path="/scratch-ticket"
-            element={<Gamepage user={user} game="scratch-ticket" />}
+            element={<Gamepage user={user} setUser={setUser} game="scratch-ticket" />}
           />
           <Route
             path="/slots"

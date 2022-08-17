@@ -8,21 +8,21 @@ import Roulette from '../roulette/Roulette';
 import ScratchTicket from '../scratch-ticket/ScratchTicket';
 import Slots from '../slots/Slots';
 
-const renderGame = (game) => {
+const renderGame = (game, user, setUser) => {
   if (game === 'roulette') {
     return <Roulette />;
   }
   if (game === 'scratch-ticket') {
-    return <ScratchTicket />;
+    return <ScratchTicket user={user} setUser={setUser} />;
   }
   return <Slots />;
 };
 
-function Gamepage({ game, user }) {
+function Gamepage({ game, user, setUser }) {
   return (
     <GamePageGrid className="game-container">
       <GameContainer>
-      {renderGame(game)}
+      {renderGame(game, user, setUser)}
       </GameContainer>
     <SidebarContainer>
       <Sidebar user={user} />

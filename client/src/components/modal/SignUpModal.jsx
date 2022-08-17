@@ -10,7 +10,7 @@ function SignUpModal({ setModal }) {
     username: '',
     password: '',
     reEnterPassword: '',
-    country: 'Usa',
+    country: 'USA',
   });
 
   function handleChange(e, field) {
@@ -77,7 +77,7 @@ function SignUpModal({ setModal }) {
               className="form-select"
               aria-label=".form-select-lg"
               onChange={(e) => handleChange(e, 'country')}
-              defaultValue="Usa"
+              defaultValue="USA"
             >
               {Object.keys(flags).map((name) => (<option key={name} value={name}>{name}</option>))}
             </select>

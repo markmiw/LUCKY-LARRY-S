@@ -1,10 +1,11 @@
 .sidebar-container {
-  border: 1px solid black;
+  border: 1px solid white;
   width: 317px;
   height: 600px;
   border-radius: 4px;
   /* background-color: #36393f ; */
-  background-color: white;;
+  background-color: #0a101e;
+  /* background: url('./background/CasinoBackground.jpeg'); */
   margin-left: 20px;
   margin-top: 20px;
 }
@@ -54,7 +55,7 @@
 
 .chat .chat-history .message-data-time {
   /* color: #bfc2cb; */
-  color: black;
+  color: white;
   font-size: 12px;
   align-self: center;
   padding-left: 5px;
@@ -62,7 +63,7 @@
 
 .chat .chat-history .message {
   /* color: #fff; */
-  color: black;
+  color: white;
   padding-left: 8px;
   line-height: 26px;
   font-size: 16px;
@@ -128,7 +129,7 @@ width: 50px;
 .message-username {
   font-weight:bold;
   padding-left: 8px;
-  color: black;
+  color: white;
 }
 
 .relative{
