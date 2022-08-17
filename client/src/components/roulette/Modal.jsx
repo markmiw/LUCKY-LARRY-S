@@ -52,20 +52,22 @@ export default function Modal({
   return (
     <div>
       {showModal
-        ? <ModalWrapperStyled>
-          <ModalWrapper>
-            <CloseButtonStyled type="button" onClick={() => setShowModal((prev) => !prev)}>X</CloseButtonStyled>
-            <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}>
-              You can bet $1, $5, $10, $20, $50, $100 on
-              {currentBetOption}
-            </ModalInnerStyled>
-            <ModalForm onSubmit={(event) => handleSubmit(event)}>
-              <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
-              <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Bet</button>
-            </ModalForm>
-          </ModalWrapper>
-          <ModalBackgroundStyled />
-        </ModalWrapperStyled>
+        ? (
+          <ModalWrapperStyled>
+            <ModalWrapper>
+              <CloseButtonStyled type="button" onClick={() => setShowModal((prev) => !prev)}>X</CloseButtonStyled>
+              <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}>
+                You can bet $1, $5, $10, $20, $50, $100 on
+                {currentBetOption}
+              </ModalInnerStyled>
+              <ModalForm onSubmit={(e) => handleSubmit(e)}>
+                <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
+                <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Bet</button>
+              </ModalForm>
+            </ModalWrapper>
+            <ModalBackgroundStyled />
+          </ModalWrapperStyled>
+        )
         : null}
     </div>
   );

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { Pool } = require('pg');
-const { getBalance, updateBalanceBasedOnWinnings } = require('../../database/controllers');
+const { getBalance, updateBalanceBasedOnWinnings, updateBalanceAfterLosing } = require('../../database/controllers');
 
 const pool = new Pool({
   user: process.env.PGUSER,
@@ -48,7 +48,8 @@ module.exports.checkNum = async (req, res) => {
         // add winnings to the user's records - to be implemented w/ global function ***
         res.status(200).send({ winAmount: winnings, updatedBalance });
       } else {
-        const updatedBalance = await updateBalanceBasedOnWinnings(userId, spentMoney, 0);
+        const updatedBalance = await updateBalanceAfterLosing(userId, spentMoney);
+        console.log(updatedBalance);
         res.status(200).send({ winAmount: winnings, updatedBalance });
       }
     })

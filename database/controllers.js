@@ -149,6 +149,19 @@ const updateBalanceBasedOnWinnings = (userid, bet, winnings) => {
     .catch(errorHandler);
 };
 
+const updateBalanceAfterLosing = (userid, bet) => {
+  const queryString = `
+      UPDATE users
+      SET balance = balance - $2
+      WHERE id = $1
+      RETURNING balance
+    `;
+
+  return db.query(queryString, [userid, bet])
+    .then((results) => results.rows[0].balance)
+    .catch(errorHandler);
+};
+
 const getSpecificUser = (username) => {
   const queryString = 'SELECT * FROM users WHERE username = $1';
   return db.query(queryString, [username])
@@ -187,6 +200,7 @@ module.exports = {
   getCountry,
   getBalance,
   updateBalanceBasedOnWinnings,
+  updateBalanceAfterLosing,
   checkIfFriendshipExists,
   createUser,
   addBalance,

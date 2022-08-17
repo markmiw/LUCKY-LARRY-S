@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import RouletteWheel from './RouletteWheel';
@@ -29,4 +30,4 @@ export const RouletteGameGrid = styled.div`
   @media (max-width: 500px) {
     gap: 2%;
   }
-`
+`;
