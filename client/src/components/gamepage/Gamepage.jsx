@@ -15,7 +15,7 @@ const renderGame = (game, user, setUser) => {
   if (game === 'scratch-ticket') {
     return <ScratchTicket user={user} setUser={setUser} />;
   }
-  return <Slots />;
+  return <Slots user={user} setUser={setUser} />;
 };
 
 function Gamepage({ game, user, setUser }) {
@@ -47,9 +47,11 @@ export const GamePageGrid = styled.div`
     gap: 5%;
   }
 `;
+
 export const GameContainer = styled.div`
   max-width: 100%;
 `;
+
 export const SidebarContainer = styled.div`
   max-width: 100%;
 `;
