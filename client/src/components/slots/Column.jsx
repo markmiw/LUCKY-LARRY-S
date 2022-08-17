@@ -23,6 +23,10 @@ export default function Column({
   values,
   setValues,
   iconSize,
+  column,
+  adjustment,
+  user,
+  setUser,
 }) {
   const [offset, setOffset] = useState(0);
 
@@ -34,6 +38,10 @@ export default function Column({
       setValues(values.slice(-3));
       columnRef.current.style.transition = '';
       setOffset(0);
+      if (column === 3 && columnRef.current.style.transition === '') {
+        const newBalance = user.balance + adjustment;
+        setUser({ ...user, balance: newBalance });
+      }
     };
 
     const el = columnRef.current;
@@ -83,6 +91,12 @@ Column.propTypes = {
   values: PropTypes.arrayOf(PropTypes.number).isRequired,
   setValues: PropTypes.func.isRequired,
   iconSize: PropTypes.number.isRequired,
+  column: PropTypes.number.isRequired,
+  adjustment: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    balance: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
 };
 
 const ColumnContainer = styled.div`

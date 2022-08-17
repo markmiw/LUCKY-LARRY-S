@@ -11,7 +11,7 @@ const {
   addBalance,
   getGlobalChat,
   postGlobalChat,
-  updateBalanceBasedOnWinnings
+  updateBalanceBasedOnWinnings,
 } = require('../database/controllers');
 const roulette = require('./controllers/roulettecontrollers');
 
@@ -83,7 +83,7 @@ router.get('/globalchat', (req, res) => {
 router.post('/globalchat', (req, res) => {
   const { username, message, country } = req.body;
   postGlobalChat(username, message, country).then((results) => res.send(results))
-  .catch(() => res.sendStatus(404));
+    .catch(() => res.sendStatus(404));
 });
 
 module.exports = router;
