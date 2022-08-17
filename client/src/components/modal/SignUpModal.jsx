@@ -77,7 +77,7 @@ function SignUpModal({ setModal }) {
               className="form-select"
               aria-label=".form-select-lg"
               onChange={(e) => handleChange(e, 'country')}
-              defaultValue="Ussr"
+              defaultValue={info.country}
             >
               {Object.keys(flags).map((name) => (<option key={name} value={name}>{name}</option>))}
             </select>

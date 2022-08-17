@@ -27,7 +27,7 @@ const Background = styled.div`
   width: 100vw;
   height: 100vh;
   place-items: center;
-  z-index: 2;
+  z-index: 10;
   background-color: rgb(30 41 59 / 0.75);
 `;
 
