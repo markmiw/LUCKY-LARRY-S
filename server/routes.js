@@ -50,14 +50,13 @@ router.get('/user/:username', (req, res) => {
     .catch((err) => res.sendStatus(404));
 });
 
-router.post('/user', (req, res) => {
+router.post('/user', async (req, res) => {
+  const user = await getSpecificUser(req.body.username);
+  if (user.length !== 0) res.status(404).send('User exists already'); // user exists
+
   createUser(req.body)
     .then((results) => {
-      if (results.length === 0) {
-        res.sendStatus(201);
-      } else {
-        res.sendStatus(409);
-      }
+      res.status(201).send(results);
     })
     .catch((err) => res.sendStatus(404));
 });

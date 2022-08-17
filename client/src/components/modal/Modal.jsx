@@ -3,13 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 function Modal({ children, setModal }) {
-  function closeModal(e) {
-    if (e.target.id === 'modal-background') {
-      setModal(false);
-    }
-  }
   return (
-    <Background id="modal-background" onClick={(e) => closeModal(e)}>
+    <Background id="modal-background">
       <Container>{children}</Container>
     </Background>
   );
