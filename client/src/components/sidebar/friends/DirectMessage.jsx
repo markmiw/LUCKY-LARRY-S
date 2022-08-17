@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Picker from 'emoji-picker-react';
-import flags from '../Flag';
+import flags from '../flags';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
 import handleDate from '../handleDate';
 
