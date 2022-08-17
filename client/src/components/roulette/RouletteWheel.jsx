@@ -5,7 +5,6 @@
 import React, { useState } from 'react';
 import { Wheel } from 'react-custom-roulette';
 import axios from 'axios';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
 
@@ -62,7 +61,7 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel({ betInfo, user, setUser }) {
+export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin }) {
   // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -72,16 +71,6 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
   };
-
-  // May use in refactor for heightened security
-  // const grabWinningNum = (num) => {
-  //   // how does router.jsx plays a role here?
-  //     axios.get('/')
-  //       .then((response) => {
-  //         setWinningNumInfo(response.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  // }
 
   return (
     <RouletteWheelContainer className="App">
@@ -105,6 +94,7 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
           textDistance={textDistance}
           onStopSpinning={() => {
             setMustSpin(false);
+            setSpin(!spin);
             axios.get('/api/roulette', {
               params: {
                 betInfo: betInfo,
@@ -113,7 +103,6 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
               },
             })
               .then((results) => {
-                console.log('hello', results.data);
                 if (results.data === 'Insufficient Funds.') {
                   window.alert(results.data);
                 } else if (results.data === 'No bet was made.') {
@@ -121,10 +110,10 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
                 } else if (results.data.winAmount) {
                   // <Confetti/>
                   window.alert(`Congratulations! You won a total of ${results.data.winAmount} dollars!`);
-                  setUser(...user, { balance: results.data.updatedBalance });
+                  setUser({ ...user, balance: results.data.updatedBalance });
                 } else {
                   window.alert('Not a winner, try again next time!');
-                  setUser(...user, { balance: results.data.updatedBalance });
+                  setUser({ ...user, balance: results.data.updatedBalance });
                 }
               })
               .catch((err) => console.log(err));
@@ -138,9 +127,6 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
     </RouletteWheelContainer>
   );
 }
-// num: num, col: color, eO: eO, rangeOf12: rangeOf12, firstalf: firstHalf, numRow: numRow,
-// RouletteWheel.propTypes = { betInfo: PropTypes.shape(num: PropTypes.shape({pick: PropTypes.string, bet: PropTypes.number})).isRequired };
-// {num: {pick: bet: }, color }
 
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;

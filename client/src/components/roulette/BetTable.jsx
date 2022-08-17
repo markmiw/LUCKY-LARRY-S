@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Modal from './Modal';
 
-export default function BetTable({ setBetInfo }) {
+export default function BetTable({ setBetInfo, spin }) {
   // userbet refactor to remove initial pick bets
   const [num, setNum] = useState({ pick: '', bet: '' });
   const [color, setColor] = useState({ pick: '', bet: '' });
@@ -25,10 +25,18 @@ export default function BetTable({ setBetInfo }) {
     });
   }, [betInput]);
 
-  // need a function that handles the amount bet pop upc
+  // resets bets on spin
+  useEffect(() => {
+    setNum({ pick: '', bet: '' });
+    setColor({ pick: '', bet: '' });
+    setEO({ pick: '', bet: '' });
+    setRangeOf12({ pick: '', bet: '' });
+    setFirstHalf({ pick: '', bet: '' });
+    setNumRow({ pick: '', bet: '' });
+  }, [spin]);
 
   const openModal = (input) => {
-    setShowModal((prev) => !prev); // prev => !prev
+    setShowModal((prev) => !prev);
     setCurrentBetOption(input);
   };
 
@@ -93,7 +101,6 @@ export default function BetTable({ setBetInfo }) {
           <BetRowButton onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>2to1 - 3s row </BetRowButton>
         </BetRowGrid>
 
-        {/* display of current bets if no visuals to show what has been checked */}
         <div>
           Your current bets:
           {num.pick && num.bet ? `$${num.bet} on ${num.pick}.` : null}

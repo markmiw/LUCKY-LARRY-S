@@ -26,7 +26,7 @@ export default function Modal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (betAmount > 0) {
+    if (betAmount >= 1) {
       if (currentBetOption === 'red' || currentBetOption === 'black') {
         setColor({ ...color, bet: betAmount });
       } else if (currentBetOption === 'even' || currentBetOption === 'odd') {
