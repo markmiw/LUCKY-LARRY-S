@@ -17,15 +17,15 @@ module.exports.checkNum = async (req, res) => {
   } = JSON.parse(req.query.betInfo);
   const spentMoney = (num.bet + col.bet + eO.bet + rangeOf12.bet + firstHalf.bet + numRow.bet);
   if (!spentMoney) {
-    res.status(200).send('No bet was made.');
+    res.status(200).send({ status: 'No bet was made.' });
     return;
   }
   const userHasEnoughMoney = await getBalance(userId) >= spentMoney;
   if (!userHasEnoughMoney) {
-    res.status(200).send('Insufficient Funds.');
+    res.status(200).send({ status: 'Insufficient Funds.' });
     return;
   }
-  const winNum = JSON.parse(req.query.winNum);
+  const winNum = Math.floor(Math.random() * 37);
   const query = `SELECT * FROM RouletteNums WHERE id = ${winNum}`;
   let winnings = 0;
   const winMultipler = (result, userInput, multiplier) => {
@@ -53,7 +53,7 @@ module.exports.checkNum = async (req, res) => {
       } else {
         const updatedBalance = await updateBalanceAfterLosing(userId, spentMoney);
         console.log(updatedBalance);
-        res.status(200).send({ winAmount: winnings, updatedBalance });
+        res.status(200).send({ winNum, winAmount: winnings, updatedBalance });
       }
     })
     .catch((err) => { res.status(500); console.log(err); });

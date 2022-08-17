@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
@@ -64,12 +66,27 @@ const spinDuration = 1.0;
 export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin }) {
   // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
-  const [prizeNumber, setPrizeNumber] = useState(0);
+  const [winData, setWinData] = useState({});
 
   const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * data.length);
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
+    axios.get('/api/roulette', {
+      params: {
+        betInfo: betInfo,
+        user: user,
+      },
+    })
+      .then((response) => {
+        let betAmount = 0;
+        // eslint-disable-next-line no-unused-vars
+        Object.entries(betInfo).forEach(([key, value]) => {
+          console.log(value.bet);
+          betAmount += Number(value.bet);
+        });
+        const updatedBalance = user.balance - betAmount;
+        setUser({ ...user, balance: updatedBalance });
+        setWinData(response.data);
+        setMustSpin(true);
+      });
   };
 
   return (
@@ -77,7 +94,7 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
       <header className="App-header">
         <Wheel
           mustStartSpinning={mustSpin}
-          prizeNumber={prizeNumber}
+          prizeNumber={winData.winNum}
           data={data}
           backgroundColors={backgroundColors}
           textColors={textColors}
@@ -95,28 +112,19 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
           onStopSpinning={() => {
             setMustSpin(false);
             setSpin(!spin);
-            axios.get('/api/roulette', {
-              params: {
-                betInfo: betInfo,
-                winNum: prizeNumber,
-                user: user,
-              },
-            })
-              .then((results) => {
-                if (results.data === 'Insufficient Funds.') {
-                  window.alert(results.data);
-                } else if (results.data === 'No bet was made.') {
-                  window.alert(results.data);
-                } else if (results.data.winAmount) {
-                  // <Confetti/>
-                  window.alert(`Congratulations! You won a total of ${results.data.winAmount} dollars!`);
-                  setUser({ ...user, balance: results.data.updatedBalance });
-                } else {
-                  window.alert('Not a winner, try again next time!');
-                  setUser({ ...user, balance: results.data.updatedBalance });
-                }
-              })
-              .catch((err) => console.log(err));
+            const { updatedBalance, winAmount, status } = winData;
+            if (status === 'Insufficient Funds.') {
+              window.alert(status);
+            } else if (status === 'No bet was made.') {
+              window.alert(status);
+            } else if (winAmount) {
+              // <Confetti/>
+              window.alert(`Congratulations! You won a total of ${winAmount} dollars!`);
+              setUser({ ...user, balance: updatedBalance });
+            } else {
+              window.alert('Not a winner, try again next time!');
+              setUser({ ...user, balance: updatedBalance });
+            }
           }}
         />
         <br />
