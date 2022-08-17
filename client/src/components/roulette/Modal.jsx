@@ -1,14 +1,6 @@
 // this is the share game model pop up
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-// import {
-//   ModalWrapper, ModalForm, CloseModalButton, ModalWrapperStyled,
-//   ModalBackgroundStyled,
-//   ModalInnerStyled,
-//   ModalContentStyled,
-//   CloseButtonStyled,
-//   CloseButtonExpandedStyled, ModalHeaderInnerStyled
-// } from './roulette.styled.js';
 
 export default function Modal({ showModal, setShowModal, currentBetOption, setNum, setColor, setEO, setFirstHalf, setNumRow, setRangeOf12, num, color, eO, rangeOf12, firstHalf, numRow, betInput, setBetInput }) {
   const [betAmount, setBetAmount] = useState(0);
@@ -49,15 +41,9 @@ export default function Modal({ showModal, setShowModal, currentBetOption, setNu
             <CloseButtonStyled type="button" onClick={() => setShowModal(prev => !prev)}>X</CloseButtonStyled>
             <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}> You can bet $1, $5, $10, $20, $50, $100 on {currentBetOption}</ModalInnerStyled>
             <ModalForm onSubmit={(event) => handleSubmit(event)}>
-              {/* styles refactor needed for buttons */}
-              <button onClick={() => setBetAmount(betAmount + 1)}>1</button>
-              <button onClick={() => setBetAmount(betAmount + 5)}>5</button>
-              <button onClick={() => setBetAmount(betAmount + 10)}>10</button>
-              <button onClick={() => setBetAmount(betAmount + 20)}>20</button>
-              <button onClick={() => setBetAmount(betAmount + 50)}>50</button>
-              <button onClick={() => setBetAmount(betAmount + 100)}>100</button>
+
               {/*  search bar implementation below*/}
-              {/* <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required /> */}
+              <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
               <button onClick={() => handleSubmit()}>Submit Bet</button>
             </ModalForm>
           </ModalWrapper>

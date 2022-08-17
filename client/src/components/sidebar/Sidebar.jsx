@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Chat from './chat/Chat.jsx';
 import leaderboard_icon from '../../../dist/icons/leaderboard.png';
 import friends from '../../../dist/icons/friends.svg';
@@ -30,7 +31,7 @@ function Sidebar() {
     );
   };
   return (
-    <div className="sidebar-container">
+    <SidebarContainer className="sidebar-container">
       <div className="sidebar-nav-container">
         <img
           onClick={() => setSidebarState('global-chat')}
@@ -52,8 +53,14 @@ function Sidebar() {
         />
       </div>
       {renderSidebar()}
-    </div>
+    </SidebarContainer>
   );
 }
 
 export default Sidebar;
+
+export const SidebarContainer = styled.div`
+  // display: grid;
+  // margin: 0 auto;
+  // height: 90%;
+`
