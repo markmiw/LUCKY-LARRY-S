@@ -38,6 +38,16 @@ CREATE TABLE chat (
   FOREIGN KEY (userID) REFERENCES users(id)
 );
 
+CREATE TABLE dms (
+  id SERIAL PRIMARY KEY NOT NULL,
+  date TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  message VARCHAR(500) NOT NULL,
+  userID INT NOT NULL,
+  recipientID INT NOT NULL,
+  FOREIGN KEY (userID) REFERENCES users(id),
+  FOREIGN KEY (recipientID) REFERENCES users(id)
+);
+
 CREATE INDEX IF NOT EXISTS idx_users ON users(id);
 CREATE INDEX IF NOT EXISTS idx_country ON country(id);
 CREATE INDEX IF NOT EXISTS idx_friends ON friends(userID);
