@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignUpModal from './components/modal/SignUpModal';
-import BalanceModal from './components/modal/BalanceModal';import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from './components/shared/button.styled.js';
+import BalanceModal from './components/modal/BalanceModal';
+import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from './components/shared/button.styled.js';
 
 function NavBar({
   user, setUser, loggedIn, setLoggedIn, setShowLoginModal,
