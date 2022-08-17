@@ -37,12 +37,12 @@ export default function PlayInputs({
         </YellowOrangeButton>
       </TopRowContainer>
       <BottomRowContainer>
-        <Bets>
-          <Dollar>
-            $
-          </Dollar>
-          <StyledInput type="number" value={betAmount} placeholder="1" onChange={(event) => setBetAmount(event.target.value)} />
-        </Bets>
+        <StyledInput
+          type="number"
+          value={betAmount}
+          placeholder="1"
+          onChange={(event) => setBetAmount(event.target.value)}
+        />
       </BottomRowContainer>
       <BottomRowContainer>
         <GreenWhiteButton
@@ -78,19 +78,18 @@ const BottomRowContainer = styled.div`
   padding: 5px;
 `;
 
-const Bets = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
 const StyledInput = styled.input`
+  height: 100%;
   margin: 0;
-  margin-left: 5px;
-  border-radius: 10px;
+  border-bottom-width: 4px;
+  background-image: linear-gradient(to right,#6dcfa4,#178a80);
   text-align: center;
-`;
-
-const Dollar = styled.div`
-  font-size: x-large;
+  width: 100%;
+  border: solid #165e58;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  color: white;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
 `;
