@@ -49,7 +49,7 @@ module.exports.checkNum = async (req, res) => {
         // change the user balance via the implemented controller ***
         const updatedBalance = await updateBalanceBasedOnWinnings(userId, spentMoney, winnings);
         // add winnings to the user's records - to be implemented w/ global function ***
-        res.status(200).send({ winAmount: winnings, updatedBalance });
+        res.status(200).send({ winNum, winAmount: winnings, updatedBalance });
       } else {
         const updatedBalance = await updateBalanceAfterLosing(userId, spentMoney);
         console.log(updatedBalance);

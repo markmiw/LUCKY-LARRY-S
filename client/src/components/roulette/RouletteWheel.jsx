@@ -76,6 +76,15 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
       },
     })
       .then((response) => {
+        if (response.data.status === 'Insufficient Funds.') {
+          window.alert(response.data.status);
+          return;
+        }
+        if (response.data.status === 'No bet was made.') {
+          window.alert(response.data.status);
+          return;
+        }
+        console.log(response.data);
         let betAmount = 0;
         // eslint-disable-next-line no-unused-vars
         Object.entries(betInfo).forEach(([key, value]) => {
@@ -112,12 +121,8 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
           onStopSpinning={() => {
             setMustSpin(false);
             setSpin(!spin);
-            const { updatedBalance, winAmount, status } = winData;
-            if (status === 'Insufficient Funds.') {
-              window.alert(status);
-            } else if (status === 'No bet was made.') {
-              window.alert(status);
-            } else if (winAmount) {
+            const { updatedBalance, winAmount } = winData;
+            if (winAmount) {
               // <Confetti/>
               window.alert(`Congratulations! You won a total of ${winAmount} dollars!`);
               setUser({ ...user, balance: updatedBalance });
