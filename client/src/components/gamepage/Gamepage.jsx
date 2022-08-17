@@ -6,21 +6,21 @@ import Roulette from '../roulette/Roulette';
 import ScratchTicket from '../scratch-ticket/ScratchTicket';
 import Slots from '../slots/Slots';
 
-const renderGame = (game) => {
+const renderGame = (game, user, setUser) => {
   if (game === 'roulette') {
-    return <Roulette />;
+    return <Roulette user={user} />;
   }
   if (game === 'scratch-ticket') {
     return <ScratchTicket />;
   }
-  return <Slots />;
+  return <Slots user={user} setUser={setUser} />;
 };
 
-function Gamepage({ user, game }) {
+function Gamepage({ game, user, setUser }) {
   return (
     <div className="game-container">
       <Sidebar user={user} />
-      {renderGame(game)}
+      {renderGame(game, user, setUser)}
     </div>
   );
 }
