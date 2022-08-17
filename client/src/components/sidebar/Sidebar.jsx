@@ -11,11 +11,7 @@ import Globe from '../../../dist/icons/globe.svg';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Friends from './friends/Friends';
 
-<<<<<<< HEAD
 function Sidebar({ user, loginTime }) {
-=======
-function Sidebar({ user }) {
->>>>>>> main
   const [sidebarState, setSidebarState] = useState('global-chat');
   const [currentDmRecipient, setCurrentDmRecipient] = useState(null);
   console.log('recipient:', currentDmRecipient);
@@ -26,7 +22,7 @@ function Sidebar({ user }) {
         <div className="sidebar-nav-container">
           <img onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn-active" src={Globe} />
           <img onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
-          <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={Friends} />
+          <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
         </div>
       );
     }
@@ -35,7 +31,7 @@ function Sidebar({ user }) {
         <div className="sidebar-nav-container">
           <img onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
           <img onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn-active" src={leaderboard_icon} />
-          <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={Friends} />
+          <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
         </div>
       );
     }
@@ -43,7 +39,7 @@ function Sidebar({ user }) {
       <div className="sidebar-nav-container">
         <img onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
         <img onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
-        <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn-active" src={Friends} />
+        <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn-active" src={friends} />
       </div>
     );
   };
@@ -68,7 +64,7 @@ function Sidebar({ user }) {
     <div className="sidebar-container">
       {renderSidebarIcons()}
       {renderSidebar()}
-    </SidebarContainer>
+    </div>
   );
 }
 
