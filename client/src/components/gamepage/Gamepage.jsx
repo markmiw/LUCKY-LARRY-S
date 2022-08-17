@@ -13,7 +13,7 @@ const renderGame = (game, user, setUser) => {
     return <Roulette user={user} />;
   }
   if (game === 'scratch-ticket') {
-    return <ScratchTicket />;
+    return <ScratchTicket user={user} setUser={setUser} />;
   }
   return <Slots user={user} setUser={setUser} />;
 };

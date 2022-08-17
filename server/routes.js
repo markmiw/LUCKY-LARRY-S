@@ -11,6 +11,7 @@ const {
   addBalance,
   getGlobalChat,
   postGlobalChat,
+  updateBalanceBasedOnWinnings
 } = require('../database/controllers');
 const roulette = require('./controllers/roulettecontrollers');
 
@@ -64,6 +65,12 @@ router.post('/user', (req, res) => {
 router.post('/user/balance', (req, res) => {
   addBalance(req.body)
     .then((results) => res.status(201).send(results))
+    .catch((err) => res.sendStatus(404));
+});
+
+router.post('/user/winnings', (req, res) => {
+  updateBalanceBasedOnWinnings(req.body.id, req.body.bet, req.body.winnings)
+    .then((results) => res.status(201).send({ results }))
     .catch((err) => res.sendStatus(404));
 });
 
