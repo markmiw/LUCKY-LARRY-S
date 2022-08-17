@@ -13,13 +13,7 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard-container" align="center">
-      <div
-        style={{
-          display: 'grid',
-          gridAutoFlow: 'column',
-        }}
-        className="headers"
-      >
+      <div className="headers">
         <p>
           Rank
         </p>

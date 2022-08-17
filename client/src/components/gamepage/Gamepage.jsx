@@ -15,10 +15,10 @@ const renderGame = (game) => {
   return <Slots />;
 };
 
-function Gamepage({ game }) {
+function Gamepage({ game, user }) {
   return (
     <div className="game-container">
-      <Sidebar user={user} />
+      <Sidebar user={user} loginTime={Date.now()} />
       {renderGame(game)}
     </div>
   );
