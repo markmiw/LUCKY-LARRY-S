@@ -42,7 +42,7 @@ function Router() {
           />
           <Route
             path="/slots"
-            element={<Gamepage user={user} game="slots" />}
+            element={<Gamepage user={user} setUser={setUser} game="slots" />}
           />
         </>
         )}

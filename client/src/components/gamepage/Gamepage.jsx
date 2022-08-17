@@ -10,23 +10,23 @@ import Slots from '../slots/Slots';
 
 const renderGame = (game, user, setUser) => {
   if (game === 'roulette') {
-    return <Roulette />;
+    return <Roulette user={user} />;
   }
   if (game === 'scratch-ticket') {
     return <ScratchTicket user={user} setUser={setUser} />;
   }
-  return <Slots />;
+  return <Slots user={user} setUser={setUser} />;
 };
 
 function Gamepage({ game, user, setUser }) {
   return (
     <GamePageGrid className="game-container">
       <GameContainer>
-      {renderGame(game, user, setUser)}
+        {renderGame(game, user, setUser)}
       </GameContainer>
-    <SidebarContainer>
-      <Sidebar user={user} />
-    </SidebarContainer>
+      <SidebarContainer>
+        <Sidebar user={user} />
+      </SidebarContainer>
     </GamePageGrid>
   );
 }
@@ -46,10 +46,12 @@ export const GamePageGrid = styled.div`
     grid-template-rows: auto auto;
     gap: 5%;
   }
-`
+`;
+
 export const GameContainer = styled.div`
   max-width: 100%;
-`
+`;
+
 export const SidebarContainer = styled.div`
   max-width: 100%;
-`
+`;

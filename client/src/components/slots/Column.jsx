@@ -22,10 +22,6 @@ export default function Column({
   scrollTime,
   values,
   setValues,
-  balance,
-  setBalance,
-  adjustment,
-  column,
   iconSize,
 }) {
   const [offset, setOffset] = useState(0);
@@ -38,9 +34,6 @@ export default function Column({
       setValues(values.slice(-3));
       columnRef.current.style.transition = '';
       setOffset(0);
-      if (column === 3) {
-        setBalance(balance + adjustment);
-      }
     };
 
     const el = columnRef.current;
@@ -89,10 +82,6 @@ Column.propTypes = {
   scrollTime: PropTypes.number.isRequired,
   values: PropTypes.arrayOf(PropTypes.number).isRequired,
   setValues: PropTypes.func.isRequired,
-  balance: PropTypes.number.isRequired,
-  setBalance: PropTypes.func.isRequired,
-  adjustment: PropTypes.number.isRequired,
-  column: PropTypes.number.isRequired,
   iconSize: PropTypes.number.isRequired,
 };
 
