@@ -140,7 +140,7 @@ export default function RouletteWheel({
             setSpin(!spin);
             const { updatedBalance, winAmount } = winData;
             if (winAmount) {
-              window.alert(`Congratulations! You won a total of ${winAmount} dollars!`);
+              setWinState(true);
               setUser({ ...user, balance: updatedBalance });
             } else {
               window.alert('Not a winner, try again next time!');
