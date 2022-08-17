@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
@@ -40,7 +41,7 @@ function NavBar({
   }
 
   return (
-    <>
+    <NavBarGrid>
       {showBalanceModal && (
         <BalanceModal user={user} setUser={setUser} setModal={setShowBalanceModal} />
       )}
@@ -95,7 +96,7 @@ function NavBar({
           </>
         )}
       </nav>
-    </>
+    </NavBarGrid>
   );
 }
 
@@ -115,3 +116,18 @@ NavBar.propTypes = {
 };
 
 export default NavBar;
+
+export const NavBarGrid = styled.div`
+// display: grid;
+// max-width: 100%;
+// margin: 0 auto;
+// height: 100%;
+
+// color: white;
+// @media (min-width: 501px) {
+//   grid-template-column: auto auto auto auto;
+// }
+// @media (max-width: 500px) {
+//   grid-template-column: auto auto;
+// }
+`

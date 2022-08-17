@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Chat from './chat/Chat.jsx';
 import leaderboard_icon from '../../../dist/icons/leaderboard.png';
 import Friends from '../../../dist/icons/friends.svg';
@@ -19,15 +20,21 @@ function Sidebar() {
     return <FriendsList userID={1} key="friends" />;
   };
   return (
-    <div className="sidebar-container">
+    <SidebarContainer className="sidebar-container">
       <div className="sidebar-nav-container">
         <img onClick={() => setSidebarState('global-chat')} className="sidebar-nav-btn" src={Globe} />
         <img onClick={() => setSidebarState('leaderboard')} className="sidebar-nav-btn" src={leaderboard_icon} />
         <img onClick={() => setSidebarState('friends')} className="sidebar-nav-btn" src={Friends} />
       </div>
       {renderSidebar()}
-    </div>
+    </SidebarContainer>
   );
 }
 
 export default Sidebar;
+
+export const SidebarContainer = styled.div`
+  // display: grid;
+  // margin: 0 auto;
+  // height: 90%;
+`

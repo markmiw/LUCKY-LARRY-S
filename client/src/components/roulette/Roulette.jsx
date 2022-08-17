@@ -21,7 +21,6 @@ export default function Roulette () {
 
 export const RouletteGameGrid = styled.div`
   display: grid;
-  width: 80vw;
   max-width: 100%;
   margin: 0 auto;
   height: 100%;
