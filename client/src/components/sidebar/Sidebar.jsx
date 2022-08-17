@@ -11,11 +11,7 @@ import Globe from '../../../dist/icons/globe.svg';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Friends from './friends/Friends';
 
-<<<<<<< HEAD
 function Sidebar({ user, loginTime }) {
-=======
-function Sidebar({ user }) {
->>>>>>> main
   const [sidebarState, setSidebarState] = useState('global-chat');
   const [currentDmRecipient, setCurrentDmRecipient] = useState(null);
   console.log('recipient:', currentDmRecipient);
@@ -68,7 +64,8 @@ function Sidebar({ user }) {
     <div className="sidebar-container">
       {renderSidebarIcons()}
       {renderSidebar()}
-    </SidebarContainer>
+
+    </div>
   );
 }
 
