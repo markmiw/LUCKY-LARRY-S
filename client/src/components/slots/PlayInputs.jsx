@@ -1,6 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import {
+  GreenWhiteButton,
+  YellowOrangeButton,
+  PinkRedButton,
+  BlueBlackButton,
+  GreenBlackButton,
+  BlueAquaButton,
+  BlueLightBlueButton,
+  LightPurplePulpleButton,
+  PurplePinkButton,
+} from '../shared/button.styled';
 
 export default function PlayInputs({
   setPlays,
@@ -11,19 +22,19 @@ export default function PlayInputs({
   return (
     <InputsContainer>
       <TopRowContainer>
-        <button type="button" onClick={() => setPlays(1)}>
+        <YellowOrangeButton type="button" onClick={() => setPlays(1)}>
           1 Line
-        </button>
+        </YellowOrangeButton>
       </TopRowContainer>
       <TopRowContainer>
-        <button type="button" onClick={() => setPlays(2)}>
+        <YellowOrangeButton type="button" onClick={() => setPlays(2)}>
           2 Lines
-        </button>
+        </YellowOrangeButton>
       </TopRowContainer>
       <TopRowContainer>
-        <button type="button" onClick={() => setPlays(3)}>
+        <YellowOrangeButton type="button" onClick={() => setPlays(3)}>
           3 Lines
-        </button>
+        </YellowOrangeButton>
       </TopRowContainer>
       <BottomRowContainer>
         <Bets>
@@ -34,12 +45,12 @@ export default function PlayInputs({
         </Bets>
       </BottomRowContainer>
       <BottomRowContainer>
-        <button
+        <GreenWhiteButton
           type="button"
           onClick={play}
         >
           Go!
-        </button>
+        </GreenWhiteButton>
       </BottomRowContainer>
     </InputsContainer>
   );

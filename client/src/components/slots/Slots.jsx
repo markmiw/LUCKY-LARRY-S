@@ -21,9 +21,16 @@ export default function Slots({ user, setUser }) {
       return;
     }
     let newBalance = user.balance - betAmount * plays;
+    // can't bet more than you have, or negative bets
+    if (newBalance < 0 || betAmount < 0) {
+      return;
+    }
     setUser({ ...user, balance: newBalance });
     axios.put('/api/slots', { data: { userid: user.id, bet: betAmount, rows: plays } })
       .then((result) => {
+        if (result.data === 'insufficient funds') {
+          return;
+        }
         const { rows, winningsData } = result.data;
         const col1 = [rows[0], rows[3], rows[6]];
         const col2 = [rows[1], rows[4], rows[7]];
