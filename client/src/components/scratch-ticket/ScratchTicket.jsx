@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import ScratchCard from 'react-scratchcard-v2';
 import styled from 'styled-components';
@@ -57,9 +54,7 @@ export default function ScratchTicket({ user, setUser }) {
   }
 
   async function getWinnings() {
-    const winningsArr = [0, 0, 1, 10, 25, 100];
-
-    let matches = countMatches();
+    const matches = countMatches();
     setNumMatches(matches);
     const winnings = bet * winningsArr[matches];
     setWinningAmount(winnings);
@@ -82,7 +77,7 @@ export default function ScratchTicket({ user, setUser }) {
     setBet(Number(e.target.value));
   }
 
-  function confirmPlay(e) {
+  function confirmPlay() {
     if (bet >= 0 && bet <= user.balance) {
       setPlaying(true);
     }
@@ -97,7 +92,7 @@ export default function ScratchTicket({ user, setUser }) {
   // using 15 sec as placeholder
   const winningEffect = () => {
     setTimeout(() => {
-        setConfirmWinnings(false);
+      setConfirmWinnings(false);
     }, 15000);
   };
 
@@ -105,7 +100,7 @@ export default function ScratchTicket({ user, setUser }) {
 
   return (
     <Game>
-      {confirmWinnings && <WinningEffect/>}
+      {confirmWinnings && <WinningEffect />}
       <Form>
         <input
           className="input-lg"
