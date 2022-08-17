@@ -118,7 +118,7 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
                   window.alert(results.data);
                 } else if (results.data === 'No bet was made.') {
                   window.alert(results.data);
-                } else if (results.data === results.data.winAmount) {
+                } else if (results.data.winAmount) {
                   // <Confetti/>
                   window.alert(`Congratulations! You won a total of ${results.data.winAmount} dollars!`);
                   setUser(...user, { balance: results.data.updatedBalance });

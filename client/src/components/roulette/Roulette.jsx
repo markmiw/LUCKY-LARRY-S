@@ -6,12 +6,18 @@ import BetTable from './BetTable';
 
 export default function Roulette({ user, setUser }) {
   const [betInfo, setBetInfo] = useState('');
+  const [spin, setSpin] = useState(false);
 
   return (
     <RouletteGameGrid>
-      {/* {winState && <Confetti/>} */}
-      <RouletteWheel betInfo={betInfo} user={user} setUser={setUser} />
-      <BetTable setBetInfo={setBetInfo} />
+      <RouletteWheel
+        betInfo={betInfo}
+        user={user}
+        setUser={setUser}
+        spin={spin}
+        setSpin={setSpin}
+      />
+      <BetTable setBetInfo={setBetInfo} spin={spin} />
     </RouletteGameGrid>
   );
 }

@@ -53,13 +53,6 @@ export default function BetTable({ setBetInfo }) {
         betInput={betInput}
         setBetInput={setBetInput}
       />
-      <RouletteInfo1Grid>
-
-        <GameDisplay>Win Chance: </GameDisplay>
-        <GameDisplay>Multiplier: </GameDisplay>
-
-        <GameDisplay>Winning Amount: </GameDisplay>
-      </RouletteInfo1Grid>
       <BetTableContainer>
         <Number0Button onClick={() => { setNum(0); openModal('0'); }}>
           0
