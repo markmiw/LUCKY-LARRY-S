@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { slots } = require('./controllers/slots');
 const { addFriend, getAllFriends } = require('./controllers/friends');
+const { sendDM, getAllDMsBetween } = require('./controllers/dms');
 const {
   getUser,
   getLeaderboard,
@@ -20,9 +21,9 @@ router.get('/users/:userID/friends', getAllFriends);
 
 router.post('/users/:userID/friends', addFriend);
 
-router.get('/test', (req, res) => {
-  res.status(200).send('hello!');
-});
+router.post('/userchat/', sendDM);
+
+router.get('/userchat/:userID/:recipientID', getAllDMsBetween);
 
 router.get('/user', (req, res) => {
   getUser()

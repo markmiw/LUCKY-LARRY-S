@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 import React, { } from 'react';
-import PropTypes from 'prop-types';
 import Sidebar from '../sidebar/Sidebar';
 import Roulette from '../roulette/Roulette';
 import ScratchTicket from '../scratch-ticket/ScratchTicket';
@@ -15,7 +16,7 @@ const renderGame = (game) => {
   return <Slots />;
 };
 
-function Gamepage({ game }) {
+function Gamepage({ user, game }) {
   return (
     <div className="game-container">
       <Sidebar user={user} />
@@ -23,10 +24,5 @@ function Gamepage({ game }) {
     </div>
   );
 }
-
-Gamepage.propTypes = {
-  user: PropTypes.object.isRequired,
-  game: PropTypes.string.isRequired,
-};
 
 export default Gamepage;
