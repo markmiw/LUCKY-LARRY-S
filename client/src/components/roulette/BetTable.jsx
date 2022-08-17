@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Modal from './Modal';
+import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from '../shared/button.styled.js';
 
 export default function BetTable({ setBetInfo, spin }) {
   // userbet refactor to remove initial pick bets
@@ -62,43 +63,54 @@ export default function BetTable({ setBetInfo, spin }) {
         setBetInput={setBetInput}
       />
       <BetTableContainer>
-        <Number0Button onClick={() => { setNum(0); openModal('0'); }}>
+        <GreenWhiteButton onClick={() => { setNum(0); openModal('0'); }}>
           0
-        </Number0Button>
+        </GreenWhiteButton>
         <BetNumberGrid>
           {[...Array(36)].map((rouletteNum, index) => {
             const val = index + 1;
             return (
+<<<<<<< HEAD
               <NumberButton key={val} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
-                {val}
-                &nbsp;
-              </NumberButton>
-            );
+=======
+              <YellowOrangeButton key={index} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
+>>>>>>> main
+                  {val}
+                  &nbsp;
+                </YellowOrangeButton>
+                );
           })}
-        </BetNumberGrid>
-        <BetColorOddGrid>
+              </BetNumberGrid>
+              <BetColorOddGrid>
+<<<<<<< HEAD
           <RedColorButton onClick={() => { setColor({ pick: 'red' }); openModal('red'); }}>Red</RedColorButton>
           <BlackColorButton onClick={() => { setColor({ pick: 'black' }); openModal('black'); }}>Black</BlackColorButton>
           <button type="submit" onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</button>
           <button type="submit" onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</button>
+=======
+          <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red')}}>Red</PinkRedButton>
+          <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black')}}>Black</BlueBlackButton>
+          <GreenBlackButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</GreenBlackButton>
+          <BlueAquaButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</BlueAquaButton>
+>>>>>>> main
 
-        </BetColorOddGrid>
+        </BetColorOddGrid >
 
         <Bet12Grid>
-          <Bet12Button onClick={() => { setRangeOf12({ pick: 1 }); openModal('1st dozen'); }}>1st12 </Bet12Button>
-          <Bet12Button onClick={() => { setRangeOf12({ pick: 2 }); openModal('2nd dozen'); }}>2nd12 </Bet12Button>
-          <Bet12Button onClick={() => { setRangeOf12({ pick: 3 }); openModal('3rd dozen'); }}>3rd12 </Bet12Button>
+          <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 1 }); openModal('1st dozen'); }}>1st12 </BlueLightBlueButton>
+          <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 2 }); openModal('2nd dozen'); }}>2nd12 </BlueLightBlueButton>
+          <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 3 }); openModal('3rd dozen'); }}>3rd12 </BlueLightBlueButton>
         </Bet12Grid>
 
         <Bet18Grid>
-          <Bet18Button onClick={() => { setFirstHalf({ pick: 1 }); openModal('1 to 18'); }}>1to18 </Bet18Button>
-          <Bet18Button onClick={() => { setFirstHalf({ pick: 2 }); openModal('19 to 36'); }}>19to36 </Bet18Button>
+          <LightPurplePulpleButton onClick={() => { setFirstHalf({ pick: 1 }); openModal('1 to 18'); }}>1to18 </LightPurplePulpleButton>
+          <LightPurplePulpleButton onClick={() => { setFirstHalf({ pick: 2 }); openModal('19 to 36'); }}>19to36 </LightPurplePulpleButton>
         </Bet18Grid>
 
         <BetRowGrid>
-          <BetRowButton onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>2to1 - 1s row </BetRowButton>
-          <BetRowButton onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2to1 - 2s row </BetRowButton>
-          <BetRowButton onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>2to1 - 3s row </BetRowButton>
+          <PurplePinkButton onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>2to1 - 1s row </PurplePinkButton>
+          <PurplePinkButton onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2to1 - 2s row </PurplePinkButton>
+          <PurplePinkButton onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>2to1 - 3s row </PurplePinkButton>
         </BetRowGrid>
 
         <div>
@@ -116,8 +128,8 @@ export default function BetTable({ setBetInfo, spin }) {
           {(numRow.pick && numRow.bet) ? `$${numRow.bet} on ${numRow.pick === 1 ? '1s row' : numRow.pick === 2 ? '2s row' : numRow.pick === 3 ? '3s row' : null}.` : null}
           &nbsp;
         </div>
-      </BetTableContainer>
-    </div>
+      </BetTableContainer >
+    </div >
   );
 }
 
@@ -134,7 +146,11 @@ export const GameDisplay = styled.div`
   margin: 0 auto;
   width: 300px;
   height: 30px;
+<<<<<<< HEAD
 `;
+=======
+`
+>>>>>>> main
 
 export const BetTableContainer = styled.div`
   margin: 0 auto;
@@ -143,6 +159,7 @@ export const BetNumberGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
+<<<<<<< HEAD
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
 `;
 export const Number0Button = styled.button`
@@ -158,11 +175,22 @@ export const NumberButton = styled.button`
 }
 background-color: #E09F5A;
 `;
+=======
+  @media (min-width: 501px) {
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+`
+
+>>>>>>> main
 export const BetColorOddGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto auto;
+<<<<<<< HEAD
 `;
 export const RedColorButton = styled.button`
 &:after {
@@ -176,12 +204,16 @@ export const BlackColorButton = styled.button`
 }
 background-color: black;
 `;
+=======
+`
+>>>>>>> main
 
 export const Bet12Grid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto;
+<<<<<<< HEAD
 `;
 export const Bet12Button = styled.button`
 &:after {
@@ -189,12 +221,17 @@ export const Bet12Button = styled.button`
 }
 background-color: #1a4b82
 `;
+=======
+`
+
+>>>>>>> main
 export const Bet18Grid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto;
 
+<<<<<<< HEAD
 `;
 export const Bet18Button = styled.button`
 &:after {
@@ -202,11 +239,16 @@ export const Bet18Button = styled.button`
 }
 background-color: #1AA7EC;
 `;
+=======
+`
+
+>>>>>>> main
 export const BetRowGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto;
+<<<<<<< HEAD
 `;
 export const BetRowButton = styled.button`
   &:after {
@@ -214,3 +256,7 @@ export const BetRowButton = styled.button`
   }
   background-color: #E09F5A;
 `;
+=======
+`
+
+>>>>>>> main

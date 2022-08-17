@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable react/prop-types */
@@ -5,10 +6,19 @@
 /* eslint-disable no-alert */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
+=======
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+>>>>>>> main
 import { Wheel } from 'react-custom-roulette';
 import axios from 'axios';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
+<<<<<<< HEAD
+=======
+import WinningEffect from '../shared/WinningEffect';
+// import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
+>>>>>>> main
 
 const data = [
   { option: '0', style: { backgroundColor: 'green' } },
@@ -50,11 +60,11 @@ const data = [
   { option: '36' },
 ];
 
-const backgroundColors = ['#9c0505', '#000000'];
+const backgroundColors = ['#e34b49', '#161a20'];
 const textColors = ['white'];
-const outerBorderColor = 'black';
+const outerBorderColor = '#fdcc14';
 const outerBorderWidth = 18;
-const innerBorderColor = '#000000';
+const innerBorderColor = '#161a20';
 const innerBorderWidth = 29;
 const innerRadius = 42;
 const radiusLineColor = '#e3c13b';
@@ -63,10 +73,21 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
+<<<<<<< HEAD
 export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin }) {
   // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [winData, setWinData] = useState({});
+=======
+
+
+export default function RouletteWheel({ betInfo }) {
+  //wheel functionality
+  const [mustSpin, setMustSpin] = useState(false);
+  const [prizeNumber, setPrizeNumber] = useState(0);
+  const [winAmount, setWinAmount] = useState(0);
+  const [winState, setWinState] = useState(false);
+>>>>>>> main
 
   const handleSpinClick = () => {
     axios.get('/api/roulette', {
@@ -98,8 +119,24 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
       });
   };
 
+<<<<<<< HEAD
+=======
+  // show winning effect for only 10 seconds
+  const winningEffect = () => {
+    setTimeout(() => {
+        setWinState(false);
+    }, 10000);
+};
+
+  useEffect(winningEffect, [winState]);
+
+
+>>>>>>> main
   return (
     <RouletteWheelContainer className="App">
+      <WinEffectContainer>
+      {winState && <WinningEffect/>}
+      </WinEffectContainer>
       <header className="App-header">
         <Wheel
           mustStartSpinning={mustSpin}
@@ -120,6 +157,7 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
           textDistance={textDistance}
           onStopSpinning={() => {
             setMustSpin(false);
+<<<<<<< HEAD
             setSpin(!spin);
             const { updatedBalance, winAmount } = winData;
             if (winAmount) {
@@ -130,6 +168,25 @@ export default function RouletteWheel({ betInfo, user, setUser, spin, setSpin })
               window.alert('Not a winner, try again next time!');
               setUser({ ...user, balance: updatedBalance });
             }
+=======
+            axios.get('/api/roulette', {
+              params: {
+                betInfo: betInfo,
+                winNum: prizeNumber
+              }
+            })
+              .then(results => {
+                // need to clean out the current bets
+                if (results.data) {
+                  (setWinState(true))
+                  // window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
+                  //update global userbalance hook here
+                } else {
+                  window.alert('You did not win this time 👉👈 ')
+                }
+              })
+              .catch(err => console.log(err));
+>>>>>>> main
           }}
         />
         <br />
@@ -145,4 +202,16 @@ export const RouletteWheelContainer = styled.div`
   margin: 0 auto;
 `;
 export const SpinButton = styled.button`
+<<<<<<< HEAD
 `;
+=======
+&:after {
+  background-color: #FDA300;
+  background-image: linear-gradient(to right, #1E2F97, #4ADEDE);
+}
+background-color: #194569;
+`
+export const WinEffectContainer = styled.div`
+  z-index: 20;
+`
+>>>>>>> main
