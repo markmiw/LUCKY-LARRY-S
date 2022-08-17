@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import flags from '../Flag';
+import flags from '../flags';
 
 export default function Item({ user, index }) {
   const [country, setCountry] = useState('');

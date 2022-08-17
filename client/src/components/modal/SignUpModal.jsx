@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
-import flags from '../sidebar/Flag';
+import flags from '../sidebar/flags';
 
 function SignUpModal({ setModal }) {
   // PROBABLY MORE FIELDS

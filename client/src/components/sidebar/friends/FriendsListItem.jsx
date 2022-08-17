@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import flags from '../Flag';
+import flags from '../flags';
 
 // no last online / last seen timestamp for mvp 😤
 
