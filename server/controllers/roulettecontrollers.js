@@ -16,10 +16,13 @@ module.exports.checkNum = async (req, res) => {
     num, col, eO, rangeOf12, firstHalf, numRow,
   } = JSON.parse(req.query.betInfo);
   const spentMoney = (num.bet + col.bet + eO.bet + rangeOf12.bet + firstHalf.bet + numRow.bet);
-
+  if (!spentMoney) {
+    res.status(200).send('No bet was made.');
+    return;
+  }
   const userHasEnoughMoney = await getBalance(userId) >= spentMoney;
   if (!userHasEnoughMoney) {
-    res.status(200).send('insufficient funds');
+    res.status(200).send('Insufficient Funds.');
     return;
   }
   const winNum = JSON.parse(req.query.winNum);

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable object-shorthand */
@@ -113,15 +114,15 @@ export default function RouletteWheel({ betInfo, user, setUser }) {
             })
               .then((results) => {
                 console.log('hello', results.data);
-                if (results.data === 'insufficient funds') {
+                if (results.data === 'Insufficient Funds.') {
+                  window.alert(results.data);
+                } else if (results.data === 'No bet was made.') {
+                  window.alert(results.data);
+                } else if (results.data === results.data.winAmount) {
                   // <Confetti/>
-                  window.alert('insufficient funds.');
-                  // update global userbalance hook here
-                } else if (results.data.winAmount) {
                   window.alert(`Congratulations! You won a total of ${results.data.winAmount} dollars!`);
                   setUser(...user, { balance: results.data.updatedBalance });
-                }
-                else {
+                } else {
                   window.alert('Not a winner, try again next time!');
                   setUser(...user, { balance: results.data.updatedBalance });
                 }
