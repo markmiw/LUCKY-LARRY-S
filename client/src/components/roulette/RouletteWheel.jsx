@@ -117,12 +117,13 @@ export default function RouletteWheel({ betInfo }) {
               }
             })
               .then(results => {
+                // need to clean out the current bets
                 if (results.data) {
                   (setWinState(true))
-                  window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
+                  // window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
                   //update global userbalance hook here
                 } else {
-                  window.alert('Not a winner, try again next time!')
+                  window.alert('You did not win this time 👉👈 ')
                 }
               })
               .catch(err => console.log(err));
