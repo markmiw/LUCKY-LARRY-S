@@ -14,7 +14,7 @@ module.exports.sendDM = async (req, res) => {
 
 module.exports.getAllDMsBetween = async (req, res) => {
   const { userID, recipientID } = req.params;
-  let messages = await getAllDMsBetween(userID, recipientID);
+  let messages = await getAllDMsBetween(userID, recipientID) || [];
   const user = await getUserById(userID);
   const recipient = await getUserById(recipientID);
   messages = messages.map(({
