@@ -1,33 +1,28 @@
 /* eslint-disable no-unused-expressions */
 const { Pool } = require('pg');
-const { getBalance, updateBalanceBasedOnWinnings, getUserId } = require('../../database/controllers');
+const { getBalance, updateBalanceBasedOnWinnings } = require('../../database/controllers');
 
 const pool = new Pool({
-  user: 'postgres',
+  user: process.env.PGUSER,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
   password: process.env.PGPASS,
   port: process.env.PGPORT,
 });
 
-module.exports.checkNum = (req, res) => {
-
-  // const userHasEnoughMoney = getBalance(username) >= bet;
-  // if (!userHasEnoughMoney) {
-  //   res.status(200).send('insufficient funds');
-  //   return;
-  // }
-
-  // const updatedBalance = updateBalanceBasedOnWinnings(username, bet, winningsData.winnings);
-
-  // const userid = getUserId(username);
-  console.log(req.query);
-  const userID = JSON.parse(req.query.userID);
-  console.log('andy', userID);
-  const winNum = JSON.parse(req.query.winNum);
+module.exports.checkNum = async (req, res) => {
+  const userId = JSON.parse(req.query.user).id;
   const {
     num, col, eO, rangeOf12, firstHalf, numRow,
   } = JSON.parse(req.query.betInfo);
+  const spentMoney = (num.bet + col.bet + eO.bet + rangeOf12.bet + firstHalf.bet + numRow.bet);
+
+  const userHasEnoughMoney = await getBalance(userId) >= spentMoney;
+  if (!userHasEnoughMoney) {
+    res.status(200).send('insufficient funds');
+    return;
+  }
+  const winNum = JSON.parse(req.query.winNum);
   const query = `SELECT * FROM RouletteNums WHERE id = ${winNum}`;
   let winnings = 0;
   const winMultipler = (result, userInput, multiplier) => {
@@ -46,14 +41,16 @@ module.exports.checkNum = (req, res) => {
       winMultipler(firsthalf, firstHalf, 2);
       winMultipler(numrow, numRow, 3);
     })
-    .then(() => {
+    .then(async () => {
       if (winnings > 0) {
-        // add the winnings to the user via the implemented controller ***
+        // change the user balance via the implemented controller ***
+        const updatedBalance = await updateBalanceBasedOnWinnings(userId, spentMoney, winnings);
         // add winnings to the user's records - to be implemented w/ global function ***
-        res.status(200).send(JSON.stringify(winnings));
+        res.status(200).send({ winAmount: winnings, updatedBalance });
       } else {
-        res.status(200).send(false);
+        const updatedBalance = await updateBalanceBasedOnWinnings(userId, spentMoney, 0);
+        res.status(200).send({ winAmount: winnings, updatedBalance });
       }
     })
-    .catch((err) => { res.status(500) });
+    .catch((err) => { res.status(500); console.log(err); });
 };

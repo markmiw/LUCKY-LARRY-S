@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 /* eslint-disable object-shorthand */
 import React, { useState } from 'react';
 import { Wheel } from 'react-custom-roulette';
@@ -59,7 +61,7 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel({ betInfo, userID }) {
+export default function RouletteWheel({ betInfo, user, setUser }) {
   // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -101,21 +103,27 @@ export default function RouletteWheel({ betInfo, userID }) {
           // perpendicularText
           textDistance={textDistance}
           onStopSpinning={() => {
+            setMustSpin(false);
             axios.get('/api/roulette', {
               params: {
                 betInfo: betInfo,
                 winNum: prizeNumber,
-                userID: userID,
+                user: user,
               },
             })
               .then((results) => {
-                setMustSpin(false);
-                if (results.data) {
+                console.log('hello', results.data);
+                if (results.data === 'insufficient funds') {
                   // <Confetti/>
-                  window.alert(`Congratulations! You won a total of ${results.data} dollars!`);
+                  window.alert('insufficient funds.');
                   // update global userbalance hook here
-                } else {
+                } else if (results.data.winAmount) {
+                  window.alert(`Congratulations! You won a total of ${results.data.winAmount} dollars!`);
+                  setUser(...user, { balance: results.data.updatedBalance });
+                }
+                else {
                   window.alert('Not a winner, try again next time!');
+                  setUser(...user, { balance: results.data.updatedBalance });
                 }
               })
               .catch((err) => console.log(err));

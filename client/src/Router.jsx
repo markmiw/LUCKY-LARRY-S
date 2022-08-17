@@ -35,7 +35,7 @@ function Router() {
       <Routes>
         <Route
           path="/roulette"
-          element={<Roulette userID={user.id} />}
+          element={<Roulette user={user} setUser={setUser} />}
         />
         <Route
           path="/scratch-ticket"
