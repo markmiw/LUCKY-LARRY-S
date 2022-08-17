@@ -28,3 +28,6 @@ package-lock.json
 
 # webpack build / generate output
 bundle.js
+
+# DS Store
+.DS_Store
