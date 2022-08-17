@@ -12,7 +12,7 @@ const {
   addBalance,
   getGlobalChat,
   postGlobalChat,
-  updateBalanceBasedOnWinnings
+  updateBalanceBasedOnWinnings,
 } = require('../database/controllers');
 const roulette = require('./controllers/roulettecontrollers');
 

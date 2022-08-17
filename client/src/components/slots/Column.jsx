@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import WinningEffect from '../shared/WinningEffect';
 
 // move the links into served assets when finalized icon decision
 const getImageFromValue = function getImageFromValue(value) {
@@ -23,6 +24,11 @@ export default function Column({
   values,
   setValues,
   iconSize,
+  column,
+  adjustment,
+  user,
+  setUser,
+  setWinState,
 }) {
   const [offset, setOffset] = useState(0);
 
@@ -34,6 +40,13 @@ export default function Column({
       setValues(values.slice(-3));
       columnRef.current.style.transition = '';
       setOffset(0);
+      if (column === 3 && columnRef.current.style.transition === '') {
+        const newBalance = user.balance + adjustment;
+        setUser({ ...user, balance: newBalance });
+        if (adjustment > 0) {
+          setWinState(true);
+        }
+      }
     };
 
     const el = columnRef.current;
@@ -83,6 +96,13 @@ Column.propTypes = {
   values: PropTypes.arrayOf(PropTypes.number).isRequired,
   setValues: PropTypes.func.isRequired,
   iconSize: PropTypes.number.isRequired,
+  column: PropTypes.number.isRequired,
+  adjustment: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    balance: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  setWinState: PropTypes.func.isRequired,
 };
 
 const ColumnContainer = styled.div`
