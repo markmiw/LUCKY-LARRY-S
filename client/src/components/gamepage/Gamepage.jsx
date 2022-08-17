@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 import React, { } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -28,11 +30,6 @@ function Gamepage({ game, user }) {
     </GamePageGrid>
   );
 }
-
-Gamepage.propTypes = {
-  user: PropTypes.object.isRequired,
-  game: PropTypes.string.isRequired,
-};
 
 export default Gamepage;
 

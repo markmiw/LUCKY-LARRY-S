@@ -27,6 +27,9 @@ function Chat({}) {
         console.log(err);
       });
     }, 300);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const hideEmojiModal = (e) => {
