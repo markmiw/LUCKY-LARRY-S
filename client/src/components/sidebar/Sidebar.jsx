@@ -11,14 +11,41 @@ import Globe from '../../../dist/icons/globe.svg';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Friends from './friends/Friends';
 
-function Sidebar({ user }) {
+function Sidebar({ user, loginTime }) {
   const [sidebarState, setSidebarState] = useState('global-chat');
   const [currentDmRecipient, setCurrentDmRecipient] = useState(null);
   console.log('recipient:', currentDmRecipient);
 
+  const renderSidebarIcons = () => {
+    if (sidebarState === 'global-chat') {
+      return (
+        <div className="sidebar-nav-container">
+          <img onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn-active" src={Globe} />
+          <img onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
+          <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
+        </div>
+      );
+    }
+    if (sidebarState === 'leaderboard') {
+      return (
+        <div className="sidebar-nav-container">
+          <img onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
+          <img onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn-active" src={leaderboard_icon} />
+          <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
+        </div>
+      );
+    }
+    return (
+      <div className="sidebar-nav-container">
+        <img onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
+        <img onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
+        <img onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn-active" src={friends} />
+      </div>
+    );
+  };
   const renderSidebar = () => {
     if (sidebarState === 'global-chat') {
-      return <Chat key="global-chat" />;
+      return <Chat user={user} loginTime={loginTime} key="global-chat" />;
     } if (sidebarState === 'leaderboard') {
       return <Leaderboard key="leaderboard" />;
     }
@@ -32,30 +59,12 @@ function Sidebar({ user }) {
       />
     );
   };
+
   return (
-    <SidebarContainer className="sidebar-container">
-      <div className="sidebar-nav-container">
-        <img
-          onClick={() => setSidebarState('global-chat')}
-          className="sidebar-nav-btn"
-          src={Globe}
-        />
-        <img
-          onClick={() => setSidebarState('leaderboard')}
-          className="sidebar-nav-btn"
-          src={leaderboard_icon}
-        />
-        <img
-          onClick={() => {
-            setCurrentDmRecipient(null);
-            setSidebarState('friends');
-          }}
-          className="sidebar-nav-btn"
-          src={friends}
-        />
-      </div>
+    <div className="sidebar-container">
+      {renderSidebarIcons()}
       {renderSidebar()}
-    </SidebarContainer>
+    </div>
   );
 }
 

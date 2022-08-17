@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Item from './Item';
-
 function Leaderboard() {
   const [topUsers, setTopUsers] = useState([]);
 
