@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Item from './Item';
-
 function Leaderboard() {
   const [topUsers, setTopUsers] = useState([]);
 
@@ -13,7 +12,13 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard-container" align="center">
-      <div className="headers">
+      <div
+        style={{
+          display: 'grid',
+          gridAutoFlow: 'column',
+        }}
+        className="headers"
+      >
         <p>
           Rank
         </p>

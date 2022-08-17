@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import handleDate from '../handleDate';
-import flags from '../Flag';
+import flags from '../flags';
 
-function FriendsListItem({ username, country, lastOpened }) {
-  console.log(handleDate(new Date(lastOpened)));
+// no last online / last seen timestamp for mvp 😤
+
+// <Timestamp>
+// {/* thoughts on making this last online instead of last opened? */}
+// Opened&nbsp;
+// {handleDate(lastOpened)}
+// </Timestamp>
+
+function FriendsListItem({
+  username,
+  country,
+  openChat,
+}) {
   return (
     <FriendsListItemContainer>
       <Flag src={flags[country]} alt={`Flag of ${country}`} />
@@ -13,14 +23,12 @@ function FriendsListItem({ username, country, lastOpened }) {
         <Username>
           {username}
         </Username>
-        <Timestamp>
-          {/* thoughts on making this last online instead of last opened? */}
-          Opened&nbsp;
-          {handleDate(lastOpened)}
-        </Timestamp>
       </TextContainer>
       <ChatIconContainer>
-        <ChatIcon className="material-symbols-outlined">
+        <ChatIcon
+          className="material-symbols-outlined"
+          onClick={openChat}
+        >
           chat_bubble
         </ChatIcon>
       </ChatIconContainer>
@@ -31,7 +39,7 @@ function FriendsListItem({ username, country, lastOpened }) {
 FriendsListItem.propTypes = {
   username: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
-  lastOpened: PropTypes.string.isRequired,
+  openChat: PropTypes.func.isRequired,
 };
 
 const FriendsListItemContainer = styled('div')`
@@ -58,11 +66,6 @@ const TextContainer = styled('div')`
 
 const Username = styled('div')`
   font-size: large;
-  color: black;
-`;
-
-const Timestamp = styled('div')`
-  font-size: small;
   color: black;
 `;
 

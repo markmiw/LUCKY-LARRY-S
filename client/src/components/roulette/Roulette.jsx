@@ -1,27 +1,29 @@
-import React, { useState } from 'react'
-import RouletteWheel from './RouletteWheel.jsx';
-import BetTable from './BetTable.jsx';
-// import { RouletteGameGrid,  } from './roulette.styled.js';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Confetti from 'react-confetti';
+import RouletteWheel from './RouletteWheel';
+import BetTable from './BetTable';
 
-
-export default function Roulette () {
+export default function Roulette({ user, setUser }) {
   const [betInfo, setBetInfo] = useState('');
+  const [spin, setSpin] = useState(false);
 
   return (
     <RouletteGameGrid>
-      {/* {winState && <Confetti/>} */}
-      <RouletteWheel betInfo={betInfo}/>
-      <BetTable setBetInfo={setBetInfo}/>
+      <RouletteWheel
+        betInfo={betInfo}
+        user={user}
+        setUser={setUser}
+        spin={spin}
+        setSpin={setSpin}
+      />
+      <BetTable setBetInfo={setBetInfo} spin={spin} />
     </RouletteGameGrid>
-  )
+  );
 }
-
 
 export const RouletteGameGrid = styled.div`
   display: grid;
-  width: 80vw;
   max-width: 100%;
   margin: 0 auto;
   height: 100%;
@@ -33,4 +35,4 @@ export const RouletteGameGrid = styled.div`
   @media (max-width: 500px) {
     gap: 2%;
   }
-`
+`;

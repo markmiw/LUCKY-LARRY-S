@@ -1,13 +1,24 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Chat from './chat/Chat.jsx';
 import leaderboard_icon from '../../../dist/icons/leaderboard.png';
-import Friends from '../../../dist/icons/friends.svg';
+import friends from '../../../dist/icons/friends.svg';
 import Globe from '../../../dist/icons/globe.svg';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
-import FriendsList from './friends/FriendsList';
+import Friends from './friends/Friends';
 
+<<<<<<< HEAD
 function Sidebar({ user, loginTime }) {
+=======
+function Sidebar({ user }) {
+>>>>>>> main
   const [sidebarState, setSidebarState] = useState('global-chat');
+  const [currentDmRecipient, setCurrentDmRecipient] = useState(null);
+  console.log('recipient:', currentDmRecipient);
 
   const renderSidebarIcons = () => {
     if (sidebarState === 'global-chat') {
@@ -43,15 +54,34 @@ function Sidebar({ user, loginTime }) {
       return <Leaderboard key="leaderboard" />;
     }
     // temp userid
-    return <FriendsList userID={1} key="friends" />;
+    return (
+      <Friends
+        userID={user.id}
+        key="friends"
+        currentDmRecipient={currentDmRecipient}
+        setCurrentDmRecipient={setCurrentDmRecipient}
+      />
+    );
   };
 
   return (
     <div className="sidebar-container">
       {renderSidebarIcons()}
       {renderSidebar()}
-    </div>
+    </SidebarContainer>
   );
 }
 
+Sidebar.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
 export default Sidebar;
+
+export const SidebarContainer = styled.div`
+  display: grid;
+  margin: 0 auto;
+  height: 90%;
+`;

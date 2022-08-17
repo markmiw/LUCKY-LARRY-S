@@ -3,13 +3,18 @@
 }
 
 .sidebar-container {
-  border: 1px solid black;
+  border: 1px solid white;
   width: 317px;
   height: 600px;
   border-radius: 15px;
   /* background-color: #36393f ; */
+<<<<<<< HEAD
   /* background-color: white; */
   background-color: #1C1E25;
+=======
+  background-color: #0a101e;
+  /* background: url('./background/CasinoBackground.jpeg'); */
+>>>>>>> main
   margin-left: 20px;
   margin-top: 20px;
 }
@@ -197,6 +202,7 @@ width: 50px;
 .chat-list {
   padding: 0;
 }
+<<<<<<< HEAD
 
 .scrollbar {
   overflow-y: scroll;
@@ -226,3 +232,5 @@ width: 50px;
   background-color: #282a30;
   border-radius: 7px;
 }
+=======
+>>>>>>> main

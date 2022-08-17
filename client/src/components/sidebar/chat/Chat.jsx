@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
-import flags from '../Flag.jsx';
+import flags from '../flags';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
 import handleDate from '../handleDate';
 
@@ -30,6 +30,9 @@ function Chat({ user, loginTime }) {
         console.log(err);
       });
     }, 300);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const hideEmojiModal = (e) => {

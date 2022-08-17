@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 const router = require('express').Router();
 const { slots } = require('./controllers/slots');
 const { addFriend, getAllFriends } = require('./controllers/friends');
+const { sendDM, getAllDMsBetween } = require('./controllers/dms');
 const {
   getUser,
   getLeaderboard,
@@ -10,6 +12,7 @@ const {
   addBalance,
   getGlobalChat,
   postGlobalChat,
+  updateBalanceBasedOnWinnings
 } = require('../database/controllers');
 const roulette = require('./controllers/roulettecontrollers');
 
@@ -20,9 +23,9 @@ router.get('/users/:userID/friends', getAllFriends);
 
 router.post('/users/:userID/friends', addFriend);
 
-router.get('/test', (req, res) => {
-  res.status(200).send('hello!');
-});
+router.post('/userchat/', sendDM);
+
+router.get('/userchat/:userID/:recipientID', getAllDMsBetween);
 
 router.get('/user', (req, res) => {
   getUser()
@@ -48,14 +51,13 @@ router.get('/user/:username', (req, res) => {
     .catch((err) => res.sendStatus(404));
 });
 
-router.post('/user', (req, res) => {
+router.post('/user', async (req, res) => {
+  const user = await getSpecificUser(req.body.username);
+  if (user.length !== 0) res.status(404).send('User exists already'); // user exists
+
   createUser(req.body)
     .then((results) => {
-      if (results.length === 0) {
-        res.sendStatus(201);
-      } else {
-        res.sendStatus(409);
-      }
+      res.status(201).send(results);
     })
     .catch((err) => res.sendStatus(404));
 });
@@ -63,6 +65,12 @@ router.post('/user', (req, res) => {
 router.post('/user/balance', (req, res) => {
   addBalance(req.body)
     .then((results) => res.status(201).send(results))
+    .catch((err) => res.sendStatus(404));
+});
+
+router.post('/user/winnings', (req, res) => {
+  updateBalanceBasedOnWinnings(req.body.id, req.body.bet, req.body.winnings)
+    .then((results) => res.status(201).send({ results }))
     .catch((err) => res.sendStatus(404));
 });
 
@@ -75,7 +83,7 @@ router.get('/globalchat', (req, res) => {
 router.post('/globalchat', (req, res) => {
   const { username, message, country } = req.body;
   postGlobalChat(username, message, country).then((results) => res.send(results))
-  .catch(() => res.sendStatus(404));
+    .catch(() => res.sendStatus(404));
 });
 
 module.exports = router;

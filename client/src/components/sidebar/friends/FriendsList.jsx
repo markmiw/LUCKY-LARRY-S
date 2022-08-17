@@ -5,7 +5,7 @@ import axios from 'axios';
 import FriendsListItem from './FriendsListItem';
 import FriendInput from './FriendInput';
 
-function FriendsList({ userID }) {
+function FriendsList({ userID, setCurrentDmRecipient }) {
   const [showingFriendInput, setShowingFriendInput] = useState(false);
   const [friendAddError, setFriendAddError] = useState('');
 
@@ -66,7 +66,7 @@ function FriendsList({ userID }) {
     <FriendsListContainer>
       <Header>
         <Title>
-          Chat
+          Friends
         </Title>
         <OpenFriendInputIcon
           className="material-symbols-outlined"
@@ -86,6 +86,7 @@ function FriendsList({ userID }) {
             username={friend.username}
             country={friend.country}
             lastOpened={friend.lastOpened}
+            openChat={() => setCurrentDmRecipient(friend.id)}
           />
         ))}
       </List>
@@ -95,6 +96,7 @@ function FriendsList({ userID }) {
 
 FriendsList.propTypes = {
   userID: PropTypes.number.isRequired,
+  setCurrentDmRecipient: PropTypes.func.isRequired,
 };
 
 const FriendsListContainer = styled('div')`

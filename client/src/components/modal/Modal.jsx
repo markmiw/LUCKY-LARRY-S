@@ -3,13 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 function Modal({ children, setModal }) {
-  function closeModal(e) {
-    if (e.target.id === 'modal-background') {
-      setModal(false);
-    }
-  }
   return (
-    <Background id="modal-background" onClick={(e) => closeModal(e)}>
+    <Background id="modal-background">
       <Container>{children}</Container>
     </Background>
   );
@@ -32,7 +27,7 @@ const Background = styled.div`
   width: 100vw;
   height: 100vh;
   place-items: center;
-  z-index: 2;
+  z-index: 10;
   background-color: rgb(30 41 59 / 0.75);
 `;
 

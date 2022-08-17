@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
-import flags from '../sidebar/Flag';
+import flags from '../sidebar/flags';
 
 function SignUpModal({ setModal }) {
   // PROBABLY MORE FIELDS
@@ -10,7 +10,7 @@ function SignUpModal({ setModal }) {
     username: '',
     password: '',
     reEnterPassword: '',
-    country: 'Usa',
+    country: 'Ussr',
   });
 
   function handleChange(e, field) {
@@ -77,7 +77,7 @@ function SignUpModal({ setModal }) {
               className="form-select"
               aria-label=".form-select-lg"
               onChange={(e) => handleChange(e, 'country')}
-              defaultValue="Usa"
+              defaultValue={info.country}
             >
               {Object.keys(flags).map((name) => (<option key={name} value={name}>{name}</option>))}
             </select>

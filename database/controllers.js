@@ -149,6 +149,19 @@ const updateBalanceBasedOnWinnings = (userid, bet, winnings) => {
     .catch(errorHandler);
 };
 
+const updateBalanceAfterLosing = (userid, bet) => {
+  const queryString = `
+      UPDATE users
+      SET balance = balance - $2
+      WHERE id = $1
+      RETURNING balance
+    `;
+
+  return db.query(queryString, [userid, bet])
+    .then((results) => results.rows[0].balance)
+    .catch(errorHandler);
+};
+
 const getSpecificUser = (username) => {
   const queryString = 'SELECT * FROM users WHERE username = $1';
   return db.query(queryString, [username])
@@ -174,6 +187,46 @@ const addBalance = (info) => {
     .catch(errorHandler);
 };
 
+const sendDM = (userID, recipientID, message) => {
+  const queryString = 'INSERT INTO dms (userID, recipientID, message) VALUES ($1, $2, $3)';
+  const args = [userID, recipientID, message];
+
+  return db.query(queryString, args)
+    .then((results) => results.rows)
+    .catch(errorHandler);
+};
+
+const getAllDMsBetween = (userID, recipientID) => {
+  const queryString = `
+    SELECT id, message, userID, date
+    FROM dms
+    WHERE (userID = $1 AND recipientID = $2)
+    OR (userID = $2 AND recipientID = $1)
+    ORDER BY date ASC
+  `;
+  const args = [userID, recipientID];
+
+  return db.query(queryString, args)
+    .then((results) => results.rows)
+    .catch(errorHandler);
+};
+
+const getUserById = (userID) => {
+  const queryString = `
+    SELECT u.id, u.username, c.country
+    FROM users u
+    JOIN
+    country c
+    ON u.countryID = c.id
+    WHERE u.id = $1
+  `;
+  const args = [userID];
+
+  return db.query(queryString, args)
+    .then((results) => results.rows[0])
+    .catch(errorHandler);
+};
+
 module.exports = {
   getTestData,
   getSpecificUser,
@@ -187,7 +240,11 @@ module.exports = {
   getCountry,
   getBalance,
   updateBalanceBasedOnWinnings,
+  updateBalanceAfterLosing,
   checkIfFriendshipExists,
   createUser,
   addBalance,
+  sendDM,
+  getAllDMsBetween,
+  getUserById,
 };
