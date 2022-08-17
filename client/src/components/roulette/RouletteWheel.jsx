@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
+import WinningEffect from '../shared/WinningEffect';
 // import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
 
 const data = [
@@ -45,11 +46,11 @@ const data = [
   { option: '36' }
 ]
 
-const backgroundColors = ['#9c0505', '#000000'];
+const backgroundColors = ['#e34b49', '#161a20'];
 const textColors = ['white'];
-const outerBorderColor = 'black';
+const outerBorderColor = '#fdcc14';
 const outerBorderWidth = 18;
-const innerBorderColor = '#000000';
+const innerBorderColor = '#161a20';
 const innerBorderWidth = 29;
 const innerRadius = 42;
 const radiusLineColor = '#e3c13b';
@@ -58,11 +59,14 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
+
+
 export default function RouletteWheel({ betInfo }) {
   //wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [winAmount, setWinAmount] = useState(0);
+  const [winState, setWinState] = useState(false);
 
   const handleSpinClick = () => {
     // grabWinningNum(newPriceNumber);
@@ -71,18 +75,21 @@ export default function RouletteWheel({ betInfo }) {
     setMustSpin(true);
   };
 
-  // May use in refactor for heightened security
-  // const grabWinningNum = (num) => {
-  //   // how does router.jsx plays a role here?
-  //     axios.get('/')
-  //       .then((response) => {
-  //         setWinningNumInfo(response.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  // }
+  // show winning effect for only 10 seconds
+  const winningEffect = () => {
+    setTimeout(() => {
+        setWinState(false);
+    }, 10000);
+};
+
+  useEffect(winningEffect, [winState]);
+
 
   return (
     <RouletteWheelContainer className="App">
+      <WinEffectContainer>
+      {winState && <WinningEffect/>}
+      </WinEffectContainer>
       <header className="App-header">
         <Wheel
           mustStartSpinning={mustSpin}
@@ -111,7 +118,7 @@ export default function RouletteWheel({ betInfo }) {
             })
               .then(results => {
                 if (results.data) {
-                  // <Confetti/>
+                  (setWinState(true))
                   window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
                   //update global userbalance hook here
                 } else {
@@ -134,5 +141,12 @@ export const RouletteWheelContainer = styled.div`
   margin: 0 auto;
 `
 export const SpinButton = styled.button`
-
+&:after {
+  background-color: #FDA300;
+  background-image: linear-gradient(to right, #1E2F97, #4ADEDE);
+}
+background-color: #194569;
+`
+export const WinEffectContainer = styled.div`
+  z-index: 20;
 `

@@ -57,8 +57,8 @@ export default function BetTable({ setResult, setBetInfo }) {
         <BetColorOddGrid>
           <RedColorButton onClick={() => { setColor({ pick: 'red' }); openModal('red')}}>Red</RedColorButton>
           <BlackColorButton onClick={() => { setColor({ pick: 'black' }); openModal('black')}}>Black</BlackColorButton>
-          <button onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</button>
-          <button onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</button>
+          <EvenColorButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</EvenColorButton>
+          <OddColorButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</OddColorButton>
 
         </BetColorOddGrid>
 
@@ -115,11 +115,18 @@ export const BetNumberGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  @media (min-width: 501px) {
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: auto auto auto auto auto auto;
+  }
 `
 export const Number0Button = styled.button`
 &:after {
   background-color: green;
+  background-image: linear-gradient(to right, #4fe08e, green);
+
 }
 background-color: #0b6102;
 `
@@ -127,6 +134,7 @@ background-color: #0b6102;
 export const NumberButton = styled.button`
 &:after {
   background-color: #FDA300;
+  background-image: linear-gradient(to right, #FDA300, #e0734f);
 }
 background-color: #E09F5A;
 `
@@ -139,12 +147,31 @@ export const BetColorOddGrid = styled.div`
 export const RedColorButton = styled.button`
 &:after {
   background-color: red;
+  background-image: linear-gradient(to right, #e05d4f, red);
+
 }
 background-color: red;
 `
 export const BlackColorButton = styled.button`
 &:after {
   background-color: black;
+  background-image: linear-gradient(to right, #5882ad, #161a20);
+}
+background-color: black;
+`
+
+export const EvenColorButton = styled.button`
+&:after {
+  background-color: black;
+  background-image: linear-gradient(to right, #6dcfa4, #178a80);
+}
+background-color: black;
+`
+
+export const OddColorButton = styled.button`
+&:after {
+  background-color: black;
+  background-image: linear-gradient(to right, #0b8699, #68ded4);
 }
 background-color: black;
 `
@@ -158,6 +185,7 @@ export const Bet12Grid = styled.div`
 export const Bet12Button = styled.button`
 &:after {
   background-color: #327ba8;
+  background-image: linear-gradient(to right, #1E2F97, #327ba8);
 }
 background-color: #1a4b82
 `
@@ -171,6 +199,7 @@ export const Bet18Grid = styled.div`
 export const Bet18Button = styled.button`
 &:after {
   background-color: #4ADEDE;
+  background-image: linear-gradient(to right, #9c76cf, #631b8c);
 }
 background-color: #1AA7EC;
 `
@@ -183,6 +212,7 @@ export const BetRowGrid = styled.div`
 export const BetRowButton = styled.button`
   &:after {
     background-color: #FDA300;
+    background-image: linear-gradient(to right, #8c1b85, #b0548a);
   }
   background-color: #E09F5A;
 `
