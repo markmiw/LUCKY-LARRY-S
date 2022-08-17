@@ -3,18 +3,17 @@ import styled from 'styled-components';
 import RouletteWheel from './RouletteWheel';
 import BetTable from './BetTable';
 
-export default function Roulette () {
+export default function Roulette ({userID}) {
   const [betInfo, setBetInfo] = useState('');
 
   return (
     <RouletteGameGrid>
       {/* {winState && <Confetti/>} */}
-      <RouletteWheel betInfo={betInfo}/>
+      <RouletteWheel betInfo={betInfo} userID={userID}/>
       <BetTable setBetInfo={setBetInfo}/>
     </RouletteGameGrid>
-  )
+  );
 }
-
 
 export const RouletteGameGrid = styled.div`
   display: grid;

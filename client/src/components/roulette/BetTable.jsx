@@ -65,7 +65,7 @@ export default function BetTable({ setBetInfo }) {
           0
         </Number0Button>
         <BetNumberGrid>
-          {[...Array(36)].map((index) => {
+          {[...Array(36)].map((rouletteNum, index) => {
             const val = index + 1;
             return (
               <NumberButton key={val} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>

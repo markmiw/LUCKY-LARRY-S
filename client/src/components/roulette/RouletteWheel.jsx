@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Wheel } from 'react-custom-roulette';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
 
@@ -59,7 +59,7 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-export default function RouletteWheel({ betInfo }) {
+export default function RouletteWheel({ betInfo, userID }) {
   // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -101,14 +101,15 @@ export default function RouletteWheel({ betInfo }) {
           // perpendicularText
           textDistance={textDistance}
           onStopSpinning={() => {
-            setMustSpin(false);
             axios.get('/api/roulette', {
               params: {
                 betInfo: betInfo,
                 winNum: prizeNumber,
+                userID: userID,
               },
             })
               .then((results) => {
+                setMustSpin(false);
                 if (results.data) {
                   // <Confetti/>
                   window.alert(`Congratulations! You won a total of ${results.data} dollars!`);
@@ -128,8 +129,9 @@ export default function RouletteWheel({ betInfo }) {
     </RouletteWheelContainer>
   );
 }
-
-RouletteWheel.propTypes = { betInfo: PropTypes.shape.isRequired };
+// num: num, col: color, eO: eO, rangeOf12: rangeOf12, firstalf: firstHalf, numRow: numRow,
+// RouletteWheel.propTypes = { betInfo: PropTypes.shape(num: PropTypes.shape({pick: PropTypes.string, bet: PropTypes.number})).isRequired };
+// {num: {pick: bet: }, color }
 
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;

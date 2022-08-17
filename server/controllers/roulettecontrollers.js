@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 const { Pool } = require('pg');
+const { getBalance, updateBalanceBasedOnWinnings, getUserId } = require('../../database/controllers');
 
 const pool = new Pool({
   user: 'postgres',
@@ -10,6 +11,19 @@ const pool = new Pool({
 });
 
 module.exports.checkNum = (req, res) => {
+
+  // const userHasEnoughMoney = getBalance(username) >= bet;
+  // if (!userHasEnoughMoney) {
+  //   res.status(200).send('insufficient funds');
+  //   return;
+  // }
+
+  // const updatedBalance = updateBalanceBasedOnWinnings(username, bet, winningsData.winnings);
+
+  // const userid = getUserId(username);
+  console.log(req.query);
+  const userID = JSON.parse(req.query.userID);
+  console.log('andy', userID);
   const winNum = JSON.parse(req.query.winNum);
   const {
     num, col, eO, rangeOf12, firstHalf, numRow,
