@@ -70,31 +70,19 @@ export default function BetTable({ setBetInfo, spin }) {
           {[...Array(36)].map((rouletteNum, index) => {
             const val = index + 1;
             return (
-<<<<<<< HEAD
-              <NumberButton key={val} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
-=======
               <YellowOrangeButton key={index} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
->>>>>>> main
-                  {val}
-                  &nbsp;
-                </YellowOrangeButton>
-                );
+                {val}
+                &nbsp;
+              </YellowOrangeButton>
+            );
           })}
-              </BetNumberGrid>
-              <BetColorOddGrid>
-<<<<<<< HEAD
-          <RedColorButton onClick={() => { setColor({ pick: 'red' }); openModal('red'); }}>Red</RedColorButton>
-          <BlackColorButton onClick={() => { setColor({ pick: 'black' }); openModal('black'); }}>Black</BlackColorButton>
-          <button type="submit" onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</button>
-          <button type="submit" onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</button>
-=======
-          <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red')}}>Red</PinkRedButton>
-          <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black')}}>Black</BlueBlackButton>
+        </BetNumberGrid>
+        <BetColorOddGrid>
+          <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red') }}>Red</PinkRedButton>
+          <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black') }}>Black</BlueBlackButton>
           <GreenBlackButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</GreenBlackButton>
           <BlueAquaButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</BlueAquaButton>
->>>>>>> main
-
-        </BetColorOddGrid >
+        </BetColorOddGrid>
 
         <Bet12Grid>
           <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 1 }); openModal('1st dozen'); }}>1st12 </BlueLightBlueButton>
@@ -146,11 +134,7 @@ export const GameDisplay = styled.div`
   margin: 0 auto;
   width: 300px;
   height: 30px;
-<<<<<<< HEAD
 `;
-=======
-`
->>>>>>> main
 
 export const BetTableContainer = styled.div`
   margin: 0 auto;
@@ -159,104 +143,38 @@ export const BetNumberGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
-<<<<<<< HEAD
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
-`;
-export const Number0Button = styled.button`
-&:after {
-  background-color: green;
-}
-background-color: #0b6102;
-`;
-
-export const NumberButton = styled.button`
-&:after {
-  background-color: #FDA300;
-}
-background-color: #E09F5A;
-`;
-=======
   @media (min-width: 501px) {
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
   }
   @media (max-width: 500px) {
     grid-template-columns: auto auto auto auto auto auto;
   }
-`
+`;
 
->>>>>>> main
 export const BetColorOddGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto auto;
-<<<<<<< HEAD
 `;
-export const RedColorButton = styled.button`
-&:after {
-  background-color: red;
-}
-background-color: red;
-`;
-export const BlackColorButton = styled.button`
-&:after {
-  background-color: black;
-}
-background-color: black;
-`;
-=======
-`
->>>>>>> main
 
 export const Bet12Grid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto;
-<<<<<<< HEAD
 `;
-export const Bet12Button = styled.button`
-&:after {
-  background-color: #327ba8;
-}
-background-color: #1a4b82
-`;
-=======
-`
 
->>>>>>> main
 export const Bet18Grid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto;
-
-<<<<<<< HEAD
 `;
-export const Bet18Button = styled.button`
-&:after {
-  background-color: #4ADEDE;
-}
-background-color: #1AA7EC;
-`;
-=======
-`
 
->>>>>>> main
 export const BetRowGrid = styled.div`
   display: grid;
   max-width: 100%;
   margin: 0 auto;
   grid-template-columns: auto auto auto;
-<<<<<<< HEAD
 `;
-export const BetRowButton = styled.button`
-  &:after {
-    background-color: #FDA300;
-  }
-  background-color: #E09F5A;
-`;
-=======
-`
-
->>>>>>> main
