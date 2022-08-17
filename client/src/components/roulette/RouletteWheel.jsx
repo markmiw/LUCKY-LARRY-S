@@ -143,7 +143,7 @@ export default function RouletteWheel({
               setWinState(true);
               setUser({ ...user, balance: updatedBalance });
             } else {
-              window.alert('Not a winner, try again next time!');
+              window.alert('You did not win this time 👉👈 ')
               setUser({ ...user, balance: updatedBalance });
             }
           }}
