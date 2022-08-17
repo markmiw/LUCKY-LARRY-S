@@ -1,14 +1,32 @@
-// this is the share game model pop up
-import React, { useEffect, useState, useContext } from 'react';
+/* eslint-disable no-alert */
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function Modal({ showModal, setShowModal, currentBetOption, setNum, setColor, setEO, setFirstHalf, setNumRow, setRangeOf12, num, color, eO, rangeOf12, firstHalf, numRow, betInput, setBetInput }) {
+export default function Modal({
+  showModal,
+  setShowModal,
+  currentBetOption,
+  setNum,
+  setColor,
+  setEO,
+  setFirstHalf,
+  setNumRow,
+  setRangeOf12,
+  num,
+  color,
+  eO,
+  rangeOf12,
+  firstHalf,
+  numRow,
+  betInput,
+  setBetInput,
+}) {
   const [betAmount, setBetAmount] = useState(0);
 
-  const handleSubmit = () => {
-    event.preventDefault();
-    if (betAmount > 0) {
-      //to potentially convert to switches or refactor later with a useEffect
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (betAmount >= 1) {
       if (currentBetOption === 'red' || currentBetOption === 'black') {
         setColor({ ...color, bet: betAmount });
       } else if (currentBetOption === 'even' || currentBetOption === 'odd') {
@@ -23,37 +41,58 @@ export default function Modal({ showModal, setShowModal, currentBetOption, setNu
         setNum({ ...num, bet: betAmount });
       }
       setBetInput(!betInput);
-      alert('You have successfully bet on this option')
+      alert('You have successfully bet on this option');
       // turn off modal after submitting bet
-      setShowModal(prev => !prev)
-
+      setShowModal((prev) => !prev);
     } else {
-      alert('Please put the amount you want to bet on this option')
+      alert('Please put the amount you want to bet on this option');
     }
     setBetAmount(0);
-  }
+  };
 
   return (
     <div>
-      {showModal ?
-        <ModalWrapperStyled>
-          <ModalWrapper>
-            <CloseButtonStyled type="button" onClick={() => setShowModal(prev => !prev)}>X</CloseButtonStyled>
-            <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}> You can bet $1, $5, $10, $20, $50, $100 on {currentBetOption}</ModalInnerStyled>
-            <ModalForm onSubmit={(event) => handleSubmit(event)}>
-
-              {/*  search bar implementation below*/}
-              <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
-              <button onClick={() => handleSubmit()}>Submit Bet</button>
-            </ModalForm>
-          </ModalWrapper>
-          <ModalBackgroundStyled />
-        </ModalWrapperStyled>
+      {showModal
+        ? (
+          <ModalWrapperStyled>
+            <ModalWrapper>
+              <CloseButtonStyled type="button" onClick={() => setShowModal((prev) => !prev)}>X</CloseButtonStyled>
+              <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}>
+                You can bet $1, $5, $10, $20, $50, $100 on
+                {currentBetOption}
+              </ModalInnerStyled>
+              <ModalForm onSubmit={(event) => handleSubmit(event)}>
+                <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
+                <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Bet</button>
+              </ModalForm>
+            </ModalWrapper>
+            <ModalBackgroundStyled />
+          </ModalWrapperStyled>
+        )
         : null}
     </div>
-  )
-
+  );
 }
+
+Modal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  currentBetOption: PropTypes.string.isRequired,
+  setNum: PropTypes.func.isRequired,
+  setColor: PropTypes.func.isRequired,
+  setEO: PropTypes.func.isRequired,
+  setFirstHalf: PropTypes.func.isRequired,
+  setNumRow: PropTypes.func.isRequired,
+  setRangeOf12: PropTypes.func.isRequired,
+  num: PropTypes.shape({ pick: PropTypes.string }).isRequired,
+  color: PropTypes.shape({ pick: PropTypes.string }).isRequired,
+  eO: PropTypes.shape({ pick: PropTypes.string }).isRequired,
+  rangeOf12: PropTypes.shape({ pick: PropTypes.string }).isRequired,
+  firstHalf: PropTypes.shape({ pick: PropTypes.string }).isRequired,
+  numRow: PropTypes.shape({ pick: PropTypes.string }).isRequired,
+  betInput: PropTypes.bool.isRequired,
+  setBetInput: PropTypes.func.isRequired,
+};
 
 export const ModalWrapper = styled.div`
   display: grid;
@@ -68,12 +107,12 @@ export const ModalWrapper = styled.div`
   height: 500px;
   margin-top: -300px;
   overflow-y: scroll;
-`
+`;
 
 export const ModalForm = styled.form`
   z-index: 11;
   color: black;
-`
+`;
 
 export const CloseModalButton = styled.button`
   cursor: pointer;
@@ -83,7 +122,7 @@ export const CloseModalButton = styled.button`
   width: 32px;
   padding: 0;
   z-index: 10;
-`
+`;
 
 export const ModalWrapperStyled = styled.div`
   position: fixed;
@@ -105,7 +144,6 @@ export const ModalBackgroundStyled = styled.div`
   bottom: 0;
   z-index: 10;
 `;
-
 
 export const ModalInnerStyled = styled.div`
   max-width: 80%;

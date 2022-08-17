@@ -31,20 +31,20 @@ function Router() {
       />
       <Routes>
         {loggedIn && (
-        <>
-          <Route
-            path="/roulette"
-            element={<Gamepage user={user} game="roulette" />}
-          />
-          <Route
-            path="/scratch-ticket"
-            element={<Gamepage user={user} setUser={setUser} game="scratch-ticket" />}
-          />
-          <Route
-            path="/slots"
-            element={<Gamepage user={user} setUser={setUser} game="slots" />}
-          />
-        </>
+          <>
+            <Route
+              path="/roulette"
+              element={<Gamepage user={user} setUser={setUser} game="roulette" />}
+            />
+            <Route
+              path="/scratch-ticket"
+              element={<Gamepage user={user} setUser={setUser} game="scratch-ticket" />}
+            />
+            <Route
+              path="/slots"
+              element={<Gamepage user={user} setUser={setUser} game="slots" />}
+            />
+          </>
         )}
         <Route
           path="/"

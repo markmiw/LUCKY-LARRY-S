@@ -10,7 +10,7 @@ import Slots from '../slots/Slots';
 
 const renderGame = (game, user, setUser) => {
   if (game === 'roulette') {
-    return <Roulette user={user} />;
+    return <Roulette user={user} setUser={setUser} />;
   }
   if (game === 'scratch-ticket') {
     return <ScratchTicket user={user} setUser={setUser} />;

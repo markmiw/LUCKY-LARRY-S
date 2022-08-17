@@ -1,10 +1,19 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
+/* eslint-disable object-shorthand */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
+
 import WinningEffect from '../shared/WinningEffect';
-// import { RouletteWheelContainer, SpinButton } from './roulette.styled.js';
 
 const data = [
   { option: '0', style: { backgroundColor: 'green' } },
@@ -43,8 +52,8 @@ const data = [
   { option: '33' },
   { option: '34' },
   { option: '35' },
-  { option: '36' }
-]
+  { option: '36' },
+];
 
 const backgroundColors = ['#e34b49', '#161a20'];
 const textColors = ['white'];
@@ -59,41 +68,59 @@ const fontSize = 17;
 const textDistance = 77;
 const spinDuration = 1.0;
 
-
-
-export default function RouletteWheel({ betInfo }) {
-  //wheel functionality
+export default function RouletteWheel({
+  betInfo, user, setUser, spin, setSpin,
+}) {
+  // wheel functionality
   const [mustSpin, setMustSpin] = useState(false);
-  const [prizeNumber, setPrizeNumber] = useState(0);
-  const [winAmount, setWinAmount] = useState(0);
+  const [winData, setWinData] = useState({});
   const [winState, setWinState] = useState(false);
 
   const handleSpinClick = () => {
-    // grabWinningNum(newPriceNumber);
-    const newPrizeNumber = Math.floor(Math.random() * data.length);
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
+    axios.get('/api/roulette', {
+      params: {
+        betInfo: betInfo,
+        user: user,
+      },
+    })
+      .then((response) => {
+        if (response.data.status === 'Insufficient Funds.') {
+          window.alert(response.data.status);
+          return;
+        }
+        if (response.data.status === 'No bet was made.') {
+          window.alert(response.data.status);
+          return;
+        }
+        let betAmount = 0;
+        Object.entries(betInfo).forEach(([key, value]) => {
+          betAmount += Number(value.bet);
+        });
+        const updatedBalance = user.balance - betAmount;
+        setUser({ ...user, balance: updatedBalance });
+        setWinData(response.data);
+        setMustSpin(true);
+      });
   };
 
   // show winning effect for only 10 seconds
   const winningEffect = () => {
     setTimeout(() => {
-        setWinState(false);
+      setWinState(false);
     }, 10000);
-};
+  };
 
   useEffect(winningEffect, [winState]);
-
 
   return (
     <RouletteWheelContainer className="App">
       <WinEffectContainer>
-      {winState && <WinningEffect/>}
+        {winState && <WinningEffect />}
       </WinEffectContainer>
       <header className="App-header">
         <Wheel
           mustStartSpinning={mustSpin}
-          prizeNumber={prizeNumber}
+          prizeNumber={winData.winNum}
           data={data}
           backgroundColors={backgroundColors}
           textColors={textColors}
@@ -110,44 +137,37 @@ export default function RouletteWheel({ betInfo }) {
           textDistance={textDistance}
           onStopSpinning={() => {
             setMustSpin(false);
-            axios.get('/api/roulette', {
-              params: {
-                betInfo: betInfo,
-                winNum: prizeNumber
-              }
-            })
-              .then(results => {
-                // need to clean out the current bets
-                if (results.data) {
-                  (setWinState(true))
-                  // window.alert(`Congratulations! You won a total of ${results.data} dollars!`)
-                  //update global userbalance hook here
-                } else {
-                  window.alert('You did not win this time 👉👈 ')
-                }
-              })
-              .catch(err => console.log(err));
+            setSpin(!spin);
+            const { updatedBalance, winAmount } = winData;
+            if (winAmount) {
+              setWinState(true);
+              setUser({ ...user, balance: updatedBalance });
+            } else {
+              window.alert('You did not win this time 👉👈 ')
+              setUser({ ...user, balance: updatedBalance });
+            }
           }}
         />
         <br />
-        <SpinButton className={'spin-button'} onClick={handleSpinClick}>
+        <SpinButton className="spin-button" onClick={handleSpinClick}>
           SPIN
         </SpinButton>
       </header>
     </RouletteWheelContainer>
-  )
+  );
 }
 
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;
-`
+`;
 export const SpinButton = styled.button`
+
 &:after {
   background-color: #FDA300;
   background-image: linear-gradient(to right, #1E2F97, #4ADEDE);
 }
 background-color: #194569;
-`
+`;
 export const WinEffectContainer = styled.div`
   z-index: 20;
-`
+`;
