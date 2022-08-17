@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import img from '../../../../assets/test.jpg';
-import rouletteLogo from '../../../dist/icons/roulette_icon.jpeg';
+import rouletteLogo from '../../../dist/icons/roulette_icon.png';
+import slotsLogo from '../../../dist/icons/slots_icon.png';
+import ticketLogo from '../../../dist/icons/scratch_ticket_icon.png';
 
 const games = ['Roulette', 'Scratch-Ticket', 'Slots'];
 export default function Homepage({
@@ -14,31 +16,63 @@ export default function Homepage({
     setShowLoginModal(true);
   }
 
+
   return (
     <Grid>
-      {games.map((game) => {
-        if (loggedIn) {
-          return (
-            <Game key={game}>
-              <Link to={game}>
-                <div>{game}</div>
-                <img
-                  src={rouletteLogo}
-                  width="200"
-                  height="200"
-                  alt="game"
-                />
-              </Link>
-            </Game>
-          );
-        }
-        return (
-          <Game key={game} onClick={() => handleClick()}>
-            <div>{game}</div>
-            <img src={rouletteLogo} width="200" height="200" alt="game" />
-          </Game>
-        );
-      })}
+      {loggedIn ? (
+        <>
+        <Game>
+          <Link to='/Roulette'>
+            <div>Roulette</div>
+            <img
+              src={rouletteLogo}
+              width="200"
+              height="200"
+              alt="game"
+            />
+          </Link>
+        </Game>
+         <Game>
+         <Link to='/Scratch-Ticket'>
+           <div>Scratch Ticket</div>
+           <img
+             src={ticketLogo}
+             width="200"
+             height="200"
+             alt="game"
+           />
+         </Link>
+       </Game>
+       <Game >
+       <Link to='/Slots'>
+         <div>Slots</div>
+         <img
+           src={slotsLogo}
+           width="200"
+           height="200"
+           alt="game"
+         />
+       </Link>
+     </Game>
+     </>
+     ) :
+     (
+      <>
+        <Game onClick={() => handleClick()}>
+          <div>Roulette</div>
+          <img src={rouletteLogo} width="200" height="200" alt="game" />
+        </Game>
+        <Game onClick={() => handleClick()}>
+        <div>Scratch Ticket</div>
+        <img src={ticketLogo} width="200" height="200" alt="game" />
+      </Game>
+      <Game onClick={() => handleClick()}>
+      <div>Slots</div>
+      <img src={slotsLogo} width="200" height="200" alt="game" />
+    </Game>
+    </>
+    )
+  }
     </Grid>
   );
 }
