@@ -7,7 +7,7 @@ CREATE DATABASE luckylarrys;
 
 CREATE TABLE country (
   id SERIAL PRIMARY KEY NOT NULL,
-  country VARCHAR(30) NOT NULL
+  country TEXT NOT NULL
 );
 
 INSERT INTO country (country) VALUES
@@ -295,7 +295,7 @@ INSERT INTO users (username, password, countryID, balance, winnings) VALUES
 ('Jesse', 'Roulette', 5, 2000, 1000),
 ('Andy', 'Anime', 6, 2000, 100000),
 ('Mark', 'Tensorflow', 7, 2000, 1000),
-('Gary', 'Pokemon', 8, 2000, 10000),
+('Gary', 'Pokemon', 8, 2000, 10000);
 
 -------Roulette---------
 -- USE roulette
@@ -308,8 +308,7 @@ INSERT INTO users (username, password, countryID, balance, winnings) VALUES
 --numRow =1,2,3 rows, 0
 -- further functionality - add relation in DB for when users pick middle quadrants between numbers
 
-DROP TABLE IF EXISTS RouletteNums;
-CREATE TABLE IF NOT EXISTS RouletteNums(
+CREATE TABLE RouletteNums(
   id INTEGER NOT NULL PRIMARY KEY,
   evenOdd VARCHAR(5) NOT NULL,
   color VARCHAR(6) NOT NULL,
