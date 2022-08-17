@@ -5,7 +5,7 @@ import Roulette from '../roulette/Roulette';
 import ScratchTicket from '../scratch-ticket/ScratchTicket';
 import Slots from '../slots/Slots';
 
-const renderGame = () => {
+const renderGame = (game) => {
   if (game === 'roulette') {
     return <Roulette />;
   }
@@ -19,7 +19,7 @@ function Gamepage({ game }) {
   return (
     <div className="game-container">
       <Sidebar user={user} />
-      {renderGame()}
+      {renderGame(game)}
     </div>
   );
 }
