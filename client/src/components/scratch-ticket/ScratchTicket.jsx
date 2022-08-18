@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
-import IMG from '../../../dist/icons/scratch_ticket_icon.png';
+
+// red background
+import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
+import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
+
 
 const GRID_COLS = 5;
 const winningsArr = [0, 0, 1, 10, 25, 100]; // 0-5 matches
@@ -33,6 +37,7 @@ export default function ScratchTicket({ user, setUser }) {
   const [bet, setBet] = useState('1');
   const [playing, setPlaying] = useState(false);
   const [confirmWinnings, setConfirmWinnings] = useState(false);
+  const [notWinState, setNotWinState] = useState(false);
 
   const [numMatches, setNumMatches] = useState(0);
   const [winningAmount, setWinningAmount] = useState(0);
@@ -70,22 +75,30 @@ export default function ScratchTicket({ user, setUser }) {
       balance: res.data.results,
     });
 
-    setConfirmWinnings(true);
-    setWinningAnimation(true);
+    if (winnings > 0) {
+      console.log('winnings is: ', winnings)
+      setConfirmWinnings(true);
+      setWinningAnimation(true);
+    } else {
+      setNotWinState(true);
+    }
   }
 
   function changeBet(e) {
     setBet(Number(e.target.value));
   }
 
+  // need to check if user entered a bet amount
   function confirmPlay() {
     if (bet >= 0 && bet <= user.balance) {
       setPlaying(true);
     }
+
   }
 
   function handlePlayAgain() {
     setConfirmWinnings(false);
+    setNotWinState(false);
     setPlaying(false);
   }
 
@@ -94,12 +107,13 @@ export default function ScratchTicket({ user, setUser }) {
   const winningEffect = () => {
     setTimeout(() => {
       setWinningAnimation(false);
-    }, 10000);
+    }, 7000);
   };
 
   useEffect(winningEffect, [winningAnimation]);
 
   return (
+    <ScratchGrid>
     <Game>
       {winningAnimation && <WinningEffect />}
       <Form>
@@ -108,21 +122,21 @@ export default function ScratchTicket({ user, setUser }) {
           type="number"
           min="0"
           max={user.balance}
-          placeholder="1"
+          placeholder="Please enter bet amount"
           disabled={playing}
           onChange={(e) => changeBet(e)}
         />
       </Form>
+      {/* <BetButton onClick={() => confirmPlay()}>Bet</BetButton> */}
       <Scratcher>
         {!playing ? (
           <ConfirmOverlay onClick={() => confirmPlay()}>
-            Wanna scratch?
           </ConfirmOverlay>
         ) : (
           <ScratchCard
             width={500}
-            height={500}
-            image={IMG}
+            height={600}
+            image={LarryBackground}
             finishPercent={80}
             onComplete={() => getWinnings()}
           >
@@ -133,7 +147,7 @@ export default function ScratchTicket({ user, setUser }) {
             </WinningVals>
             <MatchingVals>
               {matchingValues.map((num) => (
-                <div
+                <ScratchTicketNumber
                   key={num}
                   style={{
                     display: 'flex',
@@ -141,12 +155,13 @@ export default function ScratchTicket({ user, setUser }) {
                     alignItems: 'center',
                     width: '100%',
                     height: '70px',
-                    border: '1px solid',
+                    border: '1px solid white',
                     borderRadius: '100px',
+                    backgroundColor: '#FE53BB',
                   }}
                 >
                   {num}
-                </div>
+                </ScratchTicketNumber>
               ))}
             </MatchingVals>
           </ScratchCard>
@@ -163,8 +178,21 @@ export default function ScratchTicket({ user, setUser }) {
             </button>
           </ConfirmOverlay>
         )}
+        {notWinState && (
+          <ConfirmOverlay>
+            <div>{`Click to play again`}</div>
+            <div>
+              {`You had ${numMatches} `}
+              matches
+            </div>
+            <button type="submit" onClick={() => handlePlayAgain()}>
+              Play again?
+            </button>
+          </ConfirmOverlay>
+        )}
       </Scratcher>
     </Game>
+    </ScratchGrid>
   );
 }
 
@@ -180,9 +208,20 @@ ScratchTicket.propTypes = {
   setUser: PropTypes.func.isRequired,
 };
 
+const ScratchGrid = styled.div`
+display: grid;
+max-width: 90%;
+margin: 0 auto;
+grid-template-rows: auto auto;
+`
+
 const Game = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+const BetButton = styled.button`
+
 `;
 
 const Form = styled.div`
@@ -195,15 +234,17 @@ const Scratcher = styled.div`
   align-content: center;
 `;
 
+// grey background
 const ConfirmOverlay = styled.div`
   display: grid;
   place-items: center;
   position: absolute;
   justify-self: center;
   width: 500px;
-  height: 500px;
+  height: 600px;
   color: black;
-  background-color: grey;
+  background-image: url(${scratchBackground});
+  background-size: contain;
   z-index: 2;
 `;
 
@@ -227,4 +268,17 @@ const Tile = styled.div`
   border: 1px solid;
   margin: 10px;
   border-radius: 100px;
+  background-image: linear-gradient(to right, #FE53BB, #F5D300);
+`;
+
+const ScratchTicketNumber = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border: 1px solid ;
+  margin: 10px;
+  border-radius: 100px;
+  background-image: linear-gradient(to right, #F5D300, #09FBD3);
 `;

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
+import styled from 'styled-components';
+import { CloseButton } from '../shared/button.styled.js'
+
+
 
 function LoginModal({ setModal, setUser, setLoggedIn }) {
   const [info, setInfo] = useState({});
@@ -44,13 +48,13 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
           <h4 className="modal-title w-100 font-weight-bold">
             Sign in
           </h4>
-          <button
+          <CloseButton
             type="button"
             className="close"
             onClick={() => setModal(false)}
           >
             <span aria-hidden="true">&times;</span>
-          </button>
+          </CloseButton>
         </div>
         <div className="modal-body mx-3">
           <div className="md-form mb-4">
@@ -96,3 +100,4 @@ LoginModal.propTypes = {
 };
 
 export default LoginModal;
+

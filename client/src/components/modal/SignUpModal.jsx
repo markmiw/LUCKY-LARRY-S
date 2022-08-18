@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
 import flags from '../sidebar/flags';
+import styled from 'styled-components';
+import { CloseButton } from '../shared/button.styled.js'
+
 
 function SignUpModal({ setModal }) {
   // PROBABLY MORE FIELDS
@@ -39,13 +42,13 @@ function SignUpModal({ setModal }) {
           <h4 className="modal-title w-100 font-weight-bold">
             Create Account
           </h4>
-          <button
+          <CloseButton
             type="button"
             className="close"
             onClick={() => setModal(false)}
           >
             <span aria-hidden="true">&times;</span>
-          </button>
+          </CloseButton>
         </div>
         <div className="modal-body mx-3">
           <div className="md-form mb-4">
@@ -102,3 +105,4 @@ SignUpModal.propTypes = {
 };
 
 export default SignUpModal;
+

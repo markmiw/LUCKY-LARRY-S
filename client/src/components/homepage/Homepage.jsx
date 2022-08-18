@@ -6,6 +6,8 @@ import img from '../../../../assets/test.jpg';
 import rouletteLogo from '../../../dist/icons/roulette_icon.png';
 import slotsLogo from '../../../dist/icons/slots_icon.png';
 import ticketLogo from '../../../dist/icons/scratch_ticket_icon.png';
+import LarryLogoPic from '../../../dist/icons/LarryLogo.jpeg';
+
 
 const games = ['Roulette', 'Scratch-Ticket', 'Slots'];
 export default function Homepage({
@@ -18,6 +20,9 @@ export default function Homepage({
 
 
   return (
+    <>
+    <LarryLogo></LarryLogo>
+    <br></br>
     <Grid>
       {loggedIn ? (
         <>
@@ -74,6 +79,8 @@ export default function Homepage({
     )
   }
     </Grid>
+
+    </>
   );
 }
 
@@ -82,26 +89,35 @@ Homepage.propTypes = {
   setShowLoginModal: PropTypes.func.isRequired,
 };
 
+const LarryLogo = styled.div`
+  display: grid;
+  margin: 0 auto;
+  height: 400px;
+  width: 400px;
+  background-image: url(${LarryLogoPic});
+  background-size: contain;
+`
+
 const Grid = styled.div`
-@media (min-width: 501px) {
+@media (min-width: 601px) {
   display: flex;
   justify-content: space-evenly;
 }
-@media (max-width: 500px) {
-display: grid;
-grid-template-columns: auto
-margin: 0 auto;
-gap: 6%;
+@media (max-width: 600px) {
+  display: grid;
+  grid-template-rows: auto
+  margin: 0 auto;
+  gap: 6%;
 }
 `;
 
 const Game = styled.div`
-@media (min-width: 501px) {
+@media (min-width: 601px) {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   display: grid;
   margin: 0 auto;
 }

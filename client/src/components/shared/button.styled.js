@@ -67,3 +67,13 @@ export const PurplePinkButton = styled.button`
   }
   background-color: #E09F5A;
 `
+
+export const CloseButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.5rem;
+  width: 6rem;
+`;
+
+
