@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
-import IMG from '../../../dist/icons/scratch_ticket_icon.png';
+
+// red background
+import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
+import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
+
 
 const GRID_COLS = 5;
 const winningsArr = [0, 0, 1, 10, 25, 100]; // 0-5 matches
@@ -116,13 +120,12 @@ export default function ScratchTicket({ user, setUser }) {
       <Scratcher>
         {!playing ? (
           <ConfirmOverlay onClick={() => confirmPlay()}>
-            Wanna scratch?
           </ConfirmOverlay>
         ) : (
           <ScratchCard
             width={500}
-            height={500}
-            image={IMG}
+            height={650}
+            image={LarryBackground}
             finishPercent={80}
             onComplete={() => getWinnings()}
           >
@@ -195,15 +198,17 @@ const Scratcher = styled.div`
   align-content: center;
 `;
 
+// grey background
 const ConfirmOverlay = styled.div`
   display: grid;
   place-items: center;
   position: absolute;
   justify-self: center;
   width: 500px;
-  height: 500px;
+  height: 600px;
   color: black;
-  background-color: grey;
+  background-image: url(${scratchBackground});
+  background-size: contain;
   z-index: 2;
 `;
 

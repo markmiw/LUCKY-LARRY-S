@@ -6,7 +6,7 @@ import styled from 'styled-components';
 export default function WinningEffect() {
   return (
     <WinningEffectContainer>
-      Congradulation!! You won!!
+      Congratulations!! You won!!
     <Confetti/>
     <WinningBackground />
     </WinningEffectContainer>
