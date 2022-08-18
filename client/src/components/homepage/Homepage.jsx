@@ -20,9 +20,7 @@ export default function Homepage({
 
 
   return (
-    <>
-    <LarryLogo></LarryLogo>
-    <br></br>
+    <HomeGrid>
     <Grid>
       {loggedIn ? (
         <>
@@ -75,12 +73,13 @@ export default function Homepage({
       <div>Slots</div>
       <img src={slotsLogo} width="200" height="200" alt="game" />
     </Game>
+
     </>
     )
   }
     </Grid>
-
-    </>
+    <LarryLogo></LarryLogo>
+    </HomeGrid>
   );
 }
 
@@ -88,6 +87,14 @@ Homepage.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   setShowLoginModal: PropTypes.func.isRequired,
 };
+
+
+const HomeGrid = styled.div`
+  display: grid;
+  margin: 0 auto;
+  grid-template-rows: auto auto;
+  gap: 6%;
+`
 
 const LarryLogo = styled.div`
   display: grid;

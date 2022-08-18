@@ -45,7 +45,7 @@ export default function Slots({ user, setUser }) {
     setTimeout(() => {
       setTimeout(() => {
         setWinState(false);
-      }, 3000);
+      }, 7000);
     });
   };
 
@@ -61,7 +61,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={4}
           values={column1Values}
           setValues={setColumn1Values}
-          iconSize={100}
+          iconSize={160}
           column={1}
           adjustment={adjustment}
           user={user}
@@ -72,7 +72,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={5.5}
           values={column2Values}
           setValues={setColumn2Values}
-          iconSize={100}
+          iconSize={160}
           column={2}
           adjustment={adjustment}
           user={user}
@@ -83,7 +83,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={7}
           values={column3Values}
           setValues={setColumn3Values}
-          iconSize={100}
+          iconSize={160}
           column={3}
           adjustment={adjustment}
           user={user}

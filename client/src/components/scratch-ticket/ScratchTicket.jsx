@@ -5,7 +5,6 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
 
-// red background
 import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
 
@@ -17,6 +16,7 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// number set
 function getNUnique(n) {
   const arr = [];
   const set = new Set();
@@ -34,7 +34,7 @@ function getNUnique(n) {
 export default function ScratchTicket({ user, setUser }) {
   const [winningValues, setWinningValues] = useState([]);
   const [matchingValues, setMatchingValues] = useState([]);
-  const [bet, setBet] = useState('1');
+  const [bet, setBet] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [confirmWinnings, setConfirmWinnings] = useState(false);
   const [notWinState, setNotWinState] = useState(false);
@@ -90,8 +90,10 @@ export default function ScratchTicket({ user, setUser }) {
 
   // need to check if user entered a bet amount
   function confirmPlay() {
-    if (bet >= 0 && bet <= user.balance) {
+    if (bet >= 1 && bet <= user.balance) {
       setPlaying(true);
+    } else {
+      alert('please enter an amount you want to bet')
     }
 
   }
