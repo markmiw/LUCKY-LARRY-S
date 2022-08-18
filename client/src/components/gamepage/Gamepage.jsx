@@ -39,7 +39,7 @@ export const GamePageGrid = styled.div`
   margin: 0 auto;
   gap: 5%;
   @media (min-width: 501px) {
-    grid-template-columns: auto auto;
+    grid-template-columns: 2fr 1fr;
     gap: 5%;
   }
   @media (max-width: 500px) {
