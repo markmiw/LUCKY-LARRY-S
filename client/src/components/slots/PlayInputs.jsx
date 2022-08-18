@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 import {
   GreenWhiteButton,
   YellowOrangeButton,
-  PinkRedButton,
-  BlueBlackButton,
-  GreenBlackButton,
-  BlueAquaButton,
-  BlueLightBlueButton,
-  LightPurplePulpleButton,
-  PurplePinkButton,
 } from '../shared/button.styled';
 
 export default function PlayInputs({
@@ -38,10 +31,17 @@ export default function PlayInputs({
       </TopRowContainer>
       <BottomRowContainer>
         <StyledInput
-          type="number"
-          value={betAmount}
-          placeholder="1"
-          onChange={(event) => setBetAmount(event.target.value)}
+          type="text"
+          value={`$${betAmount}`}
+          onChange={(event) => {
+            if (event.target.value === '') {
+              setBetAmount('');
+              return;
+            }
+            const afterDollar = event.target.value.split('$')[1];
+            const digits = afterDollar.split(/[^0-9]/).join('');
+            setBetAmount(digits);
+          }}
         />
       </BottomRowContainer>
       <BottomRowContainer>
@@ -66,6 +66,7 @@ PlayInputs.propTypes = {
 const InputsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin-top: 50px;
 `;
 
 const TopRowContainer = styled.div`
@@ -81,14 +82,13 @@ const BottomRowContainer = styled.div`
 const StyledInput = styled.input`
   height: 100%;
   margin: 0;
-  border-bottom-width: 4px;
   background-image: linear-gradient(to right,#6dcfa4,#178a80);
-  text-align: center;
   width: 100%;
   border: solid #165e58;
   border-radius: 16px;
   border-width: 0 0 4px;
   color: white;
+  text-align: center;
   font-family: din-round,sans-serif;
   font-size: 15px;
   font-weight: 700;

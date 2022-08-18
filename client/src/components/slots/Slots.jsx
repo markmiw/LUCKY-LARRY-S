@@ -20,9 +20,9 @@ export default function Slots({ user, setUser }) {
     if (column3Values.length !== 3) {
       return;
     }
-    let newBalance = user.balance - betAmount * plays;
+    let newBalance = user.balance - Number(betAmount) * plays;
     // can't bet more than you have, or negative bets
-    if (newBalance < 0 || betAmount < 0) {
+    if (newBalance < 0 || Number(betAmount) < 0 || betAmount === '') {
       return;
     }
     setUser({ ...user, balance: newBalance });
