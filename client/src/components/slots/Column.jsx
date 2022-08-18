@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import WinningEffect from '../shared/WinningEffect';
 
 // move the links into served assets when finalized icon decision
 const getImageFromValue = function getImageFromValue(value) {
