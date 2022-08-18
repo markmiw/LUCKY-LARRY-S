@@ -14,6 +14,7 @@ export default function Slots({ user, setUser }) {
   const [betAmount, setBetAmount] = useState('1');
   const [adjustment, setAdjustment] = useState(0);
   const [winState, setWinState] = useState(false);
+  const [winningRows, setWinningRows] = useState([]);
   function getSlotArray(start, result) {
     const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
     return start.concat(filler, result);
@@ -42,6 +43,7 @@ export default function Slots({ user, setUser }) {
         setColumn2Values(getSlotArray(column2Values, col2));
         setColumn3Values(getSlotArray(column3Values, col3));
         setAdjustment(winningsData.winnings);
+        setWinningRows(winningsData.winningRows);
       })
       .catch((err) => {
         console.log('Error in Slots play:', err);
@@ -52,7 +54,7 @@ export default function Slots({ user, setUser }) {
     setTimeout(() => {
       setTimeout(() => {
         setWinState(false);
-      }, 3000);
+      }, 5000);
     });
   };
 
@@ -73,7 +75,9 @@ export default function Slots({ user, setUser }) {
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
         />
         <Column
           scrollTime={5.5}
@@ -84,7 +88,9 @@ export default function Slots({ user, setUser }) {
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
         />
         <Column
           scrollTime={7}
@@ -95,7 +101,9 @@ export default function Slots({ user, setUser }) {
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
         />
       </ColumnsContainer>
       <PlayInputs
