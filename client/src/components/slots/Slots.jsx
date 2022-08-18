@@ -14,6 +14,7 @@ export default function Slots({ user, setUser }) {
   const [betAmount, setBetAmount] = useState('1');
   const [adjustment, setAdjustment] = useState(0);
   const [winState, setWinState] = useState(false);
+  const [winningRows, setWinningRows] = useState([]);
   function getSlotArray(start, result) {
     const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
     return start.concat(filler, result);
@@ -23,10 +24,17 @@ export default function Slots({ user, setUser }) {
     if (column3Values.length !== 3) {
       return;
     }
-    const newBalance = user.balance - betAmount * plays;
+    const newBalance = user.balance - Number(betAmount) * plays;
+    // can't bet more than you have, or negative bets
+    if (newBalance < 0 || Number(betAmount) < 0 || betAmount === '') {
+      return;
+    }
     setUser({ ...user, balance: newBalance });
     axios.put('/api/slots', { data: { userid: user.id, bet: betAmount, rows: plays } })
       .then((result) => {
+        if (result.data === 'insufficient funds') {
+          return;
+        }
         const { rows, winningsData } = result.data;
         const col1 = [rows[0], rows[3], rows[6]];
         const col2 = [rows[1], rows[4], rows[7]];
@@ -35,6 +43,7 @@ export default function Slots({ user, setUser }) {
         setColumn2Values(getSlotArray(column2Values, col2));
         setColumn3Values(getSlotArray(column3Values, col3));
         setAdjustment(winningsData.winnings);
+        setWinningRows(winningsData.winningRows);
       })
       .catch((err) => {
         console.log('Error in Slots play:', err);
@@ -61,34 +70,40 @@ export default function Slots({ user, setUser }) {
           scrollTime={4}
           values={column1Values}
           setValues={setColumn1Values}
-          iconSize={160}
+          iconSize={125}
           column={1}
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
         />
         <Column
           scrollTime={5.5}
           values={column2Values}
           setValues={setColumn2Values}
-          iconSize={160}
+          iconSize={125}
           column={2}
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
         />
         <Column
           scrollTime={7}
           values={column3Values}
           setValues={setColumn3Values}
-          iconSize={160}
+          iconSize={125}
           column={3}
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
         />
       </ColumnsContainer>
       <PlayInputs
@@ -96,6 +111,7 @@ export default function Slots({ user, setUser }) {
         betAmount={betAmount}
         setBetAmount={setBetAmount}
         play={() => { play(); }}
+        plays={plays}
       />
     </SlotsContainer>
   );
@@ -111,6 +127,7 @@ Slots.propTypes = {
 
 const SlotsContainer = styled.div`
   width: 50vw;
+  min-width: 450px;
 `;
 
 const EffectContainer = styled.div`
@@ -118,7 +135,6 @@ const EffectContainer = styled.div`
 `;
 
 const ColumnsContainer = styled.div`
-  min-width: 300px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

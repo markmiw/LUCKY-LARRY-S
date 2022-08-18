@@ -35,6 +35,7 @@
     "react": "18.2.0",
     "react-animated-text": "^0.1.4",
     "react-confetti": "^6.1.0",
+    "react-countup": "^6.3.0",
     "react-custom-roulette": "^1.2.0",
     "react-custom-roulette-skate": "^1.2.3",
     "react-dom": "18.2.0",

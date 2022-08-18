@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import PropTypes from 'prop-types';
-import WinningEffect from '../shared/WinningEffect';
 
 // move the links into served assets when finalized icon decision
 const getImageFromValue = function getImageFromValue(value) {
@@ -28,7 +27,9 @@ export default function Column({
   adjustment,
   user,
   setUser,
+  winState,
   setWinState,
+  winningRows,
 }) {
   const [offset, setOffset] = useState(0);
 
@@ -80,9 +81,12 @@ export default function Column({
               // there would be duplicates
               // eslint-disable-next-line react/no-array-index-key
               key={`${value}@${index}`}
+              row={index}
+              winningRows={winningRows}
+              winState={winState}
               iconSize={iconSize}
             >
-              {getImageFromValue(value)}
+              {getImageFromValue(value, index, winningRows)}
             </Icon>
           ))
         }
@@ -103,6 +107,7 @@ Column.propTypes = {
   }).isRequired,
   setUser: PropTypes.func.isRequired,
   setWinState: PropTypes.func.isRequired,
+  winningRows: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 const ColumnContainer = styled.div`
@@ -120,6 +125,20 @@ const IconContainer = styled.div`
   position: relative;
 `;
 
+const blinkingEffect = keyframes`
+    25% {
+      filter: brightness(1.2);
+    }
+    75% {
+      filter: brightness(0.8);
+    }
+  `;
+//  animation: ${blinkingEffect} 1s ease-in infinite;
+// ${({ row, winningRows }) => {
+//   console.log('Check:', winningRows, row + 1);
+//   return (winningRows[row] === true) && `${blinkingEffect} 1s ease-in infinite;`;
+// }}
+// animation: ${({ row, winningRows }) => (winningRows.includes(row + 1) === true) && `${blinkingEffect} 1s ease-in infinite;`}
 const Icon = styled.div`
   ${({ iconSize }) => `
     height: ${iconSize}px;
@@ -129,4 +148,11 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: ${({ row, winningRows, winState }) => (winningRows.includes(row + 1) === true && winState === true) && css`${blinkingEffect} 1s ease-in infinite;`}
 `;
+
+// const Img = styled.img`
+//   animation: ${({ row, winningRows }) => (winningRows.includes(row + 1) === true) && `${blinkingEffect} 1s ease-in infinite;`}
+//   border: ${({ row, winningRows }) => (winningRows.includes(row + 1) === true) && 'solid #165e58;'}
+//   border-width: 5px;
+// `;
