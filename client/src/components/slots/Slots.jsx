@@ -103,6 +103,7 @@ export default function Slots({ user, setUser }) {
         betAmount={betAmount}
         setBetAmount={setBetAmount}
         play={() => { play(); }}
+        plays={plays}
       />
     </SlotsContainer>
   );

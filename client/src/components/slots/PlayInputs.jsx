@@ -11,26 +11,25 @@ export default function PlayInputs({
   betAmount,
   setBetAmount,
   play,
+  plays,
 }) {
-  const [selected, setSelected] = useState(0);
   function handleClick(numLines) {
     setPlays(numLines);
-    setSelected(numLines.toString());
   }
   return (
     <InputsContainer>
       <TopRowContainer>
-        <YellowOrangeButtonV2 id="1" selected={selected} type="button" onClick={() => handleClick(1)}>
+        <YellowOrangeButtonV2 id="1" selected={plays.toString()} type="button" onClick={() => handleClick(1)}>
           1 Line
         </YellowOrangeButtonV2>
       </TopRowContainer>
       <TopRowContainer>
-        <YellowOrangeButtonV2 id="2" selected={selected} type="button" onClick={() => handleClick(2)}>
+        <YellowOrangeButtonV2 id="2" selected={plays.toString()} type="button" onClick={() => handleClick(2)}>
           2 Lines
         </YellowOrangeButtonV2>
       </TopRowContainer>
       <TopRowContainer>
-        <YellowOrangeButtonV2 id="3" selected={selected} type="button" onClick={() => handleClick(3)}>
+        <YellowOrangeButtonV2 id="3" selected={plays.toString()} type="button" onClick={() => handleClick(3)}>
           3 Lines
         </YellowOrangeButtonV2>
       </TopRowContainer>
@@ -66,6 +65,7 @@ PlayInputs.propTypes = {
   betAmount: PropTypes.string.isRequired,
   setBetAmount: PropTypes.func.isRequired,
   play: PropTypes.func.isRequired,
+  plays: PropTypes.number.isRequired,
 };
 
 const InputsContainer = styled.div`

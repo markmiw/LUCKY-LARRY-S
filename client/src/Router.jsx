@@ -10,12 +10,8 @@ import '../dist/leaderboard.css';
 import Gamepage from './components/gamepage/Gamepage';
 
 function Router() {
-  const [user, setUser] = useState({
-    id: 1,
-    username: 'Bruce',
-    balance: 12345,
-  }); // user data
-  const [loggedIn, setLoggedIn] = useState(true); // is user logged in?
+  const [user, setUser] = useState(); // user data
+  const [loggedIn, setLoggedIn] = useState(false); // is user logged in?
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
