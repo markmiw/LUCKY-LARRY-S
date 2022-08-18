@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
+import { Wave } from 'react-animated-text';
 import styled from 'styled-components';
 
 
 export default function WinningEffect() {
   return (
     <WinningEffectContainer>
-      Congratulations!! You won!!
-    <Confetti/>
-    <WinningBackground />
+      <WinningText>
+      <Wave
+        text="Congratulations!! You won!!"
+        effect="stretch"
+        effectChange={2}
+        textColor="white"
+        />
+      </WinningText>
+      <Confetti />
+      <WinningBackground />
     </WinningEffectContainer>
   )
 }
+
+export const WinningText = styled.div`
+  display: grid;
+  place-items: center;
+  color: red;
+  padding-top 30%;
+`
 
 export const WinningEffectContainer = styled.div`
 position: fixed;

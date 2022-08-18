@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
+import { CloseButton } from '../shared/button.styled.js'
 
 function BalanceModal({ user, setUser, setModal }) {
   const [amount, setAmount] = useState(0);
@@ -25,13 +26,13 @@ function BalanceModal({ user, setUser, setModal }) {
           <h4 className="modal-title w-100 font-weight-bold">
             Top Off
           </h4>
-          <button
+          <CloseButton
             type="button"
             className="close"
             onClick={() => setModal(false)}
           >
             <span aria-hidden="true">&times;</span>
-          </button>
+          </CloseButton>
         </div>
         <div className="modal-body mx-3">
           <div className="md-form mb-4">

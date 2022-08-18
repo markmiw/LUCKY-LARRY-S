@@ -5,7 +5,6 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
 
-// red background
 import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
 
@@ -17,6 +16,7 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// number set
 function getNUnique(n) {
   const arr = [];
   const set = new Set();
@@ -34,7 +34,7 @@ function getNUnique(n) {
 export default function ScratchTicket({ user, setUser }) {
   const [winningValues, setWinningValues] = useState([]);
   const [matchingValues, setMatchingValues] = useState([]);
-  const [bet, setBet] = useState('1');
+  const [bet, setBet] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [confirmWinnings, setConfirmWinnings] = useState(false);
   const [notWinState, setNotWinState] = useState(false);
@@ -90,8 +90,10 @@ export default function ScratchTicket({ user, setUser }) {
 
   // need to check if user entered a bet amount
   function confirmPlay() {
-    if (bet >= 0 && bet <= user.balance) {
+    if (bet >= 1 && bet <= user.balance) {
       setPlaying(true);
+    } else {
+      alert('please enter an amount you want to bet')
     }
 
   }
@@ -209,11 +211,11 @@ ScratchTicket.propTypes = {
 };
 
 const ScratchGrid = styled.div`
-display: grid;
-max-width: 90%;
-margin: 0 auto;
-grid-template-rows: auto auto;
-`
+  display: grid;
+  margin: 0 auto;
+  grid-template-rows: auto auto;
+  height: 600px;
+`;
 
 const Game = styled.form`
   display: flex;
@@ -242,6 +244,7 @@ const ConfirmOverlay = styled.div`
   justify-self: center;
   width: 500px;
   height: 600px;
+  max-width: 90%;
   color: black;
   background-image: url(${scratchBackground});
   background-size: contain;
@@ -263,22 +266,43 @@ const Tile = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
-  border: 1px solid;
-  margin: 10px;
-  border-radius: 100px;
+
   background-image: linear-gradient(to right, #FE53BB, #F5D300);
+  @media (min-width: 501px) {
+
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+    margin: 10px;
+    border-radius: 100px;
+  }
+  @media (max-width: 500px) {
+    width: 60px;
+    height: 30px;
+    border: 1px solid;
+    margin: 10px;
+    border-radius: 100px;
+  }
 `;
 
 const ScratchTicketNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
-  border: 1px solid ;
-  margin: 10px;
-  border-radius: 100px;
+
   background-image: linear-gradient(to right, #F5D300, #09FBD3);
+  @media (min-width: 501px) {
+    width: 100px;
+    height: 100px;
+    border: 1px solid ;
+    margin: 10px;
+    border-radius: 100px;
+  }
+  @media (max-width: 500px) {
+    width: 60px;
+    height: 30px;
+    border: 1px solid ;
+    margin: 7px;
+    border-radius: 100px;
+  }
 `;

@@ -75,5 +75,3 @@ export const CloseButton = styled.button`
   height: 1.5rem;
   width: 6rem;
 `;
-
-
