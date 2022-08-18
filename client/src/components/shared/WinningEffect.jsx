@@ -23,9 +23,9 @@ export default function WinningEffect() {
 
 export const WinningText = styled.div`
   display: grid;
-  grid-template-rows: auto;
-  margin: 0 auto;
+  place-items: center;
   color: red;
+  padding-top 30%;
 `
 
 export const WinningEffectContainer = styled.div`
