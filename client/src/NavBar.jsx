@@ -123,7 +123,6 @@ export const NavBarGrid = styled.div`
 // max-width: 100%;
 // margin: 0 auto;
 // height: 100%;
-
 // color: white;
 // @media (min-width: 501px) {
 //   grid-template-column: auto auto auto auto;
