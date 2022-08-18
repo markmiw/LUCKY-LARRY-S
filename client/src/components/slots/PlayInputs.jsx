@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
@@ -12,22 +12,27 @@ export default function PlayInputs({
   setBetAmount,
   play,
 }) {
+  const [selected, setSelected] = useState(0);
+  function handleClick(numLines) {
+    setPlays(numLines);
+    setSelected(numLines.toString());
+  }
   return (
     <InputsContainer>
       <TopRowContainer>
-        <YellowOrangeButton type="button" onClick={() => setPlays(1)}>
+        <YellowOrangeButtonV2 id="1" selected={selected} type="button" onClick={() => handleClick(1)}>
           1 Line
-        </YellowOrangeButton>
+        </YellowOrangeButtonV2>
       </TopRowContainer>
       <TopRowContainer>
-        <YellowOrangeButton type="button" onClick={() => setPlays(2)}>
+        <YellowOrangeButtonV2 id="2" selected={selected} type="button" onClick={() => handleClick(2)}>
           2 Lines
-        </YellowOrangeButton>
+        </YellowOrangeButtonV2>
       </TopRowContainer>
       <TopRowContainer>
-        <YellowOrangeButton type="button" onClick={() => setPlays(3)}>
+        <YellowOrangeButtonV2 id="3" selected={selected} type="button" onClick={() => handleClick(3)}>
           3 Lines
-        </YellowOrangeButton>
+        </YellowOrangeButtonV2>
       </TopRowContainer>
       <BottomRowContainer>
         <StyledInput
@@ -72,6 +77,16 @@ const InputsContainer = styled.div`
 const TopRowContainer = styled.div`
   grid-column-end: span 2;
   padding: 5px;
+`;
+
+const YellowOrangeButtonV2 = styled(YellowOrangeButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#2accc8)'};
+  }
 `;
 
 const BottomRowContainer = styled.div`
