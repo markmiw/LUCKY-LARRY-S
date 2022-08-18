@@ -70,7 +70,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={4}
           values={column1Values}
           setValues={setColumn1Values}
-          iconSize={100}
+          iconSize={125}
           column={1}
           adjustment={adjustment}
           user={user}
@@ -83,7 +83,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={5.5}
           values={column2Values}
           setValues={setColumn2Values}
-          iconSize={100}
+          iconSize={125}
           column={2}
           adjustment={adjustment}
           user={user}
@@ -96,7 +96,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={7}
           values={column3Values}
           setValues={setColumn3Values}
-          iconSize={100}
+          iconSize={125}
           column={3}
           adjustment={adjustment}
           user={user}
@@ -127,6 +127,7 @@ Slots.propTypes = {
 
 const SlotsContainer = styled.div`
   width: 50vw;
+  min-width: 450px;
 `;
 
 const EffectContainer = styled.div`
@@ -134,7 +135,6 @@ const EffectContainer = styled.div`
 `;
 
 const ColumnsContainer = styled.div`
-  min-width: 300px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

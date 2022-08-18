@@ -34,19 +34,33 @@ export default function PlayInputs({
         </YellowOrangeButtonV2>
       </TopRowContainer>
       <BottomRowContainer>
-        <StyledInput
-          type="text"
-          value={`$${betAmount}`}
-          onChange={(event) => {
-            if (event.target.value === '') {
-              setBetAmount('');
-              return;
+        <StyledInputContainer>
+          <StyledInputSpan>
+            $
+          </StyledInputSpan>
+          <StyledInput
+            type="text"
+            value={`${betAmount}`}
+            onChange={(event) => {
+              const digits = event.target.value.split(/[^0-9]/).join('');
+              // max length 5 chars
+              setBetAmount(digits.slice(0, 5));
+            }}
+          />
+          &nbsp;
+          <StyledInputSpan>
+            {/* {`= $${plays * Number(betAmount)}`} */}
+            {`× ${plays} =`}
+          </StyledInputSpan>
+          &nbsp;
+          <StyledResult>
+            {
+              betAmount === ''
+                ? '$'
+                : `$${plays * Number(betAmount)}`
             }
-            const afterDollar = event.target.value.split('$')[1];
-            const digits = afterDollar.split(/[^0-9]/).join('');
-            setBetAmount(digits);
-          }}
-        />
+          </StyledResult>
+        </StyledInputContainer>
       </BottomRowContainer>
       <BottomRowContainer>
         <GreenWhiteButton
@@ -94,7 +108,7 @@ const BottomRowContainer = styled.div`
   padding: 5px;
 `;
 
-const StyledInput = styled.input`
+const StyledInputContainer = styled.div`
   height: 100%;
   margin: 0;
   background-image: linear-gradient(to right,#6dcfa4,#178a80);
@@ -102,9 +116,36 @@ const StyledInput = styled.input`
   border: solid #165e58;
   border-radius: 16px;
   border-width: 0 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+`;
+
+const inputText = `
   color: white;
-  text-align: center;
   font-family: din-round,sans-serif;
   font-size: 15px;
   font-weight: 700;
+`;
+
+const StyledInputSpan = styled.span`
+  ${inputText}
+`;
+
+const StyledInput = styled.input`
+  ${inputText}
+  border: 0;
+  height: 15px;
+  width: 5ch;
+  padding: 0;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
+  text-align: center;
+`;
+
+const StyledResult = styled.span`
+  user-select: none;
+  ${inputText}
+  width: 5ch;
 `;
