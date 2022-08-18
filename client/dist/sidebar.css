@@ -3,13 +3,13 @@
 }
 
 .sidebar-container {
-  border: 1px solid white;
+  border: 1px solid #08F7FE;
   width: 317px;
   height: 600px;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   /* background-color: #36393f ; */
   /* background-color: white; */
-  background-color: #1C1E25;
+  background-color: #20232b;
   margin-left: 20px;
   margin-top: 20px;
 }
@@ -100,7 +100,7 @@
   padding-left: 8px;
   line-height: 26px;
   font-size: 16px;
-  border-radius: 7px;
+  /* border-radius: 7px; */
   display: inline-block;
   position: relative;
 }
@@ -124,7 +124,7 @@
   display: flex;
   justify-content: space-evenly;
   /* border: 1px solid #ced4da; */
-  border-radius: 0.25rem;
+  /* border-radius: 0.25rem; */
   /* background-color: #464950 ; */
   background-clip: padding-box;
   position: relative;
@@ -224,5 +224,5 @@ width: 50px;
 .message-bubble {
   /* background-color: #282d31; */
   background-color: #282a30;
-  border-radius: 7px;
+  /* border-radius: 7px; */
 }
