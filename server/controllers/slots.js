@@ -22,7 +22,7 @@ const weightedSpin = (plays) => {
         combination.push(choices[0]);
       } else if (chance <= 75) {
         combination.push(choices[1]);
-      } else if (chance <= 87.5) {  
+      } else if (chance <= 87.5) {
         combination.push(choices[2]);
       } else if (chance <= 100) {
         combination.push(choices[3]);
@@ -31,13 +31,13 @@ const weightedSpin = (plays) => {
       const chance = Math.random() * 100;
       const choices = [1, 2, 3, 4, 5];
       choices.splice(combination[i - 1] - 1, 1);
-      if (chance <= 10) {
+      if (chance <= 20) {
         combination.push(combination[i - 1]);
-      } else if (chance <= 32.5) {
+      } else if (chance <= 40) {
         combination.push(choices[0]);
-      } else if (chance <= 55) {
+      } else if (chance <= 60) {
         combination.push(choices[1]);
-      } else if (chance <= 77.5) {
+      } else if (chance <= 80) {
         combination.push(choices[2]);
       } else if (chance <= 100) {
         combination.push(choices[3]);

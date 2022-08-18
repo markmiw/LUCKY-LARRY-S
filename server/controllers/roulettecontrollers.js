@@ -15,7 +15,7 @@ module.exports.checkNum = async (req, res) => {
   const {
     num, col, eO, rangeOf12, firstHalf, numRow,
   } = JSON.parse(req.query.betInfo);
-  const spentMoney = (num.bet + col.bet + eO.bet + rangeOf12.bet + firstHalf.bet + numRow.bet);
+  const spentMoney = (Number(num.bet) + Number(col.bet) + Number(eO.bet) + Number(rangeOf12.bet) + Number(firstHalf.bet) + Number(numRow.bet));
   if (!spentMoney) {
     res.status(200).send({ status: 'No bet was made.' });
     return;
@@ -36,7 +36,7 @@ module.exports.checkNum = async (req, res) => {
     .then((results) => {
       const {
         id, color, evenodd, rangeof12, firsthalf, numrow,
-      } = results.rows[0];
+      } = results.fields;
       winMultipler(id, num, 35);
       winMultipler(color, col, 2);
       winMultipler(evenodd, eO, 2);

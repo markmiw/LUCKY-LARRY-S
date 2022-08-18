@@ -1,0 +1,7 @@
+.leaderboard-container {
+  overflow: ;
+}
+.headers {
+  display: 'grid';
+  grid-row: auto;
+}

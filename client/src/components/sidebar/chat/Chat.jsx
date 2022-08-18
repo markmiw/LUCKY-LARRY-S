@@ -5,13 +5,16 @@ import flags from '../flags';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
 import handleDate from '../handleDate';
 
-function Chat({}) {
-  const username = 'mark';
-  const country = 'USA';
+function Chat({ user, loginTime }) {
+  let username = '';
+  let country = '';
+  if (user) {
+    username = user.username;
+    country = user.country;
+  }
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
-  const loginTime = useRef(Date.now());
   const onEmojiClick = (e, emojiObject) => {
     const { selectionStart, selectionEnd } = inputRef.current;
     const newVal = message.slice(0, selectionStart) + emojiObject.emoji + message.slice(selectionEnd);
@@ -21,7 +24,7 @@ function Chat({}) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      axios.get('/api/globalchat', {params: {loginTime: loginTime.current}}).then(({data}) => {
+      axios.get('/api/globalchat', { params: { loginTime: loginTime } }).then(({ data }) => {
         setMessages(data);
       }).catch((err) => {
         console.log(err);
@@ -55,7 +58,7 @@ function Chat({}) {
           {messages.map((message, i) => (
             <li key={i} className="display-flex">
               <img className="global-chat-country" alt="country" src={flags[message.country]} />
-              <div className="message-data">
+              <div className="message-data message-bubble">
                 <div className="display-flex relative">
                   <span className="message-username">
                     {message.username}
@@ -73,7 +76,7 @@ function Chat({}) {
   };
   return (
     <div className="chat">
-      <div className="chat-history">
+      <div className="chat-history scrollbar">
         {renderChatHistory()}
       </div>
       <div className="global-chat-input-container">

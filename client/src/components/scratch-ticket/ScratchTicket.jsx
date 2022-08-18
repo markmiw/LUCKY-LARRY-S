@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
-
-import IMG from '../../../../assets/test.jpg';
+import IMG from '../../../dist/icons/scratch_ticket_icon.png';
 
 const GRID_COLS = 5;
 const winningsArr = [0, 0, 1, 10, 25, 100]; // 0-5 matches
@@ -37,6 +36,7 @@ export default function ScratchTicket({ user, setUser }) {
 
   const [numMatches, setNumMatches] = useState(0);
   const [winningAmount, setWinningAmount] = useState(0);
+  const [winningAnimation, setWinningAnimation] = useState(false);
 
   useEffect(() => {
     setWinningValues(getNUnique(5));
@@ -71,6 +71,7 @@ export default function ScratchTicket({ user, setUser }) {
     });
 
     setConfirmWinnings(true);
+    setWinningAnimation(true);
   }
 
   function changeBet(e) {
@@ -84,7 +85,7 @@ export default function ScratchTicket({ user, setUser }) {
   }
 
   function handlePlayAgain() {
-    // setConfirmWinnings(false);
+    setConfirmWinnings(false);
     setPlaying(false);
   }
 
@@ -92,15 +93,15 @@ export default function ScratchTicket({ user, setUser }) {
   // using 15 sec as placeholder
   const winningEffect = () => {
     setTimeout(() => {
-      setConfirmWinnings(false);
-    }, 15000);
+      setWinningAnimation(false);
+    }, 10000);
   };
 
-  useEffect(winningEffect, [confirmWinnings]);
+  useEffect(winningEffect, [winningAnimation]);
 
   return (
     <Game>
-      {confirmWinnings && <WinningEffect />}
+      {winningAnimation && <WinningEffect />}
       <Form>
         <input
           className="input-lg"
@@ -120,7 +121,7 @@ export default function ScratchTicket({ user, setUser }) {
         ) : (
           <ScratchCard
             width={500}
-            height={650}
+            height={500}
             image={IMG}
             finishPercent={80}
             onComplete={() => getWinnings()}
@@ -139,7 +140,7 @@ export default function ScratchTicket({ user, setUser }) {
                     justifyContent: 'center',
                     alignItems: 'center',
                     width: '100%',
-                    height: '100px',
+                    height: '70px',
                     border: '1px solid',
                     borderRadius: '100px',
                   }}

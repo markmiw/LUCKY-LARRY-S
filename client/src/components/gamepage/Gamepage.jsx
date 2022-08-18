@@ -25,7 +25,7 @@ function Gamepage({ game, user, setUser }) {
         {renderGame(game, user, setUser)}
       </GameContainer>
       <SidebarContainer>
-        <Sidebar user={user} />
+        <Sidebar user={user} loginTime={Date.now()} />
       </SidebarContainer>
     </GamePageGrid>
   );
