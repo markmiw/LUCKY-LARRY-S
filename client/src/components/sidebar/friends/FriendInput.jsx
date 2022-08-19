@@ -46,6 +46,7 @@ function FriendInput({
         placeholder="username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        className="global-chat-input global-chat-input-container"
       />
       <StyledButtonInput
         type="submit"
@@ -67,7 +68,7 @@ const FriendInputContainer = styled('form')`
   display: flex;
   flex-direction: row;
   height: fit-content;
-  border-radius: 7px;
+  // border-radius: 7px;
   padding-bottom: 5xpx;
 `;
 
@@ -83,11 +84,12 @@ const StyledInput = styled('input')`
 `;
 
 const StyledTextInput = styled(StyledInput)`
-  flex-grow: 4;
+  // flex-grow: 4;
 `;
 
 const StyledButtonInput = styled(StyledInput)`
-  width: 50px
+  width: 50px;
+
 `;
 
 export default FriendInput;
