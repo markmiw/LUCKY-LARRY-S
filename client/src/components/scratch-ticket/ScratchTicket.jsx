@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ScratchCard from 'react-scratchcard-v2';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
@@ -116,84 +116,91 @@ export default function ScratchTicket({ user, setUser }) {
 
   return (
     <ScratchGrid>
-    <Game>
-      {winningAnimation && <WinningEffect />}
-      <Form>
-        <input
-          className="input-lg"
-          type="number"
-          min="0"
-          max={user.balance}
-          placeholder="Please enter bet amount"
-          disabled={playing}
-          onChange={(e) => changeBet(e)}
-        />
-      </Form>
-      {/* <BetButton onClick={() => confirmPlay()}>Bet</BetButton> */}
-      <Scratcher>
-        {!playing ? (
-          <ConfirmOverlay onClick={() => confirmPlay()}>
-          </ConfirmOverlay>
-        ) : (
-          <ScratchCard
-            width={500}
-            height={600}
-            image={LarryBackground}
-            finishPercent={80}
-            onComplete={() => getWinnings()}
-          >
-            <WinningVals>
-              {winningValues.map((num) => (
-                <Tile key={num}>{num}</Tile>
-              ))}
-            </WinningVals>
-            <MatchingVals>
-              {matchingValues.map((num) => (
-                <ScratchTicketNumber
-                  key={num}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                    height: '70px',
-                    border: '1px solid white',
-                    borderRadius: '100px',
-                    backgroundColor: '#FE53BB',
-                  }}
-                >
-                  {num}
-                </ScratchTicketNumber>
-              ))}
-            </MatchingVals>
-          </ScratchCard>
-        )}
-        {confirmWinnings && (
-          <ConfirmOverlay>
-            <div>{`Congratulations you won $${winningAmount}`}</div>
-            <div>
-              {`You had ${numMatches} `}
-              matches
-            </div>
-            <button type="submit" onClick={() => handlePlayAgain()}>
-              Play again?
-            </button>
-          </ConfirmOverlay>
-        )}
-        {notWinState && (
-          <ConfirmOverlay>
-            <div>{`Click to play again`}</div>
-            <div>
-              {`You had ${numMatches} `}
-              matches
-            </div>
-            <button type="submit" onClick={() => handlePlayAgain()}>
-              Play again?
-            </button>
-          </ConfirmOverlay>
-        )}
-      </Scratcher>
-    </Game>
+      <Game
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        {winningAnimation && <WinningEffect />}
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <input
+            className="input-lg"
+            type="number"
+            min="0"
+            max={user.balance}
+            placeholder="Please enter bet amount"
+            disabled={playing}
+            onChange={(e) => changeBet(e)}
+          />
+        </Form>
+        {/* <BetButton onClick={() => confirmPlay()}>Bet</BetButton> */}
+        <Scratcher>
+          {!playing ? (
+            <ConfirmOverlay onClick={() => confirmPlay()} />
+          ) : (
+            <ScratchCard
+              width={500}
+              height={600}
+              image={LarryBackground}
+              finishPercent={80}
+              onComplete={() => getWinnings()}
+            >
+              <WinningVals>
+                {winningValues.map((num) => (
+                  <Tile key={num}>{num}</Tile>
+                ))}
+              </WinningVals>
+              <MatchingVals>
+                {matchingValues.map((num) => (
+                  <ScratchTicketNumber
+                    key={num}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: '100%',
+                      height: '70px',
+                      border: '1px solid white',
+                      borderRadius: '100px',
+                      backgroundColor: '#FE53BB',
+                    }}
+                  >
+                    {num}
+                  </ScratchTicketNumber>
+                ))}
+              </MatchingVals>
+            </ScratchCard>
+          )}
+          {confirmWinnings && (
+            <ConfirmOverlay>
+              <div>{`Congratulations you won $${winningAmount}`}</div>
+              <div>
+                {`You had ${numMatches} `}
+                matches
+              </div>
+              <button type="submit" onClick={() => handlePlayAgain()}>
+                Play again?
+              </button>
+            </ConfirmOverlay>
+          )}
+          {notWinState && (
+            <ConfirmOverlay>
+              <div>{`Click to play again`}</div>
+              <div>
+                {`You had ${numMatches} `}
+                matches
+              </div>
+              <button type="submit" onClick={() => handlePlayAgain()}>
+                Play again?
+              </button>
+            </ConfirmOverlay>
+          )}
+        </Scratcher>
+      </Game>
     </ScratchGrid>
   );
 }
@@ -236,8 +243,23 @@ const Scratcher = styled.div`
   align-content: center;
 `;
 
+const colorRotate = keyframes`
+  0% {
+    filter: hue-rotate(1deg);
+  }
+
+  50% {
+    filter: hue-rotate(180deg);
+  }
+
+  100% {
+    filter: hue-rotate(1deg);
+  }
+`;
+
 // grey background
 const ConfirmOverlay = styled.div`
+  animation: ${css`${colorRotate}`} 4s ease-in infinite;
   display: grid;
   place-items: center;
   position: absolute;
@@ -247,7 +269,7 @@ const ConfirmOverlay = styled.div`
   max-width: 90%;
   color: black;
   background-image: url(${scratchBackground});
-  background-size: contain;
+  background-size: cover;
   z-index: 2;
 `;
 

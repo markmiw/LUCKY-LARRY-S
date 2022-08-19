@@ -59,7 +59,7 @@ export default function RouletteModal({
         ? (
           <Modal>
             <div className="modal-header text-center">
-              <h4 className="modal-title w-100 font-weight-bold">
+              <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white' }}>
                 Place your bet
               </h4>
               <CloseButton

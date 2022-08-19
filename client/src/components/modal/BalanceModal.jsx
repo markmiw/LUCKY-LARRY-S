@@ -23,7 +23,7 @@ function BalanceModal({ user, setUser, setModal }) {
     <Modal setModal={setModal}>
       <div className="modal-content">
         <div className="modal-header text-center">
-          <h4 className="modal-title w-100 font-weight-bold">
+          <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white' }}>
             Top Off
           </h4>
           <CloseButton
@@ -36,7 +36,7 @@ function BalanceModal({ user, setUser, setModal }) {
         </div>
         <div className="modal-body mx-3">
           <div className="md-form mb-4">
-            <label htmlFor="defaultForm-username">
+            <label htmlFor="defaultForm-username" style={{ color: 'white' }}>
               Amount
               <input
                 type="number"
