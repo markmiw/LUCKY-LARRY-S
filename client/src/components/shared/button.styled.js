@@ -73,5 +73,15 @@ export const CloseButton = styled.button`
   justify-content: center;
   align-items: center;
   height: 1.5rem;
-  width: 6rem;
+  width: 20px;
+  margin-left: auto;
+`;
+
+export const CloseText = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 100;
+  color: black;
 `;

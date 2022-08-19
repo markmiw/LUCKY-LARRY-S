@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
 import styled from 'styled-components';
-import { CloseButton } from '../shared/button.styled.js'
+import { CloseButton, CloseText } from '../shared/button.styled.js'
 
 
 
@@ -46,7 +46,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
     <Modal setModal={setModal}>
       <div className="modal-content">
         <div className="modal-header text-center">
-          <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white' }}>
+          <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white', marginLeft: '30px' }}>
             Sign in
           </h4>
           <CloseButton
@@ -54,7 +54,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
             className="close"
             onClick={() => setModal(false)}
           >
-            <span aria-hidden="true">&times;</span>
+            <CloseText aria-hidden="true">&times;</CloseText>
           </CloseButton>
         </div>
         <div className="modal-body mx-3">
