@@ -33,6 +33,7 @@ function Gamepage({ game, user, setUser }) {
 
 export default Gamepage;
 
+// max width was new here
 export const GamePageGrid = styled.div`
   display: grid;
   max-width: 100vw;

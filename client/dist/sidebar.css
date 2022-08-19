@@ -12,6 +12,7 @@
   background-color: #1C1E25;
   /* margin-left: 20px; */
   margin-top: 20px;
+  margin: auto;
 }
 .sidebar-nav-container {
   display: flex;
