@@ -8,7 +8,7 @@ export default function Item({ user, index }) {
   const winnings = Intl.NumberFormat('en-US', { maximumFractionDigits: 1, notation: 'compact', compactDisplay: 'short' }).format(user.winnings);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/country/${user.countryid}`)
+    axios.get(`/api/country/${user.countryid}`)
       .then((results) => { setCountry(results.data[0].country); })
       .catch((err) => console.log(err));
   }, []);

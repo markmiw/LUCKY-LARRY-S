@@ -6,7 +6,7 @@ function Leaderboard() {
   const [topUsers, setTopUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/leaderboard')
+    axios.get('/api/leaderboard')
       .then((results) => setTopUsers(results.data))
       .catch((err) => console.log(err));
   }, []);
