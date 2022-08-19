@@ -8,7 +8,6 @@ import WinningEffect from '../shared/WinningEffect';
 import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
 
-
 const GRID_COLS = 5;
 const winningsArr = [0, 0, 1, 10, 25, 100]; // 0-5 matches
 
@@ -76,7 +75,6 @@ export default function ScratchTicket({ user, setUser }) {
     });
 
     if (winnings > 0) {
-      console.log('winnings is: ', winnings)
       setConfirmWinnings(true);
       setWinningAnimation(true);
     } else {
@@ -93,9 +91,8 @@ export default function ScratchTicket({ user, setUser }) {
     if (bet >= 1 && bet <= user.balance) {
       setPlaying(true);
     } else {
-      alert('please enter an amount you want to bet')
+      alert('please enter an amount you want to bet');
     }
-
   }
 
   function handlePlayAgain() {
@@ -189,7 +186,7 @@ export default function ScratchTicket({ user, setUser }) {
           )}
           {notWinState && (
             <ConfirmOverlay>
-              <div>{`Click to play again`}</div>
+              <div>Click to play again</div>
               <div>
                 {`You had ${numMatches} `}
                 matches
@@ -227,10 +224,6 @@ const ScratchGrid = styled.div`
 const Game = styled.form`
   display: flex;
   flex-direction: column;
-`;
-
-const BetButton = styled.button`
-
 `;
 
 const Form = styled.div`

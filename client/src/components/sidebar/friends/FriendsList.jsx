@@ -65,9 +65,8 @@ function FriendsList({ userID, setCurrentDmRecipient }) {
   return (
     <FriendsListContainer>
       <Header>
-        <Title>
-          Friends
-        </Title>
+        {!showingFriendInput && <Title>Friends</Title>}
+        {friendInput}
         <OpenFriendInputIcon
           className="material-symbols-outlined"
           onClick={() => {
@@ -78,7 +77,6 @@ function FriendsList({ userID, setCurrentDmRecipient }) {
           {showingFriendInput ? 'close' : 'person_add'}
         </OpenFriendInputIcon>
       </Header>
-      {friendInput}
       <List>
         {friends.map((friend) => (
           <FriendsListItem
@@ -100,9 +98,9 @@ FriendsList.propTypes = {
 };
 
 const FriendsListContainer = styled('div')`
-  background-color: white;
+  background-color: #1C1E25;
   width: 317px;
-  border: 1px solid #ced4da;
+  // border: 1px solid #ced4da;
   border-bottom-style: none;
   border-radius: 7px;
 `;
@@ -115,15 +113,17 @@ const Header = styled('div')`
   height: 40px;
   align-items: center;
   justify-content: center;
+  background-color: #1C1E25;
 `;
 
 const Title = styled('div')`
   font-size: x-large;
-  color: black;
+  color: white;
 `;
 
 const Spacer = styled('div')`
   height: 40px;
+  background-color: #1C1E25;
 `;
 
 const ErrorMsg = styled('div')`
@@ -138,6 +138,7 @@ const List = styled('div')`
   overflow-y: scroll;
   height: 390px;
   width: 99%;
+  background-color: #1C1E25;
 `;
 
 const OpenFriendInputIcon = styled('span')`
@@ -152,7 +153,7 @@ const OpenFriendInputIcon = styled('span')`
   justify-content: center;
   align-items: center;
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-
+  background-color: #1C1E25;
   &:Hover {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
   }

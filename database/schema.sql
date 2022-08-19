@@ -288,14 +288,14 @@ CREATE INDEX IF NOT EXISTS idx_chat ON chat(userID);
 
 
 INSERT INTO users (username, password, countryID, balance, winnings) VALUES
-('Bruce', 'Waifus', 107, 2000, 10000000),
-('Matthew', 'Moofus', 221, 2000, 10),
-('Cornelius', 'Mario', 80, 2000, 0),
+('Bruce', 'Waifus', 107, 2000, 12),
+('Larry', 'Lucky', 221, 2000, 10345600),
+('Cornelius', 'Mario', 80, 2000, 11),
 ('River', 'Animation', 221, 2000, 100),
-('Jesse', 'Roulette', 39, 2000, 1000),
-('Andy', 'Anime', 221, 2000, 100000),
-('Mark', 'Tensorflow', 221, 2000, 1000),
-('Gary', 'Pokemon', 221, 2000, 10000);
+('Jesse', 'Roulette', 39, 2000, 1200),
+('Andy', 'Anime', 221, 2000, 100200),
+('Mark', 'Tensorflow', 221, 2000, 1400),
+('Gary', 'Pokemon', 221, 2000, 10300);
 
 -------Roulette---------
 -- USE roulette

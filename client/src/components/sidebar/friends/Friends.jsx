@@ -6,11 +6,12 @@ import FriendsList from './FriendsList';
 // user: the one logged on
 // recipient: the one user is talking to
 function Friends({ userID, currentDmRecipient, setCurrentDmRecipient }) {
-  if (currentDmRecipient !== null) {
+  if (currentDmRecipient !== -1) {
     return (
       <DirectMessage
         userID={userID}
         recipientID={currentDmRecipient}
+        setCurrentDmRecipient={setCurrentDmRecipient}
       />
     );
   }

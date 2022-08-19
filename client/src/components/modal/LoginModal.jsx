@@ -29,6 +29,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
     const country = await axios.get(`/api/country/${results.data[0].countryid}`);
 
     if (country.data.length !== 1) return; // did not find a country
+
     results.data[0].country = country.data[0].country;
     setUser(results.data[0]);
     setLoggedIn(true);
