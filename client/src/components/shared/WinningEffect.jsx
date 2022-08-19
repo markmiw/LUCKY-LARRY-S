@@ -7,26 +7,24 @@ import styled from 'styled-components';
 export default function WinningEffect() {
   return (
     <WinningEffectContainer>
-      <WinningText>
-      <Wave
+
+      <StyledWave
         text="Congratulations!! You won!!"
         effect="stretch"
         effectChange={2}
-        textColor="white"
         />
-      </WinningText>
       <Confetti />
       <WinningBackground />
     </WinningEffectContainer>
   )
 }
 
-export const WinningText = styled.div`
+export const StyledWave = styled(Wave)`
+  color: red;
   display: grid;
   place-items: center;
-  color: red;
-  padding-top 30%;
-`
+  padding-top 40%;
+`;
 
 export const WinningEffectContainer = styled.div`
 position: fixed;
@@ -36,7 +34,7 @@ right: 0;
 bottom: 0;
 font-size: 6rem;
 z-index: 20;
-`
+`;
 
 export const WinningBackground = styled.div`
   background: rgba(250, 250, 250, 0.1);
