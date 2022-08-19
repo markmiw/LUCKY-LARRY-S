@@ -45,7 +45,8 @@ export const GamePageGrid = styled.div`
   }
   @media (max-width: 500px) {
     grid-template-rows: auto auto;
-    gap: 10%;
+    gap: 0%;
+    height: 1500px;
   }
 `;
 

@@ -103,7 +103,7 @@ const TextUniversal = styled.p`
   color: white;
   height: min(20px, fit-content);
   font-family: 'PT Sans', sans-serif;
-  font-size: 24px;
+  font-size: 16px;
 `;
 
 const Spacer = styled.div`
