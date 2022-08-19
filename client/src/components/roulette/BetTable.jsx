@@ -80,8 +80,8 @@ export default function BetTable({ setBetInfo, spin }) {
         <BetColorOddGrid>
           <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red') }}>Red</PinkRedButton>
           <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black') }}>Black</BlueBlackButton>
-          <GreenBlackButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</GreenBlackButton>
-          <BlueAquaButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</BlueAquaButton>
+          <BlueAquaButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Even</BlueAquaButton>
+          <GreenBlackButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Odd</GreenBlackButton>
         </BetColorOddGrid>
 
         <Bet12Grid>
@@ -96,9 +96,9 @@ export default function BetTable({ setBetInfo, spin }) {
         </Bet18Grid>
 
         <BetRowGrid>
-          <PurplePinkButton onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>2to1 - 1s row </PurplePinkButton>
-          <PurplePinkButton onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2to1 - 2s row </PurplePinkButton>
-          <PurplePinkButton onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>2to1 - 3s row </PurplePinkButton>
+          <PurplePinkButton onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>1s row </PurplePinkButton>
+          <PurplePinkButton onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2s row </PurplePinkButton>
+          <PurplePinkButton onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>3s row </PurplePinkButton>
         </BetRowGrid>
 
         <div>
@@ -138,6 +138,12 @@ export const GameDisplay = styled.div`
 
 export const BetTableContainer = styled.div`
   margin: 0 auto;
+  @media (min-width: 501px) {
+    max-width: 100%;
+  }
+  @media (max-width: 500px) {
+    width: 380px;
+  }
 `;
 export const BetNumberGrid = styled.div`
   display: grid;

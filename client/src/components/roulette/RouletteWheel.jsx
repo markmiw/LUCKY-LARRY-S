@@ -107,7 +107,7 @@ export default function RouletteWheel({
   const winningEffect = () => {
     setTimeout(() => {
       setWinState(false);
-    }, 10000);
+    }, 7000);
   };
 
   useEffect(winningEffect, [winState]);
