@@ -88,7 +88,10 @@ function Chat({ user, loginTime }) {
           <div className="emoji-modal hidden">
             <div className="emoji-backdrop" onClick={(e) => { hideEmojiModal(e); }} />
             <Picker
-              pickerStyle={{ width: '250px', position: 'fixed', bottom: '165px' }}
+              className="emojis"
+              pickerStyle={{
+                width: '250px', position: 'absolute', bottom: '55px', right: '1rem',
+              }}
               onEmojiClick={onEmojiClick}
             />
           </div>
