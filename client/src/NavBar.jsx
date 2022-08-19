@@ -118,6 +118,9 @@ function NavBar({
             >
               Log Out
             </BlueLightBlueButton>
+            <PinkRedButton type="submit" className="navbar-item">
+              stop music
+            </PinkRedButton>
           </>
         )}
       </nav>
