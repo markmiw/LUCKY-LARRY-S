@@ -6,6 +6,7 @@ import Column from './Column';
 import PlayInputs from './PlayInputs';
 import WinningEffect from '../shared/WinningEffect';
 import slotsScores from '../../../dist/SlotsScores.png';
+import alertify from 'alertifyjs';
 import Modal from '../modal/Modal';
 
 export default function Slots({ user, setUser }) {
@@ -26,14 +27,17 @@ export default function Slots({ user, setUser }) {
 
   function play() {
     if (column3Values.length !== 3) {
+      alertify.error('Game in progress');
       return;
     }
     const newBalance = user.balance - Number(betAmount) * plays;
     // can't bet more than you have, or negative bets
     if (newBalance < 0 || Number(betAmount) < 0 || betAmount === '') {
+      alertify.error('Enter a legal bet');
       return;
     }
     setGameInProgress(true);
+    alertify.success(`Placed a bet of $${betAmount}`);
     setUser({ ...user, balance: newBalance });
     axios.put('/api/slots', { data: { userid: user.id, bet: betAmount, rows: plays } })
       .then((result) => {
