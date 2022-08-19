@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ScratchCard from 'react-scratchcard-v2';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import alertify from 'alertifyjs';
@@ -113,9 +113,17 @@ export default function ScratchTicket({ user, setUser }) {
 
   return (
     <ScratchGrid>
-      <Game>
+      <Game
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         {winningAnimation && <WinningEffect />}
-        <Form>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <input
             className="input-lg"
             type="number"
@@ -228,8 +236,23 @@ const Scratcher = styled.div`
   align-content: center;
 `;
 
+const colorRotate = keyframes`
+  0% {
+    filter: hue-rotate(1deg);
+  }
+
+  50% {
+    filter: hue-rotate(180deg);
+  }
+
+  100% {
+    filter: hue-rotate(1deg);
+  }
+`;
+
 // grey background
 const ConfirmOverlay = styled.div`
+  animation: ${css`${colorRotate}`} 4s ease-in infinite;
   display: grid;
   place-items: center;
   position: absolute;
@@ -239,7 +262,7 @@ const ConfirmOverlay = styled.div`
   max-width: 90%;
   color: black;
   background-image: url(${scratchBackground});
-  background-size: contain;
+  background-size: cover;
   z-index: 2;
 `;
 

@@ -113,6 +113,7 @@ const Spacer = styled.div`
 const UserText = styled(TextUniversal)`
   margin-left: auto;
   font-weight: bold;
+  text-align: right;
 `;
 
 const Question = styled(TextUniversal)`

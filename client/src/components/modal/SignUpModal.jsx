@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from './Modal';
 import flags from '../sidebar/flags';
 import styled from 'styled-components';
-import { CloseButton } from '../shared/button.styled.js'
+import { CloseButton, CloseText } from '../shared/button.styled.js'
 
 function SignUpModal({ setModal }) {
   // PROBABLY MORE FIELDS
@@ -38,7 +38,7 @@ function SignUpModal({ setModal }) {
   return (
     userExists ? (
       <Modal>
-        <div>User already exists.</div>
+        <div style={{ color: 'white' }}>User already exists.</div>
         <CloseButton
           type="button"
           className="close"
@@ -52,7 +52,7 @@ function SignUpModal({ setModal }) {
         <Modal setModal={setModal}>
           <div className="modal-content">
             <div className="modal-header text-center">
-              <h4 className="modal-title w-100 font-weight-bold">
+              <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white', marginLeft: '30px' }}>
                 Create Account
               </h4>
               <CloseButton
@@ -60,7 +60,7 @@ function SignUpModal({ setModal }) {
                 className="close"
                 onClick={() => setModal(false)}
               >
-                <span aria-hidden="true">&times;</span>
+                <CloseText aria-hidden="true">&times;</CloseText>
               </CloseButton>
             </div>
             <div className="modal-body mx-3">
@@ -104,6 +104,7 @@ function SignUpModal({ setModal }) {
                 type="submit"
                 className="btn"
                 onClick={() => handleSubmit()}
+                style={{ color: 'white' }}
               >
                 Create account
               </button>
