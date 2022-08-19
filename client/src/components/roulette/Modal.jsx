@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import alertify from 'alertifyjs';
 import Modal from '../modal/Modal';
 import { CloseButton, CloseText } from '../shared/button.styled';
 
@@ -44,11 +45,11 @@ export default function RouletteModal({
         setNum({ ...num, bet: betAmount });
       }
       setBetInput(!betInput);
-      alert('You have successfully bet on this option');
+      alertify.success(`Placed a bet of $${betAmount}`);
       // turn off modal after submitting bet
       setShowModal((prev) => !prev);
     } else {
-      alert('Please put the amount you want to bet on this option');
+      alertify.error('Please enter a bet');
     }
     setBetAmount(0);
   };

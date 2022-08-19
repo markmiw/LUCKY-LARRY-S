@@ -16,6 +16,7 @@
     "initdb": "psql -U postgres -f database/schema.sql"
   },
   "dependencies": {
+    "alertifyjs": "^1.13.1",
     "autoprefixer": "^10.4.8",
     "axios": "0.27.2",
     "bootstrap": "^5.2.0",

@@ -3,8 +3,8 @@ import ScratchCard from 'react-scratchcard-v2';
 import styled, { keyframes, css } from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import alertify from 'alertifyjs';
 import WinningEffect from '../shared/WinningEffect';
-
 import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
 
@@ -90,8 +90,9 @@ export default function ScratchTicket({ user, setUser }) {
   function confirmPlay() {
     if (bet >= 1 && bet <= user.balance) {
       setPlaying(true);
+      alertify.success(`Placed a bet of $${bet}`);
     } else {
-      alert('please enter an amount you want to bet');
+      alertify.error('Enter a legal bet');
     }
   }
 

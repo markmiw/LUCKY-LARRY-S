@@ -87,3 +87,6 @@ button:disabled {
   cursor: auto;
 }
 
+.alertify-notifier .ajs-message .ajs-success .ajs-error{
+  width: max-content !important;
+}
