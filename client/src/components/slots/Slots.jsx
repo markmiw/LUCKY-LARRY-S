@@ -17,7 +17,7 @@ export default function Slots({ user, setUser }) {
   const [winningRows, setWinningRows] = useState([]);
   const [gameInProgress, setGameInProgress] = useState(false);
   function getSlotArray(start, result) {
-    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
+    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5) + 1);
     return start.concat(filler, result);
   }
 

@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import PropTypes from 'prop-types';
+import Camel from '../../../dist/slots-icons/Camel.png';
+import Die from '../../../dist/slots-icons/Die.png';
+import Gem from '../../../dist/slots-icons/Gem.png';
+import Larry from '../../../dist/slots-icons/Larry.png';
+import PalmTree from '../../../dist/slots-icons/PalmTree.png';
 
 // move the links into served assets when finalized icon decision
 const getImageFromValue = function getImageFromValue(value) {
   switch (value) {
+    case 5:
+      return <img src={Larry} alt="coin icon" />;
     case 4:
-      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/gem-stone_1f48e.png" alt="diamond" />;
+      return <img src={Gem} alt="gem icon" />;
     case 3:
-      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/high-voltage_26a1.png" alt="lightning" />;
+      return <img src={Camel} alt="camel icon" />;
     case 2:
-      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/lemon_1f34b.png" alt="lemon" />;
-    case 1:
-      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/dollar-banknote_1f4b5.png" alt="banknote" />;
-    default: // 0
-      return <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/cherries_1f352.png" alt="cherries" />;
+      return <img src={PalmTree} alt="palm tree icon" />;
+    default: // 1
+      return <img src={Die} alt="die icon" />;
   }
 };
 
