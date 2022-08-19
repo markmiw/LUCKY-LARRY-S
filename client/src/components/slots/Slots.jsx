@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Column from './Column';
 import PlayInputs from './PlayInputs';
 import WinningEffect from '../shared/WinningEffect';
+import slotsScores from '../../../dist/SlotsScores.png';
 
 export default function Slots({ user, setUser }) {
   const [column1Values, setColumn1Values] = useState([1, 2, 3]);
@@ -124,6 +125,9 @@ export default function Slots({ user, setUser }) {
         play={() => { play(); }}
         plays={plays}
       />
+      <ScoreContainer>
+        <img style={{ width: '200px', borderRadius: '16px' }} src={slotsScores} alt="slots scorecard" />
+      </ScoreContainer>
     </SlotsContainer>
   );
 }
@@ -135,6 +139,13 @@ Slots.propTypes = {
   }).isRequired,
   setUser: PropTypes.func.isRequired,
 };
+
+const ScoreContainer = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 const SlotsContainer = styled.div`
   width: 100%;
