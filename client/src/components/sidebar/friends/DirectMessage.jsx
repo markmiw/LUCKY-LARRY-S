@@ -12,7 +12,7 @@ import handleDate from '../handleDate';
 
 // user: the one logged on
 // recipient: the one user is talking to
-function DirectMessage({ userID, recipientID, setCurrentDmRecipient }) {
+function DirectMessage({ userID, recipientID, setCurrentDmRecipient, currentRecipientName }) {
   const [messages, setMessages] = useState([]);
   const [msgInput, setMsgInput] = useState('');
   const inputRef = useRef(null);
@@ -96,12 +96,19 @@ function DirectMessage({ userID, recipientID, setCurrentDmRecipient }) {
   };
   return (
     <div className="chat">
-      <img
-        className="back-button"
-        src={Leftarrow}
-        onClick={() => setCurrentDmRecipient(-1)}
-        alt="back arrow"
-      />
+      <div className="chat-header">
+        <img
+          className="back-button"
+          src={Leftarrow}
+          onClick={() => setCurrentDmRecipient(-1)}
+          alt="back arrow"
+        />
+        <span
+          className="chat-recipientName"
+        >
+          {currentRecipientName}
+        </span>
+      </div>
       <div className="chat-dm overflow-y">
         {renderChatHistory()}
       </div>
@@ -128,6 +135,7 @@ DirectMessage.propTypes = {
   userID: PropTypes.number.isRequired,
   recipientID: PropTypes.number.isRequired,
   setCurrentDmRecipient: PropTypes.func.isRequired,
+  currentRecipientName: PropTypes.string.isRequired,
 };
 
 export default DirectMessage;

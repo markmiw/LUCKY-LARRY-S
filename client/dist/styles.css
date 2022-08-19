@@ -74,6 +74,10 @@ button:after {
   z-index: -1;
 }
 
+.emoji-container button:after {
+  display: none;
+}
+
 button:focus {
   user-select: auto;
 }

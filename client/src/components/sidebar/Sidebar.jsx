@@ -16,6 +16,7 @@ import SupportAgent from './support-agent/SupportAgent';
 function Sidebar({ user, loginTime }) {
   const [sidebarState, setSidebarState] = useState('global-chat');
   const [currentDmRecipient, setCurrentDmRecipient] = useState(-1);
+  const [currentRecipientName, setCurrentRecipientName] = useState('');
   const renderSidebarIcons = () => {
     if (sidebarState === 'global-chat') {
       return (
@@ -69,6 +70,8 @@ function Sidebar({ user, loginTime }) {
           key="friends"
           currentDmRecipient={currentDmRecipient}
           setCurrentDmRecipient={setCurrentDmRecipient}
+          currentRecipientName={currentRecipientName}
+          setCurrentRecipientName={setCurrentRecipientName}
         />
       );
     }
