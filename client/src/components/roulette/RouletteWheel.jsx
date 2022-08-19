@@ -80,7 +80,7 @@ export default function RouletteWheel({
 
   const handleSpinClick = () => {
     if (betInfo === '') {
-      alertify('please place a bet');
+      alertify.error('Please place a bet');
     } else {
       axios.get('/api/roulette', {
         params: {
@@ -90,11 +90,11 @@ export default function RouletteWheel({
       })
         .then((response) => {
           if (response.data.status === 'Insufficient Funds.') {
-            alertify(response.data.status);
+            alertify.error(response.data.status);
             return;
           }
           if (response.data.status === 'No bet was made.') {
-            alertify(response.data.status);
+            alertify.error(response.data.status);
             return;
           }
           let betAmount = 0;
