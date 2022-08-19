@@ -5,7 +5,7 @@ import axios from 'axios';
 import FriendsListItem from './FriendsListItem';
 import FriendInput from './FriendInput';
 
-function FriendsList({ userID, setCurrentDmRecipient }) {
+function FriendsList({ userID, setCurrentDmRecipient, setCurrentRecipientName }) {
   const [showingFriendInput, setShowingFriendInput] = useState(false);
   const [friendAddError, setFriendAddError] = useState('');
 
@@ -84,7 +84,9 @@ function FriendsList({ userID, setCurrentDmRecipient }) {
             username={friend.username}
             country={friend.country}
             lastOpened={friend.lastOpened}
-            openChat={() => setCurrentDmRecipient(friend.id)}
+            openChat={() => {
+              setCurrentDmRecipient(friend.id); setCurrentRecipientName(friend.username);
+            }}
           />
         ))}
       </List>
@@ -95,6 +97,7 @@ function FriendsList({ userID, setCurrentDmRecipient }) {
 FriendsList.propTypes = {
   userID: PropTypes.number.isRequired,
   setCurrentDmRecipient: PropTypes.func.isRequired,
+  setCurrentRecipientName: PropTypes.func.isRequired,
 };
 
 const FriendsListContainer = styled('div')`
@@ -152,10 +155,11 @@ const OpenFriendInputIcon = styled('span')`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: white;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
   background-color: #1C1E25;
   &:Hover {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
   }
 `;
 

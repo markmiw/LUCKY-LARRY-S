@@ -118,7 +118,7 @@ const UserText = styled(TextUniversal)`
 
 const Question = styled(TextUniversal)`
   cursor: pointer;
-  color: blue;
+  color: #40E0D0;
 
   &:hover {
     text-decoration: underline;
