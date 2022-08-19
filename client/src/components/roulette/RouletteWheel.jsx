@@ -85,11 +85,11 @@ export default function RouletteWheel({
     })
       .then((response) => {
         if (response.data.status === 'Insufficient Funds.') {
-          alertify.error(response.data.status);
+          alertify.error(response.data.status).set('resizable', true).resizeTo(500, '100%');
           return;
         }
         if (response.data.status === 'No bet was made.') {
-          alertify.error(response.data.status);
+          alertify.error(response.data.status).set('resizable', true).resizeTo(500, '100%');
           return;
         }
         let betAmount = 0;
@@ -143,7 +143,7 @@ export default function RouletteWheel({
               setWinState(true);
               setUser({ ...user, balance: updatedBalance });
             } else {
-              alertify.error('You did not win this time 👉👈 ')
+              alertify.error('You did not win 👉👈 ');
               setUser({ ...user, balance: updatedBalance });
             }
           }}

@@ -45,11 +45,11 @@ export default function RouletteModal({
         setNum({ ...num, bet: betAmount });
       }
       setBetInput(!betInput);
-      alertify.success('You have successfully bet on this option');
+      alertify.success(`Placed a bet of $${betAmount}`);
       // turn off modal after submitting bet
       setShowModal((prev) => !prev);
     } else {
-      alertify.error('Please put the amount you want to bet on this option');
+      alertify.error('Please enter a bet');
     }
     setBetAmount(0);
   };
