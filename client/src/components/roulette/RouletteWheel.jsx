@@ -76,31 +76,37 @@ export default function RouletteWheel({
   const [winData, setWinData] = useState({});
   const [winState, setWinState] = useState(false);
 
+  console.log('betInfo is: ', betInfo);
+
   const handleSpinClick = () => {
-    axios.get('/api/roulette', {
-      params: {
-        betInfo: betInfo,
-        user: user,
-      },
-    })
-      .then((response) => {
-        if (response.data.status === 'Insufficient Funds.') {
-          alertify.error(response.data.status);
-          return;
-        }
-        if (response.data.status === 'No bet was made.') {
-          alertify.error(response.data.status);
-          return;
-        }
-        let betAmount = 0;
-        Object.entries(betInfo).forEach(([key, value]) => {
-          betAmount += Number(value.bet);
+    if (betInfo === '') {
+      alert('please place a bet');
+    } else {
+      axios.get('/api/roulette', {
+        params: {
+          betInfo: betInfo,
+          user: user,
+        },
+      })
+        .then((response) => {
+          if (response.data.status === 'Insufficient Funds.') {
+            window.alert(response.data.status);
+            return;
+          }
+          if (response.data.status === 'No bet was made.') {
+            window.alert(response.data.status);
+            return;
+          }
+          let betAmount = 0;
+          Object.entries(betInfo).forEach(([key, value]) => {
+            betAmount += Number(value.bet);
+          });
+          const updatedBalance = user.balance - betAmount;
+          setUser({ ...user, balance: updatedBalance });
+          setWinData(response.data);
+          setMustSpin(true);
         });
-        const updatedBalance = user.balance - betAmount;
-        setUser({ ...user, balance: updatedBalance });
-        setWinData(response.data);
-        setMustSpin(true);
-      });
+    }
   };
 
   // show winning effect for only 10 seconds
@@ -146,6 +152,7 @@ export default function RouletteWheel({
               alertify.error('You did not win 👉👈 ');
               setUser({ ...user, balance: updatedBalance });
             }
+            // need to clean the bets
           }}
         />
         <br />

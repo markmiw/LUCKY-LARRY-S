@@ -34,6 +34,7 @@ export default function BetTable({ setBetInfo, spin }) {
     setRangeOf12({ pick: '', bet: '' });
     setFirstHalf({ pick: '', bet: '' });
     setNumRow({ pick: '', bet: '' });
+    setBetInfo('');
   }, [spin]);
 
   const openModal = (input) => {
@@ -70,35 +71,35 @@ export default function BetTable({ setBetInfo, spin }) {
           {[...Array(36)].map((rouletteNum, index) => {
             const val = index + 1;
             return (
-              <YellowOrangeButton key={index} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
+              <YellowOrangeButtonV2 key={index} id={index} selected={num.pick - 1} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
                 {val}
                 &nbsp;
-              </YellowOrangeButton>
+              </YellowOrangeButtonV2>
             );
           })}
         </BetNumberGrid>
         <BetColorOddGrid>
-          <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red') }}>Red</PinkRedButton>
-          <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black') }}>Black</BlueBlackButton>
-          <BlueAquaButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Even</BlueAquaButton>
-          <GreenBlackButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Odd</GreenBlackButton>
+          <PinkRedButtonV2 id="red" selected={color.pick} onClick={() => { setColor({ pick: 'red' }); openModal('red')}}>Red</PinkRedButtonV2>
+          <BlueBlackButtonV2 id="black" selected={color.pick} onClick={() => { setColor({ pick: 'black' }); openModal('black')}}>Black</BlueBlackButtonV2>
+          <BlueAquaButtonV2 id="even" selected={eO.pick} onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Even</BlueAquaButtonV2>
+          <GreenBlackButtonV2 id="odd" selected={eO.pick} onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Odd</GreenBlackButtonV2>
         </BetColorOddGrid>
 
         <Bet12Grid>
-          <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 1 }); openModal('1st dozen'); }}>1st12 </BlueLightBlueButton>
-          <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 2 }); openModal('2nd dozen'); }}>2nd12 </BlueLightBlueButton>
-          <BlueLightBlueButton onClick={() => { setRangeOf12({ pick: 3 }); openModal('3rd dozen'); }}>3rd12 </BlueLightBlueButton>
+          <BlueLightBlueButtonV2 id={1} selected={rangeOf12.pick} onClick={() => { setRangeOf12({ pick: 1 }); openModal('1st dozen'); }}>1st12 </BlueLightBlueButtonV2>
+          <BlueLightBlueButtonV2 id={2} selected={rangeOf12.pick} onClick={() => { setRangeOf12({ pick: 2 }); openModal('2nd dozen'); }}>2nd12 </BlueLightBlueButtonV2>
+          <BlueLightBlueButtonV2 id={3} selected={rangeOf12.pick} onClick={() => { setRangeOf12({ pick: 3 }); openModal('3rd dozen'); }}>3rd12 </BlueLightBlueButtonV2>
         </Bet12Grid>
 
         <Bet18Grid>
-          <LightPurplePulpleButton onClick={() => { setFirstHalf({ pick: 1 }); openModal('1 to 18'); }}>1to18 </LightPurplePulpleButton>
-          <LightPurplePulpleButton onClick={() => { setFirstHalf({ pick: 2 }); openModal('19 to 36'); }}>19to36 </LightPurplePulpleButton>
+          <LightPurplePulpleButtonV2 id={1} selected={firstHalf.pick} onClick={() => { setFirstHalf({ pick: 1 }); openModal('1 to 18'); }}>1to18 </LightPurplePulpleButtonV2>
+          <LightPurplePulpleButtonV2 id={2} selected={firstHalf.pick} onClick={() => { setFirstHalf({ pick: 2 }); openModal('19 to 36'); }}>19to36 </LightPurplePulpleButtonV2>
         </Bet18Grid>
 
         <BetRowGrid>
-          <PurplePinkButton onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>1s row </PurplePinkButton>
-          <PurplePinkButton onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2s row </PurplePinkButton>
-          <PurplePinkButton onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>3s row </PurplePinkButton>
+          <PurplePinkButtonV2 id={1} selected={numRow.pick} onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>1s row </PurplePinkButtonV2>
+          <PurplePinkButtonV2 id={2} selected={numRow.pick} onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2s row </PurplePinkButtonV2>
+          <PurplePinkButtonV2 id={3} selected={numRow.pick} onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>3s row </PurplePinkButtonV2>
         </BetRowGrid>
 
         <div>
@@ -116,12 +117,97 @@ export default function BetTable({ setBetInfo, spin }) {
           {(numRow.pick && numRow.bet) ? `$${numRow.bet} on ${numRow.pick === 1 ? '1s row' : numRow.pick === 2 ? '2s row' : numRow.pick === 3 ? '3s row' : null}.` : null}
           &nbsp;
         </div>
-      </BetTableContainer >
-    </div >
+      </BetTableContainer>
+    </div>
   );
 }
 
 BetTable.propTypes = { setBetInfo: PropTypes.func.isRequired };
+
+const GreenWhiteButtonV2 = styled(GreenWhiteButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#2accc8)'};
+  }
+`;
+
+const YellowOrangeButtonV2 = styled(YellowOrangeButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#2accc8)'};
+  }
+`;
+
+const PinkRedButtonV2 = styled(PinkRedButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
+
+const BlueBlackButtonV2 = styled(BlueBlackButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
+const BlueAquaButtonV2 = styled(BlueAquaButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
+const GreenBlackButtonV2 = styled(GreenBlackButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
+const BlueLightBlueButtonV2 = styled(BlueLightBlueButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
+const LightPurplePulpleButtonV2 = styled(LightPurplePulpleButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
+const PurplePinkButtonV2 = styled(PurplePinkButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#91fdff)'};
+  }
+`;
 
 export const RouletteInfo1Grid = styled.div`
   display: grid;
