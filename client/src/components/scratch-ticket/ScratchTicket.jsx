@@ -4,9 +4,13 @@ import styled, { keyframes, css } from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
-
 import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
+import {
+  StyledInputContainer,
+  StyledInputSpan,
+  StyledInput,
+} from '../shared/button.styled';
 
 const GRID_COLS = 5;
 const winningsArr = [0, 0, 1, 10, 25, 100]; // 0-5 matches
@@ -33,7 +37,7 @@ function getNUnique(n) {
 export default function ScratchTicket({ user, setUser }) {
   const [winningValues, setWinningValues] = useState([]);
   const [matchingValues, setMatchingValues] = useState([]);
-  const [bet, setBet] = useState(0);
+  const [bet, setBet] = useState(1);
   const [playing, setPlaying] = useState(false);
   const [confirmWinnings, setConfirmWinnings] = useState(false);
   const [notWinState, setNotWinState] = useState(false);
@@ -124,15 +128,22 @@ export default function ScratchTicket({ user, setUser }) {
             e.preventDefault();
           }}
         >
-          <input
-            className="input-lg"
-            type="number"
-            min="0"
-            max={user.balance}
-            placeholder="Please enter bet amount"
-            disabled={playing}
-            onChange={(e) => changeBet(e)}
-          />
+          <StyledInputContainer style={{ color: 'white' }}>
+            $
+            <StyledInput
+              className="input-lg"
+              type="number"
+              min="0"
+              max={user.balance}
+              disabled={playing}
+              onChange={(e) => {
+                if (e.target.value.length < 6) {
+                  changeBet(e);
+                }
+              }}
+              value={bet.toString()}
+            />
+          </StyledInputContainer>
         </Form>
         {/* <BetButton onClick={() => confirmPlay()}>Bet</BetButton> */}
         <Scratcher>

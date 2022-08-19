@@ -117,6 +117,7 @@ Column.propTypes = {
   winningRows: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   setGameInProgress: PropTypes.func.isRequired,
   gameInProgress: PropTypes.bool.isRequired,
+  plays: PropTypes.number.isRequired,
 };
 
 const ColumnContainer = styled.div`
@@ -142,12 +143,7 @@ const blinkingEffect = keyframes`
       filter: brightness(0.8);
     }
   `;
-//  animation: ${blinkingEffect} 1s ease-in infinite;
-// ${({ row, winningRows }) => {
-//   console.log('Check:', winningRows, row + 1);
-//   return (winningRows[row] === true) && `${blinkingEffect} 1s ease-in infinite;`;
-// }}
-// animation: ${({ row, winningRows }) => (winningRows.includes(row + 1) === true) && `${blinkingEffect} 1s ease-in infinite;`}
+
 const Icon = styled.div`
   ${({ iconSize }) => `
     height: ${iconSize}px;
@@ -161,8 +157,3 @@ const Icon = styled.div`
   ${({ row, plays, winState, gameInProgress }) => (row < plays && winState === false && gameInProgress === false) && css`animation: ${blinkingEffect} 1s ease-in infinite;`}
 `;
 
-// const Img = styled.img`
-//   animation: ${({ row, winningRows }) => (winningRows.includes(row + 1) === true) && `${blinkingEffect} 1s ease-in infinite;`}
-//   border: ${({ row, winningRows }) => (winningRows.includes(row + 1) === true) && 'solid #165e58;'}
-//   border-width: 5px;
-// `;
