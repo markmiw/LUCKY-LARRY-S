@@ -44,7 +44,7 @@ FriendsListItem.propTypes = {
 
 const FriendsListItemContainer = styled('div')`
   height: 60px;
-  background-color: white;
+  background-color: #303237;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -62,11 +62,12 @@ const TextContainer = styled('div')`
   height: 100%;
   flex-direction: column;
   justify-content: center;
+  color: white;
 `;
 
 const Username = styled('div')`
   font-size: large;
-  color: black;
+  color: white;
 `;
 
 const ChatIconContainer = styled('div')`
@@ -78,6 +79,7 @@ const ChatIcon = styled('span')`
   cursor: pointer;
   user-select: none;
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: white;
 
   &:hover {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
