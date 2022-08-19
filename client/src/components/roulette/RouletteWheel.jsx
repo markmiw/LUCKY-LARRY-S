@@ -8,7 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import alertify from 'alertifyjs';
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
@@ -85,11 +85,11 @@ export default function RouletteWheel({
     })
       .then((response) => {
         if (response.data.status === 'Insufficient Funds.') {
-          window.alert(response.data.status);
+          alertify.error(response.data.status);
           return;
         }
         if (response.data.status === 'No bet was made.') {
-          window.alert(response.data.status);
+          alertify.error(response.data.status);
           return;
         }
         let betAmount = 0;
@@ -143,7 +143,7 @@ export default function RouletteWheel({
               setWinState(true);
               setUser({ ...user, balance: updatedBalance });
             } else {
-              window.alert('You did not win this time 👉👈 ')
+              alertify.error('You did not win this time 👉👈 ')
               setUser({ ...user, balance: updatedBalance });
             }
           }}
