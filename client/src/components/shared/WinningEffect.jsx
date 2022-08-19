@@ -3,15 +3,21 @@ import Confetti from 'react-confetti';
 // import AnimatedText from 'react-animated-text-content';
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
+import winningSound from '../../../dist/sound/winningSound.mp3';
 
 export default function WinningEffect() {
   return (
     <WinningEffectContainer>
       <AnimatedGradientText>
-        Congradulations!! You won!!
+        Congratulations!! You won!!
       </AnimatedGradientText>
       <Confetti />
       <WinningBackground />
+      <audio
+        src={winningSound}
+        autoPlay
+        loop
+      />
     </WinningEffectContainer>
   );
 }
@@ -50,6 +56,7 @@ const gradient = keyframes`
 
 const AnimatedGradientText = styled.div`
   padding-top: 10%;
+  max-width: 100%;
   animation: ${gradient} 3s infinite;
   background: linear-gradient(90deg, #ff0000, #ffff00, #ff00f3, #0033ff, #ff00c4, #ff0000);
   background-size: 300%;
@@ -61,7 +68,7 @@ const AnimatedGradientText = styled.div`
     font-weight: 600;
   }
   @media (max-width: 500px) {
-    font-size: 70px;
+    font-size: 60px;
   }
 `;
 

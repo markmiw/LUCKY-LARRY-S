@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
+import backgroundMusic from '../dist/sound/backgroundMusic.mp3';
 import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from './components/shared/button.styled.js';
 
 function NavBar({
@@ -118,9 +119,11 @@ function NavBar({
             >
               Log Out
             </BlueLightBlueButton>
-            <PinkRedButton type="submit" className="navbar-item">
-              stop music
-            </PinkRedButton>
+            <audio
+              src={backgroundMusic}
+              autoPlay
+              loop
+            />
           </>
         )}
       </nav>
@@ -161,4 +164,4 @@ export const NavBarGrid = styled.div`
 // @media (max-width: 500px) {
 //   grid-template-column: auto auto;
 // }
-`
+`;

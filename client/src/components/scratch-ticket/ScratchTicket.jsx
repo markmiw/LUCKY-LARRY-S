@@ -112,7 +112,7 @@ export default function ScratchTicket({ user, setUser }) {
   const winningEffect = () => {
     setTimeout(() => {
       setWinningAnimation(false);
-    }, 7000);
+    }, 4000);
   };
 
   useEffect(winningEffect, [winningAnimation]);

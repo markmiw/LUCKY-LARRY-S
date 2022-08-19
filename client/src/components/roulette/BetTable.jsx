@@ -14,6 +14,8 @@ export default function BetTable({ setBetInfo, spin }) {
   const [rangeOf12, setRangeOf12] = useState({ pick: '', bet: '' });
   const [firstHalf, setFirstHalf] = useState({ pick: '', bet: '' });
   const [numRow, setNumRow] = useState({ pick: '', bet: '' });
+  const [selectedButton, setSelectedButton] = useState('');
+
   // modal props
   const [showModal, setShowModal] = useState(false);
   const [currentBetOption, setCurrentBetOption] = useState('');
@@ -64,14 +66,15 @@ export default function BetTable({ setBetInfo, spin }) {
         setBetInput={setBetInput}
       />
       <BetTableContainer>
-        <GreenWhiteButton onClick={() => { setNum(0); openModal('0'); }}>
+        {/* {if(num.bet !== '') {setSelectedButton('0')}} */}
+        <GreenWhiteButtonV2 id={'0'} selected={selectedButton} onClick={() => { setNum(0); openModal('0'); setSelectedButton('0')}}>
           0
-        </GreenWhiteButton>
+        </GreenWhiteButtonV2>
         <BetNumberGrid>
           {[...Array(36)].map((rouletteNum, index) => {
             const val = index + 1;
             return (
-              <YellowOrangeButtonV2 key={index} id={index} selected={num.pick - 1} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
+              <YellowOrangeButtonV2 key={val} id={index} selected={num.pick - 1} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
                 {val}
                 &nbsp;
               </YellowOrangeButtonV2>
@@ -97,7 +100,7 @@ export default function BetTable({ setBetInfo, spin }) {
         </Bet18Grid>
 
         <BetRowGrid>
-          <PurplePinkButtonV2 id={1} selected={numRow.pick} onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>1s row </PurplePinkButtonV2>
+          <PurplePinkButtonV2 id={1} selected={numRow.pick} onClick={() => { setNumRow({ pick: 1 }); openModal('1st row');  }}>1s row </PurplePinkButtonV2>
           <PurplePinkButtonV2 id={2} selected={numRow.pick} onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2s row </PurplePinkButtonV2>
           <PurplePinkButtonV2 id={3} selected={numRow.pick} onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>3s row </PurplePinkButtonV2>
         </BetRowGrid>

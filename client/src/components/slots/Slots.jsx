@@ -59,7 +59,7 @@ export default function Slots({ user, setUser }) {
     setTimeout(() => {
       setTimeout(() => {
         setWinState(false);
-      }, 7000);
+      }, 4000);
     });
   };
 
