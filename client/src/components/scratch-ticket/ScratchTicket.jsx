@@ -90,6 +90,7 @@ export default function ScratchTicket({ user, setUser }) {
   function confirmPlay() {
     if (bet >= 1 && bet <= user.balance) {
       setPlaying(true);
+      alertify.success(`Placed a bet of $${bet}`);
     } else {
       alertify.error('Enter a legal bet');
     }
