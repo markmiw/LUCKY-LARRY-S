@@ -87,8 +87,8 @@ export default function ScratchTicket({ user, setUser }) {
     }
   }
 
-  function changeBet(e) {
-    setBet(Number(e.target.value));
+  function changeBet(value) {
+    setBet(Number(value));
   }
 
   // need to check if user entered a bet amount
@@ -134,14 +134,13 @@ export default function ScratchTicket({ user, setUser }) {
             $
             <StyledInput
               className="input-lg"
-              type="number"
-              min="0"
-              max={user.balance}
+              type="text"
               disabled={playing}
               onChange={(e) => {
-                if (e.target.value.length < 6) {
-                  changeBet(e);
-                }
+                console.log(e.target.value);
+                const digits = e.target.value.split(/[^0-9]/).join('');
+                // max length 5 chars
+                changeBet(digits.slice(0, 5));
               }}
               value={bet.toString()}
             />
