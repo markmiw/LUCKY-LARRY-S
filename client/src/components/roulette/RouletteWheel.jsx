@@ -85,11 +85,11 @@ export default function RouletteWheel({
     })
       .then((response) => {
         if (response.data.status === 'Insufficient Funds.') {
-          alertify.error(response.data.status).set('resizable', true).resizeTo(500, '100%');
+          alertify.error(response.data.status);
           return;
         }
         if (response.data.status === 'No bet was made.') {
-          alertify.error(response.data.status).set('resizable', true).resizeTo(500, '100%');
+          alertify.error(response.data.status);
           return;
         }
         let betAmount = 0;
