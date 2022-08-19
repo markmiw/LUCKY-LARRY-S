@@ -15,6 +15,7 @@ export default function Slots({ user, setUser }) {
   const [adjustment, setAdjustment] = useState(0);
   const [winState, setWinState] = useState(false);
   const [winningRows, setWinningRows] = useState([]);
+  const [gameInProgress, setGameInProgress] = useState(false);
   function getSlotArray(start, result) {
     const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
     return start.concat(filler, result);
@@ -29,6 +30,7 @@ export default function Slots({ user, setUser }) {
     if (newBalance < 0 || Number(betAmount) < 0 || betAmount === '') {
       return;
     }
+    setGameInProgress(true);
     setUser({ ...user, balance: newBalance });
     axios.put('/api/slots', { data: { userid: user.id, bet: betAmount, rows: plays } })
       .then((result) => {
@@ -70,7 +72,7 @@ export default function Slots({ user, setUser }) {
           scrollTime={4}
           values={column1Values}
           setValues={setColumn1Values}
-          iconSize={125}
+          iconSize={100}
           column={1}
           adjustment={adjustment}
           user={user}
@@ -78,12 +80,15 @@ export default function Slots({ user, setUser }) {
           winState={winState}
           setWinState={setWinState}
           winningRows={winningRows}
+          gameInProgress={gameInProgress}
+          setGameInProgress={setGameInProgress}
+          plays={plays}
         />
         <Column
           scrollTime={5.5}
           values={column2Values}
           setValues={setColumn2Values}
-          iconSize={125}
+          iconSize={100}
           column={2}
           adjustment={adjustment}
           user={user}
@@ -91,12 +96,15 @@ export default function Slots({ user, setUser }) {
           winState={winState}
           setWinState={setWinState}
           winningRows={winningRows}
+          gameInProgress={gameInProgress}
+          setGameInProgress={setGameInProgress}
+          plays={plays}
         />
         <Column
           scrollTime={7}
           values={column3Values}
           setValues={setColumn3Values}
-          iconSize={125}
+          iconSize={100}
           column={3}
           adjustment={adjustment}
           user={user}
@@ -104,6 +112,9 @@ export default function Slots({ user, setUser }) {
           winState={winState}
           setWinState={setWinState}
           winningRows={winningRows}
+          gameInProgress={gameInProgress}
+          setGameInProgress={setGameInProgress}
+          plays={plays}
         />
       </ColumnsContainer>
       <PlayInputs
@@ -126,8 +137,7 @@ Slots.propTypes = {
 };
 
 const SlotsContainer = styled.div`
-  width: 50vw;
-  min-width: 450px;
+  width: 100%;
 `;
 
 const EffectContainer = styled.div`

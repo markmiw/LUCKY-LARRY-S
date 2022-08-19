@@ -30,6 +30,9 @@ export default function Column({
   winState,
   setWinState,
   winningRows,
+  setGameInProgress,
+  gameInProgress,
+  plays,
 }) {
   const [offset, setOffset] = useState(0);
 
@@ -42,6 +45,7 @@ export default function Column({
       columnRef.current.style.transition = '';
       setOffset(0);
       if (column === 3 && columnRef.current.style.transition === '') {
+        setGameInProgress(false);
         const newBalance = user.balance + adjustment;
         setUser({ ...user, balance: newBalance });
         if (adjustment > 0) {
@@ -85,6 +89,8 @@ export default function Column({
               winningRows={winningRows}
               winState={winState}
               iconSize={iconSize}
+              plays={plays}
+              gameInProgress={gameInProgress}
             >
               {getImageFromValue(value, index, winningRows)}
             </Icon>
@@ -106,8 +112,11 @@ Column.propTypes = {
     balance: PropTypes.number.isRequired,
   }).isRequired,
   setUser: PropTypes.func.isRequired,
+  winState: PropTypes.bool.isRequired,
   setWinState: PropTypes.func.isRequired,
   winningRows: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  setGameInProgress: PropTypes.func.isRequired,
+  gameInProgress: PropTypes.bool.isRequired,
 };
 
 const ColumnContainer = styled.div`
@@ -148,7 +157,8 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: ${({ row, winningRows, winState }) => (winningRows.includes(row + 1) === true && winState === true) && css`${blinkingEffect} 1s ease-in infinite;`}
+  ${({ row, winningRows, winState }) => (winningRows.includes(row + 1) === true && winState === true) && css`animation: ${blinkingEffect} 1s ease-in infinite;`}
+  ${({ row, plays, winState, gameInProgress }) => (row < plays && winState === false && gameInProgress === false) && css`animation: ${blinkingEffect} 1s ease-in infinite;`}
 `;
 
 // const Img = styled.img`
