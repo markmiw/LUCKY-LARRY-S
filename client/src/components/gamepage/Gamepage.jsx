@@ -35,7 +35,6 @@ export default Gamepage;
 
 export const GamePageGrid = styled.div`
   display: grid;
-  max-width: 95vw;
   margin: 0 auto;
   gap: 5%;
   @media (min-width: 501px) {
@@ -49,9 +48,10 @@ export const GamePageGrid = styled.div`
 `;
 
 export const GameContainer = styled.div`
-  max-width: 100%;
+  width: 100%;
 `;
 
 export const SidebarContainer = styled.div`
-  max-width: 100%;
+  width: 100%;
+  display: flex;
 `;
