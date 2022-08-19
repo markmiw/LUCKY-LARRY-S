@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import {
   GreenWhiteButton,
   YellowOrangeButton,
+  StyledInputContainer,
+  StyledInputSpan,
+  StyledInput,
 } from '../shared/button.styled';
 
 export default function PlayInputs({
@@ -53,7 +56,11 @@ export default function PlayInputs({
       </TopRowContainer>
       <TopRowContainer>
         <StyledInputContainer>
-          <StyledInputSpan>
+          <StyledInputSpan
+            style={{
+              textAlign: 'center',
+            }}
+          >
             TOTAL BET:
             &nbsp;
             {`$${plays * betAmount}`}
@@ -99,40 +106,4 @@ const YellowOrangeButtonV2 = styled(YellowOrangeButton)`
   &:after {
     ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#2accc8)'};
   }
-`;
-
-const StyledInputContainer = styled.div`
-  height: 100%;
-  margin: 0;
-  background-image: linear-gradient(to right,#6dcfa4,#178a80);
-  width: 100%;
-  border: solid #165e58;
-  border-radius: 16px;
-  border-width: 0 0 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-`;
-
-const inputText = `
-  color: white;
-  font-family: din-round,sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-`;
-
-const StyledInputSpan = styled.span`
-  ${inputText}
-`;
-
-const StyledInput = styled.input`
-  ${inputText}
-  border: 0;
-  height: 15px;
-  width: 5ch;
-  padding: 0;
-  background-color: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, .5);
-  text-align: right;
 `;
