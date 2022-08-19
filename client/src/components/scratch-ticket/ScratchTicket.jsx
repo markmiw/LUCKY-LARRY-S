@@ -37,7 +37,7 @@ function getNUnique(n) {
 export default function ScratchTicket({ user, setUser }) {
   const [winningValues, setWinningValues] = useState([]);
   const [matchingValues, setMatchingValues] = useState([]);
-  const [bet, setBet] = useState(1);
+  const [bet, setBet] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [confirmWinnings, setConfirmWinnings] = useState(false);
   const [notWinState, setNotWinState] = useState(false);
