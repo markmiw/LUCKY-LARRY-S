@@ -33,9 +33,11 @@ export default function PlayInputs({
           3 Lines
         </YellowOrangeButtonV2>
       </TopRowContainer>
-      <BottomRowContainer>
+      <TopRowContainer>
         <StyledInputContainer>
           <StyledInputSpan>
+            BET:
+            &nbsp;
             $
           </StyledInputSpan>
           <StyledInput
@@ -47,29 +49,25 @@ export default function PlayInputs({
               setBetAmount(digits.slice(0, 5));
             }}
           />
-          &nbsp;
-          <StyledInputSpan>
-            {/* {`= $${plays * Number(betAmount)}`} */}
-            {`× ${plays} =`}
-          </StyledInputSpan>
-          &nbsp;
-          <StyledResult>
-            {
-              betAmount === ''
-                ? '$'
-                : `$${plays * Number(betAmount)}`
-            }
-          </StyledResult>
         </StyledInputContainer>
-      </BottomRowContainer>
-      <BottomRowContainer>
+      </TopRowContainer>
+      <TopRowContainer>
+        <StyledInputContainer>
+          <StyledInputSpan>
+            TOTAL BET:
+            &nbsp;
+            {`$${plays * betAmount}`}
+          </StyledInputSpan>
+        </StyledInputContainer>
+      </TopRowContainer>
+      <TopRowContainer>
         <GreenWhiteButton
           type="button"
           onClick={play}
         >
           Go!
         </GreenWhiteButton>
-      </BottomRowContainer>
+      </TopRowContainer>
     </InputsContainer>
   );
 }
@@ -101,11 +99,6 @@ const YellowOrangeButtonV2 = styled(YellowOrangeButton)`
   &:after {
     ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#2accc8)'};
   }
-`;
-
-const BottomRowContainer = styled.div`
-  grid-column-end: span 3;
-  padding: 5px;
 `;
 
 const StyledInputContainer = styled.div`
@@ -141,11 +134,5 @@ const StyledInput = styled.input`
   padding: 0;
   background-color: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, .5);
-  text-align: center;
-`;
-
-const StyledResult = styled.span`
-  user-select: none;
-  ${inputText}
-  width: 5ch;
+  text-align: right;
 `;
