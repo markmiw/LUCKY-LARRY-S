@@ -91,7 +91,7 @@ export default function ScratchTicket({ user, setUser }) {
     if (bet >= 1 && bet <= user.balance) {
       setPlaying(true);
     } else {
-      alertify.error('Enter a legal bet').resizeTo(500, '100%');
+      alertify.error('Enter a legal bet');
     }
   }
 
