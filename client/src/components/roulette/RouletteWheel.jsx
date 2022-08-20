@@ -99,7 +99,6 @@ export default function RouletteWheel({
     }
   };
 
-  // show winning effect for only 10 seconds
   const winningEffect = () => {
     setTimeout(() => {
       setWinState(false);
@@ -142,13 +141,20 @@ export default function RouletteWheel({
               alertify.error('You did not win 👉👈 ');
               setUser({ ...user, balance: updatedBalance });
             }
-            // need to clean the bets
           }}
         />
         <br />
-        <SpinButton className="spin-button" onClick={handleSpinClick}>
-          SPIN
-        </SpinButton>
+        {mustSpin
+          ? (
+            <SpinButton className="spin-button">
+              SPINNING...
+            </SpinButton>
+          ) : (
+            <SpinButton className="spin-button" onClick={handleSpinClick}>
+              SPIN
+            </SpinButton>
+          )}
+
       </header>
     </RouletteWheelContainer>
   );

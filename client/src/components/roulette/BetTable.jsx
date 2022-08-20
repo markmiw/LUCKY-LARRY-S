@@ -16,7 +16,7 @@ import {
 } from '../shared/button.styled';
 
 export default function BetTable({ setBetInfo, spin }) {
-  // userbet refactor to remove initial pick bets
+  // userbet hooks
   const [num, setNum] = useState({ pick: '', bet: '' });
   const [color, setColor] = useState({ pick: '', bet: '' });
   const [eO, setEO] = useState({ pick: '', bet: '' });
@@ -25,12 +25,11 @@ export default function BetTable({ setBetInfo, spin }) {
   const [numRow, setNumRow] = useState({ pick: '', bet: '' });
   const [selectedButton, setSelectedButton] = useState('');
 
-  // modal props
+  // modal hooks
   const [showModal, setShowModal] = useState(false);
   const [currentBetOption, setCurrentBetOption] = useState('');
   const [betInput, setBetInput] = useState(false);
 
-  // updates state for roulette wheel
   useEffect(() => {
     setBetInfo({
       num, col: color, eO, rangeOf12, firstHalf, numRow,
@@ -75,8 +74,7 @@ export default function BetTable({ setBetInfo, spin }) {
         setBetInput={setBetInput}
       />
       <BetTableContainer>
-        {/* {if(num.bet !== '') {setSelectedButton('0')}} */}
-        <GreenWhiteButtonV2 id="0" selected={selectedButton} onClick={() => { setNum(0); openModal('0'); setSelectedButton('0'); }}>
+        <GreenWhiteButtonV2 id={0} selected={num.pick} onClick={() => { setNum({ pick: 0 }); openModal('0'); setSelectedButton('0'); }}>
           0
         </GreenWhiteButtonV2>
         <BetNumberGrid>

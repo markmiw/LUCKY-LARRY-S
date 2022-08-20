@@ -15,7 +15,9 @@ module.exports.checkNum = async (req, res) => {
   const {
     num, col, eO, rangeOf12, firstHalf, numRow,
   } = JSON.parse(req.query.betInfo);
-  const spentMoney = (Number(num.bet) + Number(col.bet) + Number(eO.bet) + Number(rangeOf12.bet) + Number(firstHalf.bet) + Number(numRow.bet));
+  const spentMoney = (
+    Number(num.bet) + Number(col.bet) + Number(eO.bet) + Number(rangeOf12.bet)
+    + Number(firstHalf.bet) + Number(numRow.bet));
   if (!spentMoney) {
     res.status(200).send({ status: 'No bet was made.' });
     return;
@@ -46,15 +48,12 @@ module.exports.checkNum = async (req, res) => {
     })
     .then(async () => {
       if (winnings > 0) {
-        // change the user balance via the implemented controller ***
         const updatedBalance = await updateBalanceBasedOnWinnings(userId, spentMoney, winnings);
-        // add winnings to the user's records - to be implemented w/ global function ***
         res.status(200).send({ winNum, winAmount: winnings, updatedBalance });
       } else {
         const updatedBalance = await updateBalanceAfterLosing(userId, spentMoney);
-        console.log(updatedBalance);
         res.status(200).send({ winNum, winAmount: winnings, updatedBalance });
       }
     })
-    .catch((err) => { res.status(500); console.log(err); });
+    .catch((err) => res.status(500));
 };
