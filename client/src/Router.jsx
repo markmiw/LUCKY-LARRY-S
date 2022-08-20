@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import LoginModal from './components/modal/LoginModal';
 import '../dist/sidebar.css';
 import '../dist/leaderboard.css';
+import '../dist/friends.css';
 import Gamepage from './components/gamepage/Gamepage';
 
 function Router() {

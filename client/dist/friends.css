@@ -1,0 +1,83 @@
+.friends-list-container {
+  background-color: white;
+  width: 317px;
+  border: 1px solid #ced4da;
+  border-bottom-style: none;
+  border-radius: 7px;
+}
+
+.friends-header {
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.friends-title{
+  font-size: x-large;
+  color: black;
+}
+
+.friends-error-msg {
+  height: 40px;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.friends-list {
+  overflow-y: scroll;
+  height: 390px;
+  width: 99%;
+  background-color: #303237;
+}
+
+.open-friend-input-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  user-select: none;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+:hover {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+.friends-input-container {
+  padding: 0 50px;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  border-radius: 7px;
+  padding-bottom: 5xpx;
+}
+
+.friends-styled-input {
+  height: 30px;
+  margin: 5px 0 5px 5px;
+  padding: 0 5px;
+  border: 1px solid black;
+}
+
+.friends-styled-input:last-child {
+  margin-right: 5px;
+}
+
+.friends-styled-text-input {
+  flex-grow: 4;
+}
+
+.friends-styled-button-input {
+  width: 50px;
+}

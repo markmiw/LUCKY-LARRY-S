@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import RouletteWheel from './RouletteWheel';
 import BetTable from './BetTable';
 
@@ -22,9 +22,21 @@ export default function Roulette({ user, setUser }) {
   );
 }
 
+Roulette.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+};
+
 export const RouletteGameGrid = styled.div`
   display: grid;
-  max-width: 90%;
+  max-width: 100%;
   margin: 0 auto;
   height: 100%;
   grid-template-rows: auto auto;

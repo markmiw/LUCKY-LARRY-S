@@ -36,7 +36,7 @@ module.exports.checkNum = async (req, res) => {
     .then((results) => {
       const {
         id, color, evenodd, rangeof12, firsthalf, numrow,
-      } = results.fields;
+      } = results.rows[0];
       winMultipler(id, num, 35);
       winMultipler(color, col, 2);
       winMultipler(evenodd, eO, 2);

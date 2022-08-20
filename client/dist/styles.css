@@ -74,6 +74,10 @@ button:after {
   z-index: -1;
 }
 
+.emoji-container button:after {
+  display: none;
+}
+
 button:focus {
   user-select: auto;
 }
@@ -87,3 +91,6 @@ button:disabled {
   cursor: auto;
 }
 
+.alertify-notifier .ajs-message .ajs-success .ajs-error{
+  width: max-content !important;
+}

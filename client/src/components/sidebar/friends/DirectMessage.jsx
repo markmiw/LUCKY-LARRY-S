@@ -1,14 +1,20 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Picker from 'emoji-picker-react';
 import flags from '../flags';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
+import Leftarrow from '../../../../dist/icons/left-arrow.svg';
 import handleDate from '../handleDate';
 
 // user: the one logged on
 // recipient: the one user is talking to
-function DirectMessage({ userID, recipientID }) {
+function DirectMessage({
+  userID, recipientID, setCurrentDmRecipient, currentRecipientName,
+}) {
   const [messages, setMessages] = useState([]);
   const [msgInput, setMsgInput] = useState('');
   const inputRef = useRef(null);
@@ -48,7 +54,7 @@ function DirectMessage({ userID, recipientID }) {
     setMsgInput(
       msgInput.slice(0, selectionStart)
       + emojiObject.emoji
-      + msgInput.slice(selectionEnd)
+      + msgInput.slice(selectionEnd),
     );
     hideEmojiModal();
   };
@@ -69,7 +75,9 @@ function DirectMessage({ userID, recipientID }) {
     if (messages.length) {
       return (
         <ul className="chat-list">
-          {messages.map(({ message, id, author, date }) => (
+          {messages.map(({
+            message, id, author, date,
+          }) => (
             <li key={id} className="display-flex">
               <img className="global-chat-country" alt="country" src={flags[author.country]} />
               <div className="message-data">
@@ -90,7 +98,20 @@ function DirectMessage({ userID, recipientID }) {
   };
   return (
     <div className="chat">
-      <div className="chat-history">
+      <div className="chat-header">
+        <img
+          className="back-button"
+          src={Leftarrow}
+          onClick={() => setCurrentDmRecipient(-1)}
+          alt="back arrow"
+        />
+        <span
+          className="chat-recipientName"
+        >
+          {currentRecipientName}
+        </span>
+      </div>
+      <div className="chat-dm overflow-y">
         {renderChatHistory()}
       </div>
       <div className="global-chat-input-container">
@@ -115,6 +136,8 @@ function DirectMessage({ userID, recipientID }) {
 DirectMessage.propTypes = {
   userID: PropTypes.number.isRequired,
   recipientID: PropTypes.number.isRequired,
+  setCurrentDmRecipient: PropTypes.func.isRequired,
+  currentRecipientName: PropTypes.string.isRequired,
 };
 
 export default DirectMessage;

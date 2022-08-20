@@ -73,7 +73,52 @@ export const CloseButton = styled.button`
   justify-content: center;
   align-items: center;
   height: 1.5rem;
-  width: 6rem;
+  width: 20px;
+  margin-left: auto;
 `;
 
+export const CloseText = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 100;
+  color: black;
+`;
 
+const inputText = `
+  color: white;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+`;
+
+export const StyledInputContainer = styled.div`
+  ${inputText}
+  height: 100%;
+  margin: 0;
+  background-image: linear-gradient(to right,#6dcfa4,#178a80);
+  width: 100%;
+  border: solid #165e58;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+`;
+
+export const StyledInputSpan = styled.span`
+  ${inputText}
+`;
+
+export const StyledInput = styled.input`
+  ${inputText}
+  border: 0;
+  height: 15px;
+  width: 5ch;
+  padding: 0;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
+  text-align: right;
+`;

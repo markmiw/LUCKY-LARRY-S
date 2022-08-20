@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
-import styled from 'styled-components';
-import { CloseButton } from '../shared/button.styled.js'
-
-
+import { CloseButton, CloseText } from '../shared/button.styled';
 
 function LoginModal({ setModal, setUser, setLoggedIn }) {
   const [info, setInfo] = useState({});
@@ -29,6 +26,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
     const country = await axios.get(`/api/country/${results.data[0].countryid}`);
 
     if (country.data.length !== 1) return; // did not find a country
+
     results.data[0].country = country.data[0].country;
     setUser(results.data[0]);
     setLoggedIn(true);
@@ -45,7 +43,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
     <Modal setModal={setModal}>
       <div className="modal-content">
         <div className="modal-header text-center">
-          <h4 className="modal-title w-100 font-weight-bold">
+          <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white', marginLeft: '30px' }}>
             Sign in
           </h4>
           <CloseButton
@@ -53,7 +51,7 @@ function LoginModal({ setModal, setUser, setLoggedIn }) {
             className="close"
             onClick={() => setModal(false)}
           >
-            <span aria-hidden="true">&times;</span>
+            <CloseText aria-hidden="true">&times;</CloseText>
           </CloseButton>
         </div>
         <div className="modal-body mx-3">
@@ -100,4 +98,3 @@ LoginModal.propTypes = {
 };
 
 export default LoginModal;
-

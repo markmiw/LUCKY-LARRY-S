@@ -16,6 +16,7 @@
     "initdb": "psql -U postgres -f database/schema.sql"
   },
   "dependencies": {
+    "alertifyjs": "^1.13.1",
     "autoprefixer": "^10.4.8",
     "axios": "0.27.2",
     "bootstrap": "^5.2.0",
@@ -33,7 +34,9 @@
     "precss": "^4.0.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
+    "react-animated-text-content": "^1.0.1",
     "react-confetti": "^6.1.0",
+    "react-countup": "^6.3.0",
     "react-custom-roulette": "^1.2.0",
     "react-custom-roulette-skate": "^1.2.3",
     "react-dom": "18.2.0",

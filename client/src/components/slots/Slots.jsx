@@ -1,10 +1,15 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import alertify from 'alertifyjs';
 import Column from './Column';
 import PlayInputs from './PlayInputs';
 import WinningEffect from '../shared/WinningEffect';
+import slotsScores from '../../../dist/SlotsScores.png';
+import Modal from '../modal/Modal';
 
 export default function Slots({ user, setUser }) {
   const [column1Values, setColumn1Values] = useState([1, 2, 3]);
@@ -14,19 +19,33 @@ export default function Slots({ user, setUser }) {
   const [betAmount, setBetAmount] = useState('1');
   const [adjustment, setAdjustment] = useState(0);
   const [winState, setWinState] = useState(false);
+  const [winningRows, setWinningRows] = useState([]);
+  const [gameInProgress, setGameInProgress] = useState(false);
+  const [showingModal, setShowingModal] = useState(false);
   function getSlotArray(start, result) {
-    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5));
+    const filler = [...new Array(75)].map(() => Math.floor(Math.random() * 5) + 1);
     return start.concat(filler, result);
   }
 
   function play() {
     if (column3Values.length !== 3) {
+      alertify.error('Game in progress');
       return;
     }
-    const newBalance = user.balance - betAmount * plays;
+    const newBalance = user.balance - Number(betAmount) * plays;
+    // can't bet more than you have, or negative bets
+    if (newBalance < 0 || Number(betAmount) < 0 || betAmount === '') {
+      alertify.error('Enter a legal bet');
+      return;
+    }
+    setGameInProgress(true);
+    alertify.success(`Placed a bet of $${betAmount}`);
     setUser({ ...user, balance: newBalance });
     axios.put('/api/slots', { data: { userid: user.id, bet: betAmount, rows: plays } })
       .then((result) => {
+        if (result.data === 'insufficient funds') {
+          return;
+        }
         const { rows, winningsData } = result.data;
         const col1 = [rows[0], rows[3], rows[6]];
         const col2 = [rows[1], rows[4], rows[7]];
@@ -35,6 +54,7 @@ export default function Slots({ user, setUser }) {
         setColumn2Values(getSlotArray(column2Values, col2));
         setColumn3Values(getSlotArray(column3Values, col3));
         setAdjustment(winningsData.winnings);
+        setWinningRows(winningsData.winningRows);
       })
       .catch((err) => {
         console.log('Error in Slots play:', err);
@@ -45,7 +65,7 @@ export default function Slots({ user, setUser }) {
     setTimeout(() => {
       setTimeout(() => {
         setWinState(false);
-      }, 3000);
+      }, 4000);
     });
   };
 
@@ -66,7 +86,12 @@ export default function Slots({ user, setUser }) {
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
+          gameInProgress={gameInProgress}
+          setGameInProgress={setGameInProgress}
+          plays={plays}
         />
         <Column
           scrollTime={5.5}
@@ -77,7 +102,12 @@ export default function Slots({ user, setUser }) {
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
+          gameInProgress={gameInProgress}
+          setGameInProgress={setGameInProgress}
+          plays={plays}
         />
         <Column
           scrollTime={7}
@@ -88,7 +118,12 @@ export default function Slots({ user, setUser }) {
           adjustment={adjustment}
           user={user}
           setUser={setUser}
+          winState={winState}
           setWinState={setWinState}
+          winningRows={winningRows}
+          gameInProgress={gameInProgress}
+          setGameInProgress={setGameInProgress}
+          plays={plays}
         />
       </ColumnsContainer>
       <PlayInputs
@@ -96,7 +131,28 @@ export default function Slots({ user, setUser }) {
         betAmount={betAmount}
         setBetAmount={setBetAmount}
         play={() => { play(); }}
+        plays={plays}
       />
+      <ScoreCardButton
+        onClick={() => {
+          setShowingModal(true);
+        }}
+      >
+        ?
+      </ScoreCardButton>
+      {showingModal && (
+        <div
+          onClick={() => {
+            setShowingModal(false);
+          }}
+        >
+          <Modal>
+            <ScoreContainer>
+              <img style={{ width: '200px', borderRadius: '16px' }} src={slotsScores} alt="slots scorecard" />
+            </ScoreContainer>
+          </Modal>
+        </div>
+      )}
     </SlotsContainer>
   );
 }
@@ -109,8 +165,32 @@ Slots.propTypes = {
   setUser: PropTypes.func.isRequired,
 };
 
+const ScoreCardButton = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 20px;
+`;
+
+const ScoreContainer = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
 const SlotsContainer = styled.div`
-  width: 50vw;
+  width: 100%;
+  position: relative;
 `;
 
 const EffectContainer = styled.div`
@@ -118,7 +198,7 @@ const EffectContainer = styled.div`
 `;
 
 const ColumnsContainer = styled.div`
-  min-width: 300px;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

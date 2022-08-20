@@ -1,9 +1,11 @@
-/* eslint-disable no-alert */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import alertify from 'alertifyjs';
+import Modal from '../modal/Modal';
+import { CloseButton, CloseText } from '../shared/button.styled';
 
-export default function Modal({
+export default function RouletteModal({
   showModal,
   setShowModal,
   currentBetOption,
@@ -23,6 +25,7 @@ export default function Modal({
   setBetInput,
 }) {
   const [betAmount, setBetAmount] = useState(0);
+  const placeholderText = `Place your bet on ${currentBetOption}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,11 +44,11 @@ export default function Modal({
         setNum({ ...num, bet: betAmount });
       }
       setBetInput(!betInput);
-      alert('You have successfully bet on this option');
+      alertify.success(`Placed a bet of $${betAmount}`);
       // turn off modal after submitting bet
       setShowModal((prev) => !prev);
     } else {
-      alert('Please put the amount you want to bet on this option');
+      alertify.error('Please enter a bet');
     }
     setBetAmount(0);
   };
@@ -54,27 +57,33 @@ export default function Modal({
     <div>
       {showModal
         ? (
-          <ModalWrapperStyled>
-            <ModalWrapper>
-              <CloseButtonStyled type="button" onClick={() => setShowModal((prev) => !prev)}>X</CloseButtonStyled>
-              <ModalInnerStyled style={{ color: 'blue', lineHeight: 10 }}>
-                You can bet $1, $5, $10, $20, $50, $100 on
-                {currentBetOption}
-              </ModalInnerStyled>
+          <Modal>
+            <div className="modal-header text-center" style={{ width: '100%' }}>
+              <h4 className="modal-title w-100 font-weight-bold" style={{ color: 'white', marginLeft: '30px' }}>
+                Place your bet
+              </h4>
+              <CloseButton
+                type="button"
+                className="close"
+                onClick={() => setShowModal(false)}
+              >
+                <CloseText aria-hidden="true">&times;</CloseText>
+              </CloseButton>
+            </div>
+            <div className="modal-body mx-3">
               <ModalForm onSubmit={(event) => handleSubmit(event)}>
-                <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
+                <input id="betAmount" type="text" placeholder={placeholderText} onChange={(event) => setBetAmount(event.target.value)} required />
                 <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Bet</button>
               </ModalForm>
-            </ModalWrapper>
-            <ModalBackgroundStyled />
-          </ModalWrapperStyled>
+            </div>
+          </Modal>
         )
         : null}
     </div>
   );
 }
 
-Modal.propTypes = {
+RouletteModal.propTypes = {
   showModal: PropTypes.bool.isRequired,
   setShowModal: PropTypes.func.isRequired,
   currentBetOption: PropTypes.string.isRequired,
@@ -96,17 +105,17 @@ Modal.propTypes = {
 
 export const ModalWrapper = styled.div`
   display: grid;
-  grid-template-rows: auto auto;
-  background: white;
+  grid-template-rows: 1fr 2fr;
+  background: transparent;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%);
-  min-width: 30rem;
+  min-width: 26rem;
+  // max-width: 100%;
   z-index: 11;
-  height: 500px;
+  height: 300px;
   margin-top: -300px;
-  overflow-y: scroll;
 `;
 
 export const ModalForm = styled.form`

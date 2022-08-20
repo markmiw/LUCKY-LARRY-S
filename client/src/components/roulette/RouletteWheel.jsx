@@ -1,58 +1,50 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
-/* eslint-disable object-shorthand */
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import alertify from 'alertifyjs';
+import PropTypes from 'prop-types';
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
-import Confetti from 'react-confetti';
 
 import WinningEffect from '../shared/WinningEffect';
 
 const data = [
   { option: '0', style: { backgroundColor: 'green' } },
-  { option: '1' },
-  { option: '2' },
-  { option: '3' },
-  { option: '4' },
-  { option: '5' },
-  { option: '6' },
-  { option: '7' },
-  { option: '8' },
-  { option: '9' },
-  { option: '10' },
-  { option: '11' },
-  { option: '12' },
-  { option: '13' },
-  { option: '14' },
-  { option: '15' },
-  { option: '16' },
-  { option: '17' },
-  { option: '18' },
-  { option: '19' },
-  { option: '20' },
-  { option: '21' },
-  { option: '22' },
-  { option: '23' },
-  { option: '24' },
-  { option: '25' },
-  { option: '26' },
-  { option: '27' },
-  { option: '28' },
-  { option: '29' },
-  { option: '30' },
-  { option: '31' },
   { option: '32' },
-  { option: '33' },
+  { option: '15' },
+  { option: '19' },
+  { option: '4' },
+  { option: '21' },
+  { option: '2' },
+  { option: '25' },
+  { option: '17' },
   { option: '34' },
-  { option: '35' },
+  { option: '6' },
+  { option: '27' },
+  { option: '13' },
   { option: '36' },
+  { option: '11' },
+  { option: '30' },
+  { option: '8' },
+  { option: '23' },
+  { option: '10' },
+  { option: '5' },
+  { option: '24' },
+  { option: '16' },
+  { option: '33' },
+  { option: '1' },
+  { option: '20' },
+  { option: '14' },
+  { option: '31' },
+  { option: '9' },
+  { option: '22' },
+  { option: '18' },
+  { option: '29' },
+  { option: '7' },
+  { option: '28' },
+  { option: '12' },
+  { option: '35' },
+  { option: '3' },
+  { option: '26' },
 ];
 
 const backgroundColors = ['#e34b49', '#161a20'];
@@ -77,37 +69,41 @@ export default function RouletteWheel({
   const [winState, setWinState] = useState(false);
 
   const handleSpinClick = () => {
-    axios.get('/api/roulette', {
-      params: {
-        betInfo: betInfo,
-        user: user,
-      },
-    })
-      .then((response) => {
-        if (response.data.status === 'Insufficient Funds.') {
-          window.alert(response.data.status);
-          return;
-        }
-        if (response.data.status === 'No bet was made.') {
-          window.alert(response.data.status);
-          return;
-        }
-        let betAmount = 0;
-        Object.entries(betInfo).forEach(([key, value]) => {
-          betAmount += Number(value.bet);
+    if (betInfo === '') {
+      alertify.error('Please place a bet');
+    } else {
+      axios.get('/api/roulette', {
+        params: {
+          betInfo,
+          user,
+        },
+      })
+        .then((response) => {
+          if (response.data.status === 'Insufficient Funds.') {
+            alertify.error(response.data.status);
+            return;
+          }
+          if (response.data.status === 'No bet was made.') {
+            alertify.error(response.data.status);
+            return;
+          }
+          let betAmount = 0;
+          Object.values(betInfo).forEach((value) => {
+            betAmount += Number(value.bet);
+          });
+          const updatedBalance = user.balance - betAmount;
+          setUser({ ...user, balance: updatedBalance });
+          setWinData(response.data);
+          setMustSpin(true);
         });
-        const updatedBalance = user.balance - betAmount;
-        setUser({ ...user, balance: updatedBalance });
-        setWinData(response.data);
-        setMustSpin(true);
-      });
+    }
   };
 
   // show winning effect for only 10 seconds
   const winningEffect = () => {
     setTimeout(() => {
       setWinState(false);
-    }, 10000);
+    }, 4000);
   };
 
   useEffect(winningEffect, [winState]);
@@ -143,9 +139,10 @@ export default function RouletteWheel({
               setWinState(true);
               setUser({ ...user, balance: updatedBalance });
             } else {
-              window.alert('You did not win this time 👉👈 ')
+              alertify.error('You did not win 👉👈 ');
               setUser({ ...user, balance: updatedBalance });
             }
+            // need to clean the bets
           }}
         />
         <br />
@@ -156,6 +153,21 @@ export default function RouletteWheel({
     </RouletteWheelContainer>
   );
 }
+
+RouletteWheel.propTypes = {
+  betInfo: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  spin: PropTypes.bool.isRequired,
+  setSpin: PropTypes.func.isRequired,
+};
 
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;

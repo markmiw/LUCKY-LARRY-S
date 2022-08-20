@@ -1,46 +1,80 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import {
+  GreenWhiteButton,
+  YellowOrangeButton,
+  StyledInputContainer,
+  StyledInputSpan,
+  StyledInput,
+} from '../shared/button.styled';
 
 export default function PlayInputs({
   setPlays,
   betAmount,
   setBetAmount,
   play,
+  plays,
 }) {
+  function handleClick(numLines) {
+    setPlays(numLines);
+  }
   return (
     <InputsContainer>
       <TopRowContainer>
-        <button type="button" onClick={() => setPlays(1)}>
+        <YellowOrangeButtonV2 id="1" selected={plays.toString()} type="button" onClick={() => handleClick(1)}>
           1 Line
-        </button>
+        </YellowOrangeButtonV2>
       </TopRowContainer>
       <TopRowContainer>
-        <button type="button" onClick={() => setPlays(2)}>
+        <YellowOrangeButtonV2 id="2" selected={plays.toString()} type="button" onClick={() => handleClick(2)}>
           2 Lines
-        </button>
+        </YellowOrangeButtonV2>
       </TopRowContainer>
       <TopRowContainer>
-        <button type="button" onClick={() => setPlays(3)}>
+        <YellowOrangeButtonV2 id="3" selected={plays.toString()} type="button" onClick={() => handleClick(3)}>
           3 Lines
-        </button>
+        </YellowOrangeButtonV2>
       </TopRowContainer>
-      <BottomRowContainer>
-        <Bets>
-          <Dollar>
+      <TopRowContainer>
+        <StyledInputContainer>
+          <StyledInputSpan>
+            BET:
+            &nbsp;
             $
-          </Dollar>
-          <StyledInput type="number" value={betAmount} placeholder="1" onChange={(event) => setBetAmount(event.target.value)} />
-        </Bets>
-      </BottomRowContainer>
-      <BottomRowContainer>
-        <button
+          </StyledInputSpan>
+          <StyledInput
+            type="text"
+            value={`${betAmount}`}
+            onChange={(event) => {
+              const digits = event.target.value.split(/[^0-9]/).join('');
+              // max length 5 chars
+              setBetAmount(digits.slice(0, 5));
+            }}
+          />
+        </StyledInputContainer>
+      </TopRowContainer>
+      <TopRowContainer>
+        <StyledInputContainer>
+          <StyledInputSpan
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            TOTAL BET:
+            &nbsp;
+            {`$${plays * betAmount}`}
+          </StyledInputSpan>
+        </StyledInputContainer>
+      </TopRowContainer>
+      <TopRowContainer>
+        <GreenWhiteButton
           type="button"
           onClick={play}
         >
           Go!
-        </button>
-      </BottomRowContainer>
+        </GreenWhiteButton>
+      </TopRowContainer>
     </InputsContainer>
   );
 }
@@ -50,11 +84,13 @@ PlayInputs.propTypes = {
   betAmount: PropTypes.string.isRequired,
   setBetAmount: PropTypes.func.isRequired,
   play: PropTypes.func.isRequired,
+  plays: PropTypes.number.isRequired,
 };
 
 const InputsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin-top: 50px;
 `;
 
 const TopRowContainer = styled.div`
@@ -62,24 +98,12 @@ const TopRowContainer = styled.div`
   padding: 5px;
 `;
 
-const BottomRowContainer = styled.div`
-  grid-column-end: span 3;
-  padding: 5px;
-`;
-
-const Bets = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const StyledInput = styled.input`
-  margin: 0;
-  margin-left: 5px;
-  border-radius: 10px;
-  text-align: center;
-`;
-
-const Dollar = styled.div`
-  font-size: x-large;
+const YellowOrangeButtonV2 = styled(YellowOrangeButton)`
+  background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};
+  border-style: ${(props) => (props.id === props.selected) && 'solid'};
+  border-color: ${(props) => (props.id === props.selected) && 'white'};
+  border-width: ${(props) => (props.id === props.selected) && '3px'};
+  &:after {
+    ${(props) => (props.id === props.selected) && 'background-image: linear-gradient(to right,#007ed5,#2accc8)'};
+  }
 `;

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/forbid-prop-types */
 import React, { } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -31,11 +29,25 @@ function Gamepage({ game, user, setUser }) {
   );
 }
 
+Gamepage.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  game: PropTypes.string.isRequired,
+};
+
 export default Gamepage;
 
+// max width was new here
 export const GamePageGrid = styled.div`
   display: grid;
-  max-width: 95vw;
+  max-width: 100vw;
   margin: 0 auto;
   gap: 5%;
   @media (min-width: 501px) {
@@ -44,14 +56,22 @@ export const GamePageGrid = styled.div`
   }
   @media (max-width: 500px) {
     grid-template-rows: auto auto;
-    gap: 10%;
+    gap: 0%;
+    height: 1500px;
   }
 `;
 
 export const GameContainer = styled.div`
   max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SidebarContainer = styled.div`
   max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
