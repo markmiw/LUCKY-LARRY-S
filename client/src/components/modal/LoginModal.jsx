@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
-import styled from 'styled-components';
-import { CloseButton, CloseText } from '../shared/button.styled.js'
-
-
+import { CloseButton, CloseText } from '../shared/button.styled';
 
 function LoginModal({ setModal, setUser, setLoggedIn }) {
   const [info, setInfo] = useState({});
@@ -101,4 +98,3 @@ LoginModal.propTypes = {
 };
 
 export default LoginModal;
-

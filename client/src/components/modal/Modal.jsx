@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-function Modal({ children, setModal }) {
+function Modal({ children }) {
   return (
     <Background id="modal-background">
       <Container>{children}</Container>
@@ -12,7 +12,6 @@ function Modal({ children, setModal }) {
 
 Modal.propTypes = {
   children: PropTypes.node,
-  setModal: PropTypes.func.isRequired,
 };
 
 Modal.defaultProps = {

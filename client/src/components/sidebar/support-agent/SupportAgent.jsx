@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-// ^ Support allows for repeat messages
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 /*

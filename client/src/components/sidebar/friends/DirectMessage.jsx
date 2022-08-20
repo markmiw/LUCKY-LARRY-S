@@ -12,7 +12,9 @@ import handleDate from '../handleDate';
 
 // user: the one logged on
 // recipient: the one user is talking to
-function DirectMessage({ userID, recipientID, setCurrentDmRecipient, currentRecipientName }) {
+function DirectMessage({
+  userID, recipientID, setCurrentDmRecipient, currentRecipientName,
+}) {
   const [messages, setMessages] = useState([]);
   const [msgInput, setMsgInput] = useState('');
   const inputRef = useRef(null);

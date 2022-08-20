@@ -1,10 +1,19 @@
-/* eslint-disable object-shorthand */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Modal from './Modal';
-import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from '../shared/button.styled.js';
+import {
+  GreenWhiteButton,
+  YellowOrangeButton,
+  PinkRedButton,
+  BlueBlackButton,
+  GreenBlackButton,
+  BlueAquaButton,
+  BlueLightBlueButton,
+  LightPurplePulpleButton,
+  PurplePinkButton,
+} from '../shared/button.styled';
 
 export default function BetTable({ setBetInfo, spin }) {
   // userbet refactor to remove initial pick bets
@@ -24,7 +33,7 @@ export default function BetTable({ setBetInfo, spin }) {
   // updates state for roulette wheel
   useEffect(() => {
     setBetInfo({
-      num: num, col: color, eO: eO, rangeOf12: rangeOf12, firstHalf: firstHalf, numRow: numRow,
+      num, col: color, eO, rangeOf12, firstHalf, numRow,
     });
   }, [betInput]);
 
@@ -67,7 +76,7 @@ export default function BetTable({ setBetInfo, spin }) {
       />
       <BetTableContainer>
         {/* {if(num.bet !== '') {setSelectedButton('0')}} */}
-        <GreenWhiteButtonV2 id={'0'} selected={selectedButton} onClick={() => { setNum(0); openModal('0'); setSelectedButton('0')}}>
+        <GreenWhiteButtonV2 id="0" selected={selectedButton} onClick={() => { setNum(0); openModal('0'); setSelectedButton('0'); }}>
           0
         </GreenWhiteButtonV2>
         <BetNumberGrid>
@@ -82,8 +91,8 @@ export default function BetTable({ setBetInfo, spin }) {
           })}
         </BetNumberGrid>
         <BetColorOddGrid>
-          <PinkRedButtonV2 id="red" selected={color.pick} onClick={() => { setColor({ pick: 'red' }); openModal('red')}}>Red</PinkRedButtonV2>
-          <BlueBlackButtonV2 id="black" selected={color.pick} onClick={() => { setColor({ pick: 'black' }); openModal('black')}}>Black</BlueBlackButtonV2>
+          <PinkRedButtonV2 id="red" selected={color.pick} onClick={() => { setColor({ pick: 'red' }); openModal('red'); }}>Red</PinkRedButtonV2>
+          <BlueBlackButtonV2 id="black" selected={color.pick} onClick={() => { setColor({ pick: 'black' }); openModal('black'); }}>Black</BlueBlackButtonV2>
           <BlueAquaButtonV2 id="even" selected={eO.pick} onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Even</BlueAquaButtonV2>
           <GreenBlackButtonV2 id="odd" selected={eO.pick} onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Odd</GreenBlackButtonV2>
         </BetColorOddGrid>
@@ -100,7 +109,7 @@ export default function BetTable({ setBetInfo, spin }) {
         </Bet18Grid>
 
         <BetRowGrid>
-          <PurplePinkButtonV2 id={1} selected={numRow.pick} onClick={() => { setNumRow({ pick: 1 }); openModal('1st row');  }}>1s row </PurplePinkButtonV2>
+          <PurplePinkButtonV2 id={1} selected={numRow.pick} onClick={() => { setNumRow({ pick: 1 }); openModal('1st row'); }}>1s row </PurplePinkButtonV2>
           <PurplePinkButtonV2 id={2} selected={numRow.pick} onClick={() => { setNumRow({ pick: 2 }); openModal('2nd row'); }}>2s row </PurplePinkButtonV2>
           <PurplePinkButtonV2 id={3} selected={numRow.pick} onClick={() => { setNumRow({ pick: 3 }); openModal('3rd row'); }}>3s row </PurplePinkButtonV2>
         </BetRowGrid>
@@ -125,7 +134,10 @@ export default function BetTable({ setBetInfo, spin }) {
   );
 }
 
-BetTable.propTypes = { setBetInfo: PropTypes.func.isRequired };
+BetTable.propTypes = {
+  setBetInfo: PropTypes.func.isRequired,
+  spin: PropTypes.bool.isRequired,
+};
 
 const GreenWhiteButtonV2 = styled(GreenWhiteButton)`
   background-color: ${(props) => (props.id === props.selected) && '#7ed5e5'};

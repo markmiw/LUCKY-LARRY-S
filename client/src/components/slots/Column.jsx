@@ -161,4 +161,3 @@ const Icon = styled.div`
   ${({ row, winningRows, winState }) => (winningRows.includes(row + 1) === true && winState === true) && css`animation: ${blinkingEffect} 1s ease-in infinite;`}
   ${({ row, plays, winState, gameInProgress }) => (row < plays && winState === false && gameInProgress === false) && css`animation: ${blinkingEffect} 1s ease-in infinite;`}
 `;
-

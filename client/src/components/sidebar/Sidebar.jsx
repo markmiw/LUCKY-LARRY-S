@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Chat from './chat/Chat.jsx';
-import leaderboard_icon from '../../../dist/icons/leaderboard.png';
+import Chat from './chat/Chat';
+import leaderboardIcon from '../../../dist/icons/leaderboard.png';
 import support from '../../../dist/icons/support.png';
 import friends from '../../../dist/icons/friends.svg';
 import Globe from '../../../dist/icons/globe.svg';
@@ -22,7 +22,7 @@ function Sidebar({ user, loginTime }) {
       return (
         <div className="sidebar-nav-container">
           <img draggable="false" onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn-active" src={Globe} />
-          <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
+          <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboardIcon} />
           <img draggable="false" onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
           <img draggable="false" onClick={() => setSidebarState('support')} id="global-chat-btn" className="sidebar-nav-btn" src={support} />
         </div>
@@ -32,7 +32,7 @@ function Sidebar({ user, loginTime }) {
       return (
         <div className="sidebar-nav-container">
           <img draggable="false" onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
-          <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn-active" src={leaderboard_icon} />
+          <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn-active" src={leaderboardIcon} />
           <img draggable="false" onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
           <img draggable="false" onClick={() => setSidebarState('support')} id="global-chat-btn" className="sidebar-nav-btn" src={support} />
         </div>
@@ -42,7 +42,7 @@ function Sidebar({ user, loginTime }) {
       return (
         <div className="sidebar-nav-container">
           <img draggable="false" onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
-          <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
+          <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboardIcon} />
           <img draggable="false" onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn-active" src={friends} />
           <img draggable="false" onClick={() => setSidebarState('support')} id="global-chat-btn" className="sidebar-nav-btn" src={support} />
         </div>
@@ -51,7 +51,7 @@ function Sidebar({ user, loginTime }) {
     return (
       <div className="sidebar-nav-container">
         <img draggable="false" onClick={() => setSidebarState('global-chat')} id="global-chat-btn" className="sidebar-nav-btn" src={Globe} />
-        <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboard_icon} />
+        <img draggable="false" onClick={() => setSidebarState('leaderboard')} id="leaderboard-btn" className="sidebar-nav-btn" src={leaderboardIcon} />
         <img draggable="false" onClick={() => setSidebarState('friends')} id="friends-btn" className="sidebar-nav-btn" src={friends} />
         <img draggable="false" onClick={() => setSidebarState('support')} id="global-chat-btn" className="sidebar-nav-btn-active" src={support} />
       </div>
@@ -90,6 +90,7 @@ Sidebar.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
+  loginTime: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default Sidebar;

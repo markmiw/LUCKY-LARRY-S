@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/forbid-prop-types */
 import React, { } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -30,6 +28,19 @@ function Gamepage({ game, user, setUser }) {
     </GamePageGrid>
   );
 }
+
+Gamepage.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  game: PropTypes.string.isRequired,
+};
 
 export default Gamepage;
 

@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
-import img from '../../../../assets/test.jpg';
 import rouletteLogo from '../../../dist/icons/roulette_icon.png';
 import slotsLogo from '../../../dist/icons/slots_icon.png';
 import ticketLogo from '../../../dist/icons/scratch_ticket_icon.png';
 import LarryLogoPic from '../../../dist/icons/LarryLogo.jpeg';
 
-const games = ['Roulette', 'Scratch-Ticket', 'Slots'];
 export default function Homepage({
   loggedIn,
   setShowLoginModal,
@@ -24,7 +22,6 @@ export default function Homepage({
           <>
             <Game>
               <Link to="/Roulette">
-                {/* <div>Roulette</div> */}
                 <GameImage
                   src={rouletteLogo}
                   width="200"
@@ -35,7 +32,6 @@ export default function Homepage({
             </Game>
             <Game>
               <Link to="/Scratch-Ticket">
-                {/* <div>Scratch Ticket</div> */}
                 <GameImage
                   src={ticketLogo}
                   width="200"
@@ -46,7 +42,6 @@ export default function Homepage({
             </Game>
             <Game>
               <Link to="/Slots">
-                {/* <div>Slots</div> */}
                 <GameImage
                   src={slotsLogo}
                   width="200"
@@ -60,15 +55,12 @@ export default function Homepage({
           : (
             <>
               <Game onClick={() => handleClick()}>
-                {/* <div>Roulette</div> */}
                 <GameImage src={rouletteLogo} width="200" height="200" alt="game" />
               </Game>
               <Game onClick={() => handleClick()}>
-                {/* <div>Scratch Ticket</div> */}
                 <GameImage src={ticketLogo} width="200" height="200" alt="game" />
               </Game>
               <Game onClick={() => handleClick()}>
-                {/* <div>Slots</div> */}
                 <GameImage src={slotsLogo} width="200" height="200" alt="game" />
               </Game>
 
