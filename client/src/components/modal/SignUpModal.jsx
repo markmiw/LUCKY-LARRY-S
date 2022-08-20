@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from './Modal';
 import flags from '../sidebar/flags';
-import styled from 'styled-components';
-import { CloseButton, CloseText } from '../shared/button.styled.js'
+import { CloseButton, CloseText } from '../shared/button.styled';
 
 function SignUpModal({ setModal }) {
   // PROBABLY MORE FIELDS
@@ -95,7 +94,11 @@ function SignUpModal({ setModal }) {
                   onChange={(e) => handleChange(e, 'country')}
                   defaultValue={info.country}
                 >
-                  {Object.keys(flags).map((name) => (<option key={name} value={name}>{name}</option>))}
+                  {Object.keys(flags).map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

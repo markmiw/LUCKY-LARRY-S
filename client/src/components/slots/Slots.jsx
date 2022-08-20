@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import alertify from 'alertifyjs';
 import Column from './Column';
 import PlayInputs from './PlayInputs';
 import WinningEffect from '../shared/WinningEffect';
 import slotsScores from '../../../dist/SlotsScores.png';
-import alertify from 'alertifyjs';
 import Modal from '../modal/Modal';
 
 export default function Slots({ user, setUser }) {

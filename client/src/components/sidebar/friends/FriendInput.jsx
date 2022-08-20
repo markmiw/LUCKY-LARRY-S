@@ -89,7 +89,6 @@ const StyledTextInput = styled(StyledInput)`
 
 const StyledButtonInput = styled(StyledInput)`
   width: 50px;
-
 `;
 
 export default FriendInput;

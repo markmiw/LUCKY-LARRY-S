@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import flags from '../flags';
 import Smileyface from '../../../../dist/icons/smile-regular.svg';
 import handleDate from '../handleDate';
@@ -100,5 +101,16 @@ function Chat({ user, loginTime }) {
     </div>
   );
 }
+Chat.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  loginTime: PropTypes.instanceOf(Date).isRequired,
+};
 
 export default Chat;

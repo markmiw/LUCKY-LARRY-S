@@ -9,7 +9,6 @@ import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
 import {
   StyledInputContainer,
-  StyledInputSpan,
   StyledInput,
 } from '../shared/button.styled';
 
@@ -137,7 +136,6 @@ export default function ScratchTicket({ user, setUser }) {
               type="text"
               disabled={playing}
               onChange={(e) => {
-                console.log(e.target.value);
                 const digits = e.target.value.split(/[^0-9]/).join('');
                 // max length 5 chars
                 changeBet(digits.slice(0, 5));

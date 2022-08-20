@@ -1,17 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
-/* eslint-disable object-shorthand */
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import alertify from 'alertifyjs';
+import PropTypes from 'prop-types';
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
-import Confetti from 'react-confetti';
 
 import WinningEffect from '../shared/WinningEffect';
 
@@ -76,16 +68,14 @@ export default function RouletteWheel({
   const [winData, setWinData] = useState({});
   const [winState, setWinState] = useState(false);
 
-  console.log('betInfo is: ', betInfo);
-
   const handleSpinClick = () => {
     if (betInfo === '') {
       alertify.error('Please place a bet');
     } else {
       axios.get('/api/roulette', {
         params: {
-          betInfo: betInfo,
-          user: user,
+          betInfo,
+          user,
         },
       })
         .then((response) => {
@@ -98,7 +88,7 @@ export default function RouletteWheel({
             return;
           }
           let betAmount = 0;
-          Object.entries(betInfo).forEach(([key, value]) => {
+          Object.values(betInfo).forEach((value) => {
             betAmount += Number(value.bet);
           });
           const updatedBalance = user.balance - betAmount;
@@ -163,6 +153,21 @@ export default function RouletteWheel({
     </RouletteWheelContainer>
   );
 }
+
+RouletteWheel.propTypes = {
+  betInfo: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  spin: PropTypes.bool.isRequired,
+  setSpin: PropTypes.func.isRequired,
+};
 
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;

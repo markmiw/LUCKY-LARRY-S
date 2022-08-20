@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CountUp from 'react-countup';
@@ -6,7 +7,12 @@ import { Link } from 'react-router-dom';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
 import backgroundMusic from '../dist/sound/backgroundMusic.mp3';
-import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from './components/shared/button.styled.js';
+import {
+  PinkRedButton,
+  BlueLightBlueButton,
+  LightPurplePulpleButton,
+  PurplePinkButton,
+} from './components/shared/button.styled';
 
 function NavBar({
   user, setUser, loggedIn, setLoggedIn, setShowLoginModal,
